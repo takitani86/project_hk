@@ -19,19 +19,19 @@ public class MemberDao implements IMemberDao {
 	}
 
 	@Override
-	public boolean joinMember(MemberDto memberDto) {
+	public boolean joinMember(MemberDto member) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean deleteMember(int mem_seq) {
+	public boolean deleteMember(String mem_id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean updateMember(MemberDto memberDto) {
+	public boolean updateMember(MemberDto member) {
 		// TODO Auto-generated method stub
 		return false;
 	}
