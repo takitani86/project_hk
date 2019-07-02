@@ -14,10 +14,10 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	@RequestMapping(value = "/board.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/member.do", method = RequestMethod.GET)
 	public String board(Locale locale, Model model) {
 		logger.info("게시판 호출 {}.", locale);
 		
-		return "board/board";
+		return "member/member";
 	}
 }

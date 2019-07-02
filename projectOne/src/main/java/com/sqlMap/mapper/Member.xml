@@ -24,14 +24,6 @@
 		<result property="mem_loginTime" column="mem_loginTime" javaType="java.util.Date" />
 		<result property="mem_logoutTime" column="mem_logoutTime" javaType="java.util.Date" />
 	</resultMap>
-	
-	<resultMap id="example" type="member">
-		<result property="mem_seq" column="mem_seq" />
-		<result property="mem_id" column="mem_id" />
-		<result property="mem_image" column="mem_image" />
-		<result property="mem_name" column="mem_name" />
-		<result property="mem_b_name" column="mem_b_name" />
-	</resultMap>
    
    <!-- 회원 리스트 보기 -->
 	<select id="getAllMember" resultMap="resultMemberList">
