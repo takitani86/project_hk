@@ -31,34 +31,34 @@
    </resultMap>
 
    
-   <select id="selectList" resultMap="boardList">
+   <select id="getAllBoard" resultMap="boardList">
       SELECT QNA_SEQ, QNA_TITLE, QNA_CONTENT, QNA_READCOUNT, QNA_REGDATE, MEM_ID
       FROM LJP_QNABOARD
       ORDER BY QNA_SEQ DESC  
    </select>
    
-   <insert id="insert" parameterType="member">
+   <insert id="insertBoard" parameterType="member">
       INSERT INTO LJP_QNABOARD(QNA_SEQ,QNA_TITLE,QNA_CONTENT,MEM_ID) 
       VALUES (LJP_QNABOARD_SEQ.nextval,#{qna_title},#{qna_content},#{mem_id})   
    </insert>
    
-   <delete id="delete" parameterType="int">
+   <delete id="deleteBoard" parameterType="int">
       UPDATE LJP_QNABOARD SET QNA_ISDEL = 1 WHERE QNA_SEQ = #{qna_seq}
    </delete>
    
-   <select id="selectOne" parameterType="int" resultMap="boardList" >
+   <select id="selectOneBoard" parameterType="int" resultMap="boardList" >
       SELECT QNA_SEQ, QNA_TITLE, QNA_CONTENT, QNA_READCOUNT, QNA_REGDATE, MEM_ID
       FROM LJP_QNABOARD
       WHERE QNA_SEQ = #{qna_seq}
    </select>
    
-   <update id="update" parameterType="board">
+   <update id="updateBoard" parameterType="board">
       UPDATE LJP_QNABOARD SET QNA_TITLE=#{qna_title}, QNA_CONTENT=#{qna_content},
       QNA_UPDATEDATE = sysdate
       WHERE QNA_SEQ = #{qna_seq}
    </update>
    
-   <delete id="mulDel" parameterType="Map">
+   <delete id="mulDelBoard" parameterType="Map">
    	UPDATE FROM LJP_QNABOARD WHERE QNA_SEQ IN
    	<foreach collection="nos" item="no" open="(" close=")" separator=",">
    		#{qna_seq}
