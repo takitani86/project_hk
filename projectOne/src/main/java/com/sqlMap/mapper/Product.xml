@@ -3,70 +3,63 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="Member">
+<mapper namespace="Product">
    <select id="getCount" resultType="int">
       SELECT count(*) 
-      FROM MEMBERS
+      FROM LJP_PRODUCT
    </select>
 
 
 <!-- property = java 변수명 , column = db컬럼명 -->
-<!--  resultmap에 type는 myBatis Configuration에서 축약해서 정의 member -> spms.vo.Member  -->
-   <resultMap id="resultGetList" type="member">
-      <result property="no" column="mno" />
-      <result property="name" column="mname" />
-      <result property="email" column="email" />
-      <!--  java.sql.Date는 날짜만, java.util.Date는 시분초까지 포함 -->
-      <result property="createdDate" column="cre_date" javaType="java.sql.Date"/>
-      <result property="modifiedDate" column="mod_date" javaType="java.sql.Date"/>   
-   </resultMap>
-
    
-   <select id="selectList" resultMap="resultGetList">
-      SELECT MNO,MNAME,EMAIL,PWD,CRE_DATE,MOD_DATE
-      FROM MEMBERS 
-      ORDER BY MNO ASC   
+   <select id="selectProductList" resultType="product">
+      SELECT PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
+      FROM LJP_PRODUCT  
    </select>
-   
-   <!--  as를 통한 치환도 가능하다. -->   
-   <select id="selectList2" resultType="member">
-      SELECT MNO as no , MNAME as name , EMAIL as email , CRE_DATE as createdDate ,
-            PWD as password , MOD_DATE as modifiedDate 
-      FROM MEMBERS 
-      ORDER BY MNO ASC   
-   </select>
-   
-   <insert id="insert" parameterType="member">
-      INSERT INTO MEMBERS(MNO,EMAIL,PWD,MNAME,CRE_DATE,MOD_DATE) 
-      VALUES (tmpseq.nextval,#{email},#{password},#{name},sysdate,sysdate)   
+     
+   <insert id="insertProduct" parameterType="product" >
+    INSERT INTO LJP_PRODUCT (PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE)
+	VALUES(LJP_PRODUCT_SEQ.NEXTVAL,#{pro_name},#{pro_image},#{pro_price},#{pro_desc},#{pro_option},#{pro_menu},SYSDATE)
    </insert>
    
-   <delete id="delete" parameterType="int">
-      DELETE FROM MEMBERS WHERE mno=#{no}
-   </delete>
+   <insert id="insertCategory" parameterType="product">
+      
+INSERT INTO LJP_PRODUCT (CAT_SEQ,CAT_NAME,MEM_ID,CAT_ISDEL) 
+VALUES(LJP_CATEGORY_SEQ.NEXTVAL,#{cat_name},#{mem_id}.#{cat_isdel})
+ 
+   </insert>
    
-   <select id="selectOne" parameterType="int" resultMap="resultGetList" >
-      SELECT MNO,MNAME,EMAIL,PWD,CRE_DATE,MOD_DATE
-      FROM MEMBERS 
-      WHERE mno = #{no}
+   
+   <select id="selectProductOne" parameterType="product" resultType="product" >
+      SELECT PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
+      FROM LJP_PRODUCT 
+      WHERE PRO_SEQ = #{pro_seq}
    </select>
    
-   <update id="update" parameterType="member">
-      UPDATE MEMBERS SET EMAIL=#{email}, MNAME=#{name}, MOD_DATE=sysdate where MNO=#{no}
+   <update id="updateProduct" parameterType="product">
+     UPDATE LJP_PRODUCT
+SET PRO_NAME=#{pro_name},PRO_IMAGE='변경된경로',PRO_PRICE=5555,PRO_DESC='변경된커피입니다',CAT_SEQ=1,PRO_OPTION='메인',PRO_MENU=0,PRO_REGDATE=SYSDATE
+WHERE PRO_SEQ=10
    </update>
    
-   <select id="exist" parameterType="map" resultMap="resultGetList">
-      SELECT MNAME,EMAIL from MEMBERS where EMAIL=#{email} and PWD=#{password}
-   </select>
-   
-   <select id="checkEmail" parameterType="String" resultType="String">
-      select MNAME from MEMBERS where EMAIL=#{email} and ROWNUM=1
-   </select>
-   
-   <delete id="mulDelete" parameterType="Map">
-   	DELETE FROM MEMBERS WHERE MNO IN
-   	<foreach collection="nos" item="no" open="(" close=")" separator=",">
-   		#{no}
+   <update id="insertProductImg" parameterType="product">
+     UPDATE LJP_PRODUCT 
+SET PRO_IMAGE=#{pro_image}
+WHERE PRO_SEQ=#{pro_seq}
+   </update> 
+  
+   <delete id="mulDelProduct" parameterType="Map">
+   	DELETE FROM LJP_PRODUCT WHERE PRO_SEQ IN
+   	<foreach collection="seqs" item="seq" open="(" close=")" separator=",">
+   		#{pro_seq}
    	</foreach>
    </delete>
+   
+  <!-- 미작업: 확인중 -->
+     <delete id="deleteProduct" parameterType="product">
+     DELETE FROM LJP_PRODUCT
+ WHERE PRO_SEQ=#{seqs} 
+   </delete>
+   
+  
 </mapper>
