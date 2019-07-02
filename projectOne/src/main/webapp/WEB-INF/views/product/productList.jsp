@@ -42,7 +42,7 @@ response.setContentType("text/html; charset=utf-8");
 					<td>${dto.cat_seq}</td>
 					<td>${dto.pro_option}</td>
 					<td>${dto.pro_menu}</td>
-					<td><fmt:formatDate value="${dto.regdate}" pattern="yyyy-mm-dd" /> </td> <!--날짜 보기 편한 포맷으로 변경해줌 주의사항) val에 date타입이어야함-->
+					<td><fmt:formatDate value="${dto.pro_regdate}" pattern="yyyy-mm-dd" /> </td> <!--날짜 보기 편한 포맷으로 변경해줌 주의사항) val에 date타입이어야함-->
 				</tr>
 			</c:forEach>
 		</c:otherwise>
