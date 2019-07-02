@@ -34,39 +34,39 @@
 	</resultMap>
    
    <!-- 회원 리스트 보기 -->
-	<select id="selectList" resultMap="resultMemberList">
+	<select id="selectMemberList" resultMap="resultMemberList">
 		SELECT MEM_SEQ,MEM_ID,MEM_IMAGE,MEM_NAME,MEM_B_NAME
 		FROM LJP_MEMBER
 		ORDER BY MEM_SEQ ASC
 	</select>
    
 	<!-- 회원 상세정보 보기 -->
-	<select id="selectOne" parameterType="boolean" resultMap="resultMemberList">
+	<select id="selectMember" parameterType="int" resultMap="resultMemberList">
 		SELECT MEM_SEQ,MEM_ID,MEM_IMAGE,MEM_EMAIL,MEM_NAME,MEM_ADDRESS,MEM_PHONE,MEM_B_NAME,MEM_B_STATUS,MEM_REGDATE
 		FROM LJP_MEMBER
 		WHERE mem_seq = #{mem_seq}
 	</select>
    
 	<!-- 회원 가입 -->
-	<insert id="insert" parameterType="member">
+	<insert id="insertMem" parameterType="member">
 		INSERT INTO LJP_MEMBER (MEM_SEQ,MEM_ID,MEM_PW,MEM_IMAGE,MEM_EMAIL,MEM_NAME,MEM_ADDRESS,MEM_PHONE,MEM_B_NAME,MEM_B_STATUS,MEM_ISADMIN,MEM_ISAPPROVE,MEM_ISDEL,MEM_REGDATE,MEM_LOGINTIME,MEM_LOGOUTTIME) 
 		VALUES (ljp_member_seq.nextval,#{mem_id}, #{mem_pw}, '/profile/default.jpg', #{mem_email}, #{mem_name}, #{mem_address}, #{mem_phone}, #{mem_b_name}, #{mem_b_status}, 0, 0, 0, SYSDATE, NULL, NULL)   
 	</insert>
    
 	<!-- 회원 탈퇴 -->
-	<update id="delete" parameterType="String">
+	<update id="deleteMem" parameterType="String">
 		UPDATE LJP_MEMBER SET MEM_ISDEL = 1 WHERE MEM_ID = #{mem_id}
 	</update>
    
 	<!-- 회원 정보 수정 -->
-	<update id="update" parameterType="member">
+	<update id="updateMem" parameterType="member">
 		UPDATE LJP_MEMBER
 		SET (MEM_PW, MEM_IMAGE, MEM_EMAIL, MEM_ADDRESS, MEM_PHONE, MEM_B_NAME, MEM_B_STATUS) = (#{mem_pw}, #{mem_image}, #{mem_email}, #{mem_address}, #{mem_phone}, #{mem_b_name}, #{mem_b_status})
 		WHERE MEM_ID = #{mem_id}
 	</update>
    
 	<!-- 회원 존재 확인 -->
-	<select id="exist" parameterType="map" resultMap="resultMemberList">
+	<select id="existMem" parameterType="map" resultMap="resultMemberList">
 		SELECT MEM_ID,MEM_PW
 		from LJP_MEMBER
 		where MEM_ID=#{mem_id} and MEM_PW=#{mem_pw}
