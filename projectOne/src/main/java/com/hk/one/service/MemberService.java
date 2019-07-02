@@ -2,14 +2,21 @@ package com.hk.one.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hk.one.dao.IMemberDao;
 import com.hk.one.dto.MemberDto;
 
+@Service
 public class MemberService implements IMemberService {
+	
+	@Autowired
+	private IMemberDao memberDao;
 
 	@Override
 	public List<MemberDto> getAllMember() {
-		// TODO Auto-generated method stub
-		return null;
+		return memberDao.getAllMember();
 	}
 
 	@Override

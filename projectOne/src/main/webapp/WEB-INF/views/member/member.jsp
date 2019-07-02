@@ -17,9 +17,7 @@ response.setContentType("text/html; charset=utf-8");
 <body>
 <h1>회원 목록</h1>
 <table border="1">
-	<col width="50px">
-	<col width="50px"><col width="50px"><col width="300px"><col width="100px"><col width="50px">
-	<col width="50px"><col width="50px"><col width="50px"><col width="50px">
+	<col width="50px"><col width="80px"><col width="150px"><col width="150px"><col width="150px">
 	<tr>
 		<th>회원번호</th><th>회원ID</th><th>이미지</th><th>회원 이름</th><th>상호명</th>
 	</tr>
