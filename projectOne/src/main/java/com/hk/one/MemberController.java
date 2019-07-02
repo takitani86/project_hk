@@ -14,13 +14,6 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		return "home";
-	}
-	
 	@RequestMapping(value = "/board.do", method = RequestMethod.GET)
 	public String board(Locale locale, Model model) {
 		logger.info("게시판 호출 {}.", locale);
