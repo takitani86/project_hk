@@ -14,10 +14,10 @@ public class ProductController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
-	@RequestMapping(value = "/board.do", method = RequestMethod.GET)
-	public String board(Locale locale, Model model) {
+	@RequestMapping(value = "/productList.do", method = RequestMethod.GET)
+	public String productList(Locale locale, Model model) {
 		logger.info("게시판 호출 {}.", locale);
 		
-		return "board/board";
+		return "product/productList";
 	}
 }
