@@ -32,7 +32,7 @@
       <td>${list.mem_id}</td>
       <td>${list.qna_title}</td>
       <td>${list.qna_regDate}</td>
-      <td>${list.qna_readCount</td>
+      <td>${list.qna_readCount}</td>
     </tr>
   </c:forEach>
   </c:otherwise>
