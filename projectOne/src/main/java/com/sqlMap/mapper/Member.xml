@@ -4,69 +4,100 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="Member">
-   <select id="getCount" resultType="int">
-      SELECT count(*) 
-      FROM MEMBERS
-   </select>
 
+	<!-- property = java 변수명 , column = db컬럼명 -->
+	<resultMap id="resultMemberList" type="member">
+		<result property="mem_seq" column="mem_seq" />
+		<result property="mem_id" column="mem_id" />
+		<result property="mem_pw" column="mem_pw" />
+		<result property="mem_image" column="mem_image" />
+		<result property="mem_email" column="mem_email" />
+		<result property="mem_name" column="mem_name" />
+		<result property="mem_address" column="mem_address" />
+		<result property="mem_phone" column="mem_phone" />
+		<result property="mem_b_name" column="mem_b_name" />
+		<result property="mem_b_status" column="mem_b_status" />
+		<result property="mem_isAdmin" column="mem_isAdmin" />
+		<result property="mem_isApprove" column="mem_isApprove" />
+		<result property="mem_isDel" column="mem_isDel" />
+		<result property="mem_regDate" column="mem_regDate" javaType="java.util.Date" />
+		<result property="mem_loginTime" column="mem_loginTime" javaType="java.util.Date" />
+		<result property="mem_logoutTime" column="mem_logoutTime" javaType="java.util.Date" />
+	</resultMap>
+	
+	<resultMap id="example" type="member">
+		<result property="mem_seq" column="mem_seq" />
+		<result property="mem_id" column="mem_id" />
+		<result property="mem_image" column="mem_image" />
+		<result property="mem_name" column="mem_name" />
+		<result property="mem_b_name" column="mem_b_name" />
+	</resultMap>
+   
+   <!-- 회원 리스트 보기 -->
+	<select id="selectList" resultMap="resultMemberList">
+		SELECT MEM_SEQ,MEM_ID,MEM_IMAGE,MEM_NAME,MEM_B_NAME
+		FROM LJP_MEMBER
+		ORDER BY MEM_SEQ ASC
+	</select>
+   
+	<!-- 회원 상세정보 보기 -->
+	<select id="selectOne" parameterType="boolean" resultMap="resultMemberList">
+		SELECT MEM_SEQ,MEM_ID,MEM_IMAGE,MEM_EMAIL,MEM_NAME,MEM_ADDRESS,MEM_PHONE,MEM_B_NAME,MEM_B_STATUS,MEM_REGDATE
+		FROM LJP_MEMBER
+		WHERE mem_seq = #{mem_seq}
+	</select>
+   
+	<!-- 회원 가입 -->
+	<insert id="insert" parameterType="member">
+		INSERT INTO LJP_MEMBER (MEM_SEQ,MEM_ID,MEM_PW,MEM_IMAGE,MEM_EMAIL,MEM_NAME,MEM_ADDRESS,MEM_PHONE,MEM_B_NAME,MEM_B_STATUS,MEM_ISADMIN,MEM_ISAPPROVE,MEM_ISDEL,MEM_REGDATE,MEM_LOGINTIME,MEM_LOGOUTTIME) 
+		VALUES (ljp_member_seq.nextval,#{mem_id}, #{mem_pw}, '/profile/default.jpg', #{mem_email}, #{mem_name}, #{mem_address}, #{mem_phone}, #{mem_b_name}, #{mem_b_status}, 0, 0, 0, SYSDATE, NULL, NULL)   
+	</insert>
+   
+	<!-- 회원 탈퇴 -->
+	<update id="delete" parameterType="String">
+		UPDATE LJP_MEMBER SET MEM_ISDEL = 1 WHERE MEM_ID = #{mem_id}
+	</update>
+   
+	<!-- 회원 정보 수정 -->
+	<update id="update" parameterType="member">
+		UPDATE LJP_MEMBER
+		SET (MEM_PW, MEM_IMAGE, MEM_EMAIL, MEM_ADDRESS, MEM_PHONE, MEM_B_NAME, MEM_B_STATUS) = (#{mem_pw}, #{mem_image}, #{mem_email}, #{mem_address}, #{mem_phone}, #{mem_b_name}, #{mem_b_status})
+		WHERE MEM_ID = #{mem_id}
+	</update>
+   
+	<!-- 회원 존재 확인 -->
+	<select id="exist" parameterType="map" resultMap="resultMemberList">
+		SELECT MEM_ID,MEM_PW
+		from LJP_MEMBER
+		where MEM_ID=#{mem_id} and MEM_PW=#{mem_pw}
+	</select>
 
-<!-- property = java 변수명 , column = db컬럼명 -->
-<!--  resultmap에 type는 myBatis Configuration에서 축약해서 정의 member -> spms.vo.Member  -->
-   <resultMap id="resultGetList" type="member">
-      <result property="no" column="mno" />
-      <result property="name" column="mname" />
-      <result property="email" column="email" />
-      <!--  java.sql.Date는 날짜만, java.util.Date는 시분초까지 포함 -->
-      <result property="createdDate" column="cre_date" javaType="java.sql.Date"/>
-      <result property="modifiedDate" column="mod_date" javaType="java.sql.Date"/>   
-   </resultMap>
-
+	<!-- 아이디 중복 조회 -->
+	<select id="checkId" parameterType="String" resultType="String">
+		SELECT MEM_ID
+		FROM LJP_MEMBER
+		WHERE MEM_ID = #{mem_id}
+	</select>
    
-   <select id="selectList" resultMap="resultGetList">
-      SELECT MNO,MNAME,EMAIL,PWD,CRE_DATE,MOD_DATE
-      FROM MEMBERS 
-      ORDER BY MNO ASC   
-   </select>
-   
-   <!--  as를 통한 치환도 가능하다. -->   
-   <select id="selectList2" resultType="member">
-      SELECT MNO as no , MNAME as name , EMAIL as email , CRE_DATE as createdDate ,
-            PWD as password , MOD_DATE as modifiedDate 
-      FROM MEMBERS 
-      ORDER BY MNO ASC   
-   </select>
-   
-   <insert id="insert" parameterType="member">
-      INSERT INTO MEMBERS(MNO,EMAIL,PWD,MNAME,CRE_DATE,MOD_DATE) 
-      VALUES (tmpseq.nextval,#{email},#{password},#{name},sysdate,sysdate)   
-   </insert>
-   
-   <delete id="delete" parameterType="int">
-      DELETE FROM MEMBERS WHERE mno=#{no}
-   </delete>
-   
-   <select id="selectOne" parameterType="int" resultMap="resultGetList" >
-      SELECT MNO,MNAME,EMAIL,PWD,CRE_DATE,MOD_DATE
-      FROM MEMBERS 
-      WHERE mno = #{no}
-   </select>
-   
-   <update id="update" parameterType="member">
-      UPDATE MEMBERS SET EMAIL=#{email}, MNAME=#{name}, MOD_DATE=sysdate where MNO=#{no}
-   </update>
-   
-   <select id="exist" parameterType="map" resultMap="resultGetList">
-      SELECT MNAME,EMAIL from MEMBERS where EMAIL=#{email} and PWD=#{password}
-   </select>
-   
-   <select id="checkEmail" parameterType="String" resultType="String">
-      select MNAME from MEMBERS where EMAIL=#{email} and ROWNUM=1
-   </select>
-   
-   <delete id="mulDelete" parameterType="Map">
-   	DELETE FROM MEMBERS WHERE MNO IN
-   	<foreach collection="nos" item="no" open="(" close=")" separator=",">
-   		#{no}
-   	</foreach>
-   </delete>
+	<!-- 이메일 중복 조회 -->
+	<select id="checkEmail" parameterType="String" resultType="String">
+		SELECT MEM_EMAIL
+		FROM LJP_MEMBER
+		WHERE MEM_EMAIL = #{mem_email}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="map" resultMap="resultMemberList">
+		SELECT MEM_ID
+		FROM LJP_MEMBER
+		WHERE MEM_EMAIL = #{mem_email} AND MEM_NAME = #{mem_name}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" parameterType="map" resultMap="resultMemberList">
+		SELECT MEM_PW
+		FROM LJP_MEMBER
+		WHERE MEM_ID = #{mem_id} AND MEM_NAME = #{mem_name} AND MEM_EMAIL = #{mem_email}
+	</select>
+	
 </mapper>
