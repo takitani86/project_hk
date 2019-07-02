@@ -113,5 +113,4 @@ public class BoardDto {
 				+ ", qna_announce=" + qna_announce + "]";
 	}
 	
-	
 }

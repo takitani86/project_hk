@@ -10,16 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class HomeController {
+public class ProductController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		return "home";
-	}
+	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
 	@RequestMapping(value = "/board.do", method = RequestMethod.GET)
 	public String board(Locale locale, Model model) {
