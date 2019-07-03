@@ -72,7 +72,7 @@ response.setContentType("text/html; charset=utf-8");
 		<col width="80px"><col width="150px">
 			<tr>
 				<th>탈퇴 신청</th>
-				<td><input type="button" value="탈퇴" onclick="location.href='deleteMember.do'"></td>
+				<td><input type="button" value="탈퇴" onclick="location.href='deleteMember.do?mem_id=${member.mem_id}'" method="post"></td>
 			</tr>
 			<tr>
 				<th>회원 정보 변경</th>
