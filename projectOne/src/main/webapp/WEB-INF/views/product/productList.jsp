@@ -13,10 +13,22 @@ response.setContentType("text/html; charset=utf-8");
   crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>상품 파일럿 페이지</title>
+<script type="text/javascript">
+
+//체크박스 올체크 펑션
+function allSel(bool){
+	var chks=document.getElementsByName("chk"); 
+	for(var i =0;i<chks.length;i++){
+		chks[i].checked=bool;
+	}
+}
+
+
+</script>
 </head>
 <body>
 <h1>상품 파일럿 페이지</h1>
-<form action="muldel.do" method="post">
+<form action="muldelProduct.do" method="post">
 <table border="1">
 	<col width="50px">
 	<col width="50px"><col width="50px"><col width="300px"><col width="100px"><col width="50px">
@@ -33,7 +45,7 @@ response.setContentType("text/html; charset=utf-8");
 		<c:otherwise> <!-- else면 이것을 실행 -->
 			<c:forEach items="${list}" var="dto">
 				<tr>
-					<td><input type="checkbox" name="chk" value="${dto.pro_seq}" /></td>
+					<td><input type="checkbox" name="seqs" value="${dto.pro_seq}" /></td>
 					<td>${dto.pro_seq}</td>
 					<td>${dto.pro_name}</td>
 					<td>${dto.pro_image}</td>
@@ -49,7 +61,7 @@ response.setContentType("text/html; charset=utf-8");
 	</c:choose>
 	<tr><td>
 	<input type="button" value="상품추가" onclick="location.href='insertProductForm.do'" />
-	<input type="submit" value="상푸막제" />
+	<input type="submit" value="상품삭제" />
 	</td></tr>
 </table>
 </form>

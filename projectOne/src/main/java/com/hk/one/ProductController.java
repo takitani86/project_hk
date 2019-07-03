@@ -52,6 +52,18 @@ public class ProductController {
 			return "error"; 
 		}
 	}
+	
+	@RequestMapping(value = "/muldelProduct.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String mulDel(Locale locale, Model model,String[]seqs) {
+		logger.info("여러글삭제 {}.", locale);
+		boolean isS=ProductService.mulDelProduct(seqs);
+		if(isS) {
+			return "redirect:productList.do";
+		}else {
+			model.addAttribute("msg", "여러상품삭제실패");
+			return "error";
+		}
+	}
 }
 
 

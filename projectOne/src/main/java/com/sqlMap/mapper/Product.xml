@@ -48,10 +48,10 @@ SET PRO_IMAGE=#{pro_image}
 WHERE PRO_SEQ=#{pro_seq}
    </update> 
   
-   <delete id="mulDelProduct" parameterType="Map">
-   	DELETE FROM LJP_PRODUCT WHERE PRO_SEQ IN
+   <delete id="muldelProduct" parameterType="map">
+   	UPDATE LJP_PRODUCT SET PRO_ISDEL=1 WHERE PRO_SEQ IN
    	<foreach collection="seqs" item="seq" open="(" close=")" separator=",">
-   		#{pro_seq}
+   		#{seq}
    	</foreach>
    </delete>
    

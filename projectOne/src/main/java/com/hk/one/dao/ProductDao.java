@@ -58,7 +58,7 @@ import com.hk.one.dto.ProductDto;
 	public boolean mulDelProduct(String[] seqs) {
 		Map<String,String[]>map=new HashMap<String, String[]>();
 		map.put("seqs", seqs);
-		int count=sqlSession.update(namespace+"muldel",map);
+		int count=sqlSession.update(namespace+"muldelProduct",map);
 		return count>0?true:false;
 	}
 
