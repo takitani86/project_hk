@@ -28,6 +28,11 @@
   </tr>
   <tr>
     <td colspan="2">
+      <img src="${boarddetail.qna_fileLocation}" width=200 height=200/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
       <button type="button" onclick="updateForm('${boarddetail.qna_seq}')">수정</button>
       <button type="button" onclick="delBoard('${boarddetail.qna_seq}')">삭제</button>
       <input type="button" value="목록" onclick="location.href='member_board.do'">

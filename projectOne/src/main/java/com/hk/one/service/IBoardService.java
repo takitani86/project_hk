@@ -2,10 +2,14 @@ package com.hk.one.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.hk.one.dto.BoardDto;
 
 public interface IBoardService {
 
+	// 파일업로드 기능
+	public String saveFile(MultipartFile file);
 	// 게시물 목록 출력
 	public List<BoardDto> selectList();
 	// 게시글 추가

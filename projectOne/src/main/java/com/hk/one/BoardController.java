@@ -22,7 +22,7 @@ import com.hk.one.service.IBoardService;
 public class BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-	private static final String UPLOAD_PATH = "C:\\Users\\HKEDU\\git\\project_hk1\\projectOne\\src\\main\\webapp\\img";
+
 	@Autowired
 	private IBoardService bService;
 	
@@ -70,11 +70,9 @@ public class BoardController {
 	@RequestMapping(value = "/board/member_writeBoard.do", method = RequestMethod.POST)
 	public String member_writeBoard(Locale locale, Model model, BoardDto dto, MultipartFile uploadFile) {
 		logger.info("member_writeBoard 호출 {}.", locale);
-		logger.info("uploadFile {}.", locale);
 		logger.info("파일 이름: {}.", uploadFile.getOriginalFilename());
 		logger.info("파일 용량: {}.", uploadFile.getSize());
-		saveFile(uploadFile);
-		
+		dto.setQna_fileLocation(bService.saveFile(uploadFile));
 		boolean success = bService.insert(dto);
 		if (success) {
 			System.out.println("글추가 성공");
@@ -85,22 +83,6 @@ public class BoardController {
 		}
 	}
 	
-	private String saveFile(MultipartFile file) {
-		// 파일이름 변경
-		UUID uuid = UUID.randomUUID();
-		String saveName = uuid + "_" + file.getOriginalFilename();
-		logger.info("파일 이름: {}.", saveName);
-		// 저장할 파일 객체를 생성(껍데기 파일)
-		File saveFile = new File(UPLOAD_PATH, saveName); // 저장할 폴더 이름, 저장할 파일 이름
-				
-				try {
-					file.transferTo(saveFile); // 업로드파일에 saveFile이라는 껍데기를 입힌다
-				} catch (IOException e) {
-					e.printStackTrace();
-					return null;
-				}
-		return saveName;
-	}
 	@RequestMapping(value = "/board/member_updateForm.do", method = RequestMethod.GET)
 	public String member_updateForm(Locale locale, Model model, int seq) {
 		logger.info("member_updateForm 호출 {}.", locale);
