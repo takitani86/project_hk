@@ -27,7 +27,7 @@
    
    <!-- 회원 리스트 보기 -->
 	<select id="getAllMember" resultMap="resultMemberList">
-		SELECT MEM_SEQ,MEM_ID,MEM_IMAGE,MEM_NAME,MEM_B_NAME
+		SELECT MEM_SEQ,MEM_ID,MEM_NAME,MEM_B_NAME
 		FROM LJP_MEMBER
 		ORDER BY MEM_SEQ ASC
 	</select>
