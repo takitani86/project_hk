@@ -22,15 +22,14 @@ public class MemberDao implements IMemberDao {
 	}
 
 	@Override
-	public MemberDto getMember(int mem_seq) {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberDto getMember(String mem_id) {
+		return sqlSession.selectOne(namespace + "getMember", mem_id);
 	}
 
 	@Override
 	public boolean joinMember(MemberDto member) {
-		// TODO Auto-generated method stub
-		return false;
+		int count = sqlSession.insert(namespace + "joinMember", member);
+		return count>0 ? true:false;
 	}
 
 	@Override

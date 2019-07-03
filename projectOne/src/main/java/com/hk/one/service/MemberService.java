@@ -20,15 +20,13 @@ public class MemberService implements IMemberService {
 	}
 
 	@Override
-	public MemberDto getMember(int mem_seq) {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberDto getMember(String mem_id) {
+		return memberDao.getMember(mem_id);
 	}
 
 	@Override
 	public boolean joinMember(MemberDto memberDto) {
-		// TODO Auto-generated method stub
-		return false;
+		return memberDao.joinMember(memberDto);
 	}
 
 	@Override

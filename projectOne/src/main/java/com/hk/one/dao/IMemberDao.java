@@ -7,7 +7,7 @@ import com.hk.one.dto.MemberDto;
 public interface IMemberDao {
 	
 	public List<MemberDto> getAllMember(); //전체멤버보기
-	public MemberDto getMember(int mem_seq); //멤버상세보기
+	public MemberDto getMember(String mem_id); //멤버상세보기
 	
 	public boolean joinMember(MemberDto member); //회원가입
 	public boolean deleteMember(String mem_id); //회원탈퇴

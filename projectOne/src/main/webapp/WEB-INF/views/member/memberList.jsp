@@ -29,7 +29,7 @@ response.setContentType("text/html; charset=utf-8");
 			<c:forEach items="${list}" var="member">
 				<tr>
 					<td>${member.mem_seq}</td>
-					<td>${member.mem_id}</td>
+					<td><a href="memberDetail.do?mem_id=${member.mem_id}">${member.mem_id}</a></td>
 					<td>${member.mem_image}</td>
 					<td>${member.mem_name}</td>
 					<td>${member.mem_b_name}</td>
@@ -38,7 +38,7 @@ response.setContentType("text/html; charset=utf-8");
 		</c:otherwise>
 	</c:choose>
 	<tr><td>
-	<input type="button" value="회원 추가" onclick="location.href='insertForm.do'" />
+	<input type="button" value="회원 추가" onclick="location.href='joinMemberForm.do'" />
 	</td></tr>
 </table>
 </body>

@@ -29,4 +29,34 @@ public class MemberController {
 		
 		return "member/memberList";
 	}
+	
+	@RequestMapping(value = "/memberDetail.do", method = RequestMethod.GET)
+	public String memberDetail(Locale locale, Model model, String mem_id) {
+		logger.info("멤버 상세정보 호출 {}.", locale);
+		MemberDto member = MemberService.getMember(mem_id);
+		model.addAttribute("member", member);		
+		
+		return "member/memberDetail";
+	}
+	
+	@RequestMapping(value = "/joinMemberForm.do", method = RequestMethod.GET)
+	public String joinMemberForm(Locale locale, Model model) {
+		logger.info("회원가입폼으로 이동 {}.", locale);
+		List<MemberDto> list = MemberService.getAllMember();
+		model.addAttribute("list", list);
+		
+		return "member/joinMember";
+	}
+	
+	@RequestMapping(value = "/joinMember.do", method = RequestMethod.POST)
+	public String joinMember(Locale locale, Model model, MemberDto memberDto) {
+		logger.info("회원 가입 {}.", locale);
+		boolean isS = MemberService.joinMember(memberDto);
+		if(isS) {
+			return "redirect:memberList.do";
+		} else {
+			model.addAttribute("failJoin", "회원 가입 실패");
+			return "error";
+		}
+	}
 }
