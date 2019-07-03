@@ -28,7 +28,7 @@ response.setContentType("text/html; charset=utf-8");
 	</tr>
 	<c:choose>
 		<c:when test="${empty list}"> <!-- request에 담은 list트가 비어있으면 이것을 실행 -->
-			<tr><td colspan="10">-----등록된 상품이 없습니다.-----</tr>
+			<tr><td colspan="10">-----등록된 상품이 없습니다..-----</tr>
 		</c:when>
 		<c:otherwise> <!-- else면 이것을 실행 -->
 			<c:forEach items="${list}" var="dto">
