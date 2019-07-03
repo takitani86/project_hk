@@ -30,7 +30,7 @@ VALUES(LJP_CATEGORY_SEQ.NEXTVAL,#{cat_name},#{mem_id}.#{cat_isdel})
    </insert>
    
    
-   <select id="selectProductOne" parameterType="product" resultType="product" >
+   <select id="selectProductOne" parameterType="int" resultType="product" >
       SELECT PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
       FROM LJP_PRODUCT 
       WHERE PRO_SEQ = #{pro_seq}
@@ -38,8 +38,9 @@ VALUES(LJP_CATEGORY_SEQ.NEXTVAL,#{cat_name},#{mem_id}.#{cat_isdel})
    
    <update id="updateProduct" parameterType="product">
      UPDATE LJP_PRODUCT
-SET PRO_NAME=#{pro_name},PRO_IMAGE='변경된경로',PRO_PRICE=5555,PRO_DESC='변경된커피입니다',CAT_SEQ=1,PRO_OPTION='메인',PRO_MENU=0,PRO_REGDATE=SYSDATE
-WHERE PRO_SEQ=10
+SET PRO_NAME=#{pro_name},PRO_IMAGE=#{pro_image},PRO_PRICE=#{pro_price},PRO_DESC=#{pro_desc},CAT_SEQ=#{cat_seq}
+,PRO_OPTION=#{pro_option},PRO_MENU=#{pro_menu},PRO_REGDATE=SYSDATE
+WHERE PRO_SEQ=#{pro_seq}
    </update>
    
    <update id="insertProductImg" parameterType="product">

@@ -64,6 +64,27 @@ public class ProductController {
 			return "error";
 		}
 	}
+	
+	@RequestMapping(value = "/productUpdate.do", method = RequestMethod.GET)
+	public String updateForm(Locale locale, Model model,int seq) {
+		logger.info("사품하기폼이동{}.", locale);
+		ProductDto dto =ProductService.getProduct(seq);
+		model.addAttribute("dto", dto );
+		return "product/productUpdate";
+	}
+	
+	@RequestMapping(value = "/updateReceiveProduct.do", method = RequestMethod.POST)
+	public String updateboard(Locale locale, Model model, ProductDto dto) {
+		logger.info("상품수정하기{}.", locale);
+		
+		boolean isS=ProductService.updateProduct(dto);
+		if(isS) {
+			return "redirect:productUpdate.do?seq="+dto.getPro_seq();
+		}else {
+			model.addAttribute("msg", "글수정하기 실패");
+			return "error";
+		}
+	}
 }
 
 

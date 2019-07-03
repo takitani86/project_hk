@@ -46,7 +46,7 @@ function allSel(bool){
 			<c:forEach items="${list}" var="dto">
 				<tr>
 					<td><input type="checkbox" name="seqs" value="${dto.pro_seq}" /></td>
-					<td>${dto.pro_seq}</td>
+					<td><a href="productUpdate.do?seq=${dto.pro_seq}">${dto.pro_seq}</a></td>
 					<td>${dto.pro_name}</td>
 					<td>${dto.pro_image}</td>
 					<td>${dto.pro_price}</td>

@@ -21,7 +21,7 @@ public class ProductService implements IProductService {
 	}
 
 	@Override
-	public ProductDto getProduct(ProductDto dto) {
+	public ProductDto getProduct(int dto) {
 		
 		return productDao.getProduct(dto);
 	}

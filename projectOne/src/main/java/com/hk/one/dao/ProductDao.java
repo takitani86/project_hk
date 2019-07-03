@@ -25,7 +25,7 @@ import com.hk.one.dto.ProductDto;
 	}
 
 	@Override
-	public ProductDto getProduct(ProductDto dto) {
+	public ProductDto getProduct(int dto) {
 		return sqlSession.selectOne(namespace+"selectProductOne",dto);
 	}
 
@@ -50,6 +50,7 @@ import com.hk.one.dto.ProductDto;
 	@Override
 	public boolean updateProduct(ProductDto dto) {
 		 int count=sqlSession.update(namespace+"updateProduct",dto);
+		 System.out.println(count);
 		 return count>0?true:false;
 	}
 
