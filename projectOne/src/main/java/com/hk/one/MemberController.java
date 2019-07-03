@@ -16,7 +16,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/member.do", method = RequestMethod.GET)
 	public String board(Locale locale, Model model) {
-		logger.info("게시판 호출 {}.", locale);
+		logger.info("멤버 게시판 호출 {}.", locale);
 		
 		return "member/member";
 	}

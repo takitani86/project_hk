@@ -2,14 +2,23 @@ package com.hk.one.dao;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.hk.one.dto.MemberDto;
 
+@Repository
 public class MemberDao implements IMemberDao {
+	
+	private String namespace="Member.";
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
 
 	@Override
 	public List<MemberDto> getAllMember() {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(namespace + "getAllMember");
 	}
 
 	@Override
