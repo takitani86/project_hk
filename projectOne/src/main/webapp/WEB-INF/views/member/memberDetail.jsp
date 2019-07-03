@@ -4,7 +4,7 @@ response.setContentType("text/html; charset=utf-8");
 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html>
 <head>
 <script
@@ -67,9 +67,14 @@ response.setContentType("text/html; charset=utf-8");
 		</tr>
 	</table>
 	<table border="1">
-		<tr><td>
-			<input type="button" value="회원 목록" onclick="location.href='memberList.do'" />
-		</td></tr>
+		<tr>
+			<td>
+				<input type="button" value="회원 정보 수정" onclick="location.href='member_infoForm.do?mem_id=${member.mem_id}'" />
+			</td>
+			<td>
+				<input type="button" value="회원 목록" onclick="location.href='memberList.do'" />
+			</td>
+		</tr>
 	</table>
 </body>
 </html>

@@ -59,4 +59,37 @@ public class MemberController {
 			return "error";
 		}
 	}
+	
+	@RequestMapping(value = "/member_infoForm.do", method = RequestMethod.GET)
+	public String updateMemberForm(Locale locale, Model model, String mem_id) {
+		logger.info("회원 정보 페이지로 이동 {}.", locale);
+		MemberDto member = MemberService.getMember(mem_id);
+		model.addAttribute("member", member);
+		
+		return "member/member_info";
+	}
+	
+	@RequestMapping(value = "/member_info.do", method = RequestMethod.POST)
+	public String updateMember(Locale locale, Model model, MemberDto member) {
+		logger.info("회원 정보 수정 {}.", locale);
+		boolean isS = MemberService.updateMember(member);
+		if(isS) {
+			return "redirect:memberDetail.do";
+		} else {
+			model.addAttribute("failUpdate", "회원 정보 수정 실패");
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value = "/deleteMember.do", method = RequestMethod.POST)
+	public String deleteMember(Locale locale, Model model, String mem_id) {
+		logger.info("회원 탈퇴 {}.", locale);
+		boolean isS = MemberService.deleteMember(mem_id);
+		if(isS) {
+			return "redirect:memberList.do";
+		} else {
+			model.addAttribute("failDelete", "회원 탈퇴 실패");
+			return "error";
+		}
+	}
 }

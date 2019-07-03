@@ -4,7 +4,7 @@ response.setContentType("text/html; charset=utf-8");
 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html>
 <head>
 <script
@@ -39,6 +39,7 @@ response.setContentType("text/html; charset=utf-8");
 	</c:choose>
 	<tr><td>
 	<input type="button" value="회원 추가" onclick="location.href='joinMemberForm.do'" />
+	<button onclick="location.href='home.do'">홈으로</button>
 	</td></tr>
 </table>
 </body>

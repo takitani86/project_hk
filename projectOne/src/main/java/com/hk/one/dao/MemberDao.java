@@ -34,14 +34,14 @@ public class MemberDao implements IMemberDao {
 
 	@Override
 	public boolean deleteMember(String mem_id) {
-		// TODO Auto-generated method stub
-		return false;
+		int count = sqlSession.update(namespace + "deleteMember", mem_id);
+		return count>0 ? true:false;
 	}
 
 	@Override
 	public boolean updateMember(MemberDto member) {
-		// TODO Auto-generated method stub
-		return false;
+		int count = sqlSession.update(namespace + "updateMember", member);
+		return count>0 ? true:false;
 	}
 
 	@Override

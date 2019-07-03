@@ -34,7 +34,7 @@
    
 	<!-- 회원 상세정보 보기 -->
 	<select id="getMember" parameterType="String" resultMap="resultMemberList">
-		SELECT MEM_SEQ,MEM_ID,MEM_IMAGE,MEM_EMAIL,MEM_NAME,MEM_PW,MEM_ISAPPROVE,MEM_ISDEL,MEM_REGDATE,MEM_ADDRESS,MEM_PHONE,MEM_B_NAME,MEM_B_STATUS
+		SELECT MEM_SEQ,MEM_ID,MEM_PW,MEM_IMAGE,MEM_EMAIL,MEM_NAME,MEM_PW,MEM_ISAPPROVE,MEM_ISDEL,MEM_REGDATE,MEM_ADDRESS,MEM_PHONE,MEM_B_NAME,MEM_B_STATUS
 		FROM LJP_MEMBER
 		WHERE mem_id = #{mem_id}
 	</select>
@@ -55,7 +55,7 @@
 	<!-- 회원 정보 수정 -->
 	<update id="updateMember" parameterType="member">
 		UPDATE LJP_MEMBER
-		SET (MEM_PW, MEM_IMAGE, MEM_EMAIL, MEM_ADDRESS, MEM_PHONE, MEM_B_NAME, MEM_B_STATUS) = (#{mem_pw}, #{mem_image}, #{mem_email}, #{mem_address}, #{mem_phone}, #{mem_b_name}, #{mem_b_status})
+		SET (MEM_PW, MEM_IMAGE, MEM_NAME, MEM_ADDRESS, MEM_PHONE, MEM_B_NAME, MEM_B_STATUS) = (#{mem_pw}, #{mem_image}, #{mem_name}, #{mem_address}, #{mem_phone}, #{mem_b_name}, #{mem_b_status})
 		WHERE MEM_ID = #{mem_id}
 	</update>
    

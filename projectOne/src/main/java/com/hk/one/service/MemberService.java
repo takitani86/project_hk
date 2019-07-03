@@ -30,15 +30,13 @@ public class MemberService implements IMemberService {
 	}
 
 	@Override
-	public boolean deleteMember(int mem_seq) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteMember(String mem_id) {
+		return memberDao.deleteMember(mem_id);
 	}
 
 	@Override
 	public boolean updateMember(MemberDto memberDto) {
-		// TODO Auto-generated method stub
-		return false;
+		return memberDao.updateMember(memberDto);
 	}
 
 	@Override
