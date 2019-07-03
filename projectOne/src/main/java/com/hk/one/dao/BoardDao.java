@@ -1,6 +1,8 @@
 package com.hk.one.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,38 +20,38 @@ public class BoardDao implements IBoardDao {
 	
 	@Override
 	public List<BoardDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(namespace+"getAllBoard");
 	}
 
 	@Override
 	public boolean insert(BoardDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+		int success = sqlSession.insert(namespace+"insertBoard", dto);
+		return success > 0 ? true:false;
 	}
 
 	@Override
 	public boolean delete(int seq) {
-		// TODO Auto-generated method stub
-		return false;
+		int success = sqlSession.update(namespace+"deleteBoard", seq);
+		return success > 0 ? true:false;
 	}
 
 	@Override
 	public BoardDto selectOne(int seq) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(namespace+"selectOneBoard", seq);
 	}
 
 	@Override
 	public boolean updateBoard(BoardDto dto) {
-		// TODO Auto-generated method stub
-		return false;
+		int success = sqlSession.update(namespace+"updateBoard", dto);
+		return success > 0 ? true:false;
 	}
 
 	@Override
 	public boolean mulDel(String[] seq) {
-		// TODO Auto-generated method stub
-		return false;
+		Map<String, String[]> map = new HashMap<String, String[]>();
+		map.put("nos", seq);
+		int success = sqlSession.update(namespace+"mulDelBoard", map);
+		return success > 0 ? true:false;
 	}
 
 }

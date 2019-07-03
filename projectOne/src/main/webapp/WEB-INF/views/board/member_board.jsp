@@ -20,24 +20,25 @@
     <th>조회수</th>
   </tr>
   <c:choose>
-    <c:when test="${empty list}">
+    <c:when test="${empty board}">
       <tr>
         <td colspan="5">----작성된 글이 없습니다.----</td>
       </tr>
     </c:when>
   <c:otherwise>
-  <c:forEach var="list" items="${list}">
+  <c:forEach var="board" items="${board}">
     <tr>
-      <td>${list.qna_seq}</td>
-      <td>${list.mem_id}</td>
-      <td>${list.qna_title}</td>
-      <td>${list.qna_regDate}</td>
-      <td>${list.qna_readCount}</td>
+      <td>${board.qna_seq}</td>
+      <td>${board.mem_id}</td>
+      <td><a href=""></a>${board.qna_title}</td>
+      <td>${board.qna_regDate}</td>
+      <td>${board.qna_readCount}</td>
     </tr>
   </c:forEach>
   </c:otherwise>
   </c:choose>
 </table>
-  <a href="qna_write.do">글쓰기</a>
+  <a href="member_writeForm.do">글쓰기</a>
+  <a href="../home.do">메인화면</a>
 </body>
 </html>
