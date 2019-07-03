@@ -31,4 +31,27 @@ public class ProductController {
 		
 		return "product/productList";
 	}
+	
+	@RequestMapping(value = "/insertProductForm.do", method = RequestMethod.GET)
+	public String insertProductForm(Locale locale, Model model) {
+		logger.info("상품추가 페이지이동{}.", locale);
+		List<ProductDto> list = ProductService.getAllProductList();
+		model.addAttribute("list", list );
+		
+		return "product/insertProduct";
+	}
+	
+	@RequestMapping(value = "/insertReceiveProduct.do", method = RequestMethod.POST)
+	public String insertBoard(Locale locale, Model model,ProductDto dto) {
+		logger.info("상품추가{}.", locale);
+		boolean isS=ProductService.insertProduct(dto);
+		if(isS) {
+			return "redirect:productList.do";
+		}else {
+			model.addAttribute("msg","상품추가실패");
+			return "error"; 
+		}
+	}
 }
+
+

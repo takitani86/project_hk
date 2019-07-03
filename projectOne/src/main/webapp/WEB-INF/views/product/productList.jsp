@@ -48,8 +48,8 @@ response.setContentType("text/html; charset=utf-8");
 		</c:otherwise>
 	</c:choose>
 	<tr><td>
-	<input type="button" value="글추가" onclick="location.href='insertForm.do'" />
-	<input type="submit" value="글삭제" />
+	<input type="button" value="상품추가" onclick="location.href='insertProductForm.do'" />
+	<input type="submit" value="상푸막제" />
 	</td></tr>
 </table>
 </form>
