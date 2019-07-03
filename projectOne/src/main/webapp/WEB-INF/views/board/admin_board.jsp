@@ -12,8 +12,12 @@
 </head>
 <body>
 <table border="1">
+  <col width="50px">
+  <col width="50px">
+  <col width="300px">
+  <col width="100px">
+  <col width="50px">
 	<tr>
-    <th><input type="checkbox" name="all" onclick="selectCheck();"></th>
     <th>번호</th>
     <th>작성자</th>
     <th>제목</th>
@@ -29,18 +33,29 @@
   <c:otherwise>
   <c:forEach var="board" items="${board}">
     <tr>
-      <td><input type="checkbox" name="chk" value="${board.qna_seq}"></td>
       <td>${board.qna_seq}</td>
       <td>${board.mem_id}</td>
-      <td><a href=""></a>${board.qna_title}</td>
-      <td>${board.qna_regDate}</td>
+      <td align='left'>
+      <c:choose>
+        <c:when test='${board.level > 1}'>
+          <c:forEach begin="1" end="${board.level}" step="1">
+            <span style="padding-left:20px;"></span>
+          </c:forEach>
+          <span style="font-size:12px;">[답변]</span><a href="member_boarddetail.do?seq=${board.qna_seq}">${board.qna_title}</a>
+        </c:when>
+        <c:otherwise>
+          <a href="member_boarddetail.do?seq=${board.qna_seq}">${board.qna_title}</a>
+        </c:otherwise>
+      </c:choose>
+      </td>
+      <td><fmt:formatDate value="${board.qna_regDate}"/></td>
       <td>${board.qna_readCount}</td>
     </tr>
   </c:forEach>
   </c:otherwise>
   </c:choose>
 </table>
-  <a href="member_write.do">글쓰기</a>
+  <a href="member_writeForm.do">글쓰기</a>
   <a href="../home.do">메인화면</a>
 </body>
 </html>

@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class BoardDto {
 
+	private int level;
 	private int qna_seq;
 	private String qna_title;
 	private String qna_content;
@@ -111,6 +112,12 @@ public class BoardDto {
 				+ ", qna_isDel=" + qna_isDel + ", qna_regDate=" + qna_regDate + ", qna_updateDate=" + qna_updateDate
 				+ ", qna_fileName=" + qna_fileName + ", qna_fileLocation=" + qna_fileLocation + ", mem_id=" + mem_id
 				+ ", qna_announce=" + qna_announce + "]";
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
 	}
 	
 }

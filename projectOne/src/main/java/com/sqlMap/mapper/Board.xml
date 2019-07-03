@@ -32,20 +32,27 @@
 
    
    <select id="getAllBoard" resultMap="boardList">
-      SELECT LEVEL, QNA_SEQ, LPAD(' ', 4*(LEVEL-1)) || QNA_TITLE QNA_TITLE, QNA_CONTENT, QNA_READCOUNT, QNA_REGDATE, MEM_ID
+      SELECT LEVEL, QNA_SEQ, QNA_TITLE, QNA_CONTENT, QNA_READCOUNT, QNA_REGDATE, MEM_ID
       FROM LJP_QNABOARD WHERE QNA_ISDEL = 0
       START WITH QNA_REFER = 0
       CONNECT BY PRIOR QNA_SEQ = QNA_REFER
       ORDER SIBLINGS BY QNA_SEQ DESC
    </select>
    
-   <insert id="insertBoard" parameterType="member">
-      INSERT INTO LJP_QNABOARD(QNA_SEQ,QNA_TITLE,QNA_CONTENT,MEM_ID) 
+   <insert id="insertBoard" parameterType="board">
+      INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE, QNA_FILE_NAME, QNA_FILE_LOCATION, QNA_CONTENT, MEM_ID) 
       VALUES (LJP_QNABOARD_SEQ.nextval,#{qna_title},#{qna_content},#{mem_id})   
    </insert>
    
+   <insert id="replyBoard" parameterType="board">
+   	INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE, QNA_CONTENT, QNA_REFER, MEM_ID)
+   	VALUES (LJP_QNABOARD_SEQ.nextval, #{qna_title}, #{qna_content}, #{qna_refer}, #{mem_id})
+   </insert>
+   
    <delete id="deleteBoard" parameterType="int">
-      UPDATE LJP_QNABOARD SET QNA_ISDEL = 1 WHERE QNA_SEQ = #{qna_seq}
+      UPDATE LJP_QNABOARD SET QNA_ISDEL = 1 WHERE QNA_SEQ IN
+       (SELECT QNA_SEQ FROM LJP_QNABOARD START WITH QNA_SEQ = #{qna_seq}
+       CONNECT BY PRIOR QNA_SEQ = QNA_REFER)
    </delete>
    
    <select id="selectOneBoard" parameterType="int" resultMap="boardList" >
