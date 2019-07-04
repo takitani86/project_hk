@@ -40,6 +40,28 @@
     </td>
   </tr>
 </table>
+
+<!-- 댓글  -->
+<div class="container">
+	<label for="content">comment</label>	
+	<form name="commentInsertForm">
+		<div class="input-group">
+			<input type="hidden" name="qna_seq" value="${boarddetail.qna_seq}">
+			<input type="text" class="form-control" id="content" name="com_content" placeholder="내용을 입력하세요.">
+               <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+               </span>
+              </div>
+        </form>
+    </div>
+    
+    <div class="container">
+        <div class="commentList"></div>
+    </div>
+</div>
+ 
+<!--                     추가                         -->
+<%@ include file="commentS.jsp" %>
 <script>
   // 수정폼으로 이동
   function updateForm(seq) {

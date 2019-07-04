@@ -21,13 +21,13 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
 	@Autowired
-	private IBoardService bService;
+	private IBoardService boardService;
 	
 	@RequestMapping(value = "/board/member_board.do", method = RequestMethod.GET)
 	public String member_board(Locale locale, Model model) {
 		logger.info("member_board 호출 {}.", locale);
 		
-		List<BoardDto> list = bService.selectList();
+		List<BoardDto> list = boardService.selectList();
 		model.addAttribute("board", list);
 		
 		return "board/member_board";
@@ -37,7 +37,7 @@ public class BoardController {
 	public String member_detail(Locale locale, Model model, int seq) {
 		logger.info("member_detail 호출 {}.", locale);
 		
-		BoardDto dto = bService.selectOne(seq);
+		BoardDto dto = boardService.selectOne(seq);
 		model.addAttribute("boarddetail", dto);
 		
 		return "board/member_boarddetail";
@@ -47,7 +47,7 @@ public class BoardController {
 	public String member_del(Locale locale, Model model, int seq) {
 		logger.info("member_del 호출 {}.", locale);
 		
-		boolean success = bService.delete(seq);
+		boolean success = boardService.delete(seq);
 		if (success) {
 			System.out.println(seq + "번 글삭제 성공");
 			return "redirect:member_board.do";
@@ -69,8 +69,8 @@ public class BoardController {
 		logger.info("member_writeBoard 호출 {}.", locale);
 		logger.info("파일 이름: {}.", uploadFile.getOriginalFilename());
 		logger.info("파일 용량: {}.", uploadFile.getSize());
-		dto.setQna_fileName(bService.saveFile(uploadFile));
-		boolean success = bService.insert(dto);
+		dto.setQna_fileName(boardService.saveFile(uploadFile));
+		boolean success = boardService.insert(dto);
 		if (success) {
 			System.out.println("글추가 성공");
 			return "redirect:member_board.do";
@@ -84,7 +84,7 @@ public class BoardController {
 	public String member_updateForm(Locale locale, Model model, int seq) {
 		logger.info("member_updateForm 호출 {}.", locale);
 		
-		BoardDto dto = bService.selectOne(seq);
+		BoardDto dto = boardService.selectOne(seq);
 		model.addAttribute("boarddetail", dto);
 		
 		return "board/member_updateForm";
@@ -96,8 +96,8 @@ public class BoardController {
 		logger.info("파일 이름: {}.", uploadFile.getOriginalFilename());
 		logger.info("파일 용량: {}.", uploadFile.getSize());
 		
-		dto.setQna_fileName(bService.saveFile(uploadFile));
-		boolean success = bService.updateBoard(dto);
+		dto.setQna_fileName(boardService.saveFile(uploadFile));
+		boolean success = boardService.updateBoard(dto);
 		if (success) {
 			System.out.println("글수정 성공");
 			return "redirect:member_boarddetail.do?seq=" + dto.getQna_seq();

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Comment">
+
+	<!-- property = java 변수명 , column = db컬럼명 -->
+	<!-- resultmap에 type는 myBatis Configuration에서 축약해서 정의 member -> spms.vo.Member -->
+	<resultMap id="commentList" type="comment">
+		<result property="com_seq" column="COM_SEQ" />
+		<result property="qna_seq" column="QNA_SEQ" />
+		<result property="com_content" column="COM_CONTENT" />
+		<result property="com_step" column="COM_STEP" />
+		<result property="mem_id" column="MEM_ID" />
+		<!-- java.sql.Date는 날짜만, java.util.Date는 시분초까지 포함 -->
+		<result property="com_regDate" column="COM_REGDATE"
+			javaType="java.util.Date" />
+		<result property="com_updateDate" column="COM_UPDATEDATE"
+			javaType="java.util.Date" />
+		<result property="com_star" column="COM_STAR" />
+		<result property="com_isDel" column="COM_ISDEL" />
+	</resultMap>
+
+	<select id="commentCount" resultType="int">
+		SELECT COUNT(*)
+		FROM LJP_COMMENT
+	</select>
+	
+	<select id="commentList" resultType="comment">
+		SELECT * FROM LJP_COMMENT
+	</select>
+	
+	<insert id="commentInsert" parameterType="comment">
+		INSERT INTO 
+		LJP_COMMENT(COM_SEQ, QNA_SEQ, COM_CONTENT, COM_STEP, MEM_ID, COM_REGDATE)
+		VALUES(LJP_COMMENT_SEQ.nextval, #{qna_seq}, #{com_content}, #{com_step}, #{mem_id}, SYSDATE)
+	</insert>
+	
+	<update id="commentUpdate" parameterType="comment">
+		UPDATE LJP_COMMENT SET 
+		COM_CONTENT = #{com_content}
+		WHERE COM_SEQ = #{com_seq}
+	</update>
+	
+	<update id="commentDelete" parameterType="int">
+		UPDATE LJP_COMMENT SET
+		COM_ISDEL = #{com_isDel}
+		WHERE COM_SEQ = #{com_seq}
+	</update>
+	
+</mapper>

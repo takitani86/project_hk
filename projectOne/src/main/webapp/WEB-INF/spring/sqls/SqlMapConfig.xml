@@ -9,6 +9,7 @@
 		<typeAlias type="com.hk.one.dto.CategoryDto" alias="category"/>
 		<typeAlias type="com.hk.one.dto.MemberDto" alias="member"/>
 		<typeAlias type="com.hk.one.dto.ProductDto" alias="product"/>
+		<typeAlias type="com.hk.one.dto.CommentDto" alias="comment"/>
 	</typeAliases>
 	
 	<mappers>
@@ -16,6 +17,7 @@
 		<mapper resource="/com/sqlMap/mapper/Category.xml"/>
 		<mapper resource="/com/sqlMap/mapper/Member.xml"/>
 		<mapper resource="/com/sqlMap/mapper/Product.xml"/>
+		<mapper resource="/com/sqlMap/mapper/Comment.xml"/>
 	</mappers>
 </configuration>
 
