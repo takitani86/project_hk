@@ -3,6 +3,8 @@ package com.hk.one;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +87,21 @@ public class ProductController {
 			return "error";
 		}
 	}
+	
+//	@RequestMapping(value = "/productImgInsert.do")
+//	public String fileInsert(Locale locale, Model model,HttpServletRequest request) {
+//		logger.info("파일첨부하기!", locale);
+//		
+//		//service에서 파일업로드 처리를 하기 위해 요청정보를 전달한다 (Request 객체)
+//		boolean isS = fileService.insertFileInfo(request);
+//		if(isS) {
+//			return "fileupload";
+//		}else {
+//			logger.info("파일 업로드 실패");
+//			return "error";
+//		}
+//	
+//	}
 }
 
 
