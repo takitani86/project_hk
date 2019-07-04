@@ -56,14 +56,14 @@ WHERE PRO_SEQ=#{pro_seq}
    	</foreach>
    </delete>
    
-   <insert id="insertProductImg" parameterType="FileDto">
+  <!--  <insert id="insertProductImg" parameterType="FileDto">
 		INSERT INTO FILEBOARD VALUES (FILEBOARD_SEQ.NEXTVAL, #{origin_fname},#{stored_fname},#{file_size},SYSDATE,'N')
 	</insert>
 	
 	<select id="listProductImg" resultType="FileDto">
 		SELECT SEQ, ORIGIN_FNAME, STORED_FNAME, FILE_SIZE, F_REGDATE, F_DELFLAG
 		FROM FILEBOARD ORDER BY F_REGDATE DESC
-	</select>
+	</select> -->
    
   <!-- 미작업: 확인중 -->
      <delete id="deleteProduct" parameterType="product">
