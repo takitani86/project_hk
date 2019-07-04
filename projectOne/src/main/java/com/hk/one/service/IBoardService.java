@@ -22,4 +22,6 @@ public interface IBoardService {
 	public boolean updateBoard(BoardDto dto);
 	// 글 다중삭제
 	public boolean mulDel(String[] seq);
+	// 조회수 증가
+	public boolean readcount(int seq);
 }

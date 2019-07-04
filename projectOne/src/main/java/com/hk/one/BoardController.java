@@ -1,10 +1,7 @@
 package com.hk.one;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +69,7 @@ public class BoardController {
 		logger.info("member_writeBoard 호출 {}.", locale);
 		logger.info("파일 이름: {}.", uploadFile.getOriginalFilename());
 		logger.info("파일 용량: {}.", uploadFile.getSize());
-		dto.setQna_fileLocation(bService.saveFile(uploadFile));
+		dto.setQna_fileName(bService.saveFile(uploadFile));
 		boolean success = bService.insert(dto);
 		if (success) {
 			System.out.println("글추가 성공");
@@ -94,9 +91,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/board/member_updateBoard.do", method = RequestMethod.POST)
-	public String member_updateBoard(Locale locale, Model model, BoardDto dto) {
+	public String member_updateBoard(Locale locale, Model model, BoardDto dto, MultipartFile uploadFile) {
 		logger.info("member_updateBoard 호출 {}.", locale);
+		logger.info("파일 이름: {}.", uploadFile.getOriginalFilename());
+		logger.info("파일 용량: {}.", uploadFile.getSize());
 		
+		dto.setQna_fileName(bService.saveFile(uploadFile));
 		boolean success = bService.updateBoard(dto);
 		if (success) {
 			System.out.println("글수정 성공");

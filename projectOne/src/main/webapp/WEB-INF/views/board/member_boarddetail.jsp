@@ -27,8 +27,9 @@
     <td><textarea cols="60" rows="10">${boarddetail.qna_content}</textarea></td>
   </tr>
   <tr>
-    <td colspan="2">
-      <img src="${boarddetail.qna_fileLocation}" width=200 height=200/>
+    <th>첨부이미지 미리보기</th>
+    <td>
+      <img src="${pageContext.request.contextPath}/image/${boarddetail.qna_fileName}" width=200 height=200/>
     </td>
   </tr>
   <tr>

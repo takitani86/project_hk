@@ -40,13 +40,13 @@
    </select>
    
    <insert id="insertBoard" parameterType="board">
-      INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE, QNA_FILE_LOCATION, QNA_CONTENT, MEM_ID) 
-      VALUES (LJP_QNABOARD_SEQ.nextval,#{qna_title}, #{qna_fileLocation}, #{qna_content},#{mem_id})   
+      INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE, QNA_FILE_NAME, QNA_CONTENT, MEM_ID) 
+      VALUES (LJP_QNABOARD_SEQ.nextval,#{qna_title}, #{qna_fileName}, #{qna_content},#{mem_id})   
    </insert>
    
    <insert id="replyBoard" parameterType="board">
-   	INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE, QNA_CONTENT, QNA_REFER, MEM_ID)
-   	VALUES (LJP_QNABOARD_SEQ.nextval, #{qna_title}, #{qna_content}, #{qna_refer}, #{mem_id})
+   	INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE, QNA_CONTENT, QNA_FILE_NAME, QNA_REFER, MEM_ID)
+   	VALUES (LJP_QNABOARD_SEQ.nextval, #{qna_title}, #{qna_content}, #{QNA_fileName}, #{qna_refer}, #{mem_id})
    </insert>
    
    <delete id="deleteBoard" parameterType="int">
@@ -56,15 +56,20 @@
    </delete>
    
    <select id="selectOneBoard" parameterType="int" resultMap="boardList" >
-      SELECT QNA_SEQ, QNA_TITLE, QNA_CONTENT, QNA_FILE_LOCATION, QNA_READCOUNT, QNA_REGDATE, MEM_ID
+      SELECT QNA_SEQ, QNA_TITLE, QNA_CONTENT, QNA_FILE_NAME, QNA_READCOUNT, QNA_REGDATE, MEM_ID
       FROM LJP_QNABOARD
       WHERE QNA_SEQ = #{qna_seq}
    </select>
    
    <update id="updateBoard" parameterType="board">
       UPDATE LJP_QNABOARD SET QNA_TITLE=#{qna_title}, QNA_CONTENT=#{qna_content},
-      QNA_UPDATEDATE = sysdate
+      QNA_FILE_NAME=#{qna_fileName},
+      QNA_UPDATEDATE = SYSDATE
       WHERE QNA_SEQ = #{qna_seq}
+   </update>
+   
+   <update id="readcount" parameterType="int">
+   	UPDATE LJP_QNABOARD SET QNA_READCOUNT = QNA_READCOUNT + 1 WHERE QNA_SEQ = #{qna_seq}
    </update>
    
    <delete id="mulDelBoard" parameterType="Map">
