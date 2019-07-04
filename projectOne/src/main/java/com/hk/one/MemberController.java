@@ -111,7 +111,7 @@ public class MemberController {
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		mav.addObject("map", map);
-		mav.setViewName("member/memberList");
+		mav.setViewName("member/searchMember");
 		System.out.println("서치 정보 전달됨: " + map.get(searchOption) + "," + map.get(keyword));
 		return mav;
 	}

@@ -27,7 +27,7 @@
    
    <!-- 회원 리스트 보기 -->
 	<select id="getAllMember" resultMap="resultMemberList">
-		SELECT MEM_SEQ,MEM_ID,MEM_IMAGE,MEM_NAME,MEM_B_NAME
+		SELECT MEM_SEQ,MEM_ID,MEM_IMAGE,MEM_NAME,MEM_B_NAME,MEM_ISAPPROVE,MEM_ISDEL
 		FROM LJP_MEMBER
 		ORDER BY MEM_SEQ ASC
 	</select>
@@ -116,7 +116,7 @@
 		SELECT MEM_SEQ,MEM_ID,MEM_IMAGE,MEM_NAME,MEM_B_NAME,MEM_ISAPPROVE,MEM_ISDEL
 		FROM LJP_MEMBER
 		<include refid="search"></include>
-		ORDER BY MEM_SEQ DESC
+		ORDER BY MEM_SEQ ASC
 	</select>
 	
 	<!-- 멤버 조회 결과 개수 -->
