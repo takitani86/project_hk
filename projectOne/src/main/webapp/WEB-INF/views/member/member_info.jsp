@@ -15,7 +15,7 @@ response.setContentType("text/html; charset=utf-8");
 	<form action='member_info.do' method='post'>
 		<table border="1">
 			<tr>
-				<td><input type="text" name="mem_name" value='${member.mem_image}'></td>
+				<td><input type="text" name="mem_image" value='${member.mem_image}'></td>
 			</tr>
 			<tr>
 				<td><input type="button" value="사진 등록" onclick="location.href='#'"></td>
@@ -27,11 +27,11 @@ response.setContentType("text/html; charset=utf-8");
 			<col width="80px"><col width="150px">
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="mem_name" value='${member.mem_id}' readonly></td>
+				<td><input type="text" name="mem_id" value='${member.mem_id}' readonly></td>
 			</tr>
 			<tr>
 				<th>E-Mail</th>
-				<td><input type="text" name="mem_name" value='${member.mem_email}' readonly></td>
+				<td><input type="text" name="mem_email" value='${member.mem_email}' readonly></td>
 			</tr>
 			<tr>
 				<th>이름</th>
@@ -72,7 +72,7 @@ response.setContentType("text/html; charset=utf-8");
 		<col width="80px"><col width="150px">
 			<tr>
 				<th>탈퇴 신청</th>
-				<td><input type="button" value="탈퇴" onclick="location.href='deleteMember.do?mem_id=${member.mem_id}'" method="post"></td>
+				<td><input type="button" value="탈퇴" onclick="location.href='deleteMember.do?mem_id=${member.mem_id}'"></td>
 			</tr>
 			<tr>
 				<th>회원 정보 변경</th>

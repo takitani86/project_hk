@@ -1,7 +1,9 @@
 package com.hk.one;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hk.one.dto.MemberDto;
 import com.hk.one.service.IMemberService;
@@ -30,7 +34,7 @@ public class MemberController {
 		return "member/memberList";
 	}
 	
-	@RequestMapping(value = "/memberDetail.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/memberDetail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String memberDetail(Locale locale, Model model, String mem_id) {
 		logger.info("멤버 상세정보 호출 {}.", locale);
 		MemberDto member = MemberService.getMember(mem_id);
@@ -73,15 +77,16 @@ public class MemberController {
 	public String updateMember(Locale locale, Model model, MemberDto member) {
 		logger.info("회원 정보 수정 {}.", locale);
 		boolean isS = MemberService.updateMember(member);
+		String mem_id = member.getMem_id();
 		if(isS) {
-			return "redirect:memberDetail.do";
+			return "redirect:memberDetail.do?mem_id=" + mem_id;
 		} else {
 			model.addAttribute("failUpdate", "회원 정보 수정 실패");
 			return "error";
 		}
 	}
 	
-	@RequestMapping(value = "/deleteMember.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteMember.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String deleteMember(Locale locale, Model model, String mem_id) {
 		logger.info("회원 탈퇴 {}.", locale);
 		boolean isS = MemberService.deleteMember(mem_id);
@@ -91,5 +96,23 @@ public class MemberController {
 			model.addAttribute("failDelete", "회원 탈퇴 실패");
 			return "error";
 		}
+	}
+	
+	@RequestMapping(value = "/searchMember.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView list(@RequestParam(defaultValue="all") String searchOption,
+						@RequestParam(defaultValue="") String keyword) throws Exception {
+		logger.info("회원 검색 {}.");
+		List<MemberDto> list = MemberService.searchMember(searchOption, keyword);
+		int count = MemberService.countArticle(searchOption, keyword);
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("count", count);
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		mav.addObject("map", map);
+		mav.setViewName("member/memberList");
+		System.out.println("서치 정보 전달됨: " + map.get(searchOption) + "," + map.get(keyword));
+		return mav;
 	}
 }

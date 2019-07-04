@@ -1,6 +1,8 @@
 package com.hk.one.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,22 @@ public class MemberDao implements IMemberDao {
 	public boolean checkEmailMember(String mem_email) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public List<MemberDto> searchMember(String searchOption, String keyword) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		return sqlSession.selectList("Member.searchMember", map);
+	}
+	
+	@Override
+	public int countArticle(String searchOption, String keyword) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		return sqlSession.selectOne("Member.countArticle", map);
 	}
 
 }

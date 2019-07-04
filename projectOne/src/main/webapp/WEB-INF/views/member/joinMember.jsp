@@ -71,6 +71,7 @@ response.setContentType("text/html; charset=utf-8");
 						<option value="1">카페</option>
 						<option value="2">중국집</option>
 						<option value="3">야식</option>
+						</select>
 					</td>
 				</tr>
 				<tr>

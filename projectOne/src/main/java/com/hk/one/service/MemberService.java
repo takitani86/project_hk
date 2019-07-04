@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hk.one.dao.IMemberDao;
+import com.hk.one.dao.MemberDao;
 import com.hk.one.dto.MemberDto;
 
 @Service
@@ -55,6 +56,16 @@ public class MemberService implements IMemberService {
 	public boolean checkEmailMember(String mem_email) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public List<MemberDto> searchMember(String searchOption, String keyword) throws Exception {
+		return memberDao.searchMember(searchOption, keyword);
+	}
+	
+	@Override
+	public int countArticle(String searchOption, String keyword) throws Exception {
+		return memberDao.countArticle(searchOption, keyword);
 	}
 
 }
