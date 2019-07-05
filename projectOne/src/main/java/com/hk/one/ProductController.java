@@ -58,8 +58,9 @@ public class ProductController {
 		HttpSession session = request.getSession(); // 세션을 가져옴
 		dto.setPro_image(ProductService.saveFile(uploadFile));
 		boolean isS=ProductService.insertProduct(dto);
+		
 		if(isS) {
-			return "redirect:productList.do?countProductPage=1";
+			return "redirect:productList.do?countProductPage="+session.getAttribute("countProductPageSession");
 		}else {
 			model.addAttribute("msg","상품추가실패");
 			return "error"; 
