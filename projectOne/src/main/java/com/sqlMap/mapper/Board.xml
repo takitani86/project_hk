@@ -33,7 +33,7 @@
    
    <select id="getAllBoard" resultMap="boardList">
       SELECT LEVEL, QNA_SEQ, QNA_TITLE, QNA_CONTENT, QNA_READCOUNT, QNA_REGDATE, MEM_ID
-      FROM LJP_QNABOARD WHERE QNA_ISDEL = 0
+      FROM LJP_QNABOARD WHERE QNA_ISDEL = 0 
       START WITH QNA_REFER = 0
       CONNECT BY PRIOR QNA_SEQ = QNA_REFER
       ORDER SIBLINGS BY QNA_SEQ DESC
@@ -41,7 +41,8 @@
    
    <insert id="insertBoard" parameterType="board">
       INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE, QNA_FILE_NAME, QNA_CONTENT, MEM_ID) 
-      VALUES (LJP_QNABOARD_SEQ.nextval,#{qna_title}, #{qna_fileName}, #{qna_content},#{mem_id})   
+      VALUES
+      (LJP_QNABOARD_SEQ.nextval,#{qna_title}, #{qna_fileName}, #{qna_content},#{mem_id})   
    </insert>
    
    <insert id="replyBoard" parameterType="board">

@@ -58,5 +58,6 @@
 </table>
   <a href="member_writeForm.do">글쓰기</a>
   <a href="../home.do">메인화면</a>
+  <a href="dummy.do">게시글 100개 추가</a>
 </body>
 </html>
