@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title>고객센터 게시판</title>
 </head>
 <body>
@@ -43,11 +44,11 @@
 
 <!-- 댓글  -->
 <div class="container">
-	<label for="content">comment</label>	
+	<label for="content">댓글</label>	
 	<form name="commentInsertForm">
 		<div class="input-group">
 			<input type="hidden" name="qna_seq" value="${boarddetail.qna_seq}">
-			<input type="text" class="form-control" id="content" name="com_content" placeholder="내용을 입력하세요.">
+			<input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
                <span class="input-group-btn">
                     <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
                </span>
@@ -61,7 +62,7 @@
 </div>
  
 <!--                     추가                         -->
-<%@ include file="commentS.jsp" %>
+<%@ include file="comment.jsp" %>
 <script>
   // 수정폼으로 이동
   function updateForm(seq) {

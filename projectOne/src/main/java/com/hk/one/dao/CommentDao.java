@@ -22,8 +22,8 @@ public class CommentDao implements ICommentDao {
 	}
 
 	@Override
-	public List<CommentDto> commentList() {
-		return sqlSession.selectList(namespace+"commentList");
+	public List<CommentDto> commentList(int seq) {
+		return sqlSession.selectList(namespace+"commentList", seq);
 	}
 
 	@Override

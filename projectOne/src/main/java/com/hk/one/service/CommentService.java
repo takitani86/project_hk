@@ -20,8 +20,8 @@ public class CommentService implements ICommentService {
 	}
 
 	@Override
-	public List<CommentDto> commentList() {
-		return commentDao.commentList();
+	public List<CommentDto> commentList(int seq) {
+		return commentDao.commentList(seq);
 	}
 
 	@Override

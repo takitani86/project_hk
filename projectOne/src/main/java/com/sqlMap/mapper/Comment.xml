@@ -27,8 +27,9 @@
 		FROM LJP_COMMENT
 	</select>
 	
-	<select id="commentList" resultType="comment">
-		SELECT * FROM LJP_COMMENT
+	<select id="commentList" parameterType="int" resultType="comment">
+		SELECT * FROM LJP_COMMENT WHERE QNA_SEQ = #{qna_seq}
+		ORDER BY COM_SEQ
 	</select>
 	
 	<insert id="commentInsert" parameterType="comment">
@@ -45,7 +46,7 @@
 	
 	<update id="commentDelete" parameterType="int">
 		UPDATE LJP_COMMENT SET
-		COM_ISDEL = #{com_isDel}
+		COM_ISDEL = 1
 		WHERE COM_SEQ = #{com_seq}
 	</update>
 	
