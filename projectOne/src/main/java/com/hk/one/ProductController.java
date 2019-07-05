@@ -43,10 +43,10 @@ public class ProductController {
 	@RequestMapping(value = "/insertProductForm.do", method = RequestMethod.GET)
 	public String insertProductForm(Locale locale, Model model) {
 		logger.info("상품추가 페이지이동{}.", locale);
-		List<ProductDto> list = ProductService.getAllProductList();
-		model.addAttribute("list", list );
+		//List<ProductDto> list = ProductService.getAllProductList();
+		//model.addAttribute("list", list );
 		
-		return "product/insertProduct";
+		return "product/insertProductForm";
 	}
 	
 	@RequestMapping(value = "/insertReceiveProduct.do", method = RequestMethod.POST)
@@ -54,7 +54,7 @@ public class ProductController {
 		logger.info("상품추가{}.", locale);
 		boolean isS=ProductService.insertProduct(dto);
 		if(isS) {
-			return "redirect:productList.do";
+			return "redirect:productList.do?countProductPage=1";
 		}else {
 			model.addAttribute("msg","상품추가실패");
 			return "error"; 
@@ -66,7 +66,7 @@ public class ProductController {
 		logger.info("여러글삭제 {}.", locale);
 		boolean isS=ProductService.mulDelProduct(seqs);
 		if(isS) {
-			return "redirect:productList.do";
+			return "redirect:productList.do?countProductPage=1";
 		}else {
 			model.addAttribute("msg", "여러상품삭제실패");
 			return "error";

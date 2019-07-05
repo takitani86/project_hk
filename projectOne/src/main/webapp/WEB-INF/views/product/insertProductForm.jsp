@@ -19,7 +19,8 @@ response.setContentType("text/html; charset=utf-8");
 		</tr>
 		<tr>
 			<th>상품이미지</th>
-			<td><input type="text" name="pro_image" required="required"/></td>
+			 <td><input type="file" name="pro_image" onchange="readURL(this);"></td>
+     		 <td><img id="preview" src="#" width=200 height=200/></td>
 		</tr>
 		<tr>
 			<th>가격</th>
@@ -44,10 +45,21 @@ response.setContentType("text/html; charset=utf-8");
 		<tr>
 			<td colspan="2">
 				<input type="submit" value="상품등록" />
-				<input type="button" value="목록" onclick="location.href='productList.do'"/>
+				<input type="button" value="목록" onclick="location.href='productList.do?countProductPage=1'"/>
 			</td>
 		</tr>
 	</table>
 </form>
+<script type="text/javascript">
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#preview').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  };
+</script>
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.hk.one.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hk.one.dto.CategoryDto;
 import com.hk.one.dto.ProductDto;
@@ -20,6 +21,8 @@ public interface IProductDao {
 	public int countProductPage(); // 페이징
 
 	public List<ProductDto> getAllProductList(String countProductPage);
+
+	String saveFile(MultipartFile file);
 	
 		
 }
