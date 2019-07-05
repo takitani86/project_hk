@@ -8,7 +8,13 @@ response.setContentType("text/html; charset=utf-8");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-latest.js"></script>
 <title>회원 가입 페이지</title>
+<script>
+	$(".CheckIdMember").click(function(){
+		var query = {mem_id : $("#mem_id").val()};
+	});
+</script>
 </head>
 <body>
 	<h1>회원 가입</h1>
@@ -17,6 +23,8 @@ response.setContentType("text/html; charset=utf-8");
 				<tr>
 					<th>아이디</th>
 					<td><input type="text" name="mem_id" placeholder="아이디 입력"></td>
+					<td><button type="button" class="CheckIdMember">아이디 확인</button></td>
+					<td class="resultId"><span class="msg">아이디를 확인해 주십시오.</span></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>

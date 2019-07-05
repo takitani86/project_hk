@@ -13,8 +13,8 @@ public interface IMemberDao {
 	public boolean deleteMember(String mem_id); //회원탈퇴
 	public boolean updateMember(MemberDto member); //회원정보 수정
 	public MemberDto existMember(String mem_id, String mem_pw); //회원 존재 확인
-	public boolean checkIdMember(String mem_id); //아이디 중복 확인
-	public boolean checkEmailMember(String mem_email); //이메일 중복 확인
+	public MemberDto checkIdMember(String mem_id) throws Exception; //아이디 중복 확인
+	public MemberDto checkEmailMember(String mem_email) throws Exception; //이메일 중복 확인
 	public List<MemberDto> searchMember(String searchOption, String keyword) throws Exception; //회원 정보 조회 기능
 	public int countArticle(String searchOption, String keyword) throws Exception; //조회 결과 개수 확인
 }

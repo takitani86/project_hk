@@ -5,14 +5,18 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hk.one.dto.MemberDto;
@@ -62,6 +66,25 @@ public class MemberController {
 			model.addAttribute("failJoin", "회원 가입 실패");
 			return "error";
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/CheckIdMember.do", method = RequestMethod.POST)
+	public int CheckIdMember(HttpServletRequest req) throws Exception {
+		logger.info("아이디 중복 체크 {}.");
+
+		String mem_id = req.getParameter("mem_id");
+		MemberDto mem = MemberService.checkIdMember(mem_id);
+		int result = 0;
+		if(mem != null) result = 1;
+		return result;		
+	}
+	
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	public ModelAndView loginView(ModelAndView mav) {
+		logger.info("로그인 뷰 호출 {}");
+		mav.setViewName("login");
+		return mav;
 	}
 	
 	@RequestMapping(value = "/member_infoForm.do", method = RequestMethod.GET)

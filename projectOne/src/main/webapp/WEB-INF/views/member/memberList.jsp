@@ -5,7 +5,7 @@ response.setContentType("text/html; charset=utf-8");
 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <script
@@ -14,6 +14,20 @@ response.setContentType("text/html; charset=utf-8");
   crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 목록 페이지</title>
+<script type="text/javascript">
+	var mem_id = "mem_id";
+	function goDetail(mem_id) {
+ 		location.href = 'memberDetail.do?mem_id=' + mem_id; 
+	}
+</script>
+<style type="text/css">
+	#tableSelect > tbody {
+		cursor: pointer;
+	}
+	#tableSelect > tbody:hover {
+		background-color: gray;
+	}
+</style>
 </head>
 <body>
 <form name="searchForm" method="post" action="./searchMember.do">
@@ -29,10 +43,10 @@ response.setContentType("text/html; charset=utf-8");
 </form>
 
 <h1>회원 목록</h1>
-<table border="1">
+<table border="1" id="tableSelect">
 	<col width="50px"><col width="80px"><col width="150px"><col width="150px"><col width="150px"><col width="80px"><col width="80px">
 	<tr>
-		<th>회원번호</th><th>회원ID</th><th>이미지</th><th>회원 이름</th><th>상호명</th><th>승인</th><th>상태</th>
+		<th>회원번호</th><th>이미지</th><th>회원ID</th><th>회원 이름</th><th>상호명</th><th>승인</th><th>상태</th>
 	</tr>
 	<c:choose>
 		<c:when test="${empty list}">
@@ -40,10 +54,11 @@ response.setContentType("text/html; charset=utf-8");
 		</c:when>
 		<c:otherwise>
 			<c:forEach items="${list}" var="member">
+				<tbody onclick="goDetail('${member.mem_id}')">
 				<tr>
 					<td>${member.mem_seq}</td>
-					<td><a href="memberDetail.do?mem_id=${member.mem_id}">${member.mem_id}</a></td>
 					<td>${member.mem_image}</td>
+					<td>${member.mem_id}</td>
 					<td>${member.mem_name}</td>
 					<td>${member.mem_b_name}</td>
 					<td>
@@ -69,6 +84,7 @@ response.setContentType("text/html; charset=utf-8");
 						</c:choose>
 					</td>
 				</tr>
+				</tbody>
 			</c:forEach>
 		</c:otherwise>
 	</c:choose>

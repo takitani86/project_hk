@@ -53,15 +53,13 @@ public class MemberDao implements IMemberDao {
 	}
 
 	@Override
-	public boolean checkIdMember(String mem_id) {
-		// TODO Auto-generated method stub
-		return false;
+	public MemberDto checkIdMember(String mem_id) throws Exception {
+		return sqlSession.selectOne(namespace + "checkIdMember", mem_id);
 	}
 
 	@Override
-	public boolean checkEmailMember(String mem_email) {
-		// TODO Auto-generated method stub
-		return false;
+	public MemberDto checkEmailMember(String mem_email) throws Exception {
+		return sqlSession.selectOne(namespace + "checkEmailMember", mem_email);
 	}
 	
 	@Override
