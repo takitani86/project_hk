@@ -36,11 +36,11 @@ ${map.count}개의 회원 정보가 있습니다.
 		<th>회원번호</th><th>회원ID</th><th>이미지</th><th>회원 이름</th><th>상호명</th><th>승인</th><th>상태</th>
 	</tr>
 	<c:choose>
-		<c:when test="${empty map}">
+		<c:when test="${empty map.list}">
 			<tr><td colspan="10">-----검색 결과에 맞는 회원이 없습니다.-----</tr>
 		</c:when>
 		<c:otherwise>
-			<c:forEach items="${map}" var="member">
+			<c:forEach items="${map.list}" var="member">
 				<tr>
 					<td>${member.mem_seq}</td>
 					<td><a href="memberDetail.do?mem_id=${member.mem_id}">${member.mem_id}</a></td>
