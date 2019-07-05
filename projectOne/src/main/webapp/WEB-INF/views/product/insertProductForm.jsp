@@ -3,15 +3,17 @@
 response.setContentType("text/html; charset=utf-8");
 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>상품추가하기</title>
+<title>상품추가하기</title>.
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
 <h1>상품추가하기</h1>
-<form action="insertReceiveProduct.do" method="post">
+<form action="insertReceiveProduct.do" method="post" enctype="multipart/form-data">
 	<table border="1">
 		<tr>
 			<th>상품이름</th>
@@ -19,7 +21,7 @@ response.setContentType("text/html; charset=utf-8");
 		</tr>
 		<tr>
 			<th>상품이미지</th>
-			 <td><input type="file" name="pro_image" onchange="readURL(this);"></td>
+			 <td><input type="file" name="uploadFile" onchange="readURL(this);"></td>
      		 <td><img id="preview" src="#" width=200 height=200/></td>
 		</tr>
 		<tr>

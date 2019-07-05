@@ -48,7 +48,7 @@ response.setContentType("text/html; charset=utf-8");
 		<tr>
 			<td colspan="2">
 				<input type="submit" value="상품수정" />
-				<input type="button" value="목록" onclick="location.href='productList.do'"/>
+				<input type="button" value="목록" onclick="location.href='productList.do?countProductPage=1'"/>
 			</td>
 		</tr>
 	</table>

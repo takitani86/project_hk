@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hk.one.dao.IProductDao;
 import com.hk.one.dto.CategoryDto;
@@ -18,6 +19,10 @@ public class ProductService implements IProductService {
 	@Override
 	public List<ProductDto> getAllProductList() {
 		return productDao.getAllProductList();
+	}
+	@Override
+	public String saveFile(MultipartFile file) {
+		return productDao.saveFile(file);
 	}
 
 	@Override

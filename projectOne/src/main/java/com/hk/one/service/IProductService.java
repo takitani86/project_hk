@@ -2,6 +2,8 @@ package com.hk.one.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.hk.one.dto.CategoryDto;
 import com.hk.one.dto.ProductDto;
 
@@ -18,4 +20,6 @@ public List<ProductDto> getAllProductList(); // 상품리스트 확인
 	public int countProductPage();//페이징
 
 	public List<ProductDto> getAllProductList(String countProductPage);
+
+	String saveFile(MultipartFile file);
 }

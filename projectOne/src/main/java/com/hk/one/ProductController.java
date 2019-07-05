@@ -3,8 +3,8 @@ package com.hk.one;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hk.one.dto.ProductDto;
 import com.hk.one.service.IProductService;
@@ -27,8 +28,9 @@ public class ProductController {
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
 	@RequestMapping(value = "/productList.do", method = RequestMethod.GET)
-	public String productList(Locale locale, Model model, ServletRequest request) {
+	public String productList(Locale locale, Model model,HttpServletRequest request) {
 		logger.info("상품페이지 호출{}.", locale);
+		HttpSession session = request.getSession();
 		int getPcount=ProductService.countProductPage(); // 페이지 갯수
 		String countProductPage=request.getParameter("countProductPage"); // view에서 요청페이지 파라미터를 받음
 		
@@ -50,8 +52,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/insertReceiveProduct.do", method = RequestMethod.POST)
-	public String insertBoard(Locale locale, Model model,ProductDto dto) {
+	public String insertBoard(Locale locale, Model model,ProductDto dto,MultipartFile uploadFile) {
 		logger.info("상품추가{}.", locale);
+		dto.setPro_image(ProductService.saveFile(uploadFile));
 		boolean isS=ProductService.insertProduct(dto);
 		if(isS) {
 			return "redirect:productList.do?countProductPage=1";
