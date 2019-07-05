@@ -1,13 +1,16 @@
 package com.hk.one.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hk.dto.BoardDto;
 import com.hk.one.dto.CategoryDto;
 import com.hk.one.dto.ProductDto;
 
@@ -62,5 +65,19 @@ import com.hk.one.dto.ProductDto;
 		int count=sqlSession.update(namespace+"muldelProduct",map);
 		return count>0?true:false;
 	}
+	
+	@Override
+	public int countProductPage() {
+		int countProductPage=0;
+		countProductPage=sqlSession.selectOne(namespace+"countProductPage");
+		return countProductPage;
+	
+	}
 
+	@Override
+	public List<ProductDto> getAllProductList(String countProductPage) {
+		List<ProductDto> list=new ArrayList<ProductDto>();
+		list=sqlSession.selectList(namespace+"selectProductList",countProductPage);
+		return list;
+	}
 }

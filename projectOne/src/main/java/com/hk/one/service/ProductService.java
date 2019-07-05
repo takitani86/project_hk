@@ -53,4 +53,15 @@ public class ProductService implements IProductService {
 		return productDao.mulDelProduct(seqs);
 	}
 
+	@Override
+	public int countProductPage() {
+		return productDao.countProductPage();
+	}
+
+	@Override
+	public List<ProductDto> getAllProductList(String countProductPage) {
+		return productDao.getAllProductList(countProductPage);
+	
+	}
+
 }

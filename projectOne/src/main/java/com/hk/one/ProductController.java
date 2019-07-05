@@ -3,6 +3,7 @@ package com.hk.one;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -26,10 +27,15 @@ public class ProductController {
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
 	@RequestMapping(value = "/productList.do", method = RequestMethod.GET)
-	public String productList(Locale locale, Model model) {
+	public String productList(Locale locale, Model model, ServletRequest request) {
 		logger.info("상품페이지 호출{}.", locale);
-		List<ProductDto> list = ProductService.getAllProductList();
+		int getPcount=ProductService.countProductPage(); // 페이지 갯수
+		String countProductPage=request.getParameter("countProductPage"); // view에서 요청페이지 파라미터를 받음
+		
+		List<ProductDto> list = ProductService.getAllProductList(countProductPage);
+		
 		model.addAttribute("list", list );
+		model.addAttribute("getPcount", getPcount);
 		
 		return "product/productList";
 	}
@@ -69,7 +75,7 @@ public class ProductController {
 	
 	@RequestMapping(value = "/productUpdate.do", method = RequestMethod.GET)
 	public String updateForm(Locale locale, Model model,int seq) {
-		logger.info("사품하기폼이동{}.", locale);
+		logger.info("상품수정하기폼이동{}.", locale);
 		ProductDto dto =ProductService.getProduct(seq);
 		model.addAttribute("dto", dto );
 		return "product/productUpdate";

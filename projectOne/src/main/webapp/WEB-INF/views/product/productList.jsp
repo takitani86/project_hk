@@ -59,6 +59,14 @@ function allSel(bool){
 			</c:forEach>
 		</c:otherwise>
 	</c:choose>
+	<tr>
+		<td colspan="4" style="text-align: center; ">
+			<c:forEach begin="1" end="${getPcount}" step="1" var="i">
+				<a href="productList.do?countProductPage=${i}" style="text-decoration: none;">${i}</a>			
+			</c:forEach>
+		</td>
+	</tr>
+	
 	<tr><td>
 	<input type="button" value="상품추가" onclick="location.href='insertProductForm.do'" />
 	<input type="submit" value="상품삭제" />

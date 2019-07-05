@@ -2,6 +2,8 @@ package com.hk.one.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.hk.one.dto.CategoryDto;
 import com.hk.one.dto.ProductDto;
 
@@ -15,4 +17,9 @@ public interface IProductDao {
 	public boolean updateProductImg(ProductDto dto) ; // 상품이미지 등록&변경
 	public boolean updateProduct(ProductDto dto) ; // 상품 정보 수정
 	public boolean mulDelProduct(String[] seqs) ; // 상품 다중 삭제
+	public int countProductPage(); // 페이징
+
+	public List<ProductDto> getAllProductList(String countProductPage);
+	
+		
 }

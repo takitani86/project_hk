@@ -12,9 +12,12 @@
 
 <!-- property = java 변수명 , column = db컬럼명 -->
    
-   <select id="selectProductList" resultType="product">
+   <select id="selectProductList" parameterType="String" resultType="product">
       SELECT PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
-      FROM LJP_PRODUCT  
+      FROM (SELECT ROW_NUMBER() OVER (ORDER BY PRO_REGDATE DESC) AS RN, 
+      PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
+      FROM LJP_PRODUCT ORDER BY PRO_REGDATE DESC)
+      WHERE  CEIL(RN/10) = #{countProductPage} 
    </select>
      
    <insert id="insertProduct" parameterType="product" >
@@ -64,6 +67,10 @@ WHERE PRO_SEQ=#{pro_seq}
 		SELECT SEQ, ORIGIN_FNAME, STORED_FNAME, FILE_SIZE, F_REGDATE, F_DELFLAG
 		FROM FILEBOARD ORDER BY F_REGDATE DESC
 	</select> -->
+	
+	<select id="countProductPage" resultType="int">
+		SELECT CEIL(COUNT(*)/10) FROM LJP_PRODUCT
+	</select>
    
   <!-- 미작업: 확인중 -->
      <delete id="deleteProduct" parameterType="product">
