@@ -8,6 +8,7 @@ response.setContentType("text/html; charset=utf-8");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>상품수정하기</title>
+<%  String pageNum=(String)session.getAttribute("countProductPageSession"); %>
 </head>
 <body>
 <h1>상품수정하기</h1>
@@ -48,7 +49,7 @@ response.setContentType("text/html; charset=utf-8");
 		<tr>
 			<td colspan="2">
 				<input type="submit" value="상품수정" />
-				<input type="button" value="목록" onclick="location.href='productList.do?countProductPage=1'"/>
+				<input type="button" value="목록" onclick="location.href='productList.do?countProductPage=<%=pageNum%>'"/>
 			</td>
 		</tr>
 	</table>

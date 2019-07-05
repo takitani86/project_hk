@@ -10,6 +10,7 @@ response.setContentType("text/html; charset=utf-8");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>상품추가하기</title>.
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<%  String pageNum=(String)session.getAttribute("countProductPageSession"); %>
 </head>
 <body>
 <h1>상품추가하기</h1>
@@ -47,7 +48,7 @@ response.setContentType("text/html; charset=utf-8");
 		<tr>
 			<td colspan="2">
 				<input type="submit" value="상품등록" />
-				<input type="button" value="목록" onclick="location.href='productList.do?countProductPage=1'"/>
+				<input type="button" value="목록" onclick="location.href='productList.do?countProductPage=<%=pageNum%>'"/>
 			</td>
 		</tr>
 	</table>

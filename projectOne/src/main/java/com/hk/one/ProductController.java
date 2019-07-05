@@ -30,10 +30,11 @@ public class ProductController {
 	@RequestMapping(value = "/productList.do", method = RequestMethod.GET)
 	public String productList(Locale locale, Model model,HttpServletRequest request) {
 		logger.info("상품페이지 호출{}.", locale);
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); // 세션생성
 		int getPcount=ProductService.countProductPage(); // 페이지 갯수
 		String countProductPage=request.getParameter("countProductPage"); // view에서 요청페이지 파라미터를 받음
-		
+		session.setAttribute("countProductPageSession", countProductPage); //현재페이지 세션저장
+		System.out.println("저장: "+session.getAttribute("countProductPageSession"));
 		List<ProductDto> list = ProductService.getAllProductList(countProductPage);
 		
 		model.addAttribute("list", list );
@@ -52,8 +53,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/insertReceiveProduct.do", method = RequestMethod.POST)
-	public String insertBoard(Locale locale, Model model,ProductDto dto,MultipartFile uploadFile) {
+	public String insertBoard(Locale locale, Model model,ProductDto dto,MultipartFile uploadFile,HttpServletRequest request) {
 		logger.info("상품추가{}.", locale);
+		HttpSession session = request.getSession(); // 세션을 가져옴
 		dto.setPro_image(ProductService.saveFile(uploadFile));
 		boolean isS=ProductService.insertProduct(dto);
 		if(isS) {
