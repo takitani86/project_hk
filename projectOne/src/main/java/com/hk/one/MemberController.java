@@ -69,15 +69,15 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/CheckIdMember.do", method = RequestMethod.POST)
-	public int CheckIdMember(HttpServletRequest req) throws Exception {
+	@RequestMapping(value = "/checkIdMember.do", method = RequestMethod.POST)
+	public String checkIdMember(HttpServletRequest req) throws Exception {
 		logger.info("아이디 중복 체크 {}.");
 
 		String mem_id = req.getParameter("mem_id");
 		MemberDto mem = MemberService.checkIdMember(mem_id);
 		int result = 0;
 		if(mem != null) result = 1;
-		return result;		
+		return result + "";		
 	}
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)

@@ -9,11 +9,25 @@ response.setContentType("text/html; charset=utf-8");
 <html>
 <head>
 <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  src="https://code.jquery.com/jquery-latest.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 목록 페이지</title>
+<script type="text/javascript">
+	var mem_id = "mem_id";
+	function goDetail(mem_id) {
+ 		location.href = 'memberDetail.do?mem_id=' + mem_id; 
+	}
+</script>
+<style type="text/css">
+	#tableSelect > tbody {
+		cursor: pointer;
+	}
+	#tableSelect > tbody:hover {
+		background-color: gray;
+	}
+</style>
 </head>
 <body>
 <form name="searchForm" method="post" action="./searchMember.do">
@@ -30,7 +44,7 @@ response.setContentType("text/html; charset=utf-8");
 ${map.count}개의 회원 정보가 있습니다.
 
 <h1>회원 목록</h1>
-<table border="1">
+<table border="1" id="tableSelect">
 	<col width="50px"><col width="80px"><col width="150px"><col width="150px"><col width="150px"><col width="80px"><col width="80px">
 	<tr>
 		<th>회원번호</th><th>회원ID</th><th>이미지</th><th>회원 이름</th><th>상호명</th><th>승인</th><th>상태</th>
@@ -41,9 +55,10 @@ ${map.count}개의 회원 정보가 있습니다.
 		</c:when>
 		<c:otherwise>
 			<c:forEach items="${map.list}" var="member">
+				<tbody onclick="goDetail('${member.mem_id}')">
 				<tr>
 					<td>${member.mem_seq}</td>
-					<td><a href="memberDetail.do?mem_id=${member.mem_id}">${member.mem_id}</a></td>
+					<td>${member.mem_id}</td>
 					<td>${member.mem_image}</td>
 					<td>${member.mem_name}</td>
 					<td>${member.mem_b_name}</td>
@@ -70,6 +85,7 @@ ${map.count}개의 회원 정보가 있습니다.
 						</c:choose>
 					</td>
 				</tr>
+				</tbody>
 			</c:forEach>
 		</c:otherwise>
 	</c:choose>

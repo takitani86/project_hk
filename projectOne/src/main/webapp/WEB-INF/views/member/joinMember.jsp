@@ -11,9 +11,31 @@ response.setContentType("text/html; charset=utf-8");
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <title>회원 가입 페이지</title>
 <script>
-	$(".CheckIdMember").click(function(){
-		var query = {mem_id : $("#mem_id").val()};
-	});
+$(function(){
+	$(".checkIdMember").click(function(){
+		var query = $("#mem_id").val();
+		$.ajax({
+			url: "checkIdMember.do",
+			type: "post",
+			data: {"mem_id": query},
+			success: function(data) {
+				if(data == 1) {
+					$(".resultId .msg").text("사용할 수 없는 ID입니다.");
+					$(".resultId .msg").attr("style", "color:#f00");
+				} else {
+					$(".resultId .msg").text("사용할 수 있는 ID입니다.");
+					$(".resultId .msg").attr("style", "color:#00f");
+				}
+			},
+			error: function() {
+				alert("에러 발생");
+			}
+		});
+	});	
+})
+$(function(){
+	$()
+})
 </script>
 </head>
 <body>
@@ -22,9 +44,9 @@ response.setContentType("text/html; charset=utf-8");
 			<table border="1">
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" name="mem_id" placeholder="아이디 입력"></td>
-					<td><button type="button" class="CheckIdMember">아이디 확인</button></td>
-					<td class="resultId"><span class="msg">아이디를 확인해 주십시오.</span></td>
+					<td><input type="text" id="mem_id" name="mem_id" placeholder="아이디 입력"></td>
+					<td><button type="button" class="checkIdMember">아이디 확인</button></td>
+					<td><p class="resultId"><span class="msg">아이디를 확인해 주십시오.</span></p></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
