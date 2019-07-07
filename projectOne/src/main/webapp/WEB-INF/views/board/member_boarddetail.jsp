@@ -48,7 +48,7 @@
 	<form name="commentInsertForm">
 		<div class="input-group">
 			<input type="hidden" name="qna_seq" value="${boarddetail.qna_seq}">
-			<input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+			<input type="text" class="form-control" id="content" name="com_content" placeholder="내용을 입력하세요.">
                <span class="input-group-btn">
                     <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
                </span>

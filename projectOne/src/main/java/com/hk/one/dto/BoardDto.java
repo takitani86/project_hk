@@ -19,7 +19,22 @@ public class BoardDto {
 	private String qna_fileLocation;
 	private String mem_id;
 	private int qna_announce;
+	private int startIndex;
+	private int setCntPerPage;
 	
+	
+	public int getStartIndex() {
+		return startIndex;
+	}
+	public void setStartIndex(int startIndex) {
+		this.startIndex = startIndex;
+	}
+	public int getSetCntPerPage() {
+		return setCntPerPage;
+	}
+	public void setSetCntPerPage(int setCntPerPage) {
+		this.setCntPerPage = setCntPerPage;
+	}
 	public int getQna_seq() {
 		return qna_seq;
 	}

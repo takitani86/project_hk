@@ -42,7 +42,7 @@ function commentInsert(insertData) {
     success : function(data) {
       if(data == 1) {
         commentList(); // 댓글 작성 후 댓글목록 reload
-        $('[name=content]').val('');
+        $('[name=com_content]').val('');
       }
     }
   });
@@ -53,7 +53,7 @@ function commentUpdate(com_seq, com_content) {
   var a = '';
 
   a += '<div class="input-group">';
-  a += '<input type="text" name="content_' + com_seq + '" value="' + com_content + '"/>';
+  a += '<input type="text" name="com_content_' + com_seq + '" value="' + com_content + '"/>';
   a += '<span><button type="button" onclick="commentUpdateProc(' + com_seq + ');">수정</button></span>';
   a += '</div>';
 
@@ -62,7 +62,7 @@ function commentUpdate(com_seq, com_content) {
 
 // 댓글 수정
 function commentUpdateProc(com_seq) {
-  var updateContent = $('[name=content_' + com_seq + ']').val();
+  var updateContent = $('[name=com_content_' + com_seq + ']').val();
 
   $.ajax({
     url : 'comment/update.do',

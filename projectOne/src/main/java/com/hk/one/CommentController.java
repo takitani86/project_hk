@@ -24,7 +24,8 @@ public class CommentController {
 	@Autowired
 	private ICommentService commentService;
 
-	@RequestMapping("/list.do") // 댓글 리스트
+	// 댓글 목록
+	@RequestMapping("/list.do")
 	@ResponseBody
 	private List<CommentDto> commentService(Locale locale, Model model, int seq) throws Exception {
 		logger.info("commentService 호출 {}.", locale);
@@ -32,6 +33,7 @@ public class CommentController {
 		return commentService.commentList(seq);
 	}
 	
+	// 댓글 작성
 	@RequestMapping("/insert.do")
 	@ResponseBody
 	private boolean commentInsert(Locale locale, @RequestParam int qna_seq, @RequestParam String com_content) throws Exception {
@@ -45,6 +47,7 @@ public class CommentController {
 		return commentService.commentInsert(dto);
 	}
 	
+	// 댓글 수정
 	@RequestMapping("/update.do")
 	@ResponseBody
 	private boolean commentUpdate(Locale locale, @RequestParam int com_seq, @RequestParam String com_content) throws Exception {
@@ -57,6 +60,7 @@ public class CommentController {
 		return commentService.commentUpdate(dto);
 	}
 	
+	// 댓글 삭제 (isdel컬럼을 1로 변경하고 js에서 처리)
 	@RequestMapping("/delete.do")
 	@ResponseBody
 	private boolean commentDelete(Locale locale, int seq) throws Exception {

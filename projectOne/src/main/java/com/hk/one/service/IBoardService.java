@@ -11,7 +11,7 @@ public interface IBoardService {
 	// 파일업로드 기능
 	public String saveFile(MultipartFile file);
 	// 게시물 목록 출력
-	public List<BoardDto> selectList();
+	public List<BoardDto> selectList(int section, int curPage);
 	// 게시글 추가
 	public boolean insert(BoardDto dto);
 	// 글 삭제(isDel 컬럼을 1로 변경)
@@ -24,4 +24,6 @@ public interface IBoardService {
 	public boolean mulDel(String[] seq);
 	// 조회수 증가
 	public boolean readcount(int seq);
+	// 총 게시글 갯수
+	public int selectBoardListCnt();
 }

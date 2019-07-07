@@ -22,8 +22,8 @@ public class BoardService implements IBoardService {
 	}
 	
 	@Override
-	public List<BoardDto> selectList() {
-		return boardDao.selectList();
+	public List<BoardDto> selectList(int section, int curPage) {
+		return boardDao.selectList(section, curPage);
 	}
 
 	@Override
@@ -56,5 +56,10 @@ public class BoardService implements IBoardService {
 	@Override
 	public boolean readcount(int seq) {
 		return boardDao.readcount(seq);
+	}
+
+	@Override
+	public int selectBoardListCnt() {
+		return boardDao.selectBoardListCnt();
 	}
 }

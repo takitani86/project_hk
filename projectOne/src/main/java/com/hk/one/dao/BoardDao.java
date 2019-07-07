@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.naming.NameParser;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,8 +44,12 @@ public class BoardDao implements IBoardDao {
 	}
 	
 	@Override
-	public List<BoardDto> selectList() {
-		return sqlSession.selectList(namespace+"getAllBoard");
+	public List<BoardDto> selectList(int section, int curPage) {
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("section", section);
+		map.put("curPage", curPage);
+		return sqlSession.selectList(namespace+"getAllBoard", map);
 	}
 
 	@Override
@@ -80,6 +86,11 @@ public class BoardDao implements IBoardDao {
 	public boolean readcount(int seq) {
 		int success = sqlSession.update(namespace+"readcount", seq);
 		return success > 0 ? true:false;
+	}
+
+	@Override
+	public int selectBoardListCnt() {
+		return sqlSession.selectOne(namespace+"getCount");
 	}
 
 }
