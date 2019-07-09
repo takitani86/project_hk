@@ -25,9 +25,6 @@
             <label>비밀번호</label>
             <input type="password" name="mem_pw" class="form-control" placeholder="비밀번호">
         </div>
-        <div class="form-group">
-            <input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }" >
-        </div>
         <div class="form-action">
         	<sec:csrfInput/>
             <input type="submit" class="btn btn-primary btn-lg" value="로그인">
