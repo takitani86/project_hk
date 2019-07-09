@@ -16,9 +16,17 @@
       SELECT PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
       FROM (SELECT ROW_NUMBER() OVER (ORDER BY PRO_REGDATE DESC) AS RN, 
       PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
-      FROM LJP_PRODUCT ORDER BY PRO_REGDATE DESC)
+      FROM LJP_PRODUCT ORDER BY DECODE(PRO_SORT, 0, PRO_REGDATE)
+       , DECODE(PRO_SORT, 1, PRO_SEQ)
+       , DECODE(PRO_SORT, 2, PRO_NAME)
+       , DECODE(PRO_SORT, 3, PRO_PRICE)
+       , DECODE(PRO_SORT, 4, CAT_SEQ)
+       , DECODE(PRO_SORT, 5, PRO_OPTION)
+       , DECODE(PRO_SORT, 6, PRO_MENU)
+       , DECODE(PRO_SORT, 0, PRO_REGDATE)DESC)
       WHERE  CEIL(RN/10) = #{countProductPage} 
    </select>
+     
      
    <insert id="insertProduct" parameterType="product" >
     INSERT INTO LJP_PRODUCT (PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE)
@@ -73,10 +81,7 @@ WHERE PRO_SEQ=#{pro_seq}
 	</select>
    
   <!-- 미작업: 확인중 -->
-     <delete id="deleteProduct" parameterType="product">
-     DELETE FROM LJP_PRODUCT
- WHERE PRO_SEQ=#{seqs} 
-   </delete>
+    
    
   
 </mapper>
