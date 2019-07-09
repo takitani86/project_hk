@@ -4,6 +4,7 @@ response.setContentType("text/html; charset=utf-8");
 %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html >
 <html>
 <head>
@@ -22,6 +23,112 @@ function allSel(bool){
 		chks[i].checked=bool;
 	}
 }
+//소트기능
+function sortNo(){
+	 $.ajax({
+	        url:"/productList.do",
+	        type: "get",
+	        dataType: "text",
+	        data:{"pro_sort":"1"},
+	        error : function(){
+	              alert("통신실패!!");
+	        },
+	        success : function(data){
+	        	alert("통신데이터값: "+data);
+	        }
+	    });
+}
+function sortName(){
+	 $.ajax({
+	        url:'/productList.do',
+	        type: 'get',
+	        dataType: "json",
+	        data:{'pro_sort':'2'},
+	        error : function(){
+	              alert('통신실패!!');
+	        },
+	        success : function(data){
+	        	alert('통신데이터값: '+data);
+	        }
+	    });
+	
+	
+}
+function sortPrice(){
+	 $.ajax({
+	        url:'/productList.do',
+	        type: 'get',
+	        dataType: "json",
+	        data:{'pro_sort':'3'},
+	        error : function(){
+	              alert('통신실패!!');
+	        },
+	        success : function(data){
+	        	alert('통신데이터값: '+data);
+	        }
+	    });
+	
+}
+function sortCatNo(){
+	 $.ajax({
+	        url:'/productList.do',
+	        type: 'get',
+	        dataType: "json",
+	        data:{'pro_sort':'4'},
+	        error : function(){
+	              alert('통신실패!!');
+	        },
+	        success : function(data){
+	        	alert('통신데이터값: '+data);
+	        }
+	    });
+	
+}
+function sortMain(){
+	 $.ajax({
+	        url:'/productList.do',
+	        type: 'get',
+	        dataType: "json",
+	        data:{'pro_sort':'5'},
+	        error : function(){
+	              alert('통신실패!!');
+	        },
+	        success : function(data){
+	        	alert('통신데이터값: '+data);
+	        }
+	    });
+	
+}
+function sortMenu(){
+	 $.ajax({
+	        url:'/productList.do',
+	        type: 'get',
+	        dataType: "json",
+	        data:{'pro_sort':'6'},
+	        error : function(){
+	              alert('통신실패!!');
+	        },
+	        success : function(data){
+	        	alert('통신데이터값: '+data);
+	        }
+	    });
+	
+}
+function sortReg(){
+	 $.ajax({
+	        url:'/productList.do',
+	        type: 'get',
+	        dataType: "json",
+	        data:{'pro_sort':'0'},
+	        error : function(){
+	              alert('통신실패!!');
+	        },
+	        success : function(data){
+	        	alert('통신데이터값: '+data);
+	        }
+	    });
+	
+}
 
 
 </script>
@@ -35,8 +142,9 @@ function allSel(bool){
 	<col width="50px"><col width="50px"><col width="50px"><col width="50px">
 	<tr>
 		<th><input type="checkbox" name="all" onclick="allSel(this.checked)" /></th> <!-- this는 현재 태그(checkbox)를 객체로 만들어줌 =document.getElementById(); -->
-		<th>번호</th><th>상품이름</th><th>이미지</th><th>가격</th><th>설명</th><th>카테고리번호</th>
-		<th>메인여부</th><th>메뉴판번호</th><th>수정일</th>
+		<th onclick="sortNo()">번호</th><th onclick="sortName()">상품이름</th><th>이미지</th>
+		<th onclick="sortPrice()">가격</th><th>설명</th><th onclick="sortCatNo()">카테고리번호</th>
+		<th onclick="sortMain()">메인여부</th><th onclick="sortMenu()">메뉴판번호</th><th onclick="sortReg()">수정일</th>
 	</tr>
 	<c:choose>
 		<c:when test="${empty list}"> <!-- request에 담은 list트가 비어있으면 이것을 실행 -->

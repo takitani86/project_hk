@@ -13,8 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.hk.one.dto.ProductDto;
 import com.hk.one.service.IProductService;
 
@@ -34,13 +38,16 @@ public class ProductController {
 		int getPcount=ProductService.countProductPage(); // 페이지 갯수
 		String countProductPage=request.getParameter("countProductPage"); // view에서 요청페이지 파라미터를 받음
 		session.setAttribute("countProductPageSession", countProductPage); //현재페이지 세션저장
-		System.out.println("저장: "+session.getAttribute("countProductPageSession"));
 		List<ProductDto> list = ProductService.getAllProductList(countProductPage);
-		
+		System.out.println(request.getAttribute("pro_sort"));
+		//ObjectMapper mapper = new ObjectMapper();
+		//JSONPObject json = new JSONPObject("JSON.parse", list);
+		//String jsonStr = mapper.writeValueAsString(json);
 		model.addAttribute("list", list );
 		model.addAttribute("getPcount", getPcount);
 		
 		return "product/productList";
+		
 	}
 	
 	@RequestMapping(value = "/insertProductForm.do", method = RequestMethod.GET)
