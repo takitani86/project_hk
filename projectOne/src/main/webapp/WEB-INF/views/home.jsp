@@ -20,6 +20,6 @@
 <p><a href="memberList.do">회원목록</a>
 <p><a href="board/member_board.do">점주 게시판</a>
 <p><a href="board/admin_board.do">관리자 게시판</a>
-<p><a href="login.do">로그인</a>
+<p><a href="login">로그인</a>
 </body>
 </html>
