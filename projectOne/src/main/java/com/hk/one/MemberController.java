@@ -167,7 +167,7 @@ public class MemberController {
       String pw = MemberService.getPw(paramMap);
       logger.info(pw);
       if(pw != null) {
-         email.setContent("비밀번호를 재설정합니다.");
+         email.setContent("비밀번호는 " + pw + "입니다.");
          email.setReceiver(eMail);
          email.setSubject(id + "님의 비밀번호 재설정 메일입니다.");
          EmailSender.SendEmail(email);

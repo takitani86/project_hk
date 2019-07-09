@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -82,7 +83,8 @@ public class MemberDao implements IMemberDao {
 	@Override
 	public MemberDto findPw(SqlSession sqlSession, MemberDto memberDto) throws Exception {
 		 MemberDao member = sqlSession.getMapper(MemberDao.class);
-		 MemberDto resultDto = member.findPw(paramMap)
+		 MemberDto resultDto = member.findPw(paramMap);
+		 if(resultDto == null) throw new Exception();
 	      
 		 return resultDto;
 	}

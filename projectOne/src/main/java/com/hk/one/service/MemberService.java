@@ -70,9 +70,7 @@ public class MemberService implements IMemberService {
 	
 	 @Override
 	public MemberDto findPw(Map<String, Object> paramMap) throws Exception {
-		 memberDao
-      
-		 return resultDto;
+		
 	}
 
 }
