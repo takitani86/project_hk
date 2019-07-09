@@ -12,20 +12,26 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hk.one.dto.MemberDto;
+import com.hk.one.email.Email;
+import com.hk.one.email.EmailSender;
 import com.hk.one.service.IMemberService;
 
 @Controller
 public class MemberController {
 	@Autowired
 	private IMemberService MemberService;
+	private Email email;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -137,4 +143,39 @@ public class MemberController {
 		mav.setViewName("member/searchMember");
 		return mav;
 	}
+	   
+   @RequestMapping(value = "/find_Pw.do", method = RequestMethod.POST)
+   public String findPw(MemberDto memberDto, RedirectAttributes redirectattr, Errors errors) throws Exception {
+      new FindPwValidator().validate(memberDto, errors);
+      if(errors.hasErrors()) return "Find_Pw";
+      try {
+         MemberDto member = MemberService.findPw(sqlSession, memberDto);
+         redirectattr.addFlashAttribute("resultDto", resultDto);
+         return "redirect:sendPw";
+      } catch (Exception e) {
+         errors.reject("EmailNotExist");
+         return "Find_Pw";
+      }
+   }
+   
+   @RequestMapping("/sendPw.do")
+   public ModelAndView sendEmailAction (@RequestParam Map<String, Object> paramMap, ModelMap model) throws Exception {
+      ModelAndView mav;
+      
+      String id = (String) paramMap.get("mem_id");
+      String eMail = (String) paramMap.get("mem_email");
+      String pw = MemberService.getPw(paramMap);
+      logger.info(pw);
+      if(pw != null) {
+         email.setContent("비밀번호를 재설정합니다.");
+         email.setReceiver(eMail);
+         email.setSubject(id + "님의 비밀번호 재설정 메일입니다.");
+         EmailSender.SendEmail(email);
+         mav = new ModelAndView("redirect:/login.do");
+         return mav;
+      } else {
+         mav = new ModelAndView("redirect:/logout.do");
+         return mav;
+      }
+   }
 }

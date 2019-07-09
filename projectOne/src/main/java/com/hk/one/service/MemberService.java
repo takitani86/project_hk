@@ -1,7 +1,9 @@
 package com.hk.one.service;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +66,13 @@ public class MemberService implements IMemberService {
 	@Override
 	public int countArticle(String searchOption, String keyword) throws Exception {
 		return memberDao.countArticle(searchOption, keyword);
+	}
+	
+	 @Override
+	public MemberDto findPw(Map<String, Object> paramMap) throws Exception {
+		 memberDao
+      
+		 return resultDto;
 	}
 
 }
