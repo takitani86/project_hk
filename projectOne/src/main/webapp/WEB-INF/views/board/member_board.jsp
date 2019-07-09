@@ -57,16 +57,30 @@
   </c:choose>
 </table>
 <div>
+  <div>
+    <form action="searchBoard.do" method="POST" name="searchForm">
+    <select name="searchType" size="1" class="select">
+      <option value="all" <c:out value="${search.searchType == 'all'?'selected':''}"/>>전체</option>
+      <option value="qna_title" <c:out value="${search.searchType == 'qna_title'?'selected':''}"/>>제목</option>
+      <option value="qna_content" <c:out value="${search.searchType == 'qna_content'?'selected':''}"/>>내용</option>
+      <option value="mem_id" <c:out value="${search.searchType == 'mem_id'?'selected':''}"/>>아이디</option>
+    </select>
+    <input name="keyword" value="${search.keyword}">
+    <input type="submit" value="조회">
+    </form>
+  </div>
+</div>
+<div>
 <c:if test="${totalArticles != null}">
   <c:choose>
     <c:when test="${totalArticles > 100}">
       <c:forEach var="page" begin="1" end="10" step="1">
         <c:if test="${section > 1 && page == 1}">
-          <a href="member_board.do?section=${section-1}&curPage=${(section-1)*10+1}">&nbsp;[이전]</a>
+          <a href="member_board.do?section=${section-1}&curPage=${(section-1)*10}">&nbsp;[이전]</a>
         </c:if>
         <a href="member_board.do?section=${section}&curPage=${page}">${(section-1)*10+page}</a>
         <c:if test="${page == 10}">
-          <a href="member_board.do?section=${section+1}&curPage=${section*10+1}">&nbsp;[다음]</a>
+          <a href="member_board.do?section=${section+1}&curPage=1">&nbsp;[다음]</a>
         </c:if>
       </c:forEach>
     </c:when>
@@ -93,43 +107,6 @@
 </div>
   <a href="member_writeForm.do">글쓰기</a>
   <a href="../home.do">메인화면</a>
-  <a href="dummy.do">게시글 100개 추가</a>
+<!--   <a href="dummy.do">게시글 100개 추가</a> -->
 </body>
 </html>
-
-<!-- <div>
-    <c:if test="${pagination.curRange ne 1}">
-      <a href="#" onclick="fn_paging(1)">[처음]</a>
-    </c:if>
-    <c:if test="${pagination.curPage ne 1}">
-      <a href="#" onclick="fn_paging('${pagination.prevPage}')">[이전]</a>
-    </c:if>
-    <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage}">
-      <c:choose>
-        <c:when test="${pageNum eq pagination.curPage}">
-          <span style="font-weight: bold;"><a href="#" onclick="fn_paging('${pageNum}')">${pageNum}</a></span>
-        </c:when>
-        <c:otherwise>
-          <a href="#" onclick="fn_paging('${pageNum}')">${pageNum}</a>
-        </c:otherwise>
-      </c:choose>
-    </c:forEach>
-    <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
-      <a href="#" onclick="fn_paging('${pagination.nextPage}')">[다음]</a>
-    </c:if>
-    <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
-      <a href="#" onclick="fn_paging('${pagination.pageCnt}')">[끝]</a>
-    </c:if>
-    </div>
-    <div>
-      총 게시글 수 : ${pagination.listCnt} / 총 페이지 수 : ${pagination.pageCnt} / 현재 페이지 : ${pagination.curPage} / 현재 블럭 : ${pagination.curRange} / 총 블럭 수 : ${pagination.rangeCnt}
-    </div>
-      <a href="member_writeForm.do">글쓰기</a>
-      <a href="../home.do">메인화면</a>
-      <a href="dummy.do">게시글 100개 추가</a>
-    
-      <script>
-        function fn_paging(pageNum) {
-          location.href="member_board.do?curPage=" + pageNum;
-        }
-      </script> -->

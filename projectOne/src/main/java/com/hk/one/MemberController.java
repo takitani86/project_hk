@@ -86,12 +86,12 @@ public class MemberController {
 		return result + "";		
 	}
 	
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public ModelAndView loginView(ModelAndView mav) {
-		logger.info("로그인 뷰 호출 {}");
-		mav.setViewName("login");
-		return mav;
-	}
+//	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+//	public ModelAndView loginView(ModelAndView mav) {
+//		logger.info("로그인 뷰 호출 {}");
+//		mav.setViewName("login");
+//		return mav;
+//	}
 	
 	@RequestMapping(value = "/member_infoForm.do", method = RequestMethod.GET)
 	public String updateMemberForm(Locale locale, Model model, String mem_id) {

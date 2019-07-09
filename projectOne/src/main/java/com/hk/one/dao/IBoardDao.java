@@ -26,4 +26,8 @@ public interface IBoardDao {
 	public boolean readcount(int seq);
 	// 게시글 갯수 구하기
 	int selectBoardListCnt();
+	// 검색 결과 갯수 구하기
+	int selectBoardSearchListCnt(String searchType, String keyword);
+	// 검색결과 게시글 출력
+	List<BoardDto> selectBoardSearchList(int section, int curPage, String searchType, String keyword);
 }
