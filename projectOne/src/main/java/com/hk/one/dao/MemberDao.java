@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hk.one.dto.MemberDto;
-import com.hk.one.service.memberDao;
 
 @Repository
 public class MemberDao implements IMemberDao {
@@ -69,7 +68,7 @@ public class MemberDao implements IMemberDao {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		return sqlSession.selectList("Member.searchMember", map);
+		return sqlSession.selectList(namespace + "searchMember", map);
 	}
 	
 	@Override
@@ -77,16 +76,12 @@ public class MemberDao implements IMemberDao {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		return sqlSession.selectOne("Member.countArticle", map);
+		return sqlSession.selectOne(namespace + "countArticle", map);
 	}
 	
 	@Override
-	public MemberDto findPw(SqlSession sqlSession, MemberDto memberDto) throws Exception {
-		 MemberDao member = sqlSession.getMapper(MemberDao.class);
-		 MemberDto resultDto = member.findPw(paramMap);
-		 if(resultDto == null) throw new Exception();
-	      
-		 return resultDto;
+	public String findPw(Map<String, Object> paramMap) throws Exception {
+		 return sqlSession.selectOne(namespace + "getPw", paramMap);
 	}
 
 }
