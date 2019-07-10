@@ -26,4 +26,8 @@ public interface IBoardService {
 	public boolean readcount(int seq);
 	// 총 게시글 갯수
 	public int selectBoardListCnt();
+	// 검색 게시글 갯수
+	public int selectBoardSearchListCnt(String searchType, String keyword);
+	// 검색 게시글 출력
+	public List<BoardDto> selectSearchList(int section, int curPage, String searchType, String keyword);
 }

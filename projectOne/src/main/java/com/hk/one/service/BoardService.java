@@ -62,4 +62,14 @@ public class BoardService implements IBoardService {
 	public int selectBoardListCnt() {
 		return boardDao.selectBoardListCnt();
 	}
+
+	@Override
+	public int selectBoardSearchListCnt(String searchType, String keyword) {
+		return boardDao.selectBoardSearchListCnt(searchType, keyword);
+	}
+
+	@Override
+	public List<BoardDto> selectSearchList(int section, int curPage, String searchType, String keyword) {
+		return boardDao.selectBoardSearchList(section, curPage, searchType, keyword);
+	}
 }

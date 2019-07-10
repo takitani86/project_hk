@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.naming.NameParser;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -91,6 +89,24 @@ public class BoardDao implements IBoardDao {
 	@Override
 	public int selectBoardListCnt() {
 		return sqlSession.selectOne(namespace+"getCount");
+	}
+
+	@Override
+	public int selectBoardSearchListCnt(String searchType, String keyword) {
+		Map<String, String> map = new HashMap<>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return sqlSession.selectOne(namespace+"getSearchCount", map);
+	}
+
+	@Override
+	public List<BoardDto> selectBoardSearchList(int section, int curPage, String searchType, String keyword) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			map.put("section", section);
+			map.put("curPage", curPage);
+		return sqlSession.selectList(namespace+"getSearchResult", map);
 	}
 
 }

@@ -27,13 +27,13 @@
     <th>조회수</th>
   </tr>
   <c:choose>
-    <c:when test="${empty board}">
+    <c:when test="${empty searchArticles}">
       <tr>
-        <td colspan="5">----작성된 글이 없습니다.----</td>
+        <td colspan="5">----검색 결과가 없습니다.----</td>
       </tr>
     </c:when>
   <c:otherwise>
-  <c:forEach var="board" items="${board}">
+  <c:forEach var="board" items="${searchArticles}">
     <tr>
       <td><input type="checkbox" name="chk" value="${board.qna_seq}"></td>
       <td>${board.qna_seq}</td>
@@ -60,6 +60,7 @@
   </c:choose>
 </table>
 <div>
+${searchCount}개의 게시물이 있습니다.
   <div>
     <form action="searchBoard.do" method="POST" name="searchForm">
     <select name="searchType" size="1" class="select">
@@ -74,9 +75,9 @@
   </div>
 </div>
 <div>
-<c:if test="${totalArticles != null}">
+<c:if test="${searchCount != null}">
   <c:choose>
-    <c:when test="${totalArticles > 100}">
+    <c:when test="${searchCount > 100}">
       <c:forEach var="page" begin="1" end="10" step="1">
         <c:if test="${section > 1 && page == 1}">
           <a href="admin_board.do?section=${section-1}&curPage=${(section-1)*10}">&nbsp;[이전]</a>
@@ -87,14 +88,14 @@
         </c:if>
       </c:forEach>
     </c:when>
-    <c:when test="${totalArticles == 100}">
+    <c:when test="${searchCount == 100}">
       <c:forEach var="page" begin="1" end="10" step="1">
         <a href="#">${page}</a>
       </c:forEach>
     </c:when>
 
-    <c:when test="${totalArticles < 100}">
-      <c:forEach var="page" begin="1" end="${totalArticles/10+1}" step="1">
+    <c:when test="${searchCount < 100}">
+      <c:forEach var="page" begin="1" end="${searchCount/10+1}" step="1">
         <c:choose>
           <c:when test="${page==curPage}">
             <a href="admin_board.do?section=${section}&curPage=${page}">${page}</a>
