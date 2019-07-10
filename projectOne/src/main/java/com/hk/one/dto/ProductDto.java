@@ -20,13 +20,14 @@ public class ProductDto {
 	private String pro_option;
 	private int pro_menu;
 	private Date pro_regdate;
+	private String pro_sort;
 	
 	public ProductDto() {
 		super();
 	}
 	
 	public ProductDto(int cat_seq, String cat_name, String mem_id, int cat_isdel, int pro_seq, String pro_name,
-			String pro_image, int pro_price, String pro_desc, String pro_option, int pro_menu, Date pro_regdate) {
+			String pro_image, int pro_price, String pro_desc, String pro_option, int pro_menu, Date pro_regdate,String pro_sort) {
 		super();
 		this.cat_seq = cat_seq;
 		this.cat_name = cat_name;
@@ -40,6 +41,7 @@ public class ProductDto {
 		this.pro_option = pro_option;
 		this.pro_menu = pro_menu;
 		this.pro_regdate = pro_regdate;
+		this.pro_sort=pro_sort;
 	}
 	
 	public int getCat_seq() {
@@ -121,6 +123,14 @@ public class ProductDto {
 				+ cat_isdel + ", pro_seq=" + pro_seq + ", pro_name=" + pro_name + ", pro_image=" + pro_image
 				+ ", pro_price=" + pro_price + ", pro_desc=" + pro_desc + ", pro_option=" + pro_option + ", pro_menu="
 				+ pro_menu + ", pro_regdate=" + pro_regdate + "]";
+	}
+
+	public String getPro_sort() {
+		return pro_sort;
+	}
+
+	public void setPro_sort(String pro_sort) {
+		this.pro_sort = pro_sort;
 	}
 	
 }

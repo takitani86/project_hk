@@ -72,7 +72,7 @@
         <tr>
           <td colspan="3">
             <input type="submit" value="등록">
-            <input type="button" value="목록" onclick="location.href='admin_board.do'">
+            <input type="button" value="목록" onclick="location.href='admin_board.do?section=${section}&curPage=${curPage}'">
           </td>
         </tr>
       </table>  

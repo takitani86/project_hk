@@ -102,4 +102,10 @@ import com.hk.one.dto.ProductDto;
 		list=sqlSession.selectList(namespace+"selectProductList",countProductPage);
 		return list;
 	}
+	
+	@Override
+	public boolean sortProduct(String pro_sort) {
+		int count=sqlSession.update(namespace+"sortProduct",pro_sort);
+		return count>0?true:false;
+	}
 }

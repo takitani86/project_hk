@@ -18,7 +18,8 @@ public interface IProductDao {
 	public boolean updateProductImg(ProductDto dto) ; // 상품이미지 등록&변경
 	public boolean updateProduct(ProductDto dto) ; // 상품 정보 수정
 	public boolean mulDelProduct(String[] seqs) ; // 상품 다중 삭제
-	public int countProductPage(); // 페이징
+	public int countProductPage();// 페이징
+	public boolean sortProduct(String dto);
 
 	public List<ProductDto> getAllProductList(String countProductPage);
 

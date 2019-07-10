@@ -47,11 +47,13 @@ public class BoardController {
 	
 	// 게시글 상세보기
 	@RequestMapping(value = "/admin_boarddetail.do", method = RequestMethod.GET)
-	public String admin_detail(Locale locale, Model model, int seq) {
+	public String admin_detail(Locale locale, Model model, int seq, @RequestParam(defaultValue="1") int section, @RequestParam(defaultValue="1") int curPage) {
 		logger.info("admin_detail 호출 {}.", locale);
 		
 		BoardDto dto = boardService.selectOne(seq);
 		model.addAttribute("boarddetail", dto);
+		model.addAttribute("section", section);
+		model.addAttribute("curPage", curPage);
 		
 		return "board/admin_boarddetail";
 	}

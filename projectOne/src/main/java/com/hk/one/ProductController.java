@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,22 +34,28 @@ public class ProductController {
 	
 	@RequestMapping(value = "/productList.do", method = RequestMethod.GET)
 	public String productList(Locale locale, Model model,HttpServletRequest request) {
+		String sort = (String) request.getParameter("sort");
+		System.out.println(sort);
 		logger.info("상품페이지 호출{}.", locale);
 		HttpSession session = request.getSession(); // 세션생성
 		int getPcount=ProductService.countProductPage(); // 페이지 갯수
 		String countProductPage=request.getParameter("countProductPage"); // view에서 요청페이지 파라미터를 받음
 		session.setAttribute("countProductPageSession", countProductPage); //현재페이지 세션저장
 		List<ProductDto> list = ProductService.getAllProductList(countProductPage);
-		System.out.println(request.getAttribute("pro_sort"));
-		//ObjectMapper mapper = new ObjectMapper();
-		//JSONPObject json = new JSONPObject("JSON.parse", list);
-		//String jsonStr = mapper.writeValueAsString(json);
+		
+		model.addAttribute("sort", sort);
 		model.addAttribute("list", list );
 		model.addAttribute("getPcount", getPcount);
-		
-		return "product/productList";
+		boolean isS=ProductService.sortProduct(sort);
+		if(isS) {
+			return "product/productList";
+		}else {
+			model.addAttribute("msg","상품리스트업실패");
+			return "error";  
+		}
 		
 	}
+	
 	
 	@RequestMapping(value = "/insertProductForm.do", method = RequestMethod.GET)
 	public String insertProductForm(Locale locale, Model model) {
@@ -67,7 +74,7 @@ public class ProductController {
 		boolean isS=ProductService.insertProduct(dto);
 		
 		if(isS) {
-			return "redirect:productList.do?countProductPage="+session.getAttribute("countProductPageSession");
+			return "redirect:productList.do?countProductPage="+session.getAttribute("countProductPageSession")+"&sort=0";
 		}else {
 			model.addAttribute("msg","상품추가실패");
 			return "error"; 

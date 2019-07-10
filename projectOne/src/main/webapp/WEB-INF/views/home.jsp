@@ -16,7 +16,7 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<p><a href="productList.do?countProductPage=1">상품리스트</a></p>
+<p><a href="productList.do?countProductPage=1&sort=0">상품리스트</a></p>
 <p><a href="memberList.do">회원목록</a>
 <p><a href="board/member_board.do">점주 게시판</a>
 <p><a href="board/admin_board.do">관리자 게시판</a>

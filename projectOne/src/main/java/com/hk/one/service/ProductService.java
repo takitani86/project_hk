@@ -68,5 +68,10 @@ public class ProductService implements IProductService {
 		return productDao.getAllProductList(countProductPage);
 	
 	}
+	
+	@Override 
+	public boolean sortProduct(String dto) {
+		return productDao.sortProduct(dto);
+	}
 
 }
