@@ -69,8 +69,8 @@ public class MemberService implements IMemberService {
 	}
 	
 	 @Override
-	public MemberDto findPw(Map<String, Object> paramMap) throws Exception {
-		
+	public String findPw(Map<String, Object> paramMap) throws Exception {
+		return memberDao.findPw(paramMap);
 	}
 
 }

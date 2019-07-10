@@ -29,8 +29,12 @@ import com.hk.one.service.IMemberService;
 
 @Controller
 public class MemberController {
+	
 	@Autowired
 	private IMemberService MemberService;
+	@Autowired
+	private EmailSender emailSender;
+	@Autowired
 	private Email email;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
@@ -144,33 +148,47 @@ public class MemberController {
 		return mav;
 	}
 	   
-   @RequestMapping(value = "/find_Pw.do", method = RequestMethod.POST)
-   public String findPw(MemberDto memberDto, RedirectAttributes redirectattr, Errors errors) throws Exception {
-      new FindPwValidator().validate(memberDto, errors);
-      if(errors.hasErrors()) return "Find_Pw";
-      try {
-         MemberDto member = MemberService.findPw(sqlSession, memberDto);
-         redirectattr.addFlashAttribute("resultDto", resultDto);
-         return "redirect:sendPw";
-      } catch (Exception e) {
-         errors.reject("EmailNotExist");
-         return "Find_Pw";
-      }
-   }
-   
+/*	@RequestMapping(value = "/find_Pw.do", method = RequestMethod.POST)
+	public String findPw(MemberDto memberDto, RedirectAttributes redirectattr, Errors errors) throws Exception {
+		logger.info("비밀번호 찾기 {}.");
+		new FindPwValidator().validate(memberDto, errors);
+		if(errors.hasErrors()) return "Find_Pw";
+		try {
+			MemberDto member = MemberService.findPw(sqlSession, memberDto);
+			redirectattr.addFlashAttribute("resultDto", resultDto);
+			return "redirect:sendPw";
+		} catch (Exception e) {
+			errors.reject("EmailNotExist");
+		return "Find_Pw";
+		}
+	}*/
+
+	@RequestMapping(value = "/to_find_PwForm.do", method = RequestMethod.GET)
+	public String to_find_PwForm(Locale locale, Model model) {
+		logger.info("비밀번호 찾기 페이지로 이동 {}.", locale);
+		return "member/test01";
+	}
+	
+	@RequestMapping(value = "/find_Pw.do")
+	public void findPw(@RequestParam Map<String, Object> paramMap, ModelMap model) throws Exception {
+		logger.info("비밀번호 찾기 {}.");
+		model.addAttribute("msg", 0);
+	}
+	
    @RequestMapping("/sendPw.do")
    public ModelAndView sendEmailAction (@RequestParam Map<String, Object> paramMap, ModelMap model) throws Exception {
+	  logger.info("이메일 보내기 {}.");
       ModelAndView mav;
       
       String id = (String) paramMap.get("mem_id");
       String eMail = (String) paramMap.get("mem_email");
-      String pw = MemberService.getPw(paramMap);
+      String pw = MemberService.findPw(paramMap);
       logger.info(pw);
       if(pw != null) {
          email.setContent("비밀번호는 " + pw + "입니다.");
          email.setReceiver(eMail);
          email.setSubject(id + "님의 비밀번호 재설정 메일입니다.");
-         EmailSender.SendEmail(email);
+         emailSender.SendEmail(email);
          mav = new ModelAndView("redirect:/login.do");
          return mav;
       } else {

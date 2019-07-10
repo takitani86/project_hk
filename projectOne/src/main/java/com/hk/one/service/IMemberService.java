@@ -20,5 +20,5 @@ public interface IMemberService {
 	public MemberDto checkEmailMember(String mem_email) throws Exception; //이메일 중복 확인
 	public List<MemberDto> searchMember(String searchOption, String keyword) throws Exception; //회원 조회 기능
 	public int countArticle(String searchOption, String keyword) throws Exception; //조회 결과 개수 확인
-	public MemberDto findPw(Map<String, Object> paramMap); //비밀번호 찾기 기능
+	public String findPw(Map<String, Object> paramMap) throws Exception; //비밀번호 찾기 기능
 }
