@@ -34,7 +34,7 @@
 		FROM
 		LJP_QNABOARD
 	</select>
-
+	
 	<select id="getSearchCount" parameterType="Map" resultType="int">
 		SELECT count(*)
 		FROM LJP_QNABOARD

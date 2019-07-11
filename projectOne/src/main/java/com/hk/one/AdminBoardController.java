@@ -17,10 +17,10 @@ import com.hk.one.dto.BoardDto;
 import com.hk.one.service.IBoardService;
 
 @Controller
-@RequestMapping(value = "/board/*")
-public class BoardController {
+@RequestMapping(value = "admin/board/*")
+public class AdminBoardController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AdminBoardController.class);
 
 	@Autowired
 	private IBoardService boardService;
