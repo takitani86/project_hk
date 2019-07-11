@@ -1,7 +1,7 @@
 package com.hk.one.email;
 
 public class Email {
-   private String subject;
+	private String subject;
     private String content;
     private String receiver;
      

@@ -95,6 +95,13 @@
 		WHERE MEM_ID = #{mem_id} AND MEM_NAME = #{mem_name} AND MEM_EMAIL = #{mem_email}
 	</select>
 	
+	<!-- 비밀번호 가져오기 -->
+	<select id="getPw" parameterType="map" resultType="String">
+		SELECT MEM_PW
+		FROM LJP_MEMBER
+		WHERE MEM_ID = #{mem_id} AND MEM_EMAIL = #{mem_email}
+	</select>
+	
 	<sql id="search">
 		<choose>
 			<!-- 전체 검색 -->
