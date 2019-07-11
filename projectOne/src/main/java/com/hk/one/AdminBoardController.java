@@ -277,16 +277,16 @@ public class AdminBoardController {
 	@RequestMapping(value = "/searchBoard.do", method = RequestMethod.POST)
 	public String search(Locale locale, Model model,
 			@RequestParam(defaultValue="1") int section, @RequestParam(defaultValue="1") int curPage,
-			@RequestParam(defaultValue="title") String searchType, @RequestParam(defaultValue="") String keyword) {
+			@RequestParam(defaultValue="qna_title") String searchType, @RequestParam(defaultValue="") String keyword) {
 		logger.info("searchBoard 호출 {}.", locale);
 		
 		// 검색 글 수 조회
-		int searchArticles = boardService.selectBoardSearchListCnt(searchType, keyword);
+		int searchCount = boardService.selectBoardSearchListCnt(searchType, keyword);
 		//전체리스트 출력
 		List<BoardDto> list = boardService.selectSearchList(section, curPage, searchType, keyword);
 		
 		model.addAttribute("searchArticles", list);
-		model.addAttribute("searchCount", searchArticles);
+		model.addAttribute("searchCount", searchCount);
 		model.addAttribute("section", section);
 		model.addAttribute("curPage", curPage);
 		
