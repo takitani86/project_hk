@@ -20,6 +20,7 @@ import com.hk.one.dto.ProductDto;
 	@Repository
 	public class ProductDao implements IProductDao {
 		
+	private boolean flag=true;
 	private String namespace="Product.";
 	
 	@Autowired
@@ -44,10 +45,19 @@ import com.hk.one.dto.ProductDto;
 		return saveName;
 	}
 	
-	@Override
-	public List<ProductDto> getAllProductList() {
-		return sqlSession.selectList(namespace+"selectProductList");
-	}
+//	@Override
+//	public List<ProductDto> getAllProductList() {
+//		if(flag==true) {
+//			flag=false;
+//			System.out.println("falg상태=" +flag);
+//			return sqlSession.selectList(namespace+"selectProductList");
+//		}else {
+//			flag=true;
+//			System.out.println("falg상태=" +flag);
+//			return sqlSession.selectList(namespace+"selectReverseProductList");
+//		}
+//		
+//	}
 
 	@Override
 	public ProductDto getProduct(int dto) {
@@ -99,8 +109,18 @@ import com.hk.one.dto.ProductDto;
 	@Override
 	public List<ProductDto> getAllProductList(String countProductPage) {
 		List<ProductDto> list=new ArrayList<ProductDto>();
-		list=sqlSession.selectList(namespace+"selectProductList",countProductPage);
-		return list;
+		if(flag==true) {
+			System.out.println("flag상태ㅔ" +flag);
+			flag=false;
+			list=sqlSession.selectList(namespace+"selectProductList",countProductPage);
+			return list;
+		}else {
+			System.out.println("flag상태ㅔ" +flag);
+			flag=true;
+			list=sqlSession.selectList(namespace+"selectReverseProductList",countProductPage);
+			return list;
+		}
+		
 	}
 	
 	@Override

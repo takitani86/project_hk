@@ -12,12 +12,11 @@
 
 <!-- property = java 변수명 , column = db컬럼명 -->
    
-   <select id="selectProductList" parameterType="String" resultType="product">
+      <select id="selectProductList" parameterType="String" resultType="product">
       SELECT PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
       FROM (SELECT ROW_NUMBER() OVER (ORDER BY PRO_REGDATE DESC) AS RN, 
       PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
-      FROM LJP_PRODUCT ORDER BY 
-      DECODE(PRO_SORT, 0, PRO_REGDATE)
+      FROM LJP_PRODUCT ORDER BY DECODE(PRO_SORT, 0, PRO_REGDATE)
        , DECODE(PRO_SORT, 1, PRO_SEQ)
        , DECODE(PRO_SORT, 2, PRO_NAME)
        , DECODE(PRO_SORT, 3, PRO_PRICE)
@@ -25,6 +24,21 @@
        , DECODE(PRO_SORT, 5, PRO_OPTION)
        , DECODE(PRO_SORT, 6, PRO_MENU)
        , DECODE(PRO_SORT, 0, PRO_REGDATE)DESC)
+      WHERE  CEIL(RN/10) = #{countProductPage} 
+   </select>
+   
+      <select id="selectReverseProductList" parameterType="String" resultType="product">
+      SELECT PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
+      FROM (SELECT ROW_NUMBER() OVER (ORDER BY PRO_REGDATE DESC) AS RN, 
+      PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
+      FROM LJP_PRODUCT ORDER BY DECODE(PRO_SORT, 0, PRO_REGDATE)
+       , DECODE(PRO_SORT, 1, PRO_SEQ)
+       , DECODE(PRO_SORT, 2, PRO_NAME)
+       , DECODE(PRO_SORT, 3, PRO_PRICE)
+       , DECODE(PRO_SORT, 4, CAT_SEQ)
+       , DECODE(PRO_SORT, 5, PRO_OPTION)
+       , DECODE(PRO_SORT, 6, PRO_MENU)
+       , DECODE(PRO_SORT, 0, PRO_REGDATE)ASC)
       WHERE  CEIL(RN/10) = #{countProductPage} 
    </select>
    

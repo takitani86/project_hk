@@ -35,13 +35,8 @@
 		<property name="maxInMemorySize" value="100000000" />
 	</bean>
 	<!-- Email 발송 -->
-<<<<<<< HEAD
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.naver.com" />
-=======
- 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
->>>>>>> branch 'master' of https://github.com/takitani86/project_hk.git
 		<property name="port" value="587" />
 		<property name="username" value="ms_sakana@naver.com" />
 		<property name="password" value="tkxkd7487" />

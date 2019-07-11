@@ -21,6 +21,14 @@
 		</repository>
 	</repositories>
 	<dependencies>
+	
+		<!-- 스프링 소켓(채팅) -->
+		<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-websocket</artifactId>
+    <version>5.1.8.RELEASE</version>
+</dependency>
+
 		<!-- EMail 발송 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
