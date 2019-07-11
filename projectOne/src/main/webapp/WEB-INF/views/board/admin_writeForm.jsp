@@ -14,7 +14,7 @@
   <table border="1">
     <tr>
       <th>아이디</th>
-      <td colspan="2"><input type="text" name="mem_id" value="admin" readonly></td>
+      <td colspan="2"><input type="text" name="mem_id" value="ADMIN" readonly></td>
     </tr>
     <tr>
       <th>제목</th>

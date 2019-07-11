@@ -14,10 +14,19 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/home.do"}, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.info("인덱스 {}.", locale);
 		
 		return "home";
 	}
+	
+	// 로그인 화면으로 이동
+	@RequestMapping(value = "/secu/loginPage.do", method = RequestMethod.GET)
+	public String loginForm(Locale locale, Model model) {
+		logger.info("로그인화면 {}.", locale);
+		
+		return "secu/loginPage";
+	}
+	
 }
