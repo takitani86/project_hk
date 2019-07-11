@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -36,6 +37,8 @@ public class MemberController {
 	private EmailSender emailSender;
 	@Autowired
 	private Email email;
+	@Autowired
+	private JavaMailSenderImpl javaMailSenderImpl;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -169,31 +172,33 @@ public class MemberController {
 		return "member/test01";
 	}
 	
-	@RequestMapping(value = "/find_Pw.do")
-	public void findPw(@RequestParam Map<String, Object> paramMap, ModelMap model) throws Exception {
+/*	@RequestMapping(value = "/find_Pw.do")
+	public String findPw(@RequestParam Map<String, Object> paramMap, ModelMap model) throws Exception {
 		logger.info("비밀번호 찾기 {}.");
 		model.addAttribute("msg", 0);
-	}
+		return "member/test01";
+	}*/
 	
-   @RequestMapping("/sendPw.do")
-   public ModelAndView sendEmailAction (@RequestParam Map<String, Object> paramMap, ModelMap model) throws Exception {
-	  logger.info("이메일 보내기 {}.");
-      ModelAndView mav;
-      
-      String id = (String) paramMap.get("mem_id");
-      String eMail = (String) paramMap.get("mem_email");
-      String pw = MemberService.findPw(paramMap);
-      logger.info(pw);
-      if(pw != null) {
-         email.setContent("비밀번호는 " + pw + "입니다.");
-         email.setReceiver(eMail);
-         email.setSubject(id + "님의 비밀번호 재설정 메일입니다.");
-         emailSender.SendEmail(email);
-         mav = new ModelAndView("redirect:/login.do");
-         return mav;
-      } else {
-         mav = new ModelAndView("redirect:/logout.do");
-         return mav;
-      }
-   }
+	@RequestMapping("/sendPw.do")
+	public ModelAndView sendEmailAction (@RequestParam Map<String, Object> paramMap, ModelMap model) throws Exception {
+		logger.info("비밀번호 찾기 {}.");
+		ModelAndView mav;
+		String id = (String) paramMap.get("mem_id");
+		String eMail = (String) paramMap.get("mem_email");
+		String pw = MemberService.findPw(paramMap);
+		logger.info("이메일 보내기 {}.");
+		logger.info("id:" + id + " / 메일: " + eMail + " / 비밀번호: " + pw);
+		if(pw != null) {
+	    	  email.setContent("비밀번호는 " + pw + "입니다.");
+	    	  email.setReceiver(eMail);
+	    	  email.setSubject(id + "님의 비밀번호 재설정 메일입니다.");
+	    	  emailSender.SendEmail(email);
+	    	  mav = new ModelAndView("redirect:/login.do");
+	    	  return mav;
+		} else {
+	    	  model.addAttribute("msg", 1);
+	    	  mav = new ModelAndView("member/test01");
+	    	  return mav;
+		}
+	}
 }
