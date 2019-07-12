@@ -17,7 +17,7 @@ import com.hk.one.dto.BoardDto;
 import com.hk.one.service.IBoardService;
 
 @Controller
-@RequestMapping(value = "member/board/*")
+@RequestMapping(value = "/member/board/*")
 public class MemberBoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberBoardController.class);

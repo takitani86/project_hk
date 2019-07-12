@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="user">
+
+<select id="selectUser" resultType="map">
+	SELECT
+	MEM_EMAIL as username,
+	MEM_PW as password,
+	MEM_ISAPPROVE as ENABLED,
+	CASE WHEN MEM_ISADMIN = 0 THEN 'ROLE_MEMBER'
+	WHEN MEM_ISADMIN = 1 THEN 'ROLE_ADMIN'
+	END AS AUTHORITY FROM LJP_MEMBER MEM_EMAIL = #{username}
+</select>
+
+</mapper>

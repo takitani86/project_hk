@@ -8,6 +8,13 @@
                                  http://www.springframework.org/schema/security
                                  http://www.springframework.org/schema/security/spring-security.xsd">
 
+  <!-- 비밀번호 암호화 -->
+	<beans:bean id="bcryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
+	<beans:bean id="userService" class="com.min.study.user.service.UserAuthenticationService">
+	<beans:constructor-arg name="sqlSession" ref="sqlSession"/>
+	</beans:bean>
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/member/**"
 			access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')" />
@@ -24,7 +31,7 @@
 			login-page="/secu/loginPage.do" default-target-url="/" />
 
 		<!-- 로그아웃 -->
-		<logout logout-url="/logout.do" logout-success-url="/" />
+		<logout logout-url="/logout.do" logout-success-url="/" delete-cookies="true" invalidate-session="true"/>
 
 		<!-- 중복로그인 방지 -->
 		<session-management>
@@ -34,15 +41,15 @@
 
 		<csrf disabled="true" />
 	</http>
-	<jdbc-user-service data-source-ref="dataSource"
+<!-- 	<jdbc-user-service data-source-ref="dataSource"
 		id="userService"
 		users-by-username-query="SELECT mem_id as loginId, mem_pw as loginPwd, 
 		mem_isapprove as ENABLED FROM LJP_MEMBER WHERE mem_id = ?"
 		authorities-by-username-query="SELECT mem_id as loginId, 
 		CASE WHEN mem_isadmin = 0 THEN 'ROLE_MEMBER' 
 		WHEN mem_isadmin = 1 THEN 'ROLE_ADMIN' 
-		END AS authority FROM LJP_MEMBER WHERE mem_id = ?" />
-		
+		END AS authority FROM LJP_MEMBER WHERE mem_id = ?" /> -->
+
 	<authentication-manager>
 		<authentication-provider
 			user-service-ref="userService">
