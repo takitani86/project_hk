@@ -91,7 +91,7 @@ ${map.count}개의 회원 정보가 있습니다.
 	</c:choose>
 	<tr><td>
 	<input type="button" value="회원 추가" onclick="location.href='joinMemberForm.do'" />
-	<button onclick="location.href='home.do'">홈으로</button>
+	<button onclick="location.href='<c:url value="/home.do"/>'">홈으로</button>
 	</td></tr>
 </table>
 </body>

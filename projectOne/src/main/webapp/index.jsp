@@ -17,7 +17,7 @@
 
 
 <p><a href="<c:url value='productList.do?countProductPage=1'/>">상품리스트</a></p>
-<p><a href="<c:url value='memberList.do'/>">회원목록</a>
+<p><a href="<c:url value='member/memberList.do'/>">회원목록</a>
 <p><a href="<c:url value='member/board/member_board.do'/>">점주 게시판</a>
 <p><a href="<c:url value='admin/board/admin_board.do'/>">관리자 게시판</a>
 <p><a href="<c:url value='passwordEncoder.do?targetStr=asdasd'/>">암호화 테스트</a>
