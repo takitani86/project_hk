@@ -16,6 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <title>로그인</title>
 </head>
 <body>
@@ -44,9 +45,48 @@
 	          </div>
 	          <button type="submit" class="btn btn-primary">Sign in</button>
 	      </form>
+	      <div class="social-login">
+	      		<a id="kakao-login-btn"></a>
+	      		<a href="http://developers.kakao.com/logout"></a>
+<script type='text/javascript'>
+      //<![CDATA[
+        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('a995d32c456d751360248fd1314e6cc5');
+        // 카카오 로그인 버튼을 생성합니다.
+        Kakao.Auth.createLoginButton({
+          container: '#kakao-login-btn',
+          success: function(authObj) {
+            alert(JSON.stringify(authObj));
+            
+            // 로그인 성공 시, API를 호출합니다.
+            Kakao.API.request({
+            	url: '/v1/user/me',
+            	success: function(res) {
+            		console.log(res);
+            		
+            		var userId = res.id; //유저의 카톡 고유 id
+            		var userEmail = res.kaccount_email; //유저의 이메일
+            		var userNickName = res.properties.nickname; //유저의 별명
+            		
+            		console.log(userId);
+            		console.log(userEmail);
+            		console.log(userNickName);
+            	},
+            	fail: function(error) {
+            		alert(JSON.stringify(error));
+            	}
+            });
+          },
+          fail: function(err) {
+             alert(JSON.stringify(err));
+          }
+        });
+      //]]>
+</script>
+	      </div>
 	      <div class="dropdown-divider"></div>
 	      <a class="dropdown-item" href="#">New around here? Sign up</a>
-	      <a class="dropdown-item" href="#">Forgot password?</a>
+	      <a class="dropdown-item" href="<c:url value='/secu/to_find_PwForm.do'/>">Forgot password?</a>
 	  </div>
 </body>
 </html>
