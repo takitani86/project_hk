@@ -1,11 +1,14 @@
 package com.hk.one;
 
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hk.one.service.IMemberService;
 
@@ -81,4 +85,10 @@ public class HomeController {
 			return mav;
 		}
 	}	
+	
+	@RequestMapping(value = "/kakaologin", produces = "application/json", method = RequestMethod.GET)
+	public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws IOException {
+		System.out.println("kakao code: " + code);
+		return null;
+	}
 }
