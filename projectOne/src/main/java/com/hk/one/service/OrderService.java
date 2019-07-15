@@ -25,4 +25,9 @@ public class OrderService implements IOrderService {
 		return orderDao.selectMenuProductList(seq);
 	}
 
+	@Override
+	public boolean addCategory(String mem_id, String add) {
+		return orderDao.addCategory(mem_id, add);
+	}
+
 }

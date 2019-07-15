@@ -11,4 +11,6 @@ public interface IOrderService {
 	public List<CategoryDto> selectMenuCategoryList(String username);
 	// 카테고리 안에 담긴 상품리스트 불러오기
 	public List<ProductDto> selectMenuProductList(int seq);
+	// 카테고리 추가
+	public boolean addCategory(String mem_id, String add);
 }

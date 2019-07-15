@@ -14,7 +14,8 @@ function menuList(seq) {
       a += '<tr>';
       $.each(data, function(key, value){
           a += '<td><p><img src="' + value.pro_image +
-           '" width="150" height="200"></p><p>' + value.pro_name + '</p></td>';
+           '" width="150" height="200" onclick="productUpdate(' + value.pro_seq +
+           ')"></p><p>' + value.pro_name + '</p></td>';
            count++;
            if (count == 3) {
              a += '</tr><tr>';
@@ -24,5 +25,9 @@ function menuList(seq) {
       $('.menuList').html(a);
     }
   });
+}
+
+function productUpdate(seq) {
+  
 }
 </script>

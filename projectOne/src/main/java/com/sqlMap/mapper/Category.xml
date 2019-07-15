@@ -19,8 +19,12 @@
    <select id="selectList" parameterType="String" resultMap="resultGetList">
       SELECT CAT_SEQ, CAT_NAME, MEM_ID, CAT_ISDEL
       FROM LJP_CATEGORY
-      WHERE MEM_ID = #{mem_id}
+      WHERE MEM_ID = #{mem_id} AND CAT_ISDEL = 0
       ORDER BY CAT_SEQ ASC
    </select>
-
+	
+	<insert id="addCategory" parameterType="Map">
+		INSERT INTO LJP_CATEGORY VALUES (LJP_CATEGORY_SEQ.NEXTVAL, #{cat_name}, #{mem_id}, 0)
+	</insert>
+	
 </mapper>

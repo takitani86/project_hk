@@ -9,4 +9,5 @@ public interface IOrderDao {
 
 	public List<CategoryDto> selectMenuCategoryList(String username);
 	public List<ProductDto> selectMenuProductList(int seq);
+	public boolean addCategory(String mem_id, String add);
 }

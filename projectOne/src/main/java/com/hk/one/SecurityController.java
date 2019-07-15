@@ -21,34 +21,47 @@ import com.hk.one.service.IOrderService;
 public class SecurityController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SecurityController.class);
-	
+
 	@Autowired
 	private IOrderService orderService;
-	
-	@RequestMapping(value="/payment.do", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/payment.do", method = RequestMethod.GET)
 	public String payment(Model model) {
 		logger.info("결제 메소드 호출");
-		
+
 		return "payment/payment";
 	}
-	
-	@RequestMapping(value="/menu.do", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/menu.do", method = RequestMethod.GET)
 	public String menu(Model model, Authentication auth) {
 		logger.info("메뉴 메소드 호출");
-		
+
 		// 카테고리 정보 조회
 		List<CategoryDto> category = orderService.selectMenuCategoryList(auth.getName());
-		
+
 		model.addAttribute("category", category);
-		
+
 		return "menu/menu";
 	}
-	
-	@RequestMapping("/menuList.do")
+
+	@RequestMapping(value = "/menuList.do", method = RequestMethod.GET)
 	@ResponseBody
 	private List<ProductDto> productList(Model model, int seq) throws Exception {
 		logger.info("상품리스트 호출");
-		
+
 		return orderService.selectMenuProductList(seq);
+	}
+
+	@RequestMapping(value = "/addCategory.do", method = RequestMethod.GET)
+	private String addCategoryForm(Model model, Authentication auth, @RequestParam String add) {
+		logger.info("카테고리 등록폼 호출");
+
+		String mem_id = auth.getName();
+		boolean success = orderService.addCategory(mem_id, add);
+		if (success) {
+			return "redirect:/menu.do";
+		} else {
+			return "redirect:/menu.do";
+		}
 	}
 }
