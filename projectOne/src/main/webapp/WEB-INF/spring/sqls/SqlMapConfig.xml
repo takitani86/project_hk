@@ -18,7 +18,6 @@
 		<mapper resource="/com/sqlMap/mapper/Member.xml"/>
 		<mapper resource="/com/sqlMap/mapper/Product.xml"/>
 		<mapper resource="/com/sqlMap/mapper/Comment.xml"/>
-		<mapper resource="/com/hk/one/security/user.xml"/>
 	</mappers>
 </configuration>
 

@@ -20,7 +20,6 @@
 <p><a href="<c:url value='member/memberList.do'/>">회원목록</a>
 <p><a href="<c:url value='member/board/member_board.do'/>">점주 게시판</a>
 <p><a href="<c:url value='admin/board/admin_board.do'/>">관리자 게시판</a>
-<p><a href="<c:url value='passwordEncoder.do?targetStr=asdasd'/>">암호화 테스트</a>
 <p><a href="<c:url value='payment.do'/>">결제테스트</a>
 <sec:authorize access="isAnonymous()">
     <h5><a href='<c:url value="/secu/loginPage.do"/>'>LOGIN</a> 로그인 해주세요.</h5>

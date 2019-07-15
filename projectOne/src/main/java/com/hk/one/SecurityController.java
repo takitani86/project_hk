@@ -16,23 +16,6 @@ public class SecurityController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SecurityController.class);
 	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-	
-	@RequestMapping(value="passwordEncoder.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public String passwordEncdoer(@RequestParam(value="targetStr", required=false, defaultValue="") 
-	String targetStr, Model model) {
-		logger.info("암호화 메소드 호출");
-		if(StringUtils.hasText(targetStr)) {
-			// 암호화 작업
-			String bCryptString = passwordEncoder.encode(targetStr);
-			model.addAttribute("targetStr", targetStr);
-			model.addAttribute("bCryptString", bCryptString);
-		}
-		
-		return "secu/showBCryptString";
-	}
-	
 	@RequestMapping(value="/payment.do", method= RequestMethod.GET)
 	public String payment(Model model) {
 		logger.info("결제 메소드 호출");
