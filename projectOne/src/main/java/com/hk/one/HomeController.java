@@ -1,12 +1,15 @@
 package com.hk.one;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -19,10 +22,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.hk.one.dto.MemberDto;
 import com.hk.one.login.KakaoAccessToken;
 import com.hk.one.login.KakaoUserInfo;
 import com.hk.one.service.IMemberService;
@@ -44,6 +49,51 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/secu/joinMemberForm.do", method = RequestMethod.GET)
+	public String joinMemberForm(Locale locale, Model model) {
+		logger.info("회원가입폼으로 이동 {}.", locale);
+		List<MemberDto> list = MemberService.getAllMember();
+		model.addAttribute("list", list);
+		
+		return "secu/joinMember";
+	}
+	
+	@RequestMapping(value = "/secu/joinMember.do", method = RequestMethod.POST)
+	public String joinMember(Locale locale, Model model, MemberDto memberDto, HttpServletRequest req) {
+		logger.info("회원 가입 {}.", locale);
+		String roadAddress = req.getParameter("sample4_roadAddress");
+		String detailAddress = req.getParameter("sample4_detailAddress");
+		String mem_address = roadAddress + " " + detailAddress;
+		System.out.println("주소: " + mem_address);
+		boolean isS = MemberService.joinMember(memberDto);
+		if(isS) {
+			return "redirect:/member/memberList.do";
+		} else {
+			model.addAttribute("failJoin", "회원 가입 실패");
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value = "/secu/addressForm.do", method = RequestMethod.GET)
+	public String addressForm(Locale locale, Model model) {
+		logger.info("도로명 주소 입력 {}.", locale);
+		
+		return "secu/addressForm";
+	}
+
+	
+	@ResponseBody
+	@RequestMapping(value = "/secu/checkIdMember.do", method = RequestMethod.POST)
+	public String checkIdMember(HttpServletRequest req) throws Exception {
+		logger.info("아이디 중복 체크 {}.");
+
+		String mem_id = req.getParameter("mem_id");
+		MemberDto mem = MemberService.checkIdMember(mem_id);
+		int result = 0;
+		if(mem != null) result = 1;
+		return result + "";		
+	}
+
 	// 로그인 화면으로 이동
 	@RequestMapping(value = "/secu/loginPage.do", method = RequestMethod.GET)
 	public String loginForm(Locale locale, Model model) {
@@ -56,6 +106,18 @@ public class HomeController {
 	public String to_find_PwForm(Locale locale, Model model) {
 		logger.info("비밀번호 찾기 페이지로 이동 {}.", locale);
 		return "secu/findPw";
+	}
+	
+	@RequestMapping(value = "/deleteMember.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String deleteMember(Locale locale, Model model, String mem_id) {
+		logger.info("회원 탈퇴 {}.", locale);
+		boolean isS = MemberService.deleteMember(mem_id);
+		if(isS) {
+			return "redirect:memberList.do";
+		} else {
+			model.addAttribute("failDelete", "회원 탈퇴 실패");
+			return "error";
+		}
 	}
 	
 	@RequestMapping(value = "/secu/sendPw.do")
@@ -89,7 +151,7 @@ public class HomeController {
 		}
 	}	
 	
-	@RequestMapping(value = "/kakaologin", produces = "application/json", method = RequestMethod.GET)
+	@RequestMapping(value = "/kakaoLogin.do", produces = "application/json", method = RequestMethod.GET)
 	public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws IOException {
 		logger.info("kakao 로그인 토큰 받아오기 {}.");
 		System.out.println("kakao code: " + code);
@@ -102,20 +164,26 @@ public class HomeController {
         JsonNode userInfo = KakaoUserInfo.getKakaoUserInfo(accessToken);
  
         // Get id
-        String id = userInfo.path("id").asText();
-        String name = null;
-        String email = null;
+        String mem_id = userInfo.path("id").asText();
+        String mem_name = null;
+        String mem_email = null;
+        String mem_image = null;
+        String mem_regDate = null;
  
         // 유저정보 카카오에서 가져오기 Get properties
         JsonNode properties = userInfo.path("properties");
         JsonNode kakao_account = userInfo.path("kakao_account");
  
-        name = properties.path("nickname").asText();
-        email = kakao_account.path("email").asText();
+        mem_name = properties.path("nickname").asText();
+        mem_email = kakao_account.path("email").asText();
+        mem_image = properties.path("profile_image").asText();
+        mem_regDate = properties.path("created").asText();
  
-        System.out.println("id : " + id);
-        System.out.println("name : " + name);
-        System.out.println("email : " + email);
+        System.out.println("id: " + mem_id);
+        System.out.println("name: " + mem_name);
+        System.out.println("email: " + mem_email);
+        System.out.println("image: " + mem_image);
+        System.out.println("regDate: " + mem_regDate);
 		return null;
 	}
 }

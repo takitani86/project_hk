@@ -63,6 +63,8 @@
             	url: '/v1/user/me',
             	success: function(res) {
             		console.log(res);
+            		//여기서 정보 요청해서 다 받아온 뒤에 디비에서 아이디 검색 -> 있으면 로그인완료+메인화면 이동 / 없으면 정보 받아서 회원가입폼으로 이동 ㅜㅜ
+            		
             		
             		var userId = res.id; //유저의 카톡 고유 id
             		var userEmail = res.kaccount_email; //유저의 이메일
@@ -71,6 +73,8 @@
             		console.log(userId);
             		console.log(userEmail);
             		console.log(userNickName);
+            		
+            		location.href = "register.do"
             	},
             	fail: function(error) {
             		alert(JSON.stringify(error));
@@ -85,8 +89,9 @@
 </script>
 	      </div>
 	      <div class="dropdown-divider"></div>
-	      <a class="dropdown-item" href="#">New around here? Sign up</a>
-	      <a class="dropdown-item" href="<c:url value='/secu/to_find_PwForm.do'/>">Forgot password?</a>
+	      <a class="dropdown-item" href="<c:url value='/secu/joinMemberForm.do'/>">ProjectOne 회원가입 하기</a>
+	      <a class="dropdown-item" href="<c:url value='/secu/joinKakaoMember.do'/>">카카오 계정으로 회원가입 하기</a>
+	      <a class="dropdown-item" href="<c:url value='/secu/to_find_PwForm.do'/>">비밀번호 찾기</a>
 	  </div>
 </body>
 </html>
