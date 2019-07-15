@@ -29,7 +29,7 @@
 <h3>${user.username}님, 반갑습니다.</h3>
 암호 : ${user.password} <br>
 활성화 여부: ${user.enabled}<br>
-만료여부: ${user.accountNonExpired}<br>
+이메일: ${user.secu_email}<br>
 	<form action="<c:url value='/logout.do'/>" method="POST">
 		<button type="submit">LOGOUT</button>
 	</form>

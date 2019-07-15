@@ -1,16 +1,11 @@
 package com.hk.one.security;
 
-import javax.annotation.Resource;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 import com.hk.one.dto.MemberDto;
 
@@ -30,15 +25,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-		logger.info("dto실행");
+		
+		logger.info("사용자 로그인 인증 실행");
 		MemberDto dto = sqlSession.selectOne("Member.getMember", username);
 
 		if (dto == null) {
-			logger.info("예외실행"); 
 			throw new UsernameNotFoundException(username);
 		}
-		logger.info("user 실행");
 		CustomUserDetails user = new CustomUserDetails();
 		user.setSecu_id(dto.getMem_id());
 		user.setSecu_pw(dto.getMem_pw());
