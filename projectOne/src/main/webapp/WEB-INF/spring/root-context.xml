@@ -50,8 +50,4 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="email" class="com.hk.one.email.Email">
-	</bean>
-	<bean id="emailSender" class="com.hk.one.email.EmailSender">
-	</bean>
 </beans>

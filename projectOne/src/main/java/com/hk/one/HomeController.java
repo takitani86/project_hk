@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.hk.one.login.KakaoAccessToken;
+import com.hk.one.login.KakaoUserInfo;
 import com.hk.one.service.IMemberService;
 
 @Controller
@@ -88,7 +91,31 @@ public class HomeController {
 	
 	@RequestMapping(value = "/kakaologin", produces = "application/json", method = RequestMethod.GET)
 	public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws IOException {
+		logger.info("kakao 로그인 토큰 받아오기 {}.");
 		System.out.println("kakao code: " + code);
+		JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);
+		JsonNode accessToken = jsonToken.get("access_token");
+		System.out.println("access_token : " + accessToken);
+		
+		logger.info("kakao 사용자 정보 받아오기 {}.");
+		// access_token을 통해 사용자 정보 요청
+        JsonNode userInfo = KakaoUserInfo.getKakaoUserInfo(accessToken);
+ 
+        // Get id
+        String id = userInfo.path("id").asText();
+        String name = null;
+        String email = null;
+ 
+        // 유저정보 카카오에서 가져오기 Get properties
+        JsonNode properties = userInfo.path("properties");
+        JsonNode kakao_account = userInfo.path("kakao_account");
+ 
+        name = properties.path("nickname").asText();
+        email = kakao_account.path("email").asText();
+ 
+        System.out.println("id : " + id);
+        System.out.println("name : " + name);
+        System.out.println("email : " + email);
 		return null;
 	}
 }
