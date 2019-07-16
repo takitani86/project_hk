@@ -33,12 +33,17 @@ function productUpdate(seq) {
     type : 'get',
     success : function(data) {
       $('#productUpdate').modal('show');
+      $('input[name="pro_seq"]').val(data.pro_seq);
       $('input[name="pro_name"]').val(data.pro_name);
       $('input[name="pro_price"]').val(data.pro_price);
       $('input[name="pro_desc"]').val(data.pro_desc);
       $('input[name="pro_option"]').val(data.pro_option);
     }
   })
+}
+
+function delProduct() {
+  location.href="delProduct.do?seq=" + $('input[name="pro_seq"]').val();
 }
 </script>
 
@@ -54,6 +59,7 @@ function productUpdate(seq) {
         </div>
         <div class="modal-body">
           <form action="productUpdateSubmit.do" method="post">
+            <input type="hidden" name="pro_seq">
             <label for="pro_name">상품명</label>
             <input type="text" class="form-control" name="pro_name"><br>
             <label for="pro_price">가격</label>
@@ -65,7 +71,8 @@ function productUpdate(seq) {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-            <input type="submit" value="수정">
+            <button type="button" class="btn btn-danger" onclick="delProduct();">삭제</button>
+            <input type="submit" class="btn btn-primary" value="수정">
           </form>
         </div>
       </div>

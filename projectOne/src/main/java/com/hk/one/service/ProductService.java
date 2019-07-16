@@ -73,5 +73,9 @@ public class ProductService implements IProductService {
 	public boolean sortProduct(String dto) {
 		return productDao.sortProduct(dto);
 	}
+	@Override
+	public boolean delProduct(int seq) {
+		return productDao.delProduct(seq);
+	}
 
 }
