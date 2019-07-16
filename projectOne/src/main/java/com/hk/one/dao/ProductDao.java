@@ -128,4 +128,18 @@ import com.hk.one.dto.ProductDto;
 		int count=sqlSession.update(namespace+"sortProduct",pro_sort);
 		return count>0?true:false;
 	}
+
+	@Override
+	public List<ProductDto> getAllProductList() {
+		if(flag==true) {
+			flag=false;
+			System.out.println("falg상태=" +flag);
+			return sqlSession.selectList(namespace+"selectProductList");
+		}else {
+			flag=true;
+			System.out.println("falg상태=" +flag);
+			return sqlSession.selectList(namespace+"selectReverseProductList");
+		}
+		
+	}
 }
