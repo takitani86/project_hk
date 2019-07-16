@@ -19,9 +19,10 @@ import com.hk.one.service.IOrderService;
 import com.hk.one.service.IProductService;
 
 @Controller
-public class SecurityController {
+@RequestMapping(value = "/member")
+public class MenuController {
 
-	private static final Logger logger = LoggerFactory.getLogger(SecurityController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
 	@Autowired
 	private IOrderService orderService;
@@ -62,9 +63,9 @@ public class SecurityController {
 		String mem_id = auth.getName();
 		boolean success = orderService.addCategory(mem_id, add);
 		if (success) {
-			return "redirect:/menu.do";
+			return "redirect:/member/menu.do";
 		} else {
-			return "redirect:/menu.do";
+			return "redirect:/member/menu.do";
 		}
 	}
 	
@@ -76,5 +77,29 @@ public class SecurityController {
 		ProductDto dto = productService.getProduct(seq);
 		
 		return dto;
+	}
+	
+	@RequestMapping(value = "/productUpdateSubmit.do", method = RequestMethod.POST)
+	private String productUpdateSubmit(Model model, ProductDto dto) {
+		logger.info("상품 수정완료 호출");
+		
+		boolean success = productService.updateProduct(dto);
+		if (success) {
+			return "redirect:/member/menu.do";
+		} else {
+			return "redirect:/member/menu.do";
+		}
+	}
+	
+	@RequestMapping(value = "/delProduct.do", method = RequestMethod.GET)
+	private String delProduct(Model model, @RequestParam int seq) {
+		logger.info("상품삭제 호출");
+		
+		boolean success = productService.delProduct(seq);
+		if (success) {
+			return "redirect:/member/menu.do";
+		} else {
+			return "redirect:/member/menu.do";
+		}
 	}
 }

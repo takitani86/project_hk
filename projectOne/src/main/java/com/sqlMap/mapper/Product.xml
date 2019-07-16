@@ -2,110 +2,148 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="Product">
-   <select id="getCount" resultType="int">
-      SELECT count(*) 
-      FROM LJP_PRODUCT
-   </select>
-
-
-<!-- property = java 변수명 , column = db컬럼명 -->
-   
-      <select id="selectProductList" parameterType="String" resultType="product">
-      SELECT PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
-      FROM (SELECT ROW_NUMBER() OVER (ORDER BY PRO_REGDATE DESC) AS RN, 
-      PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
-      FROM LJP_PRODUCT ORDER BY DECODE(PRO_SORT, 0, PRO_REGDATE)
-       , DECODE(PRO_SORT, 1, PRO_SEQ)
-       , DECODE(PRO_SORT, 2, PRO_NAME)
-       , DECODE(PRO_SORT, 3, PRO_PRICE)
-       , DECODE(PRO_SORT, 4, CAT_SEQ)
-       , DECODE(PRO_SORT, 5, PRO_OPTION)
-       , DECODE(PRO_SORT, 6, PRO_MENU)
-       , DECODE(PRO_SORT, 0, PRO_REGDATE)DESC)
-      WHERE  CEIL(RN/10) = #{countProductPage} 
-   </select>
-   
-      <select id="selectReverseProductList" parameterType="String" resultType="product">
-      SELECT PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
-      FROM (SELECT ROW_NUMBER() OVER (ORDER BY PRO_REGDATE DESC) AS RN, 
-      PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
-      FROM LJP_PRODUCT ORDER BY DECODE(PRO_SORT, 0, PRO_REGDATE)
-       , DECODE(PRO_SORT, 1, PRO_SEQ)
-       , DECODE(PRO_SORT, 2, PRO_NAME)
-       , DECODE(PRO_SORT, 3, PRO_PRICE)
-       , DECODE(PRO_SORT, 4, CAT_SEQ)
-       , DECODE(PRO_SORT, 5, PRO_OPTION)
-       , DECODE(PRO_SORT, 6, PRO_MENU)
-       , DECODE(PRO_SORT, 0, PRO_REGDATE)ASC)
-      WHERE  CEIL(RN/10) = #{countProductPage} 
-   </select>
-   
-    <update id="sortProduct" parameterType="String">
-    UPDATE LJP_PRODUCT
-	SET PRO_SORT=#{pro_sort}
-   </update>
-     
-   <select id="selectMenuList" parameterType="int" resultType="product">
-   	SELECT * FROM LJP_PRODUCT
-   	WHERE CAT_SEQ = #{seq}
-   </select>
-   
-   <insert id="insertProduct" parameterType="product" >
-    INSERT INTO LJP_PRODUCT (PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE)
-	VALUES(LJP_PRODUCT_SEQ.NEXTVAL,#{pro_name},#{pro_image},#{pro_price},#{pro_desc},#{cat_seq},#{pro_option},#{pro_menu},SYSDATE)
-   </insert>
-   
-   <insert id="insertCategory" parameterType="product">
-      
-INSERT INTO LJP_PRODUCT (CAT_SEQ,CAT_NAME,MEM_ID,CAT_ISDEL) 
-VALUES(LJP_CATEGORY_SEQ.NEXTVAL,#{cat_name},#{mem_id}.#{cat_isdel})
- 
-   </insert>
-   
-   
-   <select id="selectProductOne" parameterType="int" resultType="product" >
-      SELECT PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
-      FROM LJP_PRODUCT 
-      WHERE PRO_SEQ = #{pro_seq}
-   </select>
-   
-   <update id="updateProduct" parameterType="product">
-     UPDATE LJP_PRODUCT
-SET PRO_NAME=#{pro_name},PRO_IMAGE=#{pro_image},PRO_PRICE=#{pro_price},PRO_DESC=#{pro_desc},CAT_SEQ=#{cat_seq}
-,PRO_OPTION=#{pro_option},PRO_MENU=#{pro_menu},PRO_REGDATE=SYSDATE
-WHERE PRO_SEQ=#{pro_seq}
-   </update>
-   
-   <update id="insertProductImg" parameterType="product">
-     UPDATE LJP_PRODUCT 
-SET PRO_IMAGE=#{pro_image}
-WHERE PRO_SEQ=#{pro_seq}
-   </update> 
-  
-   <delete id="muldelProduct" parameterType="map">
-   	UPDATE LJP_PRODUCT SET PRO_ISDEL=1 WHERE PRO_SEQ IN
-   	<foreach collection="seqs" item="seq" open="(" close=")" separator=",">
-   		#{seq}
-   	</foreach>
-   </delete>
-   
-  <!--  <insert id="insertProductImg" parameterType="FileDto">
-		INSERT INTO FILEBOARD VALUES (FILEBOARD_SEQ.NEXTVAL, #{origin_fname},#{stored_fname},#{file_size},SYSDATE,'N')
-	</insert>
-	
-	<select id="listProductImg" resultType="FileDto">
-		SELECT SEQ, ORIGIN_FNAME, STORED_FNAME, FILE_SIZE, F_REGDATE, F_DELFLAG
-		FROM FILEBOARD ORDER BY F_REGDATE DESC
-	</select> -->
-	
-	<select id="countProductPage" resultType="int">
-		SELECT CEIL(COUNT(*)/10) FROM LJP_PRODUCT
+	<select id="getCount" resultType="int">
+		SELECT count(*)
+		FROM LJP_PRODUCT
 	</select>
-   
-  <!-- 미작업: 확인중 -->
-    
-   
-  
+
+
+	<!-- property = java 변수명 , column = db컬럼명 -->
+
+	<select id="selectProductList" parameterType="String"
+		resultType="product">
+		SELECT
+		PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
+		FROM (SELECT ROW_NUMBER() OVER (ORDER BY PRO_REGDATE DESC) AS RN,
+		PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
+		FROM LJP_PRODUCT ORDER BY DECODE(PRO_SORT, 0, PRO_REGDATE)
+		,
+		DECODE(PRO_SORT, 1, PRO_SEQ)
+		, DECODE(PRO_SORT, 2, PRO_NAME)
+		,
+		DECODE(PRO_SORT, 3, PRO_PRICE)
+		, DECODE(PRO_SORT, 4, CAT_SEQ)
+		,
+		DECODE(PRO_SORT, 5, PRO_OPTION)
+		, DECODE(PRO_SORT, 6, PRO_MENU)
+		,
+		DECODE(PRO_SORT, 0, PRO_REGDATE)DESC)
+		WHERE CEIL(RN/10) =
+		#{countProductPage}
+	</select>
+
+	<select id="selectReverseProductList" parameterType="String"
+		resultType="product">
+		SELECT
+		PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
+		FROM (SELECT ROW_NUMBER() OVER (ORDER BY PRO_REGDATE DESC) AS RN,
+		PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
+		FROM LJP_PRODUCT ORDER BY DECODE(PRO_SORT, 0, PRO_REGDATE)
+		,
+		DECODE(PRO_SORT, 1, PRO_SEQ)
+		, DECODE(PRO_SORT, 2, PRO_NAME)
+		,
+		DECODE(PRO_SORT, 3, PRO_PRICE)
+		, DECODE(PRO_SORT, 4, CAT_SEQ)
+		,
+		DECODE(PRO_SORT, 5, PRO_OPTION)
+		, DECODE(PRO_SORT, 6, PRO_MENU)
+		,
+		DECODE(PRO_SORT, 0, PRO_REGDATE)ASC)
+		WHERE CEIL(RN/10) =
+		#{countProductPage}
+	</select>
+
+	<update id="sortProduct" parameterType="String">
+		UPDATE LJP_PRODUCT
+		SET
+		PRO_SORT=#{pro_sort}
+	</update>
+
+	<select id="selectMenuList" parameterType="int"
+		resultType="product">
+		SELECT * FROM LJP_PRODUCT
+		WHERE CAT_SEQ = #{seq} AND PRO_ISDEL = 0
+	</select>
+
+	<insert id="insertProduct" parameterType="product">
+		INSERT INTO LJP_PRODUCT
+		(PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE)
+		VALUES(LJP_PRODUCT_SEQ.NEXTVAL,#{pro_name},#{pro_image},#{pro_price},#{pro_desc},#{cat_seq},#{pro_option},#{pro_menu},SYSDATE)
+	</insert>
+
+	<insert id="insertCategory" parameterType="product">
+
+		INSERT INTO
+		LJP_PRODUCT (CAT_SEQ,CAT_NAME,MEM_ID,CAT_ISDEL)
+		VALUES(LJP_CATEGORY_SEQ.NEXTVAL,#{cat_name},#{mem_id}.#{cat_isdel})
+
+	</insert>
+
+
+	<select id="selectProductOne" parameterType="int"
+		resultType="product">
+		SELECT
+		PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE
+		FROM LJP_PRODUCT
+		WHERE PRO_SEQ = #{pro_seq}
+	</select>
+
+	<update id="updateProduct" parameterType="product">
+		<!-- 메뉴판에서 수정일 경우 -->
+		<choose>
+			<when test="pro_image == null">
+				UPDATE LJP_PRODUCT
+				SET
+				PRO_NAME=#{pro_name},PRO_PRICE=#{pro_price},PRO_DESC=#{pro_desc}
+				,PRO_OPTION=#{pro_option},PRO_REGDATE=SYSDATE
+				WHERE PRO_SEQ=#{pro_seq}
+			</when>
+			<otherwise>
+				UPDATE LJP_PRODUCT
+				SET
+				PRO_NAME=#{pro_name},PRO_IMAGE=#{pro_image},PRO_PRICE=#{pro_price},PRO_DESC=#{pro_desc},CAT_SEQ=#{cat_seq}
+				,PRO_OPTION=#{pro_option},PRO_MENU=#{pro_menu},PRO_REGDATE=SYSDATE
+				WHERE PRO_SEQ=#{pro_seq}
+			</otherwise>
+		</choose>
+	</update>
+
+	<update id="insertProductImg" parameterType="product">
+		UPDATE LJP_PRODUCT
+		SET PRO_IMAGE=#{pro_image}
+		WHERE PRO_SEQ=#{pro_seq}
+	</update>
+	
+	<update id="delProduct" parameterType="int">
+		UPDATE LJP_PRODUCT
+		SET PRO_ISDEL = 1
+		WHERE PRO_SEQ = #{pro_seq}
+	</update>
+	
+	<delete id="muldelProduct" parameterType="map">
+		UPDATE LJP_PRODUCT SET PRO_ISDEL=1 WHERE PRO_SEQ IN
+		<foreach collection="seqs" item="seq" open="(" close=")"
+			separator=",">
+			#{seq}
+		</foreach>
+	</delete>
+
+	<!-- <insert id="insertProductImg" parameterType="FileDto"> INSERT INTO 
+		FILEBOARD VALUES (FILEBOARD_SEQ.NEXTVAL, #{origin_fname},#{stored_fname},#{file_size},SYSDATE,'N') 
+		</insert> <select id="listProductImg" resultType="FileDto"> SELECT SEQ, ORIGIN_FNAME, 
+		STORED_FNAME, FILE_SIZE, F_REGDATE, F_DELFLAG FROM FILEBOARD ORDER BY F_REGDATE 
+		DESC </select> -->
+
+	<select id="countProductPage" resultType="int">
+		SELECT
+		CEIL(COUNT(*)/10) FROM LJP_PRODUCT
+	</select>
+
+	<!-- 미작업: 확인중 -->
+
+
+
 </mapper>

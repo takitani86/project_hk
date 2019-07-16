@@ -23,4 +23,6 @@ public List<ProductDto> getAllProductList(); // 상품리스트 확인
 	public List<ProductDto> getAllProductList(String countProductPage);
 
 	String saveFile(MultipartFile file);
+	
+	public boolean delProduct(int seq);
 }
