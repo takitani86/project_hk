@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -190,4 +191,48 @@ public class HomeController {
         System.out.println("regDate: " + mem_regDate);
 		return null;
 	}
+	
+	@RequestMapping(value = "/secu/emailRegist.do")
+	public ModelAndView sendEmailRegist (@RequestParam("mem_id") String mem_id, @RequestParam("mem_email") String mem_email, Locale locale, Model model) throws Exception {
+		logger.info("이메일 인증하기 {}.");
+		ModelAndView mav = new ModelAndView();
+		String id = mem_id;
+		String eMail = mem_email;
+		
+		Random random = new Random();
+		StringBuffer buf = new StringBuffer();
+		
+		for (int i=0; i<6; i++) {
+			if(random.nextBoolean()) {
+				buf.append((char)(int)(Math.random()*26 + 97));			
+			} else {
+				buf.append(random.nextInt(10));
+			}
+		}
+		
+		String RegistNum = buf.toString();
+		
+		logger.info("이메일로 인증번호 보내기 {}.");
+		logger.info("id:" + id + " / 메일: " + eMail + " / 인증번호: " + RegistNum);
+		if((id != null) && (eMail != null) && (RegistNum != null)) {
+			MimeMessage mimeMessage = javaMailSenderImpl.createMimeMessage();
+			logger.info("메일을 보냈습니다.");
+			mimeMessage.setFrom(new InternetAddress("ms_sakana@naver.com"));
+			mimeMessage.addRecipients(RecipientType.TO, InternetAddress.parse(eMail));
+			mimeMessage.setSubject(id + "님의 가입 인증번호 안내 메일입니다.");
+			mimeMessage.setText("<b>인증번호는 " + RegistNum +"입니다.</b><br /> 가입 폼의 인증번호 란에 입력해 주세요.", "UTF-8", "html");
+			
+			javaMailSenderImpl.send(mimeMessage);
+			
+			mav.addObject("rst", 0);
+			mav.addObject("RegistN", RegistNum);
+			return mav;			
+		} else {
+			mav.addObject("rst", 1);
+			return mav;
+		}
+	}
+/*	
+	@RequestMapping(value = "/secu/emailConfirm.do")
+	public String emailConfirm ()*/
 }

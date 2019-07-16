@@ -63,10 +63,6 @@ response.setContentType("text/html; charset=utf-8");
                     guideTextBox.innerHTML = '';
                     guideTextBox.style.display = 'none';
                 }
-                
-                /* var mem_address = document.getElementById("sample4_roadAddress").value + " " + document.getElementById("sample4_detailAddress").value;
-                console.log(document.getElementById("sample4_roadAddress").value + " " + document.getElementById("sample4_detailAddress").value);
-                document.getElementById("mem_address").value = mem_address; */
             }
         }).open();
     }
@@ -97,6 +93,65 @@ $(function(){
 $(function(){
 	$()
 })
+$(function(){
+	$(".emailRegist").click(function() {
+		var mem_email = document.getElementById("mem_email").value;
+		
+		if(mem_email == "") {
+			alert("이메일을 입력해 주세요.");
+			return false;		
+		}
+		
+		function sendEmail(mem_email) {
+			var registNum = $("#registNum").val();
+			$.ajax({
+				url: "emailRegist.do",
+				type: "POST",
+				data: {"registNum": registNum},
+				success: function() {
+					alert("이메일을 전송하였습니다. 확인해 주세요.");
+					//registNum을 담고 registNum 함수로 넘기기
+				}
+			});
+		}
+	)};
+})			
+$(function registNum(){ //registNum 함수
+	$.ajax({
+		url: "serialize",
+		type: "POST",
+		data: $(".emailRegist").sereailize(),
+		success: function()
+		
+	})
+	
+})
+					
+					
+					
+					
+					
+					
+					function(rst) {
+					if((rst == 0) && (registNum.equal(RegistN))) {					
+						$(".resultEmail .rst").text("인증완료");
+						$(".resultEmail .rst").attr("style", "color:#00f");
+					} else if (rst ==1) {
+						$(".resultEmail .rst").text("이메일을 다시 확인해 주세요..");
+						$(".resultEmail .rst").attr("style", "color:#f00");
+					} else if (!registNum.equal(RegistN)) {
+						$(".resultEmail .rst").text("인증번호가 맞지 않습니다.");
+						$(".resultEmail .rst").attr("style", "color:#f00");
+					}
+				},
+				error: function() {
+					alert("에러 발생");
+				}
+			}
+		}
+		});
+	});	
+})
 </script>
 </head>
 <body>
@@ -124,12 +179,12 @@ $(function(){
 				<tr>
 					<th>E-Mail</th>
 					<td><input type="email" name="mem_email" placeholder="이메일 주소 입력"></td>
-					<td><input type="button" value="이메일 인증" onclick="#"></td>
+					<td><button type="button" class="emailRegist">이메일 인증</button></td>
 				</tr>
 				<tr>
 					<th></th>
-					<td><input type="text" name="mem_email2" placeholder="인증 번호 입력 입력"></td>
-					<td>인증 완료</td>
+					<td><input type="text" name="registNum" placeholder="인증 번호 입력 입력"></td>
+					<td><p class="resultEmail"><span class="rst"></span></p></td>
 				</tr>
 				<tr>
 					<th>이름</th>
