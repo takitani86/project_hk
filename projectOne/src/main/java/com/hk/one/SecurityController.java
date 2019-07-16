@@ -68,7 +68,7 @@ public class SecurityController {
 		}
 	}
 	
-	@RequestMapping(value = "/productUpdate.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/menuProductUpdate.do", method = RequestMethod.GET)
 	@ResponseBody
 	private ProductDto productUpdate(Model model, @RequestParam int seq) {
 		logger.info("상품 수정 모달 호출");
