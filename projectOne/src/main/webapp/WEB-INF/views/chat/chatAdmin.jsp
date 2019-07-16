@@ -10,7 +10,7 @@
 <meta charset="UTF-8" />
 </head>
 <body>
-	<h1>1:1 상담(고객)</h1>
+	<h1>1:1 상담(관리자)</h1>
 
 
 	<br />
@@ -28,10 +28,10 @@
 
 
 	<div>
-		Signed In as : <span id=""> ${sessionScope.userid } </span>
+		Signed In as : <span id="">${sessionScope.userid }</span>
 	</div>
 	<div>
-		Send To : <span id="sendTo">ADMIN</span>
+		Send To : <span id="sendTo">merchant</span>
 	</div>
 <script>
 	/*
