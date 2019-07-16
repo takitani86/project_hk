@@ -29,7 +29,7 @@ function menuList(seq) {
 
 function productUpdate(seq) {
   $.ajax({
-    url : 'productUpdate.do?seq=' + seq,
+    url : 'menuProductUpdate.do?seq=' + seq,
     type : 'get',
     success : function(data) {
       $('#productUpdate').modal('show');
@@ -54,9 +54,13 @@ function productUpdate(seq) {
         </div>
         <div class="modal-body">
           <form action="productUpdateSubmit.do" method="post">
+            <label for="pro_name">상품명</label>
             <input type="text" class="form-control" name="pro_name"><br>
+            <label for="pro_price">가격</label>
             <input type="text" class="form-control" name="pro_price"><br>
+            <label for="pro_desc">상품설명</label>
             <input type="text" class="form-control" name="pro_desc"><br>
+            <label for="pro_option">상품 옵션</label>
             <input type="text" class="form-control" name="pro_option"><br>
           </div>
           <div class="modal-footer">
