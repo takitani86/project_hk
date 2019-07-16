@@ -59,15 +59,19 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/secu/joinMember.do", method = RequestMethod.POST)
-	public String joinMember(Locale locale, Model model, MemberDto memberDto, HttpServletRequest req) {
+	public String joinMember(Locale locale, Model model, MemberDto memberDto, @RequestParam("roadAddress") String sample4_roadAddress, @RequestParam("detailAddress") String sample4_detailAddress) {
+		ModelAndView mav = new ModelAndView();
 		logger.info("회원 가입 {}.", locale);
-		String roadAddress = req.getParameter("sample4_roadAddress");
-		String detailAddress = req.getParameter("sample4_detailAddress");
+		String roadAddress = sample4_roadAddress;
+		String detailAddress = sample4_detailAddress;
 		String mem_address = roadAddress + " " + detailAddress;
 		System.out.println("주소: " + mem_address);
+		
 		boolean isS = MemberService.joinMember(memberDto);
 		if(isS) {
-			return "redirect:/member/memberList.do";
+			model.addAttribute("mem_address", mem_address);
+			mav = new ModelAndView("member/memberList"); //쉬벌 값 넣어서 전달하는거 나중에 하자ㅡㅡ
+			return "member/memberList";
 		} else {
 			model.addAttribute("failJoin", "회원 가입 실패");
 			return "error";
