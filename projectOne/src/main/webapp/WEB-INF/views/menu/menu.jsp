@@ -26,7 +26,7 @@
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">
         카테고리 추가
       </button>
-      <button type="button" class="btn btn-secondary" onclick="Consumer.do">
+      <button type="button" class="btn btn-secondary" onclick="consumer();">
         손님용 메뉴판
       </button>
       <c:if test="${not empty category}">
@@ -73,6 +73,9 @@
 <script>
   function addCategory() {
     location.href="addCategory.do?add=" + $('#add').val();
+  }
+  function consumer() {
+    location.href="consumer.do";
   }
 </script>
 </body>
