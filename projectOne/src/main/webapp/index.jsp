@@ -23,6 +23,8 @@
 <p><a href="<c:url value='payment.do'/>">결제테스트</a>
 <p><a href="<c:url value='menu.do'/>">메뉴판</a>
 <p><a href="<c:url value='chat.do'/>">채팅</a>
+<p><a href="<c:url value='chatAdmin.do'/>">채팅관리자</a>
+<br/>
 <sec:authorize access="isAnonymous()">
     <h5><a href='<c:url value="/secu/loginPage.do"/>'>LOGIN</a> 로그인 해주세요.</h5>
 </sec:authorize>

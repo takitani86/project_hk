@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -193,16 +194,33 @@ public class HomeController {
 	public static List<String> idList = new ArrayList<String>();
 	
 	@RequestMapping(value = "/chat", method = RequestMethod.GET)
-	public String home(SessionVO vo, HttpServletRequest req) {
+	public String chat(SessionVO vo, HttpServletRequest req,Authentication auth) {
 		session = req.getSession();
-		if (vo.getSession_id() != null) {
-			session.setAttribute("userid", vo.getSession_id());
-			
-			if (!idList.contains(vo.getSession_id())) {
-				idList.add(vo.getSession_id());
-			}
-		}
+		session.setAttribute("userid", auth.getName());
+		
+//		if (vo.getSession_id() != null) {
+//			session.setAttribute("userid", vo.getSession_id());
+//			
+//			if (!idList.contains(vo.getSession_id())) {
+//				idList.add(vo.getSession_id());
+//			}
+//		}
 		return "chat/chat";
+	}
+	
+	@RequestMapping(value = "/chatAdmin", method = RequestMethod.GET)
+	public String chatAdmin(SessionVO vo, HttpServletRequest req,Authentication auth) {
+		session = req.getSession();
+		session.setAttribute("userid", auth.getName());
+		
+//		if (vo.getSession_id() != null) {
+//			session.setAttribute("userid", vo.getSession_id());
+//			
+//			if (!idList.contains(vo.getSession_id())) {
+//				idList.add(vo.getSession_id());
+//			}
+//		}
+		return "chat/chatAdmin";
 	}
 	
 	@RequestMapping(value = "sessList.do", method = RequestMethod.GET)

@@ -35,23 +35,23 @@ public class SocketController extends TextWebSocketHandler{
      */
     
     
-    @Override
-    public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-    	// TODO Auto-generated method stub
-    	super.handleMessage(session, message);
-    }
-    
-    @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-    	// TODO Auto-generated method stub
-    	super.afterConnectionClosed(session, status);
-    }
-    
-    @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-    	// TODO Auto-generated method stub
-    	super.handleTextMessage(session, message);
-    }
+//    @Override
+//    public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+//    	// TODO Auto-generated method stub
+//    	super.handleMessage(session, message);
+//    }
+//    
+//    @Override
+//    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+//    	// TODO Auto-generated method stub
+//    	super.afterConnectionClosed(session, status);
+//    }
+//    
+//    @Override
+//    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+//    	// TODO Auto-generated method stub
+//    	super.handleTextMessage(session, message);
+//    }
     
     
     

@@ -10,20 +10,7 @@
 <meta charset="UTF-8" />
 </head>
 <body>
-	<h1>Simple Chat v1.0.0</h1>
-
-	<div style="margin: 10px;">Sign In</div>
-	<a href="?session_id=A" style="border: 1px solid black; padding: 5px;">A</a>
-	<a href="?session_id=B" style="border: 1px solid black; padding: 5px;">B</a>
-	<a href="?session_id=C" style="border: 1px solid black; padding: 5px;">C</a>
-
-	<div style="margin: 10px;">Send To</div>
-	<a onclick="sendToCng('A');"
-		style="border: 1px solid black; padding: 5px;">A</a>
-	<a onclick="sendToCng('B');"
-		style="border: 1px solid black; padding: 5px;">B</a>
-	<a onclick="sendToCng('C');"
-		style="border: 1px solid black; padding: 5px;">C</a>
+	<h1>1:1 상담</h1>
 
 
 	<br />
@@ -44,7 +31,7 @@
 		Signed In as : <span id=""> ${sessionScope.userid } </span>
 	</div>
 	<div>
-		Send To : <span id="sendTo"></span>
+		Send To : <span id="sendTo">ADMIN</span>
 	</div>
 <script>
 	/*
@@ -74,7 +61,7 @@
 	});
 
 	//Init WebSocket.
-	var webSocket = new WebSocket("ws://192.168.5.124:8080/projectOne/SocketController");
+	var webSocket = new WebSocket("ws://192.168.5.124:8888/projectOne/broadsocket");
 
 	var messageTextArea = document.getElementById("chatArea");
 
@@ -123,9 +110,7 @@
 		messageText.value = "";
 	}
 
-	function sendToCng(val) {
-		$("#sendTo").text(val);
-	}
+
 </script>
 </body>
 <style>
