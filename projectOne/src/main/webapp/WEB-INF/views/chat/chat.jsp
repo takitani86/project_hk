@@ -74,7 +74,7 @@
 	});
 
 	//Init WebSocket.
-	var webSocket = new WebSocket("ws://192.168.5.124:8081/WebSocketGazu2a/broadsocket");
+	var webSocket = new WebSocket("ws://192.168.5.124:8080/projectOne/SocketController");
 
 	var messageTextArea = document.getElementById("chatArea");
 
