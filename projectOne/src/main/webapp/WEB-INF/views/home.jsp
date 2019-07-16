@@ -3,23 +3,34 @@
 <%request.setCharacterEncoding("UTF-8");%>
 <%response.setContentType("text/html; charset=UTF-8");%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
+
 <html>
 <head>
 	<title>Home</title>
 </head>
 <body>
 <h1>
-	Hello world! 
-	Hi world!
-	pzl
+	통합 주문관리서비스 기능구현중
 </h1>
-
-<P>  The time on the server is ${serverTime}. </P>
-<p><a href="productList.do?countProductPage=1&sort=0">상품리스트</a></p>
-<p><a href="memberList.do">회원목록</a>
-<p><a href="board/member_board.do">점주 게시판</a>
-<p><a href="board/admin_board.do">관리자 게시판</a>
-<p><a href="login">로그인</a>
+<p><a href="<c:url value='productList.do?countProductPage=1'/>">상품리스트</a></p>
+<p><a href="<c:url value='member/memberList.do'/>">회원목록</a>
+<p><a href="<c:url value='member/board/member_board.do'/>">점주 게시판</a>
+<p><a href="<c:url value='admin/board/admin_board.do'/>">관리자 게시판</a>
+<p><a href="<c:url value='payment.do'/>">결제테스트</a>
+<sec:authorize access="isAnonymous()">
+    <h5><a href='<c:url value="/secu/loginPage.do"/>'>LOGIN</a> 로그인 해주세요.</h5>
+</sec:authorize>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication var="user" property="principal"/>
+<h3>${user.username}님, 반갑습니다.</h3>
+암호 : ${user.password} <br>
+활성화 여부: ${user.enabled}<br>
+이메일: ${user.secu_email}<br>
+	<form action="<c:url value='/logout.do'/>" method="POST">
+		<button type="submit">LOGOUT</button>
+	</form>
+</sec:authorize>
 </body>
 </html>

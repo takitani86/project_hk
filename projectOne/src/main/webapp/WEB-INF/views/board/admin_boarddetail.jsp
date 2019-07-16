@@ -72,7 +72,7 @@
         <tr>
           <td colspan="3">
             <input type="submit" value="등록">
-            <input type="button" value="목록" onclick="location.href='admin_board.do?section=${section}&curPage=${curPage}'">
+            <input type="button" value="목록" onclick="history.back()'">
           </td>
         </tr>
       </table>  
@@ -95,7 +95,6 @@
     <div class="container">
         <div class="commentList"></div>
     </div>
-</div>
  
 <!--                     추가                         -->
 <%@ include file="comment.jsp" %>

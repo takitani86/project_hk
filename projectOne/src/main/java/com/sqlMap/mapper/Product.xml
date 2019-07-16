@@ -47,7 +47,11 @@
 	SET PRO_SORT=#{pro_sort}
    </update>
      
-     
+   <select id="selectMenuList" parameterType="int" resultType="product">
+   	SELECT * FROM LJP_PRODUCT
+   	WHERE CAT_SEQ = #{seq}
+   </select>
+   
    <insert id="insertProduct" parameterType="product" >
     INSERT INTO LJP_PRODUCT (PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_OPTION,PRO_MENU,PRO_REGDATE)
 	VALUES(LJP_PRODUCT_SEQ.NEXTVAL,#{pro_name},#{pro_image},#{pro_price},#{pro_desc},#{cat_seq},#{pro_option},#{pro_menu},SYSDATE)

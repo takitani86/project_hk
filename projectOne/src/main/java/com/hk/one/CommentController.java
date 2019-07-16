@@ -16,7 +16,7 @@ import com.hk.one.dto.CommentDto;
 import com.hk.one.service.ICommentService;
 
 @Controller
-@RequestMapping("/board/comment")
+@RequestMapping(value = {"/admin/board/comment", "/member/board/comment"})
 public class CommentController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CommentController.class);

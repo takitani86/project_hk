@@ -81,7 +81,8 @@ public class MemberDao implements IMemberDao {
 	
 	@Override
 	public String findPw(Map<String, Object> paramMap) throws Exception {
-		 return sqlSession.selectOne(namespace + "getPw", paramMap);
+		 String pw = sqlSession.selectOne(namespace + "getPw", paramMap);
+		 return pw;
 	}
 
 }

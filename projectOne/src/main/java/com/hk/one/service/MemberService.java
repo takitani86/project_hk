@@ -13,7 +13,7 @@ import com.hk.one.dto.MemberDto;
 
 @Service
 public class MemberService implements IMemberService {
-	
+
 	@Autowired
 	private IMemberDao memberDao;
 
@@ -57,18 +57,18 @@ public class MemberService implements IMemberService {
 	public MemberDto checkEmailMember(String mem_email) throws Exception {
 		return memberDao.checkEmailMember(mem_email);
 	}
-	
+
 	@Override
 	public List<MemberDto> searchMember(String searchOption, String keyword) throws Exception {
 		return memberDao.searchMember(searchOption, keyword);
 	}
-	
+
 	@Override
 	public int countArticle(String searchOption, String keyword) throws Exception {
 		return memberDao.countArticle(searchOption, keyword);
 	}
-	
-	 @Override
+
+	@Override
 	public String findPw(Map<String, Object> paramMap) throws Exception {
 		return memberDao.findPw(paramMap);
 	}
