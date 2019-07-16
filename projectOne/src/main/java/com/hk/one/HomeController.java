@@ -1,7 +1,7 @@
 package com.hk.one;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.hk.one.dto.MemberDto;
+import com.hk.one.dto.SessionVO;
 import com.hk.one.login.KakaoAccessToken;
 import com.hk.one.login.KakaoUserInfo;
 import com.hk.one.service.IMemberService;
@@ -184,6 +185,33 @@ public class HomeController {
         System.out.println("email: " + mem_email);
         System.out.println("image: " + mem_image);
         System.out.println("regDate: " + mem_regDate);
+		return null;
+	}
+	
+	// 웹소켓
+	static HttpSession session;
+	public static List<String> idList = new ArrayList<String>();
+	
+	@RequestMapping(value = "/chat", method = RequestMethod.GET)
+	public String home(SessionVO vo, HttpServletRequest req) {
+		session = req.getSession();
+		if (vo.getSession_id() != null) {
+			session.setAttribute("userid", vo.getSession_id());
+			
+			if (!idList.contains(vo.getSession_id())) {
+				idList.add(vo.getSession_id());
+			}
+		}
+		return "chat/chat";
+	}
+	
+	@RequestMapping(value = "sessList.do", method = RequestMethod.GET)
+	public @ResponseBody List<String> getSessionList() {
+		try {
+			return idList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }
