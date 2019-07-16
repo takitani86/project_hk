@@ -14,7 +14,7 @@ function menuList(seq) {
       a += '<tr>';
       $.each(data, function(key, value){
           a += '<td><p><img src="' + value.pro_image +
-           '" width="150" height="200" onclick="productUpdate(' + value.pro_seq +
+           '" width="150" height="200" data-toggle="modal" data-target="#productUpdate" onclick="productUpdate(' + value.pro_seq +
            ')"></p><p>' + value.pro_name + '</p></td>';
            count++;
            if (count == 3) {
@@ -28,6 +28,42 @@ function menuList(seq) {
 }
 
 function productUpdate(seq) {
-  
+  $.ajax({
+    url : 'productUpdate.do?seq=' + seq,
+    type : 'get',
+    success : function(data) {
+      $('#productUpdate').modal('show');
+      $('input[name="pro_name"]').val(data.pro_name);
+      $('input[name="pro_price"]').val(data.pro_price);
+      $('input[name="pro_desc"]').val(data.pro_desc);
+      $('input[name="pro_option"]').val(data.pro_option);
+    }
+  })
 }
 </script>
+
+<!-- 상품수정 MODAL -->
+<div class="modal fade" id="productUpdate" tabindex="-1" role="dialog" aria-labelledby="productUpdateLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productUpdateLabel">상품 수정</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="productUpdateSubmit.do" method="post">
+            <input type="text" class="form-control" name="pro_name"><br>
+            <input type="text" class="form-control" name="pro_price"><br>
+            <input type="text" class="form-control" name="pro_desc"><br>
+            <input type="text" class="form-control" name="pro_option"><br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            <input type="submit" value="수정">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

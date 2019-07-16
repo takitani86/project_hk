@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hk.one.dto.CategoryDto;
 import com.hk.one.dto.ProductDto;
 import com.hk.one.service.IOrderService;
+import com.hk.one.service.IProductService;
 
 @Controller
 public class SecurityController {
@@ -24,7 +25,9 @@ public class SecurityController {
 
 	@Autowired
 	private IOrderService orderService;
-
+	@Autowired
+	private IProductService productService;
+	
 	@RequestMapping(value = "/payment.do", method = RequestMethod.GET)
 	public String payment(Model model) {
 		logger.info("결제 메소드 호출");
@@ -63,5 +66,15 @@ public class SecurityController {
 		} else {
 			return "redirect:/menu.do";
 		}
+	}
+	
+	@RequestMapping(value = "/productUpdate.do", method = RequestMethod.GET)
+	@ResponseBody
+	private ProductDto productUpdate(Model model, @RequestParam int seq) {
+		logger.info("상품 수정 모달 호출");
+		
+		ProductDto dto = productService.getProduct(seq);
+		
+		return dto;
 	}
 }
