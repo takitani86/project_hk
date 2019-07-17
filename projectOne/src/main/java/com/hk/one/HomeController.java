@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -233,7 +234,23 @@ public class HomeController {
 			return mav;
 		}
 	}
-/*	
-	@RequestMapping(value = "/secu/emailConfirm.do")
-	public String emailConfirm ()*/
+	
+	static HttpSession session;
+	
+	@RequestMapping(value = "/chat.do", method = RequestMethod.GET)
+	public String chat(SessionVO vo, HttpServletRequest req,Authentication auth) {
+		session = req.getSession();
+		session.setAttribute("userid", auth.getName());
+			
+		return "chat/chat";
+	}
+	
+	@RequestMapping(value = "/chatAdmin.do", method = RequestMethod.GET)
+	public String chatAdmin(SessionVO vo, HttpServletRequest req,Authentication auth) {
+		session = req.getSession();
+		session.setAttribute("userid", auth.getName());
+			
+		return "chat/chatAdmin";
+	}
+	
 }
