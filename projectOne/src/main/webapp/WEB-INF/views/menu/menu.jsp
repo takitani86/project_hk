@@ -74,6 +74,9 @@
   function addCategory() {
     location.href="addCategory.do?add=" + $('#add').val();
   }
+    function consumer() {
+    location.href="consumer.do";
+  }
 </script>
 </body>
 </html>
