@@ -239,8 +239,7 @@ public class HomeController {
 			return mav;
 		}
 	}
-	
-	static HttpSession session;
+static HttpSession session;
 	
 	@RequestMapping(value = "/chat.do", method = RequestMethod.GET)
 	public String chat(SessionVO vo, HttpServletRequest req,Authentication auth) {
@@ -257,5 +256,4 @@ public class HomeController {
 			
 		return "chat/chatAdmin";
 	}
-	
 }
