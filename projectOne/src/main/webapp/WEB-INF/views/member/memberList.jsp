@@ -27,7 +27,7 @@ response.setContentType("text/html; charset=utf-8");
 	}
 </style>
 </head>
-<body class="skin-blue">
+<body class="skin-blue-light">
 	<div class="wrapper">
 		<section class="content-header">
 			<form name="searchForm" method="post" action="./searchMember.do">
@@ -52,64 +52,60 @@ response.setContentType("text/html; charset=utf-8");
 	<div class="content-wrapper">
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="box">
-					<section class="content-subject">
-						<h3 class="box-title">회원 목록</h3>
-					</section>
-				</div>
-				<div class="box-body">
-					<table border="1" id="tableSelect" class="table table-bordered table-hover">
-						<col width="50px"><col width="80px"><col width="150px"><col width="150px"><col width="150px"><col width="80px"><col width="80px">
-						<tr>
-							<th>회원번호</th><th>이미지</th><th>회원ID</th><th>회원 이름</th><th>상호명</th><th>승인</th><th>상태</th>
-						</tr>
-						<c:choose>
-							<c:when test="${empty list}">
-								<tr><td colspan="10">-----가입된 회원이 없습니다.-----</tr>
-							</c:when>
-							<c:otherwise>
-								<c:forEach items="${list}" var="member">
-									<tbody onclick="goDetail('${member.mem_id}')">
-									<tr>
-										<td>${member.mem_seq}</td>
-										<td>${member.mem_image}</td>
-										<td>${member.mem_id}</td>
-										<td>${member.mem_name}</td>
-										<td>${member.mem_b_name}</td>
-										<td>
-											<c:set var="isApprove" value="${member.mem_isApprove}" />
-											<c:choose>
-												<c:when test="${isApprove == 1}">
-												승인
-												</c:when>
-												<c:otherwise>
-												미승인
-												</c:otherwise>
-											</c:choose>
-										</td>
-										<td>
-											<c:set var="isDel" value="${member.mem_isDel}" />
-											<c:choose>
-												<c:when test="${isDel == 1}">
-												탈퇴
-												</c:when>
-												<c:otherwise>
-												가입
-												</c:otherwise>
-											</c:choose>
-										</td>
-									</tr>
-									</tbody>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-						<tr><td>
-						<input type="button" value="회원 추가" onclick="location.href='joinMemberForm.do'" />
-						<button onclick="location.href='home.do'">홈으로</button>
-						<button onclick="location.href='<c:url value="to_find_PwForm.do"/>'">비밀번호 찾기</button>
-						</td></tr>
-					</table>
-				</div>
+				<section class="content-subject">
+					<h3 class="box-title">회원 목록</h3>
+				</section>
+				<table border="1" id="tableSelect" class="table table-bordered table-hover">
+					<col width="50px"><col width="80px"><col width="150px"><col width="150px"><col width="150px"><col width="80px"><col width="80px">
+					<tr>
+						<th>회원번호</th><th>이미지</th><th>회원ID</th><th>회원 이름</th><th>상호명</th><th>승인</th><th>상태</th>
+					</tr>
+					<c:choose>
+						<c:when test="${empty list}">
+							<tr><td colspan="10">-----가입된 회원이 없습니다.-----</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="member">
+								<tbody onclick="goDetail('${member.mem_id}')">
+								<tr>
+									<td>${member.mem_seq}</td>
+									<td>${member.mem_image}</td>
+									<td>${member.mem_id}</td>
+									<td>${member.mem_name}</td>
+									<td>${member.mem_b_name}</td>
+									<td>
+										<c:set var="isApprove" value="${member.mem_isApprove}" />
+										<c:choose>
+											<c:when test="${isApprove == 1}">
+											승인
+											</c:when>
+											<c:otherwise>
+											미승인
+											</c:otherwise>
+										</c:choose>
+									</td>
+									<td>
+										<c:set var="isDel" value="${member.mem_isDel}" />
+										<c:choose>
+											<c:when test="${isDel == 1}">
+											탈퇴
+											</c:when>
+											<c:otherwise>
+											가입
+											</c:otherwise>
+										</c:choose>
+									</td>
+								</tr>
+								</tbody>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+					<tr><td>
+					<input type="button" value="회원 추가" onclick="location.href='joinMemberForm.do'" />
+					<button onclick="location.href='home.do'">홈으로</button>
+					<button onclick="location.href='<c:url value="to_find_PwForm.do"/>'">비밀번호 찾기</button>
+					</td></tr>
+				</table>
 			</div>
 		</div>
 	</div>
