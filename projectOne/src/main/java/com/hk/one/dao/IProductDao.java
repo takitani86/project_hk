@@ -24,8 +24,6 @@ public interface IProductDao {
 	public List<ProductDto> getAllProductList(String countProductPage);
 
 	String saveFile(MultipartFile file);
-
-	public boolean delProduct(int seq);
 	
 		
 }

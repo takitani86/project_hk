@@ -117,40 +117,26 @@ $(function(){
 	)};
 })			
 $(function registNum(){ //registNum 함수
-	$.ajax({
-		url: "serialize",
+	$.ajax({ //rst값과 registNum을 가져와서 활용해야 한다
+		url: "",
 		type: "POST",
-		data: $(".emailRegist").sereailize(),
-		success: function()
-		
-	})
-	
-})
-					
-					
-					
-					
-					
-					
-					function(rst) {
-					if((rst == 0) && (registNum.equal(RegistN))) {					
-						$(".resultEmail .rst").text("인증완료");
-						$(".resultEmail .rst").attr("style", "color:#00f");
-					} else if (rst ==1) {
-						$(".resultEmail .rst").text("이메일을 다시 확인해 주세요..");
-						$(".resultEmail .rst").attr("style", "color:#f00");
-					} else if (!registNum.equal(RegistN)) {
-						$(".resultEmail .rst").text("인증번호가 맞지 않습니다.");
-						$(".resultEmail .rst").attr("style", "color:#f00");
-					}
-				},
-				error: function() {
-					alert("에러 발생");
-				}
+		data: $("rst"), 
+		success: function(rst) {
+			if((rst == 0) && (registNum.equal(RegistN))) {					
+				$(".resultEmail .rst").text("인증완료");
+				$(".resultEmail .rst").attr("style", "color:#00f");
+			} else if (rst ==1) {
+				$(".resultEmail .rst").text("이메일을 다시 확인해 주세요..");
+				$(".resultEmail .rst").attr("style", "color:#f00");
+			} else if (!registNum.equal(RegistN)) {
+				$(".resultEmail .rst").text("인증번호가 맞지 않습니다.");
+				$(".resultEmail .rst").attr("style", "color:#f00");
 			}
+		},
+		error: function() {
+			alert("에러 발생");
 		}
-		});
-	});	
+	});
 })
 </script>
 </head>
