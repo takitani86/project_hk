@@ -27,7 +27,7 @@ response.setContentType("text/html; charset=utf-8");
 	}
 </style>
 </head>
-<body class="skin-blue">
+<body class="skin-blue-light">
 	<div class="wrapper">
 		<section class="content-header">
 			<form name="searchForm" method="post" action="./searchMember.do">
