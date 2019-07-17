@@ -140,8 +140,17 @@
 		CEIL(COUNT(*)/10) FROM LJP_PRODUCT
 	</select>
 
-	<!-- 미작업: 확인중 -->
-
+	<!-- orderList -->
+	<insert id="insertOrderList" parameterType="product">
+	INSERT INTO LJP_ORDERLIST (
+	SEQ_ORD.NEXTVAL,
+	ORD_BILL(랜덤난수)),
+	SYSDATE ,
+	#{id} ,
+	#{pro_num} ,
+	#{pro_price}
+	)
+	</insert>
 
 
 </mapper>
