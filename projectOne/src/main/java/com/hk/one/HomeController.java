@@ -51,6 +51,29 @@ public class HomeController {
 		
 		return "home";
 	}
+  /**
+   * Tiles를 사용하지 않은 일반적인 형태
+   */    
+  @RequestMapping("/test.do")
+  public String test() {
+      return "test";
+  }    
+  
+  /**
+   * Tiles를 사용(header, left, footer 포함)
+   */        
+  @RequestMapping("/testPage.do")
+  public String testPage() {
+      return "test.page";
+  }
+  
+  /**
+   * Tiles를 사용(header, left, footer 제외)
+   */    
+  @RequestMapping("/testPart.do")
+  public String testPart() {
+      return "test.part";
+  }        
 	
 	@RequestMapping(value = "/secu/joinMemberForm.do", method = RequestMethod.GET)
 	public String joinMemberForm(Locale locale, Model model) {
