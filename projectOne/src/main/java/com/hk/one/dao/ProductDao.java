@@ -142,4 +142,10 @@ import com.hk.one.dto.ProductDto;
 		}
 		
 	}
+
+	@Override
+	public boolean delProduct(int seq) {
+		int success = sqlSession.update(namespace+"delProduct", seq);
+		return success > 0 ? true:false;
+	}
 }
