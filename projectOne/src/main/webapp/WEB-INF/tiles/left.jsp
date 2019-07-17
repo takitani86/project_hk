@@ -3,17 +3,19 @@
     <!-- Inner sidebar -->
     <div class="sidebar">
       <!-- user panel (Optional) -->
+      <sec:authorize access="isAuthenticated()">
+      <sec:authentication var="user" property="principal"/>
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="../resources/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>User Name</p>
+          <p>${user.username}</p>
 
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div><!-- /.user-panel -->
-
+			</sec:authorize>
       <!-- Search Form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
