@@ -33,7 +33,7 @@ public class MemberController {
 		List<MemberDto> list = MemberService.getAllMember();
 		model.addAttribute("list", list);		
 		
-		return "member/memberList";
+		return "member/memberListPage";
 	}
 	
 	@RequestMapping(value = "/memberDetail.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -42,7 +42,7 @@ public class MemberController {
 		MemberDto member = MemberService.getMember(mem_id);
 		model.addAttribute("member", member);		
 		
-		return "member/memberDetail";
+		return "member/memberDetailPage";
 	}
 	
 	@RequestMapping(value = "/member_infoForm.do", method = RequestMethod.GET)
@@ -51,7 +51,7 @@ public class MemberController {
 		MemberDto member = MemberService.getMember(mem_id);
 		model.addAttribute("member", member);
 		
-		return "member/member_info";
+		return "member/member_infoPage";
 	}
 	
 	@RequestMapping(value = "/member_info.do", method = RequestMethod.POST)
