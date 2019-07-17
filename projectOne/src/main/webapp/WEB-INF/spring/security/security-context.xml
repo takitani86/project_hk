@@ -10,7 +10,8 @@
 
 	<!-- 해당 폴더의 인증과정 제거(js/css 등의 외부파일 사용 가능) -->
 	<http pattern="/resources/**" security="none" />
-
+	<http pattern="/image/**" security="none" />
+	
 	<!-- 로그인 과정 직접 제어 -->
 	<beans:bean id="userService"
 		class="com.hk.one.security.CustomUserDetailsService">
@@ -19,9 +20,7 @@
 	</beans:bean>
 
 	<http auto-config="true" use-expressions="true">
-		<!-- <intercept-url pattern="/member/**" access="hasAnyRole('ROLE_MEMBER', 
-			'ROLE_ADMIN')" /> -->
-		<intercept-url pattern="/user/**"
+		<intercept-url pattern="/member/**"
 			access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/admin/**"
 			access="hasRole('ROLE_ADMIN')" />

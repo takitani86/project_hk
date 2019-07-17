@@ -26,10 +26,19 @@
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">
         카테고리 추가
       </button>
+      <button type="button" class="btn btn-secondary" onclick="consumer();">
+        손님용 메뉴판
+      </button>
       <c:if test="${not empty category}">
         <c:forEach var="cate" items="${category}">
-          <td onclick="menuList(${cate.cat_seq});">${cate.cat_name}</a></td>
+          <td id="${cate.cat_seq}" onclick="menuList(${cate.cat_seq});">${cate.cat_name}</a></td>
         </c:forEach>
+        <script>
+          $(document).ready(function(){
+            var seq = $('td:first').attr("id");
+            menuList(seq);
+          })
+        </script>
       </c:if>
     </tr>
   </table>

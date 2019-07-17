@@ -15,10 +15,12 @@
 	통합 주문관리서비스 기능구현중
 </h1>
 <p><a href="<c:url value='productList.do?countProductPage=1'/>">상품리스트</a></p>
-<p><a href="<c:url value='member/memberList.do'/>">회원목록</a>
-<p><a href="<c:url value='member/board/member_board.do'/>">점주 게시판</a>
-<p><a href="<c:url value='admin/board/admin_board.do'/>">관리자 게시판</a>
-<p><a href="<c:url value='payment.do'/>">결제테스트</a>
+<p><a href="<c:url value='member/memberList.do'/>">회원목록</a></p>
+<p><a href="<c:url value='member/board/member_board.do'/>">점주 게시판</a></p>
+<p><a href="<c:url value='admin/board/admin_board.do'/>">관리자 게시판</a></p>
+<p><a href="<c:url value='member/payment.do'/>">결제테스트</a></p>
+<p><a href="<c:url value='chatAdmin'/>">관리자채팅</a></p>
+<p><a href="<c:url value='chat'/>">채팅</a></p>
 <sec:authorize access="isAnonymous()">
     <h5><a href='<c:url value="/secu/loginPage.do"/>'>LOGIN</a> 로그인 해주세요.</h5>
 </sec:authorize>
