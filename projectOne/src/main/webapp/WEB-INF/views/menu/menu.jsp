@@ -74,7 +74,11 @@
   function addCategory() {
     location.href="addCategory.do?add=" + $('#add').val();
   }
+<<<<<<< HEAD
     function consumer() {
+=======
+  function consumer() {
+>>>>>>> branch 'master' of https://github.com/takitani86/project_hk.git
     location.href="consumer.do";
   }
 </script>
