@@ -269,7 +269,7 @@ static HttpSession session;
 		session = req.getSession();
 		session.setAttribute("userid", auth.getName());
 			
-		return "chat/chat";
+		return "chat/chat.page";
 	}
 	
 	@RequestMapping(value = "/chatAdmin.do", method = RequestMethod.GET)
@@ -277,6 +277,6 @@ static HttpSession session;
 		session = req.getSession();
 		session.setAttribute("userid", auth.getName());
 			
-		return "chat/chatAdmin";
+		return "chat/chatAdmin.page";
 	}
 }
