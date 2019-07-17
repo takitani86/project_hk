@@ -42,7 +42,7 @@ public class MemberBoardController {
 		model.addAttribute("section", section);
 		model.addAttribute("curPage", curPage);
 		
-		return "board/member_board";
+		return "board/member_board.page";
 	}
 	
 	// 게시글 상세보기
@@ -53,7 +53,7 @@ public class MemberBoardController {
 		BoardDto dto = boardService.selectOne(seq);
 		model.addAttribute("boarddetail", dto);
 		
-		return "board/member_boarddetail";
+		return "board/member_boarddetail.page";
 	}
 	
 	// 게시글 삭제하기(isdel을 1로 바꾸고 게시판목록 메소드에서 isdel이 0인 칼럼만 출력)
@@ -76,7 +76,7 @@ public class MemberBoardController {
 	public String member_write(Locale locale, Model model) {
 		logger.info("member_writeForm 호출 {}.", locale);
 		
-		return "board/member_writeForm";
+		return "board/member_writeForm.page";
 	}
 	
 	// 글작성 후 insert
@@ -104,7 +104,7 @@ public class MemberBoardController {
 		BoardDto dto = boardService.selectOne(seq);
 		model.addAttribute("boarddetail", dto);
 		
-		return "board/member_updateForm";
+		return "board/member_updateForm.page";
 	}
 	
 	// 글수정 후 update
@@ -159,6 +159,6 @@ public class MemberBoardController {
 		model.addAttribute("section", section);
 		model.addAttribute("curPage", curPage);
 		
-		return "board/boardSearch";
+		return "board/boardSearch.page";
 	}
 }

@@ -81,7 +81,7 @@ public class HomeController {
 		List<MemberDto> list = MemberService.getAllMember();
 		model.addAttribute("list", list);
 		
-		return "secu/joinMember";
+		return "secu/joinMember.page";
 	}
 	
 	@RequestMapping(value = "/secu/joinMember.do", method = RequestMethod.POST)
@@ -97,7 +97,7 @@ public class HomeController {
 		if(isS) {
 			model.addAttribute("mem_address", mem_address);
 			mav = new ModelAndView("member/memberList"); //쉬벌 값 넣어서 전달하는거 나중에 하자ㅡㅡ
-			return "member/memberList";
+			return "member/memberList.page";
 		} else {
 			model.addAttribute("failJoin", "회원 가입 실패");
 			return "error";
@@ -129,13 +129,13 @@ public class HomeController {
 	public String loginForm(Locale locale, Model model) {
 		logger.info("로그인화면 {}.", locale);
 		
-		return "secu/loginPage";
+		return "secu/loginPage.page";
 	}
 	
 	@RequestMapping(value = "/secu/to_find_PwForm.do", method = RequestMethod.GET)
 	public String to_find_PwForm(Locale locale, Model model) {
 		logger.info("비밀번호 찾기 페이지로 이동 {}.", locale);
-		return "secu/findPw";
+		return "secu/findPw.page";
 	}
 	
 	@RequestMapping(value = "/deleteMember.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -146,7 +146,7 @@ public class HomeController {
 			return "redirect:memberList.do";
 		} else {
 			model.addAttribute("failDelete", "회원 탈퇴 실패");
-			return "error";
+			return "error.page";
 		}
 	}
 	
@@ -171,12 +171,12 @@ public class HomeController {
 			javaMailSenderImpl.send(mimeMessage);
 			
 			model.addAttribute("msg", 0);
-			mav = new ModelAndView("secu/findPwResult");
+			mav = new ModelAndView("secu/findPwResult.page");
 			return mav;
 		} else {
 			mav.addObject("msg", 1);
 			//model.addAttribute("msg", 1);
-			mav.setViewName("secu/findPwResult");
+			mav.setViewName("secu/findPwResult.page");
 			return mav;
 		}
 	}	
