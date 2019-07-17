@@ -40,7 +40,7 @@
 	clear: both;
 }
 
-#left, #main {
+#main {
 	min-height: 600px;
 }
 </style>
