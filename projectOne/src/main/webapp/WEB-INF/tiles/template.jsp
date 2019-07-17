@@ -13,26 +13,26 @@
 	width: 100%;
 	height: 50px;
 	text-align: center;
-	background-color: aqua;
+	background-color: #3C8DBC;
 }
 
 #left {
 	float: left;
 	width: 15%;
-	background-color: gray;
+	background-color: #222222;
 }
 
 #main {
 	float: left;
 	width: 85%;
-	background-color: lime;
+	background-color: #ecf0f5;
 }
 
 #footer {
 	width: 100%;
 	height: 50px;
 	text-align: center;
-	background-color: orange;
+	background-color: white;
 	clear: both;
 }
 
