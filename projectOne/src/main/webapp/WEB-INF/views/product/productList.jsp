@@ -55,7 +55,7 @@ function sortNo(num){
 					<td><input type="checkbox" name="seqs" value="${dto.pro_seq}" /></td>
 					<td><a href="productUpdate.do?seq=${dto.pro_seq}">${dto.pro_seq}</a></td>
 					<td>${dto.pro_name}</td>
-					<td><img src="${pageContext.request.contextPath}/image/product/${dto.pro_image}" width=200 height=200/></td>
+					<td><img src="${pageContext.request.contextPath}/resources/img/product/${dto.pro_image}" width=200 height=200/></td>
 					<td>${dto.pro_price}</td>
 					<td>${dto.pro_desc}</td>
 					<td>${dto.cat_seq}</td>
