@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%request.setCharacterEncoding("UTF-8");%>
-<%response.setContentType("text/html; charset=UTF-8");%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	response.setContentType("text/html; charset=UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,6 +46,20 @@
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="../resources/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="../resources/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="../resources/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet"
+	href="../resources/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet"
+	href="../resources/AdminLTE/dist/css/AdminLTE.min.css">
+<link rel="stylesheet"
+	href="../resources/AdminLTE/dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body>
 	<div style="width: 100%; height: 100%;">

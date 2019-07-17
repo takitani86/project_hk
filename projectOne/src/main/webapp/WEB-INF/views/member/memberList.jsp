@@ -8,20 +8,10 @@ response.setContentType("text/html; charset=utf-8");
 <!DOCTYPE html>
 <html>
 <head>
-<script
-  src="https://code.jquery.com/jquery-latest.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 목록 페이지</title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<link rel="stylesheet" href="../resources/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="../resources/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="../resources/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
-<link rel="stylesheet" href="../resources/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-<link rel="stylesheet" href="../resources/AdminLTE/dist/css/AdminLTE.min.css">
-<link rel="stylesheet" href="../resources/AdminLTE/dist/css/skins/_all-skins.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
 <script type="text/javascript">
 	var mem_id = "mem_id";
 	function goDetail(mem_id) {
