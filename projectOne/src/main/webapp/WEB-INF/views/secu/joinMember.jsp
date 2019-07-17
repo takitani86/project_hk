@@ -101,32 +101,34 @@ $(function(){
 			alert("이메일을 입력해 주세요.");
 			return false;		
 		}
-		
-		function sendEmail(mem_email) {
-			var registNum = $("#registNum").val();
-			$.ajax({
-				url: "emailRegist.do",
-				type: "POST",
-				data: {"registNum": registNum},
-				success: function() {
-					alert("이메일을 전송하였습니다. 확인해 주세요.");
-					//registNum을 담고 registNum 함수로 넘기기
-				}
-			});
-		}
-	)};
+		sendEmail(mem_email);
+	});
 })			
+function sendEmail(mem_email) {
+	var registNum = $("#registNum").val();
+	$.ajax({
+		url: "emailRegist.do",
+		type: "POST",
+		dataType: "json",
+		data: {"registNum": registNum},
+		success: function(map) { //컨트롤러에서 넘긴 맵을 받음
+			alert("이메일을 전송하였습니다. 확인해 주세요.");
+			//registNum을 담고 registNum 함수로 넘기기
+		}
+	});
+}
 $(function registNum(){ //registNum 함수
 	$.ajax({ //rst값과 registNum을 가져와서 활용해야 한다
 		url: "",
 		type: "POST",
+		dataType: "json",
 		data: $("rst"), 
 		success: function(rst) {
 			if((rst == 0) && (registNum.equal(RegistN))) {					
 				$(".resultEmail .rst").text("인증완료");
 				$(".resultEmail .rst").attr("style", "color:#00f");
 			} else if (rst ==1) {
-				$(".resultEmail .rst").text("이메일을 다시 확인해 주세요..");
+				$(".resultEmail .rst").text("이메일을 다시 확인해 주세요.");
 				$(".resultEmail .rst").attr("style", "color:#f00");
 			} else if (!registNum.equal(RegistN)) {
 				$(".resultEmail .rst").text("인증번호가 맞지 않습니다.");

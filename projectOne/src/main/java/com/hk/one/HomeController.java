@@ -194,6 +194,7 @@ public class HomeController {
 		return null;
 	}
 	
+	@ResponseBody //html로 응답하기
 	@RequestMapping(value = "/secu/emailRegist.do")
 	public ModelAndView sendEmailRegist (@RequestParam("mem_id") String mem_id, @RequestParam("mem_email") String mem_email, Locale locale, Model model) throws Exception {
 		logger.info("이메일 인증하기 {}.");
@@ -226,9 +227,13 @@ public class HomeController {
 			
 			javaMailSenderImpl.send(mimeMessage);
 			
+			Map map;
+			//모델에 담는 건 자바가 받을 수 있는 것
+			//맵에 담아서 보내야 함 <- 자바스크립트가 받으려면
+			//세션에 담기
 			mav.addObject("rst", 0);
 			mav.addObject("RegistN", RegistNum);
-			return mav;			
+			return mav;	//리턴맵		
 		} else {
 			mav.addObject("rst", 1);
 			return mav;
