@@ -57,11 +57,14 @@
 	<script>
 
 var productList;
+var pro_seq;
 
 function menuList(seq) {
   $.ajax({
     url : 'menuList.do?seq=' + seq,
     type : 'get',
+    dataType : 'JSON',
+    async:false,
     success : function(data) {
       productList = data;
       var a = '';
@@ -69,22 +72,35 @@ function menuList(seq) {
       a += '<tr>';
       $.each(data, function(key, value){
           a += '<td><p><img src="' + value.pro_image +
-           '" width="150" height="200" onclick="selectOrder(' + value.pro_seq +
+           '" width="150" height="200" onclick="selectOrder('+key+',' + value.pro_seq +
            ')"></p><p>' + value.pro_name + '</p><p>' + value.pro_price + '</td>';
            count++;
            if (count == 4) {
              a += '</tr><tr>';
              count = 0;
            }
+           pro_seq=value.pro_seq;
       });
       $('#menuList').html(a);
     }
   });
 }
-
-function selectOrder(seq) {
-  $('#selectOrder').html(JSON.stringify(productList));
+var price=0;
+function selectOrder(k,pro_seq) {
+  //var object =JSON(productList);
+  price+= productList[k]["pro_price"];
+  $("#selectOrder").append("<div>"+ pro_seq +":"+productList[k]["pro_name"] +"</div>");
+  $("#sum").append(price);
+  
+  
+  //$("#selectOrder").append(JSON.stringify(productList);
+ // $('#selectOrder').append(productList["pro_name"]);
+  //$('#selectOrder').html(object);
+  
 }
+
+
 </script>
+<p>합계:<span id="sum"></span></p>
 </body>
 </html>
