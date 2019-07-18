@@ -49,7 +49,7 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		logger.info("인덱스 {}.", locale);
 		
-		return "home";   
+		return "home"; 
 	}
 	
 	@RequestMapping(value = "/secu/joinMemberForm.do", method = RequestMethod.GET)
