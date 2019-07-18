@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false" %>
-<% response.sendRedirect("homePage.do"); %>
+<% response.sendRedirect("home.do"); %>
 <html>
 <head>
 	<title>Home</title>
