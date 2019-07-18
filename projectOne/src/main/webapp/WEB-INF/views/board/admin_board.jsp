@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	request.setCharacterEncoding("UTF-8");
-%>
-<%
-	response.setContentType("text/html; charset=UTF-8");
-%>
+<%request.setCharacterEncoding("UTF-8");%>
+<%response.setContentType("text/html; charset=UTF-8");%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec"
@@ -94,7 +90,7 @@
 							<input class="form-control" name="keyword" value="${search.keyword}">
 						</div>
 						<div class="form-group">
-							<button class="btn btn-default" type="submit">
+							<button class="btn-default" type="submit">
 								<i class="glyphicon glyphicon-search"></i>
 							</button>
 						</div>
@@ -135,7 +131,7 @@
 							</c:if>
 						</ul>
 					</div>
-					<input type="button" class="btn-success" onclick="location.href='/admin.writeForm.do;'" value="글쓰기">
+					<input type="button" class="btn-default" onclick="location.href='admin_writeForm.do'" value="글쓰기">
 			</section>
 		</div>
 	<!-- Main Footer -->

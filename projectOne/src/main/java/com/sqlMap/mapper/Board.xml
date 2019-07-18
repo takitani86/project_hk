@@ -130,7 +130,7 @@
 		QNA_REFER, MEM_ID)
 		VALUES (LJP_QNABOARD_SEQ.nextval, #{qna_title},
 		#{qna_content},
-		#{QNA_fileName}, #{qna_refer}, #{mem_id})
+		#{qna_fileName}, #{qna_refer}, #{mem_id})
 	</insert>
 
 	<!-- 글 삭제(isdel 컬럼을 1으로) -->
