@@ -16,7 +16,7 @@
 		<sec:authorize access="isAnonymous()">
 			<div class="user-panel">
 				<div class="pull-left image">
-					<img src="<c:url value="/resources/dist/img/question-mark.png"/>"> width="160px"
+					<img src="<c:url value="/resources/dist/img/question-mark.png"/>" width="160px"
 						height="160px" class="img-circle" alt="User Image">
 				</div>
 				<div class="pull-left info">
