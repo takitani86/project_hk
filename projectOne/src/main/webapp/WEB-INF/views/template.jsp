@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	request.setCharacterEncoding("UTF-8");
-%>
-<%
-	response.setContentType("text/html; charset=UTF-8");
-%>
+<%request.setCharacterEncoding("UTF-8");%>
+<%response.setContentType("text/html; charset=UTF-8");%>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -13,15 +9,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
 <!-- HEAD(link파일들 모음) -->
-<%@ include file="include/head.jsp"%>
+<%-- include 경로를 불러온 jsp 페이지의 상대경로에 따라 
+../를 추가해주어야 한다(절대경로로 할 방법이 없음) --%>
+<%@ include file="../include/head.jsp"%>
 
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 		<!-- Main Header(네비게이션 바) -->
-		<%@ include file="include/main_header.jsp"%>
+		<%@ include file="../include/main_header.jsp"%>
 
 		<!-- Left Column(사이드바) -->
-		<%@ include file="include/left_column.jsp"%>
+		<%@ include file="../include/left_column.jsp"%>
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
@@ -30,10 +28,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<h1>
 					Page Header <small>Optional description</small>
 				</h1>
-				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-					<li class="active">Here</li>
-				</ol>
 			</section>
 
 			<!-- Main content -->
@@ -49,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<!-- /.content-wrapper -->
 
 		<!-- Main Footer -->
-		<%@ include file="include/main_footer.jsp"%>
+		<%@ include file="../include/main_footer.jsp"%>
 
 	</div>
 	<!-- ./wrapper -->
@@ -57,10 +51,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- REQUIRED JS SCRIPTS -->
 
 	<!-- JS 스크립트모음 -->
-	<%@ include file="include/plugin_js.jsp"%>
+	<%@ include file="../include/plugin_js.jsp"%>
 
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
 </body>
+
 </html>
