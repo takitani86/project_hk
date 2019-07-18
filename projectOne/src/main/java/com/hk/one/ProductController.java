@@ -13,13 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hk.one.dto.OrderListDto;
 import com.hk.one.dto.ProductDto;
 import com.hk.one.service.IOrderListService;
 import com.hk.one.service.IProductService;
-import com.hk.one.service.OrderListService;
 
 @Controller
 public class ProductController {
@@ -113,9 +113,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/ordList.do", method = RequestMethod.GET)
-	public String ordList(Locale locale, Model model, OrderListDto dto) {
+	public String ordList(Locale locale, Model model,@RequestParam String user,@RequestParam int seqs) {
 		logger.info("결제성공인서트{}.", locale);
-		
+		OrderList
 		boolean isS=orderListService.addOrderList(dto);
 		
 		if(isS) {
