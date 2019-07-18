@@ -45,11 +45,11 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value = {"/", "/home.do"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/homePage.do"}, method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("인덱스 {}.", locale);
 		
-		return "home";
+		return "home.page";
 	}
   /**
    * Tiles를 사용하지 않은 일반적인 형태

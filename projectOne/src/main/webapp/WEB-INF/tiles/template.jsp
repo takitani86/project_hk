@@ -61,7 +61,7 @@
 	clear: both;
 }
 
-#main {
+#left, #main {
 	min-height: 600px;
 }
 </style>
