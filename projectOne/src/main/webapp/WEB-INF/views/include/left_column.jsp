@@ -21,7 +21,7 @@
 				</div>
 				<div class="pull-left info">
 					<p>
-						<a href="<c:url value='/secu/loginPage.do'/>">로그인 해주세요.
+						<a href="<c:url value='/secu/loginPage.do'/>">로그인 해주세요.</a>
 					</p>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 			<sec:authentication var="user" property="principal" />
 			<div class="user-panel">
 				<div class="pull-left image">
-					<img src="<c:url value="/resources/dist/img/user1-128x128.jpg"/>"> class="img-circle"
+					<img src="<c:url value="/resources/dist/img/user1-128x128.jpg"/>" class="img-circle"
 						alt="User Image">
 				</div>
 				<div class="pull-left info">
