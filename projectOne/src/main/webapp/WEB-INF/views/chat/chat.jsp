@@ -3,30 +3,90 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<link rel="stylesheet"
+	href="/projectOne/resources/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="/projectOne/resources/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="/projectOne/resources/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
+<!-- Theme style -->
+<link rel="stylesheet"
+	href="/projectOne/resources/AdminLTE/dist/css/AdminLTE.min.css">
+<!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect. -->
+<link rel="stylesheet"
+	href="/projectOne/resources/AdminLTE/dist/css/skins/skin-blue.min.css">
+<!-- jQuery 3 -->
+<script
+	src="/projectOne/resources/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script
+	src="/projectOne/resources/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script
+	src="/projectOne/resources/AdminLTE/dist/js/adminlte.min.js"></script>
+
+<!-- Google Font -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <title>Home</title>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/0.3.4/sockjs.min.js"></script>
 <meta charset="UTF-8" />
 </head>
-<body>
-	<h1>1:1 상담(고객)</h1>
-
+<body class="hold-transition skin-blue-light">
+	<section class="content-header">
+		<h1>1:1 상담(고객)</h1>
+	</section>
 
 	<br />
 	<div id="chatContainer"></div>
+	<div class="box box-danger direct-chat direct-chat-danger">
+		<div class="box-header with-border">
+			<h3 class="box-title">1:1상담</h3>
+			<div class="box-tools pull-right">
+				<button class="btn btn-box-tool" data-widget="collapse">
+					<i class="fa fa-minus"></i>
+				</button>
+				<button class="btn btn-box-tool" data-widget="remove">
+					<i class="fa fa-times"></i>
+				</button>
+			</div>
+		</div>
+	</div>
 
-	<div id="chatArea"
-		style="width: 500px; height: 500px; overflow-y: scroll; margin-top: 30px;"></div>
+	<div class="box-body">
+		<div id="chatArea" class="direct-chat-meassage">
+			<div class="direct-chat-msg">
+				<div class="direct-chat-info clearfix">
+					<span class="direct-chat-name pull-left">${sessionScope.userid}</span>
+					<span class="direct-chat-timestamp pull-right">23 Jan 2:00pm</span>
+				</div>
+				<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg"
+					alt="message user image">
+				<div class="direct-chat-text">Is this template really for
+					free? That's unbelievable!</div>
+			</div>
+		</div>
 
-	<br />
+		<br />
 
-	<input id="message">
-	<span id="sendBtn"
-		style="border: 1px solid red; padding: 5px; width: 30px; background-color: red; color: white; cursor: pointer;">
-		Send</span>
-
-
+		<div class="box-footer">
+			<div class="input group">
+				<input type="text" id="message" placeholder="메시지를 입력하세요." class="form-control">
+				<span id="sendBtn" class="input-group-btn">
+					<button type="button" class="btn btn-danger btn-flat">Send</button>
+				</span>
+			</div>
+		</div>
+	</div>
 	<div>
 		Signed In as : <span id=""> ${sessionScope.userid } </span>
 	</div>
