@@ -22,8 +22,6 @@ public class OrderListDao implements IOrderListDao {
 
 	@Override
 	public boolean addOrderList(OrderListDto dto) {
-		//HashMap<String, String> orderListMap = new HashMap();
-		//orderListMap.put("orderList", dto);
 		 int count=sqlSession.insert(namespace+"insertOrderList",dto);
 		 return count>0?true:false;
 	}

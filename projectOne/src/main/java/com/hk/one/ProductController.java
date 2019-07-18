@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.hk.one.dto.OrderListDto;
 import com.hk.one.dto.ProductDto;
+import com.hk.one.service.IOrderListService;
 import com.hk.one.service.IProductService;
 import com.hk.one.service.OrderListService;
 
@@ -24,8 +25,8 @@ import com.hk.one.service.OrderListService;
 public class ProductController {
 	
 	@Autowired
-	private IProductService ProductService;
-	
+	private IProductService productService;
+	private IOrderListService orderListService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
@@ -35,15 +36,15 @@ public class ProductController {
 		System.out.println(sort);
 		logger.info("상품페이지 호출{}.", locale);
 		HttpSession session = request.getSession(); // 세션생성
-		int getPcount=ProductService.countProductPage(); // 페이지 갯수
+		int getPcount=productService.countProductPage(); // 페이지 갯수
 		String countProductPage=request.getParameter("countProductPage"); // view에서 요청페이지 파라미터를 받음
 		session.setAttribute("countProductPageSession", countProductPage); //현재페이지 세션저장
-		List<ProductDto> list = ProductService.getAllProductList(countProductPage);
+		List<ProductDto> list = productService.getAllProductList(countProductPage);
 		
 		model.addAttribute("sort", sort);
 		model.addAttribute("list", list );
 		model.addAttribute("getPcount", getPcount);
-		boolean isS=ProductService.sortProduct(sort);
+		boolean isS=productService.sortProduct(sort);
 		if(isS) {
 			return "product/productList";
 		}else {
@@ -57,7 +58,7 @@ public class ProductController {
 	@RequestMapping(value = "/insertProductForm.do", method = RequestMethod.GET)
 	public String insertProductForm(Locale locale, Model model) {
 		logger.info("상품추가 페이지이동{}.", locale);
-		//List<ProductDto> list = ProductService.getAllProductList();
+		//List<ProductDto> list = productService.getAllProductList();
 		//model.addAttribute("list", list );
 		
 		return "product/insertProductForm";
@@ -67,8 +68,8 @@ public class ProductController {
 	public String insertBoard(Locale locale, Model model,ProductDto dto,MultipartFile uploadFile,HttpServletRequest request) {
 		logger.info("상품추가{}.", locale);
 		HttpSession session = request.getSession(); // 세션을 가져옴
-		dto.setPro_image(ProductService.saveFile(uploadFile));
-		boolean isS=ProductService.insertProduct(dto);
+		dto.setPro_image(productService.saveFile(uploadFile));
+		boolean isS=productService.insertProduct(dto);
 		
 		if(isS) {
 			return "redirect:productList.do?countProductPage="+session.getAttribute("countProductPageSession")+"&sort=0";
@@ -81,7 +82,7 @@ public class ProductController {
 	@RequestMapping(value = "/muldelProduct.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String mulDel(Locale locale, Model model,String[]seqs) {
 		logger.info("여러글삭제 {}.", locale);
-		boolean isS=ProductService.mulDelProduct(seqs);
+		boolean isS=productService.mulDelProduct(seqs);
 		if(isS) {
 			return "redirect:productList.do?countProductPage=1";
 		}else {
@@ -93,7 +94,7 @@ public class ProductController {
 	@RequestMapping(value = "/productUpdate.do", method = RequestMethod.GET)
 	public String updateForm(Locale locale, Model model,int seq) {
 		logger.info("상품수정하기폼이동{}.", locale);
-		ProductDto dto =ProductService.getProduct(seq);
+		ProductDto dto =productService.getProduct(seq);
 		model.addAttribute("dto", dto );
 		return "product/productUpdate";
 	}
@@ -102,7 +103,7 @@ public class ProductController {
 	public String updateboard(Locale locale, Model model, ProductDto dto) {
 		logger.info("상품수정하기{}.", locale);
 		
-		boolean isS=ProductService.updateProduct(dto);
+		boolean isS=productService.updateProduct(dto);
 		if(isS) {
 			return "redirect:productUpdate.do?seq="+dto.getPro_seq();
 		}else {
@@ -115,11 +116,12 @@ public class ProductController {
 	public String ordList(Locale locale, Model model, OrderListDto dto) {
 		logger.info("결제성공인서트{}.", locale);
 		
-		boolean isS=OrderListService.addOrderList(dto);
+		boolean isS=orderListService.addOrderList(dto);
+		
 		if(isS) {
 			return "redirect:consumer.do";
 		}else {
-			model.addAttribute("msg", "글수정하기 실패");
+			model.addAttribute("msg", "상품결제실패");
 			return "error";
 		}
 	}

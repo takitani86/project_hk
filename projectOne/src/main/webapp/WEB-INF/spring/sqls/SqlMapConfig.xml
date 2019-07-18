@@ -10,6 +10,7 @@
 		<typeAlias type="com.hk.one.dto.MemberDto" alias="member"/>
 		<typeAlias type="com.hk.one.dto.ProductDto" alias="product"/>
 		<typeAlias type="com.hk.one.dto.CommentDto" alias="comment"/>
+		<typeAlias type="com.hk.one.dto.OrderListDto" alias="orderList"/>
 	</typeAliases>
 	
 	<mappers>
