@@ -43,7 +43,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 			user.setEnabled(false);
 		}
 		if (dto.getMem_isAdmin() == 1) {
+			System.out.println("유저권한:" + dto.getMem_isAdmin());
 			user.setAuth("ROLE_ADMIN");
+			System.out.println("유저권한:" + user.getAuth());
 		} else {
 			user.setAuth("ROLE_MEMBER");
 		}

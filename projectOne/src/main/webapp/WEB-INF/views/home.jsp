@@ -23,7 +23,13 @@
 		<!-- Left Column(사이드바) -->
 		<%@ include file="include/left_column.jsp"%>
 		<div class="content-wrapper">
-			<h1>통합 주문관리서비스 기능구현중</h1>
+					<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					통합 주문관리서비스 <small>2019.07.18</small>
+				</h1>
+			</section>
+			<section class="content container-fluid">
 			<p>
 				<a href="<c:url value='productList.do?countProductPage=1'/>">상품리스트</a>
 			</p>
@@ -64,14 +70,16 @@
 					<button type="submit">LOGOUT</button>
 				</form>
 			</sec:authorize>
+			</section>
 		</div>
 		
 		<!-- Main Footer -->
 		<%@ include file="include/main_footer.jsp"%>
 		
 	</div>
-	.<!-- /wrapper -->
+	<!-- /wrapper -->
 	
+	<!-- JS 스크립트모음 -->
 	<%@ include file="include/plugin_js.jsp"%>
 </body>
 </html>
