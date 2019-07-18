@@ -7,10 +7,11 @@ response.setContentType("text/html; charset=utf-8");
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
-<head>
+<%@ include file="../include/head.jsp" %>
+<!-- <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 목록 페이지</title>
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"> -->
 
 <script type="text/javascript">
 	var mem_id = "mem_id";
@@ -26,8 +27,10 @@ response.setContentType("text/html; charset=utf-8");
 		background-color: gray;
 	}
 </style>
-</head>
-<body class="skin-blue-light">
+<!-- </head> -->
+<body class="skin-blue">
+	<%@ include file="../include/main_header.jsp" %>
+	<%@ include file="../include/left_column.jsp" %>
 	<div class="wrapper">
 		<section class="content-header">
 			<form name="searchForm" method="post" action="./searchMember.do">
@@ -118,5 +121,7 @@ response.setContentType("text/html; charset=utf-8");
 			</div>
 		</div>
 	</div>
+<%@ include file="../include/main_footer.jsp" %>
+<%@ include file="../include/plugin_js.jsp" %>
 </body>
 </html>
