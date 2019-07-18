@@ -10,8 +10,10 @@ response.setContentType("text/html; charset=utf-8");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 정보 / 수정</title>
 </head>
-<body>
-	<h1>회원 정보</h1>
+<body class="hold-transition skin-blue-light">
+	<section class="content-header">
+		<h1>회원 정보</h1>
+	</section>
 	<form action='member_info.do' method='post'>
 		<table border="1">
 			<tr>

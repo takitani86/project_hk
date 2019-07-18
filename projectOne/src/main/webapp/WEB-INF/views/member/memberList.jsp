@@ -100,12 +100,21 @@ response.setContentType("text/html; charset=utf-8");
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-					<tr><td>
-					<input type="button" value="회원 추가" onclick="location.href='joinMemberForm.do'" />
-					<button onclick="location.href='home.do'">홈으로</button>
-					<button onclick="location.href='<c:url value="to_find_PwForm.do"/>'">비밀번호 찾기</button>
-					</td></tr>
 				</table>
+				<div class="box-footer">
+					<div class="box-tools">
+						<ul class="pagination pagination-sm no-margin pull-right">
+							<li><a href="#">&laquo;</a></li>
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">&raquo;</a></li>
+						</ul>
+					</div>
+					<button type="submit" onclick="location.href='joinMemberForm.do'" class="btn btn-block btn-default">회원 추가</button>
+					<button onclick="location.href='home.do'" class="btn btn-block btn-default">홈으로</button>
+					<button onclick="location.href='<c:url value="to_find_PwForm.do"/>'" class="btn btn-block btn-default">비밀번호 찾기</button>
+				</div>
 			</div>
 		</div>
 	</div>
