@@ -144,7 +144,7 @@
 	<insert id="insertOrderList" parameterType="product">
 	INSERT INTO LJP_ORDERLIST (
 	SEQ_ORD.NEXTVAL,
-	ORD_BILL(랜덤난수)),
+	#{ord_bill},
 	SYSDATE ,
 	#{id} ,
 	#{pro_num} ,

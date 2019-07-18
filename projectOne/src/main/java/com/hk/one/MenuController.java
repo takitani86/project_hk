@@ -2,6 +2,9 @@ package com.hk.one;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,10 +107,13 @@ public class MenuController {
 	}
 	
 	// 손님용 컨트롤러
-	
+	static HttpSession session;
 	@RequestMapping(value = "/consumer.do", method = RequestMethod.GET)
-	public String consumer(Model model, Authentication auth) {
+	public String consumer(Model model, Authentication auth,HttpServletRequest req) {
 		logger.info("손님용 메뉴 메소드 호출");
+		session = req.getSession();
+		session.setAttribute("userid", auth.getName());
+		System.out.println(auth.getName());
 
 		// 카테고리 정보 조회
 		List<CategoryDto> category = orderService.selectMenuCategoryList(auth.getName());

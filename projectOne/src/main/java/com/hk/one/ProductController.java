@@ -13,15 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.hk.one.dto.ProductDto;
 import com.hk.one.service.IProductService;
+import com.hk.one.service.OrderListService;
 
 @Controller
 public class ProductController {
@@ -106,6 +102,19 @@ public class ProductController {
 		logger.info("상품수정하기{}.", locale);
 		
 		boolean isS=ProductService.updateProduct(dto);
+		if(isS) {
+			return "redirect:productUpdate.do?seq="+dto.getPro_seq();
+		}else {
+			model.addAttribute("msg", "글수정하기 실패");
+			return "error";
+		}
+	}
+	
+	@RequestMapping(value = "/ordList.do", method = RequestMethod.GET)
+	public String ordList(Locale locale, Model model, ProductDto dto) {
+		logger.info("결제성공인서트{}.", locale);
+		
+		boolean isS=OrderListService.addOrderList();
 		if(isS) {
 			return "redirect:productUpdate.do?seq="+dto.getPro_seq();
 		}else {

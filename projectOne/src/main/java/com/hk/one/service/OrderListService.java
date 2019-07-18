@@ -15,10 +15,8 @@ public class OrderListService implements IOrderListService {
 
 	@Override
 	public boolean addOrderList(String mem_id, String add) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
-	
-
 
 }
