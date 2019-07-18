@@ -8,11 +8,6 @@ response.setContentType("text/html; charset=utf-8");
 <!DOCTYPE html>
 <html>
 <%@ include file="../include/head.jsp" %>
-<!-- <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원 목록 페이지</title>
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"> -->
-
 <script type="text/javascript">
 	var mem_id = "mem_id";
 	function goDetail(mem_id) {
@@ -27,7 +22,6 @@ response.setContentType("text/html; charset=utf-8");
 		background-color: gray;
 	}
 </style>
-<!-- </head> -->
 <body class="skin-blue">
 	<%@ include file="../include/main_header.jsp" %>
 	<%@ include file="../include/left_column.jsp" %>
