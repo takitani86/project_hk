@@ -6,15 +6,14 @@ response.setContentType("text/html; charset=utf-8");
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
-<head>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원 상세정보 게시판</title>
-</head>
-<body class="hold-transition skin-blue-light">
+<%@ include file="../include/head.jsp" %>
+<body class="hold-transition skin-blue">
+<%@ include file="../include/main_header.jsp" %>
+<%@ include file="../include/left_column.jsp" %>
 	<div class="wrapper">
 		<div class="ground1" style="display: inline-block; width: 150px; top:0px;"> <!-- 사진 등록 위로 올리기 -->
 			<img src="${member.mem_image}" class="img-circle"
@@ -22,7 +21,7 @@ response.setContentType("text/html; charset=utf-8");
 			<button type="button" onclick="#" class="btn btn-block btn-default">사진 등록</button>
 		</div>
 		<div class="ground2" style="display: inline-block">
-			<div class="box">
+			<div class="box" style="width:500px;">
 				<div class="box-header">
 					<h3 class="box-title">기본 정보</h3>
 				</div>
@@ -86,7 +85,20 @@ response.setContentType("text/html; charset=utf-8");
 						</tr>
 						<tr>
 							<th>업태</th>
-							<td>${member.mem_b_status}</td>
+							<td><c:set var="b_status" value="${member.mem_b_status}" />
+							<c:choose>
+								<c:when test="${b_status == 1}">한식</c:when>
+								<c:when test="${b_status == 2}">분식</c:when>
+								<c:when test="${b_status == 3}">일식</c:when>
+								<c:when test="${b_status == 4}">중식</c:when>
+								<c:when test="${b_status == 5}">양식</c:when>
+								<c:when test="${b_status == 6}">야식</c:when>
+								<c:when test="${b_status == 7}">주점</c:when>
+								<c:when test="${b_status == 8}">카페/디저트</c:when>
+								<c:when test="${b_status == 9}">패스트푸드</c:when>
+								<c:when test="${b_status == 10}">치킨/피자</c:when>
+								<c:otherwise>기타</c:otherwise>							
+							</c:choose></td>
 						</tr>
 					</table>
 					<table class="table">
@@ -105,5 +117,7 @@ response.setContentType("text/html; charset=utf-8");
 			</div>
 		</div>
 	</div>
+<%@ include file="../include/main_footer.jsp" %>
+<%@ include file="../include/plugin_js.jsp" %>
 </body>
 </html>

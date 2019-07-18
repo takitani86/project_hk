@@ -108,8 +108,8 @@ response.setContentType("text/html; charset=utf-8");
 							<li><a href="#">&raquo;</a></li>
 						</ul>
 					</div>
-					<button type="submit" onclick="location.href='joinMemberForm.do'" class="btn btn-block btn-default">회원 추가</button>
-					<button onclick="location.href='home.do'" class="btn btn-block btn-default">홈으로</button>
+					<button type="submit" onclick="location.href='../secu/joinMemberForm.do'" class="btn btn-block btn-default">회원 추가</button>
+					<button onclick="location.href='../home.do'" class="btn btn-block btn-default">홈으로</button>
 					<button onclick="location.href='<c:url value="to_find_PwForm.do"/>'" class="btn btn-block btn-default">비밀번호 찾기</button>
 				</div>
 			</div>

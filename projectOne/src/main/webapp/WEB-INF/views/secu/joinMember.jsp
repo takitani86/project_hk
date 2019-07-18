@@ -210,9 +210,17 @@ $(function registNum(){ //registNum 함수
 					<th>업태</th>
 					<td><select name="mem_b_status" size='1' class='select'>
 						<option value=''>선택하세요</option>
-						<option value="1">카페</option>
-						<option value="2">중국집</option>
-						<option value="3">야식</option>
+						<option value="1">한식</option>
+						<option value="2">분식</option>
+						<option value="3">일식</option>
+						<option value="4">중식</option>
+						<option value="5">양식</option>
+						<option value="6">야식</option>
+						<option value="7">주점</option>
+						<option value="8">카페/디저트</option>
+						<option value="9">패스트푸드</option>
+						<option value="10">치킨/피자</option>
+						<option value="11">기타</option>
 						</select>
 					</td>
 				</tr>
