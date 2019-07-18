@@ -26,7 +26,7 @@
 					<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					통합 주문관리서비스 <small>2019.07.18</small>
+					통합 주문관리서비스 <small>2019.07.19</small>
 				</h1>
 			</section>
 			<section class="content container-fluid">
