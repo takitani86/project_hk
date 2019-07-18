@@ -8,6 +8,8 @@
 %>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <!DOCTYPE html>
@@ -26,7 +28,8 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <title>메뉴판</title>
 </head>
 <body>
@@ -37,8 +40,8 @@
 				<c:if test="${not empty category}">
 					<c:forEach var="cate" items="${category}">
 						<td onclick="menuList(${cate.cat_seq});">${cate.cat_name}</td>
-          </c:forEach>
-          <script>
+					</c:forEach>
+					<script>
               $(document).ready(function(){
                 var seq = $('td:first').attr("id");
                 menuList(seq);
@@ -106,11 +109,18 @@ function selectOrder(k,pro_seq) {
 
 
 </script>
-<p>합계:<span id="sum"></span></p>
-<p><button onclick="payment();">결제</button></p>
-<input type='button' id="btn1" onclick="check(${sessionScope.userid});" value="${sessionScope.userid}"/>
-<script>
-
+	<p>
+		합계:<span id="sum"></span>
+	</p>
+	<p>
+		<button onclick="payment();">결제</button>
+	</p>
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication var="user" property="principal" />
+		<input type='button' id="btn1" onclick="check('${user.username}');"
+			value="${user.username}" />
+	</sec:authorize>
+	<script>
 var IMP = window.IMP;
 IMP.init('imp55450318');
 
@@ -147,9 +157,9 @@ var i;
 function check(userid) {
 var suc=0;
 for(i=0;i<arrayBox.length;i++){
-//	ordList(arrayBox[i],userid); // 인서트 함수 
+	ordList(userid,arrayBox[i]);
 	alert(arrayBox[i]);
-	alert($("#btn1").val());
+	alert(userid);
 }
 $("#selectOrder").html("<div></div>");
 $("#sum").html(suc);
@@ -160,7 +170,7 @@ function ordList(userid,seqs) {
 	 $.ajax({
 	        url:"ordList.do?seqs="+seqs+"&user="+userid,
 	        type:'GET',
-	        data: allData,
+	        data: 'json',
 	        success:function(data){
 	            alert("완료!");
 	        },
@@ -171,6 +181,5 @@ function ordList(userid,seqs) {
 	}
 	
 </script>
-
 </body>
 </html>

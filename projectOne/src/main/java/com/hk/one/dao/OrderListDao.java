@@ -9,18 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hk.one.dto.CategoryDto;
+import com.hk.one.dto.OrderListDto;
 import com.hk.one.dto.ProductDto;
 
 @Repository
 public class OrderListDao implements IOrderListDao {
+	
+	private String namespace="Product.";
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public boolean addOrderList(String mem_id, String add) {
-		
-		return false;
+	public boolean addOrderList(OrderListDto dto) {
+		//HashMap<String, String> orderListMap = new HashMap();
+		//orderListMap.put("orderList", dto);
+		 int count=sqlSession.insert(namespace+"insertOrderList",dto);
+		 return count>0?true:false;
 	}
 
 

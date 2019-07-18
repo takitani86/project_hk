@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hk.one.dao.IOrderListDao;
+import com.hk.one.dto.OrderListDto;
 
 
 
@@ -14,9 +15,10 @@ public class OrderListService implements IOrderListService {
 	private IOrderListDao orderListDao;
 
 	@Override
-	public boolean addOrderList(String mem_id, String add) {
+	public boolean addOrderList(OrderListDto dto) {
 		
-		return false;
+		return orderListDao.addOrderList(dto);
 	}
+
 
 }

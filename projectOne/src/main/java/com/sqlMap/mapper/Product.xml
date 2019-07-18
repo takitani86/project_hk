@@ -141,14 +141,14 @@
 	</select>
 
 	<!-- orderList -->
-	<insert id="insertOrderList" parameterType="product">
+	<insert id="insertOrderList" parameterType="orderList">
 	INSERT INTO LJP_ORDERLIST (
 	SEQ_ORD.NEXTVAL,
-	#{ord_bill},
+	'd',
 	SYSDATE ,
-	#{id} ,
-	#{pro_num} ,
-	#{pro_price}
+	#{ord_id} ,
+	#{ord_pronum} ,
+	#{ord_proprice}
 	)
 	</insert>
 

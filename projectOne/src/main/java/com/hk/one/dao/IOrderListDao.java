@@ -1,8 +1,9 @@
 package com.hk.one.dao;
 
-
+import com.hk.one.dto.OrderListDto;
 
 public interface IOrderListDao {
 
-	public boolean addOrderList(String mem_id, String add);
+	public boolean addOrderList(OrderListDto dto);
+
 }

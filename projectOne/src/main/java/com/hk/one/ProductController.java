@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hk.one.dto.OrderListDto;
 import com.hk.one.dto.ProductDto;
 import com.hk.one.service.IProductService;
 import com.hk.one.service.OrderListService;
@@ -111,12 +112,12 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/ordList.do", method = RequestMethod.GET)
-	public String ordList(Locale locale, Model model, ProductDto dto) {
+	public String ordList(Locale locale, Model model, OrderListDto dto) {
 		logger.info("결제성공인서트{}.", locale);
 		
-		boolean isS=OrderListService.addOrderList();
+		boolean isS=OrderListService.addOrderList(dto);
 		if(isS) {
-			return "redirect:productUpdate.do?seq="+dto.getPro_seq();
+			return "redirect:consumer.do";
 		}else {
 			model.addAttribute("msg", "글수정하기 실패");
 			return "error";

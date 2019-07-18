@@ -1,7 +1,8 @@
 package com.hk.one.service;
 
+import com.hk.one.dto.OrderListDto;
 
 public interface IOrderListService {
 
-	public boolean addOrderList(String mem_id, String add);
+	public boolean addOrderList(OrderListDto dto);
 }
