@@ -11,10 +11,11 @@ response.setContentType("text/html; charset=utf-8");
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 <%@ include file="../include/head.jsp" %>
-<body class="hold-transition skin-blue">
+<body class="layout-boxed skin-blue sidebar-mini">
+	<div class="wrapper">
 <%@ include file="../include/main_header.jsp" %>
 <%@ include file="../include/left_column.jsp" %>
-	<div class="wrapper">
+	<div class="content-wrapper">
 		<div class="ground1" style="display: inline-block; width: 150px; top:0px;"> <!-- 사진 등록 위로 올리기 -->
 			<img src="${member.mem_image}" class="img-circle"
 				alt="User Image" style="width: 80px; height: 80px"> <br />
@@ -115,6 +116,7 @@ response.setContentType("text/html; charset=utf-8");
 					</table>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 <%@ include file="../include/main_footer.jsp" %>
