@@ -14,21 +14,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hk.one.dto.OrderListDto;
 import com.hk.one.dto.ProductDto;
 import com.hk.one.service.IOrderListService;
 import com.hk.one.service.IProductService;
-import com.hk.one.service.ProductService;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
 	private IProductService productService;
+	@Autowired
 	private IOrderListService orderListService;
-	private OrderListDto orderListDto;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
@@ -114,28 +114,32 @@ public class ProductController {
 		}
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/ordList.do", method = RequestMethod.GET)
 	public String ordList(Locale locale, Model model,@RequestParam String user,@RequestParam int seqs) {
 		logger.info("결제통신성공{}.", locale);
-	
+		System.out.println("통신 유저:"+user);
+		System.out.println("통신 seq:"+seqs);
 		OrderListDto dto=orderListWrap(user,seqs); 
 		boolean isS=orderListService.addOrderList(dto);
-		
-		if(isS) {
-			return "redirect:consumer.do";
-		}else {
-			model.addAttribute("msg", "상품결제실패");
-			return "error";
-		}
+		return "d";
+//		if(isS) {
+//			return "redirect:consumer.do";
+//		}else {
+//			model.addAttribute("msg", "상품결제실패");
+//			return "error";
+//		}
 	}
 	
 	public OrderListDto orderListWrap(String user, int seqs){ //담아줌
-		
+		System.out.println("orderListWrap 유저:"+user);
+		System.out.println("orderListWrap seq:"+seqs);
 		ProductDto pro_seq=productService.getProduct(seqs);
 		
-		orderListDto.setOrd_id(user);
-		orderListDto.setOrd_num(seqs);
-		orderListDto.setOrd_proprice(pro_seq.getPro_price());
+		OrderListDto orderListDto = new OrderListDto(user,seqs,pro_seq.getPro_price());
+//		orderListDto.setOrd_id(user);
+//		orderListDto.setOrd_num(seqs);
+//		orderListDto.setOrd_proprice(pro_seq.getPro_price());
 		return orderListDto;
 	}
 	
