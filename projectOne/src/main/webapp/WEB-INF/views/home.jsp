@@ -34,7 +34,7 @@
 				<a href="<c:url value='productList.do?countProductPage=1'/>">상품리스트</a>
 			</p>
 			<p>
-				<a href="<c:url value='member/memberList.do'/>">회원목록</a>
+				<a href="<c:url value='admin/memberList.do'/>">회원목록</a>
 			</p>
 			<p>
 				<a href="<c:url value='member/board/member_board.do'/>">점주 게시판</a>
@@ -64,6 +64,7 @@
 				<h3>${user.username}님,반갑습니다.</h3>
 				<p>암호 : ${user.password}</p>
 				<p>활성화 여부: ${user.enabled}</p>
+				<p>권한 여부: ${user.auth}</p>
 				<p>이메일: ${user.secu_email}
 				</p>
 				<form action="<c:url value='/logout.do'/>" method="POST">

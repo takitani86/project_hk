@@ -19,7 +19,7 @@ import com.hk.one.dto.MemberDto;
 import com.hk.one.service.IMemberService;
 
 @Controller
-@RequestMapping(value = "member/*")
+@RequestMapping(value = "/admin/*")
 public class MemberController {
 	
 	@Autowired

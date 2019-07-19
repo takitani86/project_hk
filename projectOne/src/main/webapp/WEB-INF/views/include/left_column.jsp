@@ -54,12 +54,12 @@
 					<i class="fa fa-file-text-o"></i>
 					<span>고객센터 게시판</span></a></li>
 				<li>
-					<a href="<c:url value='/member/memberList.do'/>">
+					<a href="<c:url value='/admin/memberList.do'/>">
 					<i class="fa fa-list-alt"></i>
 				    <span>가입점주 목록</span></a>
 				</li>
 				<li>
-					<a href="<c:url value='/member/memberList.do'/>">
+					<a href="<c:url value='/admin/memberList.do'/>">
 					<i class="fa fa-list-alt"></i>
 				    <span>가입점주 목록</span></a>
 				</li>
