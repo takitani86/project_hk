@@ -16,7 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 ../를 추가해주어야 한다(절대경로로 할 방법이 없음) --%>
 <%@ include file="../include/head.jsp"%>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="layout-boxed skin-blue sidebar-mini">
 	<div class="wrapper">
 		<!-- Main Header(네비게이션 바) -->
 		<%@ include file="../include/main_header.jsp"%>

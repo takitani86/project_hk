@@ -14,7 +14,7 @@
 <html>
 <!-- HEAD(link파일들 모음) -->
 <%@ include file="include/head.jsp"%>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="skin-blue sidebar-mini layout-boxed">
 
 	<div class="wrapper">
 		<!-- Main Header(네비게이션 바) -->

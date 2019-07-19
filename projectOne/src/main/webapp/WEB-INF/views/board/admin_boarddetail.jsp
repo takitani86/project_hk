@@ -19,7 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   }
 </style>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="layout-boxed skin-blue sidebar-mini">
   <div class="wrapper">
     <!-- Main Header(네비게이션 바) -->
     <%@ include file="../include/main_header.jsp"%>
