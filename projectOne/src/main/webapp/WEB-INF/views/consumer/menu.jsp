@@ -113,7 +113,7 @@ function selectOrder(k,pro_seq) {
 		합계:<span id="sum"></span>
 	</p>
 	<p>
-		<button onclick="payment();">결제</button>
+		<button onclick="payment('${user.username}');">결제</button>
 	</p>
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication var="user" property="principal" />
@@ -124,13 +124,13 @@ function selectOrder(k,pro_seq) {
 var IMP = window.IMP;
 IMP.init('imp55450318');
 
-function payment() {
+function payment(userid) {
   IMP.request_pay({
     pg : 'kakao',
     pay_method : 'card',
     merchant_uid : 'merchant_' + new Date().getTime(),
     name : '주문명:결제테스트',
-    amount : 1000,
+    amount : $("#sum").text(),
     buyer_email : 'aetheru@gmail.com',
     buyer_name : '이상희',
     buyer_tel : '010-6665-4963',
@@ -140,6 +140,8 @@ function payment() {
     if ( rsp.success ) {
         var msg = '결제가 완료되었습니다.';
         var suc=0;
+        check(userid);
+        
         msg += '고유ID : ' + rsp.imp_uid;
         msg += '상점 거래ID : ' + rsp.merchant_uid;
         msg += '결제 금액 : ' + rsp.paid_amount;
@@ -153,24 +155,22 @@ function payment() {
     alert(msg);
   });
 }
-var i;
+ var i;
 function check(userid) {
 var suc=0;
 for(i=0;i<arrayBox.length;i++){
 	ordList(userid,arrayBox[i]);
-	alert(arrayBox[i]);
-	alert(userid);
 }
 $("#selectOrder").html("<div></div>");
 $("#sum").html(suc);
 arrayBox.splice(0);
-}
+} 
 
 function ordList(userid,seqs) {
 	 $.ajax({
-	        url:"/ordList.do?seqs="+seqs+"&user="+userid,
+	        url:"../ordList.do",
 	        type:'GET',
-	        data: 'json',
+	        data:"seqs="+seqs+"&user="+userid,
 	        success:function(data){
 	            alert("완료!");
 	        },

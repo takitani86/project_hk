@@ -12,8 +12,10 @@ public class OrderListDto {
 	
 	
 	
-	public OrderListDto() {
-		super();
+	public OrderListDto(String ord_id, int ord_pronum, int ord_proprice) {
+		this.ord_id=ord_id;
+		this.ord_pronum=ord_pronum;
+		this.ord_proprice=ord_proprice;
 	}
 
 	public OrderListDto(int ord_num, String ord_bill, Date ord_date, String ord_id, int ord_pronum, int ord_proprice) {
