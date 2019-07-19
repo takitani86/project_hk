@@ -7,6 +7,7 @@ response.setContentType("text/html; charset=utf-8");
 <!DOCTYPE html>
 <html>
 <%@ include file="../include/head.jsp" %>
+
 <body class="layout-boxed skin-blue sidebar-mini">
 	<div class="wrapper">
 <%@ include file="../include/main_header.jsp" %>
