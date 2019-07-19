@@ -46,7 +46,7 @@ response.setContentType("text/html; charset=utf-8");
 					</div>
 				</form>
 				<div class="container-fluid">
-					&nbsp;&nbsp; ${map.count}개의 회원 정보가 있습니다.
+					<p style="vertical-align:middle;">&nbsp;&nbsp; ${map.count}개의 회원 정보가 있습니다.</p>
 				</div>
 			</section>
 			<div class="content-header">
