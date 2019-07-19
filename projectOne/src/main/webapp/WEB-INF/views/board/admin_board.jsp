@@ -36,24 +36,23 @@
 						<button class="btn btn-info btn-flat" type="submit">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>
+						<input type="button" class="btn btn-default" onclick="location.href='admin_writeForm.do'" value="글쓰기">
 					</div>
 				</form>
-				<input type="button" class="btn btn-default" onclick="location.href='admin_writeForm.do'" value="글쓰기">
 			</section>
 			<section class="content container-fluid">
 				<div class="row">
-					<div class="col-xs-12">
+					<div class="col-xs-10">
 						<div class="box">
 							<div class="box-body table-responsive no-padding">
 								<table class="table table- table-bordered table-hover">
 									<thead>
 										<tr>
-											<th width="2%"><input type="checkbox" name="allCheck" onclick="allSel(this.checked);"></th>
-											<th width="5%">번호</th>
-											<th width="4%">작성자</th>
-											<th width="50%">제목</th>
+											<th width="10%">번호</th>
+											<th width="10%">작성자</th>
+											<th width="60%">제목</th>
 											<th width="10%">작성일</th>
-											<th width="7%">조회수</th>
+											<th width="10%">조회수</th>
 										</tr>
 									</thead>
 									<c:choose>
@@ -65,7 +64,6 @@
 										<c:otherwise>
 											<c:forEach var="board" items="${board}">
 												<tr>
-													<td><input type="checkbox" name="chk" value="${board.qna_seq}"></td>
 													<td>${board.qna_seq}</td>
 													<td>${board.mem_id}</td>
 													<td align='left'>
@@ -138,16 +136,6 @@
 
 	</div>
 	<!-- /wrapper -->
-
-	<script>
-		// 전체선택
-		function allSel(chk) {
-			var chks = document.getElementsByName("chk");
-			for (var i = 0; i < chks.length; i++) {
-				chks[i].checked = chk;
-			}
-		}
-	</script>
 	<%@ include file="../include/plugin_js.jsp"%>
 </body>
 

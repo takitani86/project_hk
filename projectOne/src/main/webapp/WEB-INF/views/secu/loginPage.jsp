@@ -22,7 +22,7 @@
         </div>
         <div class="row">
           <div class="col-xs-8">
-            <div class="checkbox">
+            <div class="checkbox icheck">
               <label>
                 <input type="checkbox"> Remember Me
               </label>
@@ -38,8 +38,7 @@
 
       <div class="social-auth-links text-center">
         <p>- OR -</p>
-        			<a id="kakao-login-btn"></a> <a
-				href="http://developers.kakao.com/logout"></a>
+        <a id="kakao-login-btn"></a> <a href="http://developers.kakao.com/logout"></a>
       </div>
       <!-- /.social-auth-links -->
 
@@ -53,6 +52,8 @@
   <!-- /.login-box -->
   <%@ include file="../include/plugin_js.jsp" %>
   <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <!-- iCheck -->
+  <script src="<c:url value='/resources/plugins/iCheck/icheck.min.js'/>"></script>
   <script>
     $(function () {
       $('input').iCheck({

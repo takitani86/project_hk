@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <script>
 var qna_seq = '${boarddetail.qna_seq}'; // 게시글 번호
 
@@ -25,7 +28,7 @@ function commentList() {
           }
         a += '</div></div>'; 
       });
-      $(".commentList").html(a);
+      $("#commentList").html(a);
     }
   });
 }
@@ -54,7 +57,7 @@ function commentUpdate(com_seq, com_content) {
   a += '<span><button type="button" onclick="commentUpdateProc(' + com_seq + ');">수정</button></span>';
   a += '</div>';
 
-  $('.commentContent' + com_seq).html(a);
+  $('#commentContent' + com_seq).html(a);
 }
 
 // 댓글 수정

@@ -7,7 +7,6 @@
 <!-- AdminLTE App -->
 <script
 	src="<c:url value='/resources/dist/js/adminlte.min.js'/>"></script>
-
 <!-- REQUIRED JS SCRIPTS -->
 <script>
 	
