@@ -1,16 +1,31 @@
-﻿<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="true"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Home</title>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/0.3.4/sockjs.min.js"></script>
-<meta charset="UTF-8" />
-</head>
-<body>
-	<h1>1:1 상담(관리자)</h1>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!-- HEAD(link파일들 모음) -->
+<%-- include 경로를 불러온 jsp 페이지의 상대경로에 따라 
+../를 추가해주어야 한다(절대경로로 할 방법이 없음) --%>
+<%@ include file="../include/head.jsp"%>
+
+<body class="layout-boxed skin-blue sidebar-mini">
+	<div class="wrapper">
+		<!-- Main Header(네비게이션 바) -->
+		<%@ include file="../include/main_header.jsp"%>
+
+		<!-- Left Column(사이드바) -->
+		<%@ include file="../include/left_column.jsp"%>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					고객상담 <small>대화창</small>
+				</h1>
+			</section>
+
+			<!-- Main content -->
+			<section class="content container-fluid">
+
+		<h1>1:1 상담(관리자)</h1>
 
 
 	<br />
@@ -28,12 +43,28 @@
 
 
 	<div>
-		Signed In as : <span id="">${sessionScope.userid }</span>
+		Signed In as : <span id="">${sessionScope.userid}</span>
 	</div>
 	<div>
 		Send To : <span id="sendTo">merchant</span>
 	</div>
-<script>
+
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<!-- Main Footer -->
+		<%@ include file="../include/main_footer.jsp"%>
+
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- REQUIRED JS SCRIPTS -->
+
+	<!-- JS 스크립트모음 -->
+	<%@ include file="../include/plugin_js.jsp"%>
+	<script>
 	/*
 	$.ajax({
 		url : '/sessList.do',
@@ -112,6 +143,10 @@
 
 
 </script>
+
+	<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
 </body>
 <style>
 #newmsg {

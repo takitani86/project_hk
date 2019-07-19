@@ -31,7 +31,7 @@
 			</section>
 			<section class="content container-fluid">
 			<p>
-				<a href="<c:url value='productList.do?countProductPage=1'/>">상품리스트</a>
+				<a href="<c:url value='productList.do?countProductPage=1&sort=1'/>">상품리스트</a>
 			</p>
 			<p>
 				<a href="<c:url value='admin/memberList.do'/>">회원목록</a>

@@ -1,67 +1,70 @@
-﻿<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="true"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Home</title>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="//cdnjs.cloudflare.com/ajax/libs/sockjs-client/0.3.4/sockjs.min.js"></script>
-<meta charset="UTF-8" />
-</head>
-<body class="hold-transition skin-blue-light">
-	<section class="content-header">
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!-- HEAD(link파일들 모음) -->
+<%-- include 경로를 불러온 jsp 페이지의 상대경로에 따라 
+../를 추가해주어야 한다(절대경로로 할 방법이 없음) --%>
+<%@ include file="../include/head.jsp"%>
+
+<body class="layout-boxed skin-blue sidebar-mini">
+	<div class="wrapper">
+		<!-- Main Header(네비게이션 바) -->
+		<%@ include file="../include/main_header.jsp"%>
+
+		<!-- Left Column(사이드바) -->
+		<%@ include file="../include/left_column.jsp"%>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					고객상담 <small>대화창</small>
+				</h1>
+			</section>
+
+			<!-- Main content -->
+			<section class="content container-fluid">
+
 		<h1>1:1 상담(고객)</h1>
-	</section>
+
 
 	<br />
 	<div id="chatContainer"></div>
-	<div class="box box-danger direct-chat direct-chat-danger">
-		<div class="box-header with-border">
-			<h3 class="box-title">1:1상담</h3>
-			<div class="box-tools pull-right">
-				<button class="btn btn-box-tool" data-widget="collapse">
-					<i class="fa fa-minus"></i>
-				</button>
-				<button class="btn btn-box-tool" data-widget="remove">
-					<i class="fa fa-times"></i>
-				</button>
-			</div>
-		</div>
-	</div>
 
-	<div class="box-body">
-		<div id="chatArea" class="direct-chat-meassage">
-			<div class="direct-chat-msg">
-				<div class="direct-chat-info clearfix">
-					<span class="direct-chat-name pull-left">${sessionScope.userid}</span>
-					<span class="direct-chat-timestamp pull-right">23 Jan 2:00pm</span>
-				</div>
-				<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg"
-					alt="message user image">
-				<div class="direct-chat-text">Is this template really for
-					free? That's unbelievable!</div>
-			</div>
-		</div>
+	<div id="chatArea"
+		style="width: 500px; height: 500px; overflow-y: scroll; margin-top: 30px;"></div>
 
-		<br />
+	<br />
 
-		<div class="box-footer">
-			<div class="input group">
-				<input type="text" id="message" placeholder="메시지를 입력하세요." class="form-control">
-				<span id="sendBtn" class="input-group-btn">
-					<button type="button" class="btn btn-danger btn-flat">Send</button>
-				</span>
-			</div>
-		</div>
-	</div>
+	<input id="message">
+	<span id="sendBtn"
+		style="border: 1px solid red; padding: 5px; width: 30px; background-color: red; color: white; cursor: pointer;">
+		Send</span>
+
+
 	<div>
-		Signed In as : <span id=""> ${sessionScope.userid } </span>
+		Signed In as : <span id="">${sessionScope.userid}</span>
 	</div>
 	<div>
 		Send To : <span id="sendTo">ADMIN</span>
 	</div>
-<script>
+
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<!-- Main Footer -->
+		<%@ include file="../include/main_footer.jsp"%>
+
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- REQUIRED JS SCRIPTS -->
+
+	<!-- JS 스크립트모음 -->
+	<%@ include file="../include/plugin_js.jsp"%>
+	<script>
 	/*
 	$.ajax({
 		url : '/sessList.do',
@@ -140,6 +143,10 @@
 
 
 </script>
+
+	<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. -->
 </body>
 <style>
 #newmsg {
