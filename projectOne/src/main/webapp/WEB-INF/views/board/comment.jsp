@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
 <script>
 var qna_seq = '${boarddetail.qna_seq}'; // 게시글 번호
 
