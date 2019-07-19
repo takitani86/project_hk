@@ -144,7 +144,7 @@
 	<insert id="insertOrderList" parameterType="orderList">
 	INSERT INTO LJP_ORDERLIST values(
 	SEQ_ORD.NEXTVAL,
-	SEQ_ORD.CURRVAL,
+	2,
 	SYSDATE ,
 	#{ord_id} ,
 	#{ord_pronum} ,

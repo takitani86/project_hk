@@ -113,12 +113,11 @@ function selectOrder(k,pro_seq) {
 		합계:<span id="sum"></span>
 	</p>
 	<p>
-		<button onclick="payment('${user.username}');">결제</button>
+		
 	</p>
 	<sec:authorize access="isAuthenticated()">
 		<sec:authentication var="user" property="principal" />
-		<input type='button' id="btn1" onclick="check('${user.username}');"
-			value="${user.username}" />
+		<button onclick="payment('${user.username}');">결제</button>
 	</sec:authorize>
 	<script>
 var IMP = window.IMP;
@@ -172,7 +171,6 @@ function ordList(userid,seqs) {
 	        type:'GET',
 	        data:"seqs="+seqs+"&user="+userid,
 	        success:function(data){
-	            alert("완료!");
 	        },
 	        error:function(jqXHR, textStatus, errorThrown){
 	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
