@@ -41,7 +41,7 @@
 						<input class="form-control" name="keyword" value="${search.keyword}">
 					</div>
 					<div class="form-group">
-						<button class="btn btn-default" type="submit">
+						<button class="btn btn-info btn-flat" type="submit">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>
 					</div>
