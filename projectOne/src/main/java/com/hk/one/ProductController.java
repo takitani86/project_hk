@@ -20,6 +20,7 @@ import com.hk.one.dto.OrderListDto;
 import com.hk.one.dto.ProductDto;
 import com.hk.one.service.IOrderListService;
 import com.hk.one.service.IProductService;
+import com.hk.one.service.ProductService;
 
 @Controller
 public class ProductController {
@@ -27,6 +28,7 @@ public class ProductController {
 	@Autowired
 	private IProductService productService;
 	private IOrderListService orderListService;
+	private OrderListDto orderListDto;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
@@ -114,8 +116,9 @@ public class ProductController {
 	
 	@RequestMapping(value = "/ordList.do", method = RequestMethod.GET)
 	public String ordList(Locale locale, Model model,@RequestParam String user,@RequestParam int seqs) {
-		logger.info("결제성공인서트{}.", locale);
-		OrderList
+		logger.info("결제통신성공{}.", locale);
+	
+		OrderListDto dto=orderListWrap(user,seqs); 
 		boolean isS=orderListService.addOrderList(dto);
 		
 		if(isS) {
@@ -124,6 +127,16 @@ public class ProductController {
 			model.addAttribute("msg", "상품결제실패");
 			return "error";
 		}
+	}
+	
+	public OrderListDto orderListWrap(String user, int seqs){ //담아줌
+		
+		ProductDto pro_seq=productService.getProduct(seqs);
+		
+		orderListDto.setOrd_id(user);
+		orderListDto.setOrd_num(seqs);
+		orderListDto.setOrd_proprice(pro_seq.getPro_price());
+		return orderListDto;
 	}
 	
 //	@RequestMapping(value = "/productImgInsert.do")

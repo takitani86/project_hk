@@ -148,7 +148,8 @@
 	SYSDATE ,
 	#{ord_id} ,
 	#{ord_pronum} ,
-	#{ord_proprice}
+	#{ord_price}
+	<!-- #{ord_proprice} -->
 	)
 	</insert>
 

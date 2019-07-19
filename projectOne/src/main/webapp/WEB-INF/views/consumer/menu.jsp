@@ -168,7 +168,7 @@ arrayBox.splice(0);
 
 function ordList(userid,seqs) {
 	 $.ajax({
-	        url:"ordList.do?seqs="+seqs+"&user="+userid,
+	        url:"/ordList.do?seqs="+seqs+"&user="+userid,
 	        type:'GET',
 	        data: 'json',
 	        success:function(data){
