@@ -27,4 +27,7 @@
 		INSERT INTO LJP_CATEGORY VALUES (LJP_CATEGORY_SEQ.NEXTVAL, #{cat_name}, #{mem_id}, 0)
 	</insert>
 	
+	<update id="delCategory" parameterType="int">
+		UPDATE LJP_CATEGORY SET CAT_ISDEL = 1 WHERE CAT_SEQ = #{seq}
+	</update>
 </mapper>
