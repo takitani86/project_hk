@@ -1,82 +1,119 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%request.setCharacterEncoding("UTF-8");%>
-<%response.setContentType("text/html; charset=UTF-8");%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<title>메뉴판</title>
-</head>
-<body>
-<div>
-  <table border="1">
-    <tr>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">
-        카테고리 추가
-      </button>
-      <button type="button" class="btn btn-secondary" onclick="consumer();">
-        손님용 메뉴판
-      </button>
-      <c:if test="${not empty category}">
-        <c:forEach var="cate" items="${category}">
-          <td id="${cate.cat_seq}" onclick="menuList(${cate.cat_seq});">${cate.cat_name}</a></td>
-        </c:forEach>
-        <script>
-          $(document).ready(function(){
-            var seq = $('td:first').attr("id");
-            menuList(seq);
-          })
-        </script>
-      </c:if>
-    </tr>
-  </table>
-</div>
-<div>
-  <table class="menuList">
-  </table>
-</div>
-<%@ include file="menulist.jsp" %>
+	pageEncoding="UTF-8"%>
+<!-- HEAD(link파일들 모음) -->
+<%-- include 경로를 불러온 jsp 페이지의 상대경로에 따라 
+../를 추가해주어야 한다(절대경로로 할 방법이 없음) --%>
+<%@ include file="../include/head.jsp"%>
 
-<!-- 카테고리 추가 MODAL -->
-<div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="addCategoryLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addCategoryLabel">카테고리 추가</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+<body class="layout-boxed skin-blue sidebar-mini">
+  <div class="wrapper">
+    <!-- Main Header(네비게이션 바) -->
+    <%@ include file="../include/main_header.jsp"%>
+
+    <!-- Left Column(사이드바) -->
+    <%@ include file="../include/left_column.jsp"%>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          메뉴판 관리 <small>점주용</small>
+        </h1>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="box">
+              <div class="box-header with-border">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">
+                  카테고리 추가
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="consumer();">
+                  손님용 메뉴판
+                </button>
+              </div>
+              <div class="box-body">
+                <table class="table table-bordered">
+                  <tr>
+                    <c:if test="${not empty category}">
+                      <c:forEach var="cate" items="${category}">
+                        <td id="${cate.cat_seq}" onclick="menuList('${cate.cat_seq}');">${cate.cat_name}</a>
+                        &nbsp;&nbsp;&nbsp;<a href="delCate(${cate.cat_seq})" class="glyphicon glyphicon-minus"></a></td>
+                      </c:forEach>
+                      <script>
+                        $(document).ready(function () {
+                          var seq = $('td:first').attr("id");
+                          menuList(seq);
+                        })
+                      </script>
+                    </c:if>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="box">
+              <div class="box-body">
+                <table class="menuList">
+                </table>
+                <%@ include file="menulist.jsp" %>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="modal-body">
-          <input type="text" class="form-control" id="add">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-          <button type="button" class="btn btn-primary" onclick="addCategory();">추가</button>
+
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    
+    <!-- 카테고리 추가 MODAL -->
+    <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="addCategoryLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addCategoryLabel">카테고리 추가</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="text" class="form-control" id="add">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+            <button type="button" class="btn btn-primary" onclick="addCategory();">추가</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    
+    <!-- Main Footer -->
+    <%@ include file="../include/main_footer.jsp"%>
 
-<script>
-  function addCategory() {
-    location.href="addCategory.do?add=" + $('#add').val();
-  }
-  function consumer() {
-    location.href="consumer.do";
-  }
-</script>
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- REQUIRED JS SCRIPTS -->
+
+  <!-- JS 스크립트모음 -->
+  <%@ include file="../include/plugin_js.jsp"%>
+
+  <script>
+    function addCategory() {
+      location.href = "addCategory.do?add=" + $('#add').val();
+    }
+
+    function consumer() {
+      location.href = "consumer.do";
+    }
+    function delCate(seq) {
+      location.href = "delCategory.do?seq=" + seq;
+    }
+  </script>
 </body>
+
 </html>

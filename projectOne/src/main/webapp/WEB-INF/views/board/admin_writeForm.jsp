@@ -25,7 +25,7 @@
       <section class="content container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-6">
+          <div class="col-xs-10">
             <!-- general form elements -->
             <div class="box box-primary">
               <div class="box-header with-border">
@@ -54,11 +54,6 @@
                     <label for="content">내용</label>
                     <textarea name="qna_content" class="form-control" rows="8" id="content"
                       placeholder="내용을 입력하세요." style="resize:none;"></textarea>
-                  </div>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> 공지사항으로 등록
-                    </label>
                   </div>
                 </div>
                 <!-- /.box-body -->

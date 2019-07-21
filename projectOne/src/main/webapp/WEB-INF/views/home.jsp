@@ -1,17 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	request.setCharacterEncoding("UTF-8");
-%>
-<%
-	response.setContentType("text/html; charset=UTF-8");
-%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@ page session="false"%>
-
-<html>
 <!-- HEAD(link파일들 모음) -->
 <%@ include file="include/head.jsp"%>
 <body class="skin-blue sidebar-mini layout-boxed">
@@ -60,7 +48,6 @@
 				</h5>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
-				<sec:authentication var="user" property="principal" />
 				<h3>${user.username}님,반갑습니다.</h3>
 				<p>암호 : ${user.password}</p>
 				<p>활성화 여부: ${user.enabled}</p>

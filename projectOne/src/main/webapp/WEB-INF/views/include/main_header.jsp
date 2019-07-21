@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <body class="skin-blue">
 	<!-- Main Header -->
 	<header class="main-header">
 
 		<!-- Logo -->
-		<a href="<c:url value="/home.do" />" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+		<a href="<c:url value='/home.do' />" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 			<span class="logo-mini"><b>O</b>NE</span> <!-- logo for regular state and mobile devices -->
 			<span class="logo-lg">PROJECT<b>ONE</b></span>
 		</a>
@@ -22,16 +24,16 @@
 					<li class="dropdown notifications-menu">
 						<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
-							class="label label-warning">10</span>
+							class="label label-warning">5</span>
 					</a>
 						<ul class="dropdown-menu">
-							<li class="header">You have 10 notifications</li>
+							<li class="header">5개의 알림이 있습니다</li>
 							<li>
 								<!-- Inner Menu: contains the notifications -->
 								<ul class="menu">
 									<li>
 										<!-- start notification --> <a href="#"> <i
-											class="fa fa-users text-aqua"></i> 5 new members joined today
+											class="fa fa-users text-aqua"></i> 5명의 점주가 승인 대기중입니다.
 									</a>
 									</li>
 									<!-- end notification -->

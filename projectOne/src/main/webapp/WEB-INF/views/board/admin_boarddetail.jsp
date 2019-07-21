@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
 <!-- HEAD(link파일들 모음) -->
 <%-- include 경로를 불러온 jsp 페이지의 상대경로에 따라 
 ../를 추가해주어야 한다(절대경로로 할 방법이 없음) --%>
 <%@ include file="../include/head.jsp"%>
 <style>
-  #replyForm {
-    display: none;
-  }
-</style>
-
+    #replyForm {
+      display: none;
+    }
+  </style>
 <body class="layout-boxed skin-blue sidebar-mini">
   <div class="wrapper">
     <!-- Main Header(네비게이션 바) -->
@@ -36,11 +35,6 @@
               <!-- form start -->
               <div class="box-body">
                 <div class="form-group">
-                  <label for="seq">글번호</label>
-                  <input type="text" name="qna_seq" class="form-control col-xs-3" id="seq"
-                    placeholder="${boarddetail.qna_seq}" readonly>
-                </div>
-                <div class="form-group">
                   <label for="id">아이디</label>
                   <input type="text" name="mem_id" class="form-control col-xs-3" id="id"
                     placeholder="${boarddetail.mem_id}" readonly>
@@ -52,9 +46,9 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputFile">첨부된 파일</label>
-                  <img src="${pageContext.request.contextPath}/image/${boarddetail.qna_fileName}" width=250 height=400
+                  <img onerror="this.style.display='none'" src="<c:url value='/resources/img/board/${boarddetail.qna_fileName}'/>" width=550 height=300
                     alt="preview">
-                  <p class="help-block">미리보기가 표시됩니다.</p>
+                  <p class="help-block">이미지일 경우 미리보기가 표시됩니다.</p>
                 </div>
                 <div class="form-group">
                   <label for="content">내용</label>
@@ -65,46 +59,55 @@
               <!-- /.box-body -->
 
               <div class="box-footer btn-group">
-                <button class="btn btn-default" type="button" onclick="replyForm()">답글달기</button>
-                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#delBoard">삭제</button>
+                    <c:if test="${user.username == boarddetail.mem_id}">
+                      <button class="btn btn-default" type="button" onclick="updateForm('${boarddetail.qna_seq}')">수정</button>
+                    </c:if>
+                    <c:if test="${user.username != boarddetail.mem_id}">
+                      <button class="btn btn-default" type="button" onclick="replyForm()">답글달기</button>
+                    </c:if>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#delBoard">삭제</button>
               </div>
             </div>
             <!-- /.box -->
             <!-- 답글폼 -->
-            <div class="form-group" id="replyForm">
-              <h1>답글</h1>
-              <form action="admin_replyBoard.do" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="seq" value="${boarddetail.qna_seq}">
-                <table class="table table-bordered table-hover">
-                  <tr>
-                    <th width="10%">아이디</th>
-                    <td colspan="2"><input class="form-control" type="text" name="mem_id" value="ADMIN" readonly>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>제목</th>
-                    <td colspan="2"><input class="form-control type=" text" name="qna_title"></td>
-                  </tr>
-                  <tr>
-                    <th><input type="file" name="uploadFile" onchange="readURL(this);"></th>
-                    <td><img id="preview" src="#" width=200 height=200 /></td>
-                  </tr>
-                  <tr>
-                    <th>내용</th>
-                    <td colspan="2"><textarea name="qna_content" class="form-control rounded-0" rows="5"></textarea>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <input class="btn btn-default" type="submit" value="등록">
-                      <input class="btn btn-default" type="button" value="목록" onclick="history.back()">
-                    </td>
-                  </tr>
-                </table>
-              </form>
+            <div class="box box-primary" id="replyForm">
+              <div class="box-body">
+                <div class="form-group">
+                  <h1>답글</h1>
+                  <form action="admin_replyBoard.do" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="seq" value="${boarddetail.qna_seq}">
+                    <table class="table table-bordered table-hover">
+                      <tr>
+                        <th width="10%">아이디</th>
+                        <td colspan="2"><input class="form-control" type="text" name="mem_id" value="ADMIN" readonly>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>제목</th>
+                        <td colspan="2"><input class="form-control type=" text" name="qna_title"></td>
+                      </tr>
+                      <tr>
+                        <th><input type="file" name="uploadFile" onchange="readURL(this);"></th>
+                        <td><img id="preview" onerror="this.style.display='none'" src="#" width=200 height=200 /></td>
+                      </tr>
+                      <tr>
+                        <th>내용</th>
+                        <td colspan="2"><textarea name="qna_content" class="form-control rounded-0" rows="5"></textarea>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="3">
+                          <input class="btn btn-default" type="submit" value="등록">
+                          <input class="btn btn-default" type="button" value="목록" onclick="history.back()">
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+                </div>
+              </div>
             </div>
             <!-- 댓글목록 -->
-            <div id="commentList" class="box-comments "></div>
+            <div id="commentList" class="box box-comments"></div>
             <!-- 댓글  -->
             <label for="content">댓글</label>
             <form name="commentInsertForm">
@@ -129,10 +132,10 @@
 
   </div>
   <!-- ./wrapper -->
-<!-- 삭제창 Modal -->
-<div id="delBoard" class="modal fade" role="dialog">
+  <!-- 삭제창 Modal -->
+  <div id="delBoard" class="modal" role="dialog">
     <div class="modal-dialog modal-sm">
-  
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -147,7 +150,7 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">아니오</button>
         </div>
       </div>
-  
+
     </div>
   </div>
   <!-- REQUIRED JS SCRIPTS -->

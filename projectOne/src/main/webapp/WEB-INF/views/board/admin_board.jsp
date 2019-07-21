@@ -48,10 +48,10 @@
 								<table class="table table- table-bordered table-hover">
 									<thead>
 										<tr>
-											<th width="10%">번호</th>
+											<th width="7%">번호</th>
 											<th width="10%">작성자</th>
-											<th width="60%">제목</th>
-											<th width="10%">작성일</th>
+											<th>제목</th>
+											<th width="15%">작성일</th>
 											<th width="10%">조회수</th>
 										</tr>
 									</thead>
@@ -68,6 +68,9 @@
 													<td>${board.mem_id}</td>
 													<td align='left'>
 														<c:choose>
+															<c:when test='${board.qna_isDel == 1}'>
+																----삭제된 글입니다.----
+															</c:when>
 															<c:when test='${board.level > 1}'>
 																<c:forEach begin="1" end="${board.level}" step="1">
 																	<span style="padding-left: 20px;"></span>
@@ -93,7 +96,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="align-content-center">
+				<div>
 					<ul class="pagination">
 						<c:if test="${totalArticles != null}">
 							<c:choose>

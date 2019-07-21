@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ko.js" integrity="sha256-qkVUOqyWLNnWgXE3Xd2HmUE9GQ/4Z6zRSk3P7JYAAOk=" crossorigin="anonymous"></script>
 <script>
 var qna_seq = '${boarddetail.qna_seq}'; // 게시글 번호
 
@@ -24,7 +24,7 @@ function commentList() {
         if (value.com_isDel == 1) {
           a += '<div class="commentContent' + value.com_seq + '"> <p> -- 삭제된 댓글입니다. -- <p>';
         } else {
-            a += '<div class="commentContent' + value.com_seq + '"> <p> 내용 : ' + value.com_content + '<p>';
+            a += '<div class="commentContent' + value.com_seq + '"> <p>' + value.com_content + '<p>';
           }
         a += '</div></div>'; 
       });

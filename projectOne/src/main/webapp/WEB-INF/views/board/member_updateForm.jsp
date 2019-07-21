@@ -1,59 +1,104 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%request.setCharacterEncoding("UTF-8");%>
-<%response.setContentType("text/html; charset=UTF-8");%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<title>고객센터 게시판</title>
-</head>
-<body>
-<form action="member_updateBoard.do" method="post" enctype="multipart/form-data">
-  <input type="hidden" name="qna_seq" value="${boarddetail.qna_seq}"/>
-  <table border="1">
-    <tr>
-      <th>아이디</th>
-      <td><input type="text" name="mem_id" value="merchant" readonly></td>
-    </tr>
-    <tr>
-      <th>제목</th>
-      <td><input type="text" name="qna_title" value="${boarddetail.qna_title}"></td>
-    </tr>
-    <tr>
-      <th>내용</th>
-      <td><textarea name="qna_content" cols="60" rows="10">${boarddetail.qna_content}</textarea></td>
-    </tr>
-    <tr>
-      <td><input type="file" name="uploadFile" onchange="readURL(this);"></td>
-      <td>
-        <img id="preview" src="${pageContext.request.contextPath}/image/${boarddetail.qna_fileName}" width=200 height=200/>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <input type="submit" value="수정">
-        <input type="reset" value="초기화">
-        <input type="button" onclick="delBoard('${boarddetail.qna_seq}')" value="삭제">
-        <input type="button" value="목록" onclick="location.href='member_board.do'">
-      </td>
-    </tr>
-  </table>  
-</form>
-<script>
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#preview').attr('src', e.target.result);
-      }
-      reader.readAsDataURL(input.files[0]);
+	pageEncoding="UTF-8"%>
+<!-- HEAD(link파일들 모음) -->
+<%-- include 경로를 불러온 jsp 페이지의 상대경로에 따라 
+../를 추가해주어야 한다(절대경로로 할 방법이 없음) --%>
+<%@ include file="../include/head.jsp"%>
+
+<body class="layout-boxed skin-blue sidebar-mini">
+  <div class="wrapper">
+    <!-- Main Header(네비게이션 바) -->
+    <%@ include file="../include/main_header.jsp"%>
+
+    <!-- Left Column(사이드바) -->
+    <%@ include file="../include/left_column.jsp"%>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          고객센터 게시판 <small>점주용</small>
+        </h1>
+      </section>
+
+      <!-- Main content -->
+      <section class="content container-fluid">
+        <div class="row">
+          <div class="col-xs-10">
+            <div class="box box-primary">
+              <!-- form start -->
+              <form role="form" action="member_updateBoard.do" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="qna_seq" value="${boarddetail.qna_seq}">
+                <div class="box-body">
+                  <div class="form-group">
+                    <label for="id">아이디</label>
+                    <input type="text" name="mem_id" class="form-control col-xs-3" id="id"
+                      placeholder="${boarddetail.mem_id}" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label for="title">제목</label>
+                    <input type="text" name="qna_title" class="form-control" id="title"
+                      value="${boarddetail.qna_title}">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputFile">파일 첨부</label>
+                    <input type="file" name="uploadFile" onchange="readURL(this);" id="exampleInputFile">
+                    <img onerror="this.style.display='none'" src="#" id="preview" width=250 height=400 alt="preview">
+                    <p class="help-block">미리보기가 표시됩니다.</p>
+                  </div>
+                  <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea name="qna_content" class="form-control" rows="8" id="content"
+                      style="resize:none;">${boarddetail.qna_content}</textarea>
+                  </div>
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer btn-group">
+                  <button class="btn btn-default" type="submit">수정</button>
+                  <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#delBoard">삭제</button>
+                  <input class="btn btn-default" type="button" value="돌아가기"
+                    onclick="location.href='member_boarddetail.do?seq=${boarddetail.qna_seq}'">
+                </div>
+              </form>
+            </div>
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <%@ include file="../include/main_footer.jsp"%>
+
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- REQUIRED JS SCRIPTS -->
+
+  <!-- JS 스크립트모음 -->
+  <%@ include file="../include/plugin_js.jsp"%>
+
+  <script>
+    // 수정폼으로 이동
+    function updateForm(seq) {
+      location.href = "member_updateForm.do?seq=" + seq;
     }
-  };
-  function delBoard(seq) {
-    location.href="member_del.do?seq=" + seq;
-  }
-</script>
+    // 삭제하기
+    function delBoard(seq) {
+      location.href = "member_del.do?seq=" + seq;
+    }
+    // 이미지 미리보기
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#preview').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    };
+  </script>
 </body>
+
 </html>
