@@ -30,4 +30,9 @@ public class OrderService implements IOrderService {
 		return orderDao.addCategory(mem_id, add);
 	}
 
+	@Override
+	public boolean delCategory(int seq) {
+		return orderDao.delCategory(seq);
+	}
+
 }

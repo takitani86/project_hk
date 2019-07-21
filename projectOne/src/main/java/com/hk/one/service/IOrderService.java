@@ -13,4 +13,6 @@ public interface IOrderService {
 	public List<ProductDto> selectMenuProductList(int seq);
 	// 카테고리 추가
 	public boolean addCategory(String mem_id, String add);
+	// 카테고리 삭제
+	public boolean delCategory(int seq);
 }

@@ -106,6 +106,18 @@ public class MenuController {
 		}
 	}
 	
+	@RequestMapping(value = "/delCategory.do", method = RequestMethod.GET)
+	private String delCategory(Model model, @RequestParam int seq) {
+		logger.info("카테고리삭제 호출");
+		
+		boolean success = orderService.delCategory(seq);
+		if (success) {
+			return "redirect:/member/menu.do";
+		} else {
+			return "redirect:/member/menu.do";
+		}
+	}
+	
 	// 손님용 컨트롤러
 	static HttpSession session;
 	@RequestMapping(value = "/consumer.do", method = RequestMethod.GET)

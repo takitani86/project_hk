@@ -39,4 +39,10 @@ public class OrderDao implements IOrderDao {
 			return false;
 		}
 	}
+	
+	@Override
+	public boolean delCategory(int seq) {
+		int success = sqlSession.update("Category.delCategory", seq);
+		return  success > 0 ? true:false;
+	}
 }

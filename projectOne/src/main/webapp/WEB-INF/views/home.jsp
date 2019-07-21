@@ -47,7 +47,8 @@
 					<a href='<c:url value="/secu/loginPage.do"/>'>LOGIN</a> 로그인 해주세요.
 				</h5>
 			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
+			<sec:authorize access="isAuthenticated()"> 
+			<sec:authentication var="user" property="principal" />
 				<h3>${user.username}님,반갑습니다.</h3>
 				<p>암호 : ${user.password}</p>
 				<p>활성화 여부: ${user.enabled}</p>
@@ -71,3 +72,11 @@
 	<%@ include file="include/plugin_js.jsp"%>
 </body>
 </html>
+			<sec:authorize access="isAnonymous()"> // if 로그인하지않은 유저일 때
+			<sec:authentication var="user" property="principal" /> // 
+				<h3>${user.username}님,반갑습니다.</h3>
+				<p>암호 : ${user.password}</p>
+				<p>활성화 여부: ${user.enabled}</p>
+				<p>권한 여부: ${user.auth}</p>
+				<p>이메일: ${user.secu_email}
+			</sec:authorize>
