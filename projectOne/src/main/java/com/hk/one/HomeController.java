@@ -33,6 +33,7 @@ import com.hk.one.dto.MemberDto;
 import com.hk.one.dto.SessionVO;
 import com.hk.one.login.KakaoAccessToken;
 import com.hk.one.login.KakaoUserInfo;
+import com.hk.one.login.Kakao_restApi;
 import com.hk.one.service.IMemberService;
 
 @Controller
@@ -73,7 +74,7 @@ public class HomeController {
 		boolean isS = MemberService.joinMember(memberDto);
 		if(isS) {
 			model.addAttribute("mem_address", mem_address);
-			mav = new ModelAndView("member/memberList"); //쉬벌 값 넣어서 전달하는거 나중에 하자ㅡㅡ
+			mav = new ModelAndView("member/memberList"); //값 넣어서 전달하는거 
 			return "member/memberList";
 		} else {
 			model.addAttribute("failJoin", "회원 가입 실패");
@@ -99,6 +100,26 @@ public class HomeController {
 		int result = 0;
 		if(mem != null) result = 1;
 		return result + "";		
+	}
+	
+	//카카오 로그인
+	@RequestMapping(value = "/secu/oauth.do", produces = "application/json")
+	public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) {
+		//카카오 홈페이지에서 받은 결과 코드
+		logger.info("로그인 시 받은 임시 코드: " + code);
+		logger.info("로그인 후 결과값 {}.");
+		
+		//카카오 rest Api 객체 선언
+		Kakao_restApi kr = new Kakao_restApi();
+		//결과값 node에 담기
+		JsonNode node = kr.getAccessToken(code);
+		//결과값 출력
+		logger.info("노드값: " + node);
+		//노드 안에 있는 access_token 값 꺼내 문자열로 변환
+		String token = node.get("access_token").toString();
+		//시큐리티에 담아주는 부분
+		
+		return "home"; //로그인 이후 결과창
 	}
 
 	// 로그인 화면으로 이동
@@ -158,7 +179,7 @@ public class HomeController {
 		}
 	}	
 	
-	@RequestMapping(value = "/kakaoLogin.do", produces = "application/json", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/kakaoLogin.do", produces = "application/json", method = RequestMethod.GET)
 	public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws IOException {
 		logger.info("kakao 로그인 토큰 받아오기 {}.");
 		System.out.println("kakao code: " + code);
@@ -192,7 +213,7 @@ public class HomeController {
         System.out.println("image: " + mem_image);
         System.out.println("regDate: " + mem_regDate);
 		return null;
-	}
+	}*/
 	
 	@ResponseBody //html로 응답하기
 	@RequestMapping(value = "/secu/emailRegist.do")

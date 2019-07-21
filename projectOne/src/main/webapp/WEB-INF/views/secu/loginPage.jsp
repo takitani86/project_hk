@@ -44,6 +44,8 @@
 
       <a href="<c:url value='/secu/to_find_PwForm.do'/>">비밀번호 찾기</a><br>
       <a href="<c:url value='/secu/joinMemberForm.do'/>">회원가입</a><br>
+      <a href="<c:url value='https://kauth.kakao.com/oauth/authorize?client_id=27bd705ffa551adfcdf14b5d6e5b9316&redirect_uri=http://localhost:5336/projectOne/secu/oauth.do&response_type=code'/>">카카오 로그인</a>
+      <a href="<c:url value='/secu/oauth.do'/>">카카오 계정으로 이용하기</a>
       <a href="<c:url value='/secu/joinKakaoMember.do'/>">카카오 계정으로 회원가입</a>
 
     </div>
