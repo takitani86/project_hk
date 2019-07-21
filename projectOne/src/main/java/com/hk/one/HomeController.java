@@ -102,7 +102,7 @@ public class HomeController {
 		return result + "";		
 	}
 	
-	//카카오 로그인
+/*	//카카오 로그인
 	@RequestMapping(value = "/secu/oauth.do", produces = "application/json")
 	public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) {
 		//카카오 홈페이지에서 받은 결과 코드
@@ -120,7 +120,7 @@ public class HomeController {
 		//시큐리티에 담아주는 부분
 		
 		return "home"; //로그인 이후 결과창
-	}
+	}*/
 
 	// 로그인 화면으로 이동
 	@RequestMapping(value = "/secu/loginPage.do", method = RequestMethod.GET)
@@ -179,7 +179,8 @@ public class HomeController {
 		}
 	}	
 	
-/*	@RequestMapping(value = "/kakaoLogin.do", produces = "application/json", method = RequestMethod.GET)
+	//카카오 로그인
+	@RequestMapping(value = "/kakaoLogin.do", produces = "application/json", method = RequestMethod.GET)
 	public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws IOException {
 		logger.info("kakao 로그인 토큰 받아오기 {}.");
 		System.out.println("kakao code: " + code);
@@ -212,8 +213,22 @@ public class HomeController {
         System.out.println("email: " + mem_email);
         System.out.println("image: " + mem_image);
         System.out.println("regDate: " + mem_regDate);
-		return null;
-	}*/
+        
+        Map<String, Object> map;
+        MemberDto mem = MemberService.checkIdMember(mem_id);
+        if (mem == null) { //해당 되는 아이디 없음. 회원 가입 폼으로 이동
+        	map.set(mem_id, mem_id); //키 뭘로 잡아야 하는지
+        	map.set(mem_name, mem_name);
+        	map.set(mem_email, mem_email);
+        	map.set(mem_image, mem_image);
+        	map.set(mem_regDate, mem_regDate);
+        	
+        	return "/secu/joinMemberForm.do";
+        } else { //해당 아이디 있음. 로그인 후 메인화면으로 이동
+        	
+        	return "home";
+        }
+	}
 	
 	@ResponseBody //html로 응답하기
 	@RequestMapping(value = "/secu/emailRegist.do")
@@ -260,7 +275,8 @@ public class HomeController {
 			return mav;
 		}
 	}
-static HttpSession session;
+	
+	static HttpSession session;
 	
 	@RequestMapping(value = "/chat.do", method = RequestMethod.GET)
 	public String chat(SessionVO vo, HttpServletRequest req,Authentication auth) {
