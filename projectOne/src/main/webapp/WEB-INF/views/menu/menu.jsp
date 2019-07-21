@@ -41,7 +41,7 @@
                     <c:if test="${not empty category}">
                       <c:forEach var="cate" items="${category}">
                         <td id="${cate.cat_seq}" onclick="menuList('${cate.cat_seq}');">${cate.cat_name}</a>
-                        &nbsp;&nbsp;&nbsp;<a href="delCate(${cate.cat_seq})" class="glyphicon glyphicon-minus"></a></td>
+                        &nbsp;&nbsp;&nbsp;<a href="delCategory.do?seq=${cate.cat_seq}" class="glyphicon glyphicon-minus"></a></td>
                       </c:forEach>
                       <script>
                         $(document).ready(function () {
@@ -109,9 +109,6 @@
 
     function consumer() {
       location.href = "consumer.do";
-    }
-    function delCate(seq) {
-      location.href = "delCategory.do?seq=" + seq;
     }
   </script>
 </body>
