@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,8 +76,10 @@ public class HomeController {
 		
 		boolean isS = MemberService.joinMember(memberDto);
 		if(isS) {
-			model.addAttribute("mem_address", mem_address);
-			mav = new ModelAndView("member/memberList"); //값 넣어서 전달하는거 
+			Map<String,String> addMap = new HashMap<>();
+			addMap.put("mem_address", mem_address);
+			model.addAttribute("addMap", addMap);
+			//mav = new ModelAndView("member/memberList"); //값 넣어서 전달하는거 
 			return "member/memberList";
 		} else {
 			model.addAttribute("failJoin", "회원 가입 실패");
@@ -161,64 +164,41 @@ public class HomeController {
 	}	
 	
 	//카카오 로그인 
-//	@ResponseBody
 	@RequestMapping(value = "/secu/kakaoLogin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
-//	public String kakaoLogin(@RequestParam("code") String code,RedirectAttributes ra, HttpSession session, HttpServletResponse response, Model model) throws IOException {
 	public String kakaoLogin( HttpServletRequest request, HttpServletResponse response, Model model, MemberDto dto) throws IOException {
 		
 		logger.info("kakao 사용자 정보 받아오기 {}.");
 		
-		String mem_id=dto.getMem_id();
+		String mem_id = dto.getMem_id();
         String mem_name = dto.getMem_name();
         String mem_email = dto.getMem_email();
-        String mem_image = null;
-        String mem_regDate = null;
-        System.out.println("카카오아이디"+mem_id);
-        Map<String,String>map=new HashMap<>();
-        map.put("mem_id", mem_id);
-		map.put("mem_name", mem_name);
-		map.put("mem_email", mem_email);
-		model.addAttribute("map", map);
-        // 유저정보 카카오에서 가져오기 Get properties
-//        JsonNode properties = userInfo.path("properties");
-//        JsonNode kakao_account = userInfo.path("kakao_account");
- 
-//        mem_name = properties.path("nickname").asText();
-//        mem_email = kakao_account.path("email").asText();
-//        mem_image = properties.path("profile_image").asText();
-//        mem_regDate = properties.path("created").asText();
- 
-//        System.out.println("id: " + mem_id);
-//        System.out.println("name: " + mem_name);
-//        System.out.println("email: " + mem_email);
-//        System.out.println("image: " + mem_image);
-//        System.out.println("regDate: " + mem_regDate);
+        System.out.println("카카오아이디: " + mem_id);
         
-//        try {
-//			Map<String, Object> map = new HashMap<>();
-//			MemberDto mem = MemberService.checkIdMember(mem_id);
-//			if (mem == null) { //해당 되는 아이디 없음. 회원 가입 폼으로 이동
-//				map.put("mem_id", mem_id);
-//				map.put("mem_name", mem_name);
-//				map.put("mem_email", mem_email);
-//				map.put("mem_image", mem_image);
-//				map.put("mem_regDate", mem_regDate);
-//					
-//				model.addAttribute("map", map);
-//				return "/secu/joinMemberForm.do";
-//			} else { //해당 아이디 있음. 로그인 후 메인화면으로 이동
-//				CustomUserDetailsService userService = new CustomUserDetailsService();
-//				userService.loadUserByUsername(mem_id);
-//				return "home";
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		List<MemberDto> list = MemberService.getAllMember();
-		model.addAttribute("list", list);
-		
-		return "secu/joinKakaoMember";
-//        return "/secu/joinMemberForm.do";
+        try {
+			MemberDto mem = MemberService.checkIdMember(mem_id);
+			if (mem == null) { //해당 아이디 없음. 회원가입 화면으로 이동
+			    Map<String,String> map = new HashMap<>();
+			    map.put("mem_id", mem_id);
+				map.put("mem_name", mem_name);
+				map.put("mem_email", mem_email);
+				model.addAttribute("map", map);
+				
+				List<MemberDto> list = MemberService.getAllMember();
+				model.addAttribute("list", list);
+				
+				return "secu/joinKakaoMember";
+			} else { //해당 아이디 있음. 로그인 후 메인화면으로 이동
+				CustomUserDetailsService userService = new CustomUserDetailsService();
+				userService.loadUserByUsername(mem_id);
+				return "home";
+			}
+		} catch (UsernameNotFoundException e) {
+			e.printStackTrace();
+			return "home";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "home";
+		}
 	}
 	
 	@ResponseBody //html로 응답하기

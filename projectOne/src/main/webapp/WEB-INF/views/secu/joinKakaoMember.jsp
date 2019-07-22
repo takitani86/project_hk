@@ -63,6 +63,11 @@ response.setContentType("text/html; charset=utf-8");
             }
         }).open();
     }
+    function oneAddress() {
+    	if(document.getElementById("sample4_roadAddress").value && document.getElementById("sample4_detailAddress").value) {
+    		document.getElementById("mem_address").value = parseInt(document.getElementById("sample4_roadAddress").value);
+    	}
+    }
 </script>
 <body class="layout-boxed skin-blue sidebar-mini">
 <div class="wrapper">
@@ -102,9 +107,9 @@ response.setContentType("text/html; charset=utf-8");
 						<td>
 							<input type="text" id="sample4_postcode" placeholder="우편번호">
 							<input type="button" id="addressBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" id="sample4_roadAddress" name="roadAddress" placeholder="도로명주소">
+							<input type="text" id="sample4_roadAddress" name="roadAddress" placeholder="도로명주소" onkeyup="oneAddress()">
 							<span id="guide" style="color:#999;display:none"></span>
-							<input type="text" id="sample4_detailAddress" name="detailAddress" placeholder="상세주소">
+							<input type="text" id="sample4_detailAddress" name="detailAddress" placeholder="상세주소" onkeyup="oneAddress()">
 							<input type="text" id="sample4_extraAddress" placeholder="참고항목">
 							<input type="hidden" name="mem_address" id="mem_address" value="">
 						</td>
