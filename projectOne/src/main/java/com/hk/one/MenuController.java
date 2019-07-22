@@ -1,6 +1,8 @@
 package com.hk.one;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hk.one.dto.CategoryDto;
+import com.hk.one.dto.MemberDto;
+import com.hk.one.dto.OrderListDto;
 import com.hk.one.dto.ProductDto;
+import com.hk.one.service.IMemberService;
+import com.hk.one.service.IOrderListService;
 import com.hk.one.service.IOrderService;
 import com.hk.one.service.IProductService;
 
@@ -31,6 +37,10 @@ public class MenuController {
 	private IOrderService orderService;
 	@Autowired
 	private IProductService productService;
+	@Autowired
+	private IMemberService memberService;
+	@Autowired
+	private IOrderListService orderListService;
 	
 	@RequestMapping(value = "/payment.do", method = RequestMethod.GET)
 	public String payment(Model model) {
@@ -119,19 +129,55 @@ public class MenuController {
 	}
 	
 	// 손님용 컨트롤러
-	static HttpSession session;
-	@RequestMapping(value = "/consumer.do", method = RequestMethod.GET)
-	public String consumer(Model model, Authentication auth,HttpServletRequest req) {
+	
+	@RequestMapping(value = "/consumer/select.do", method = RequestMethod.GET)
+	public String consumer(Model model) {
+		logger.info("손님용 초기화면 메소드 호출");
+		
+		List<MemberDto> dto = new ArrayList<>();
+		dto = memberService.getEnabledMember();
+		model.addAttribute("member", dto);
+		
+		return "consumer/first";
+	}
+	
+	@RequestMapping(value = "/consumer/menu.do", method = RequestMethod.GET)
+	public String consumerMenu(Model model, @RequestParam String mem_id) {
 		logger.info("손님용 메뉴 메소드 호출");
-		session = req.getSession();
-		session.setAttribute("userid", auth.getName());
-		System.out.println(auth.getName());
 
 		// 카테고리 정보 조회
-		List<CategoryDto> category = orderService.selectMenuCategoryList(auth.getName());
+		List<CategoryDto> category = orderService.selectMenuCategoryList(mem_id);
 
 		model.addAttribute("category", category);
+		model.addAttribute("mem_id", mem_id);
 
 		return "consumer/menu";
+	}
+	
+	@RequestMapping(value = "/consumer/menuList.do", method = RequestMethod.GET)
+	@ResponseBody
+	private List<ProductDto> consumerProductList(Model model, int seq) throws Exception {
+		logger.info("상품리스트 호출");
+
+		return orderService.selectMenuProductList(seq);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ordList.do", method = RequestMethod.GET)
+	public void ordList(Locale locale, Model model,@RequestParam String user,@RequestParam int seqs) {
+		logger.info("결제통신성공{}.", locale);
+		System.out.println("통신 유저:"+user);
+		System.out.println("통신 seq:"+seqs);
+		OrderListDto dto=orderListWrap(user,seqs); 
+		boolean isS= orderListService.addOrderList(dto);
+	}
+	
+	public OrderListDto orderListWrap(String user, int seqs){ //담아줌
+		System.out.println("orderListWrap 유저:"+user);
+		System.out.println("orderListWrap seq:"+seqs);
+		ProductDto pro_seq=productService.getProduct(seqs);
+		
+		OrderListDto orderListDto = new OrderListDto(user,seqs,pro_seq.getPro_price());
+		return orderListDto;
 	}
 }

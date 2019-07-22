@@ -85,4 +85,9 @@ public class MemberDao implements IMemberDao {
 		 return pw;
 	}
 
+	@Override
+	public List<MemberDto> getEnabledMember() {
+		return sqlSession.selectList(namespace + "getEnabledMember");
+	}
+
 }

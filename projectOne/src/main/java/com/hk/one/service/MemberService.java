@@ -73,4 +73,9 @@ public class MemberService implements IMemberService {
 		return memberDao.findPw(paramMap);
 	}
 
+	@Override
+	public List<MemberDto> getEnabledMember() {
+		return memberDao.getEnabledMember();
+	}
+
 }

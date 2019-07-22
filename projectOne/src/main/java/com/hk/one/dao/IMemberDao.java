@@ -19,4 +19,5 @@ public interface IMemberDao {
 	public List<MemberDto> searchMember(String searchOption, String keyword) throws Exception; //회원 정보 조회 기능
 	public int countArticle(String searchOption, String keyword) throws Exception; //조회 결과 개수 확인
 	public String findPw(Map<String, Object> paramMap) throws Exception; //비밀번호 찾기 기능
+	public List<MemberDto> getEnabledMember(); // 활성화된 멤버 찾기
 }

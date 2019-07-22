@@ -5,124 +5,91 @@
 ../를 추가해주어야 한다(절대경로로 할 방법이 없음) --%>
 <%@ include file="../include/head.jsp"%>
 
-<body class="layout-boxed skin-blue sidebar-mini">
-  <div class="wrapper">
-    <!-- Main Header(네비게이션 바) -->
-    <%@ include file="../include/main_header.jsp"%>
+<body class="hold-transition">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content container">
+    <!-- Content Header (Page header) -->
 
-    <!-- Left Column(사이드바) -->
-    <%@ include file="../include/left_column.jsp"%>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          ${user.username} 영업장의 메뉴입니다.
-        </h1>
-      </section>
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="row">
-          <div class="col-sm-10">
-            <div class="box">
-              <div class="box-body">
-                <table class="table table-bordered">
-                  <tr>
-                    <c:if test="${not empty category}">
-                      <c:forEach var="cate" items="${category}">
-                        <td id="${cate.cat_seq}" onclick="menuList('${cate.cat_seq}');">${cate.cat_name}</a>
-                          &nbsp;&nbsp;&nbsp;<a href="delCate(${cate.cat_seq})" class="glyphicon glyphicon-minus"></a>
-                        </td>
-                      </c:forEach>
-                      <script>
-                        $(document).ready(function () {
-                          var seq = $('td:first').attr("id");
-                          menuList(seq);
-                        })
-                      </script>
-                    </c:if>
-                  </tr>
-                </table>
-              </div>
-            </div>
-            <div class="box">
-              <div class="box-body">
-                <table class="menuList">
-                </table>
-              </div>
-            </div>
-            <div class="box">
-              <div class="box-header">
-                <h6>장바구니</h6>
-              </div>
-              <box id="selectOrder" class="box-body">
-                <p>주문수량 :</p>
-                <p>
-                  합계:<span id="sum"></span>
-                </p>
-                <p>
-                </p>
-                <sec:authorize access="isAuthenticated()">
-                  <button onclick="payment('${user.username}');">결제</button>
-                </sec:authorize>
-              </box>
-            </div>
+    <!-- Main content -->
+    <div class="row">
+      <div class="col-lg-8">
+        <section class="content-header text-center">
+          <div class="alert alert-info alert-dismissable">
+            <h1>
+              ${mem_id} 의 메뉴
+            </h1>
+          </div>
+        </section>
+        <div class="box">
+          <div class="box-body">
+            <table class="table table-bordered text-center">
+              <tr>
+                <c:if test="${not empty category}">
+                  <c:forEach var="cate" items="${category}">
+                    <td id="${cate.cat_seq}" onclick="menuList('${cate.cat_seq}');">${cate.cat_name}</a>
+                    </td>
+                  </c:forEach>
+                  <script>
+                    $(document).ready(function () {
+                      var seq = $('td:first').attr("id");
+                      menuList(seq);
+                    })
+                  </script>
+                </c:if>
+              </tr>
+            </table>
           </div>
         </div>
-
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-
-    <!-- 카테고리 추가 MODAL -->
-    <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="addCategoryLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="addCategoryLabel">카테고리 추가</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="box">
+          <div class="box-body">
+            <table class="menuList text-center">
+            </table>
           </div>
-          <div class="modal-body">
-            <input type="text" class="form-control" id="add">
+        </div>
+        <div class="box">
+          <div class="alert alert-success alert-dismissible">
+            <h4><i class="icon fa fa-check"></i>
+              내 주문</h4>
+            - 선택한 상품이 아래에 표시됩니다.
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-            <button type="button" class="btn btn-primary" onclick="addCategory();">추가</button>
+          <div id="selectOrder" class="box-body">
+            <div class="row">
+              <div class="col-md-8">
+                <table class="orderList text-center">
+                  <tr></tr>
+                </table>
+              </div>
+              <div class="col-md-2">
+                <h4>합계</h4>
+                <h3 id="sum"></h3>
+                <input type="hidden" id="sum1">
+              </div>
+              <div class="col-md-2">
+                <button class="btn bg-maroon btn-flat" onclick="delOrder();">장바구니 비우기</button>
+                <button class="btn btn-lg bg-purple btn-flat" onclick="payment('${mem_id}');">결제</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Main Footer -->
-    <%@ include file="../include/main_footer.jsp"%>
-
   </div>
-  <!-- ./wrapper -->
+
 
   <!-- REQUIRED JS SCRIPTS -->
 
   <!-- JS 스크립트모음 -->
   <%@ include file="../include/plugin_js.jsp"%>
-  <script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
   <script>
-    function addCategory() {
-      location.href = "addCategory.do?add=" + $('#add').val();
-    }
-
     function consumer() {
       location.href = "consumer.do";
     }
 
-    function delCate(seq) {
-      location.href = "delCategory.do?seq=" + seq;
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+
     var productList;
     var pro_seq;
 
@@ -138,17 +105,17 @@
           let count = 0;
           a += '<tr>';
           $.each(data, function (key, value) {
-            a += '<td><p><img src="' + value.pro_image +
+            a += '<td><p><img src="${pageContext.request.contextPath}/resources/img/product/' + value.pro_image +
               '" width="150" height="200" onclick="selectOrder(' + key + ',' + value.pro_seq +
               ')"></p><p>' + value.pro_name + '</p><p>' + value.pro_price + '</td>';
             count++;
-            if (count == 4) {
+            if (count == 5) {
               a += '</tr><tr>';
               count = 0;
             }
             pro_seq = value.pro_seq;
           });
-          $('#menuList').html(a);
+          $('.menuList').html(a);
         }
       });
     }
@@ -159,9 +126,11 @@
       //var object =JSON(productList);
       price += productList[k]["pro_price"];
       arrayBox.push(pro_seq);
-      $("#selectOrder").append("<div class ='pay' value=" + pro_seq + ">" + productList[k]["pro_name"] + "</div>");
-
-      $("#sum").html(price);
+      var a = '';
+      $(".orderList").children().append("<td><img src='${pageContext.request.contextPath}/resources/img/product/" + productList[k]["pro_image"] + "' width='100px' height='120px'><p>" + productList[k]["pro_name"] + '</p></td>');
+      // $("#selectOrder").append("<div class ='pay' value=" + pro_seq + ">" + productList[k]["pro_name"] + "</>");
+      $("#sum1").val(price);
+      $("#sum").html("&#8361; " + numberWithCommas(price));
 
 
       //$("#selectOrder").append(JSON.stringify(productList);
@@ -170,6 +139,12 @@
 
     }
 
+    function delOrder() {
+      $(".orderList").html('<tr></tr>');
+      $("#sum1").val('');
+      $("#sum").html('');
+      price = 0;
+    }
     var IMP = window.IMP;
     IMP.init('imp55450318');
 
@@ -179,7 +154,7 @@
         pay_method: 'card',
         merchant_uid: 'merchant_' + new Date().getTime(),
         name: '주문명:결제테스트',
-        amount: $("#sum").text(),
+        amount: $("#sum1").val(),
         buyer_email: 'aetheru@gmail.com',
         buyer_name: '이상희',
         buyer_tel: '010-6665-4963',
@@ -211,14 +186,14 @@
       for (i = 0; i < arrayBox.length; i++) {
         ordList(userid, arrayBox[i]);
       }
-      $("#selectOrder").html("<div></div>");
+      $("#selectOrder").html("<tr></tr>");
       $("#sum").html(suc);
       arrayBox.splice(0);
     }
 
     function ordList(userid, seqs) {
       $.ajax({
-        url: "../ordList.do",
+        url: "ordList.do",
         type: 'GET',
         data: "seqs=" + seqs + "&user=" + userid,
         success: function (data) {},
