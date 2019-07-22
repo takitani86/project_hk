@@ -18,15 +18,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class KakaoAccessToken {
-	public static JsonNode getKakaoAccessToken(String code) {
+	public static JsonNode getKakaoAccessToken(String authorize_code) {
 
 		final String RequestUrl = "https://kauth.kakao.com/oauth/token"; // Host
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
-		postParams.add(new BasicNameValuePair("client_id", "85f4a0fdfed755ce3d9b2b081af17f44")); // REST API KEY
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8080/MS/kakaologin")); // 리다이렉트 URI
-		postParams.add(new BasicNameValuePair("code", code)); // 로그인 과정중 얻은 code 값
+		postParams.add(new BasicNameValuePair("client_id", "27bd705ffa551adfcdf14b5d6e5b9316")); // REST API KEY
+		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:5336/projectOne/secu/kakaoLogin.do")); // 리다이렉트 URI
+		postParams.add(new BasicNameValuePair("code", authorize_code)); // 로그인 과정중 얻은 code 값
 
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);

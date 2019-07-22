@@ -2,6 +2,7 @@ package com.hk.one;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -34,6 +35,7 @@ import com.hk.one.dto.SessionVO;
 import com.hk.one.login.KakaoAccessToken;
 import com.hk.one.login.KakaoUserInfo;
 import com.hk.one.login.Kakao_restApi;
+import com.hk.one.security.CustomUserDetailsService;
 import com.hk.one.service.IMemberService;
 
 @Controller
@@ -180,8 +182,9 @@ public class HomeController {
 	}	
 	
 	//카카오 로그인
-	@RequestMapping(value = "/kakaoLogin.do", produces = "application/json", method = RequestMethod.GET)
-	public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, HttpServletResponse response) throws IOException {
+	@ResponseBody
+	@RequestMapping(value = "/secu/kakaoLogin.do", produces = "application/json", method = RequestMethod.GET)
+	public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, HttpServletResponse response, Model model) throws IOException {
 		logger.info("kakao 로그인 토큰 받아오기 {}.");
 		System.out.println("kakao code: " + code);
 		JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);
@@ -214,20 +217,28 @@ public class HomeController {
         System.out.println("image: " + mem_image);
         System.out.println("regDate: " + mem_regDate);
         
-        Map<String, Object> map;
-        MemberDto mem = MemberService.checkIdMember(mem_id);
-        if (mem == null) { //해당 되는 아이디 없음. 회원 가입 폼으로 이동
-        	map.set(mem_id, mem_id); //키 뭘로 잡아야 하는지
-        	map.set(mem_name, mem_name);
-        	map.set(mem_email, mem_email);
-        	map.set(mem_image, mem_image);
-        	map.set(mem_regDate, mem_regDate);
-        	
-        	return "/secu/joinMemberForm.do";
-        } else { //해당 아이디 있음. 로그인 후 메인화면으로 이동
-        	
-        	return "home";
-        }
+        try {
+			Map<String, Object> map = new HashMap<>();
+			MemberDto mem = MemberService.checkIdMember(mem_id);
+			if (mem == null) { //해당 되는 아이디 없음. 회원 가입 폼으로 이동
+				map.put("mem_id", mem_id);
+				map.put("mem_name", mem_name);
+				map.put("mem_email", mem_email);
+				map.put("mem_image", mem_image);
+				map.put("mem_regDate", mem_regDate);
+					
+				model.addAttribute("map", map);
+				return "/secu/joinMemberForm.do";
+			} else { //해당 아이디 있음. 로그인 후 메인화면으로 이동
+				CustomUserDetailsService userService = new CustomUserDetailsService();
+				userService.loadUserByUsername(mem_id);
+				return "home";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        return null;
 	}
 	
 	@ResponseBody //html로 응답하기

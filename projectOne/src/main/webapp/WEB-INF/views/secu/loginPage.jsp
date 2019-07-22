@@ -44,9 +44,9 @@
 
       <a href="<c:url value='/secu/to_find_PwForm.do'/>">비밀번호 찾기</a><br>
       <a href="<c:url value='/secu/joinMemberForm.do'/>">회원가입</a><br>
-      <a href="<c:url value='https://kauth.kakao.com/oauth/authorize?client_id=27bd705ffa551adfcdf14b5d6e5b9316&redirect_uri=http://localhost:5336/projectOne/secu/oauth.do&response_type=code'/>">카카오 로그인</a>
+     <%--  <a href="<c:url value='https://kauth.kakao.com/oauth/authorize?client_id=27bd705ffa551adfcdf14b5d6e5b9316&redirect_uri=http://localhost:5336/projectOne/secu/oauth.do&response_type=code'/>">카카오 로그인</a>
       <a href="<c:url value='/secu/oauth.do'/>">카카오 계정으로 이용하기</a>
-      <a href="<c:url value='/secu/joinKakaoMember.do'/>">카카오 계정으로 회원가입</a>
+      <a href="<c:url value='/secu/joinKakaoMember.do'/>">카카오 계정으로 회원가입</a> --%>
 
     </div>
     <!-- /.login-box-body -->
@@ -80,15 +80,17 @@
             console.log(res);
             //여기서 정보 요청해서 다 받아온 뒤에 디비에서 아이디 검색 -> 있으면 로그인완료+메인화면 이동 / 없으면 정보 받아서 회원가입폼으로 이동 ㅜㅜ
 
+            var userToken = res.access_token;
             var userId = res.id; //유저의 카톡 고유 id
             var userEmail = res.kaccount_email; //유저의 이메일
             var userNickName = res.properties.nickname; //유저의 별명
 
+            console.log(userToken);
             console.log(userId);
             console.log(userEmail);
             console.log(userNickName);
 
-            location.href = "register.do"
+            location.href = "<c:url value='/kakaoLogin.do'/>"
           },
           fail: function (error) {
             alert(JSON.stringify(error));

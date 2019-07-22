@@ -68,7 +68,7 @@
 	</select>
 
 	<!-- 아이디 중복 조회 -->
-	<select id="checkIdMember" parameterType="member" resultMap="resultMemberList">
+	<select id="checkIdMember" parameterType="String" resultMap="resultMemberList">
 		SELECT MEM_ID
 		FROM LJP_MEMBER
 		WHERE MEM_ID = #{mem_id}
