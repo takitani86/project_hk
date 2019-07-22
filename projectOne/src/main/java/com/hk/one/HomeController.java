@@ -90,7 +90,6 @@ public class HomeController {
 		
 		return "secu/addressForm";
 	}
-
 	
 	@ResponseBody
 	@RequestMapping(value = "/secu/checkIdMember.do", method = RequestMethod.POST)
@@ -103,26 +102,6 @@ public class HomeController {
 		if(mem != null) result = 1;
 		return result + "";		
 	}
-	
-/*	//카카오 로그인
-	@RequestMapping(value = "/secu/oauth.do", produces = "application/json")
-	public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) {
-		//카카오 홈페이지에서 받은 결과 코드
-		logger.info("로그인 시 받은 임시 코드: " + code);
-		logger.info("로그인 후 결과값 {}.");
-		
-		//카카오 rest Api 객체 선언
-		Kakao_restApi kr = new Kakao_restApi();
-		//결과값 node에 담기
-		JsonNode node = kr.getAccessToken(code);
-		//결과값 출력
-		logger.info("노드값: " + node);
-		//노드 안에 있는 access_token 값 꺼내 문자열로 변환
-		String token = node.get("access_token").toString();
-		//시큐리티에 담아주는 부분
-		
-		return "home"; //로그인 이후 결과창
-	}*/
 
 	// 로그인 화면으로 이동
 	@RequestMapping(value = "/secu/loginPage.do", method = RequestMethod.GET)
@@ -181,64 +160,65 @@ public class HomeController {
 		}
 	}	
 	
-	//카카오 로그인
-	@ResponseBody
-	@RequestMapping(value = "/secu/kakaoLogin.do", produces = "application/json", method = RequestMethod.GET)
-	public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra, HttpSession session, HttpServletResponse response, Model model) throws IOException {
-		logger.info("kakao 로그인 토큰 받아오기 {}.");
-		System.out.println("kakao code: " + code);
-		JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);
-		JsonNode accessToken = jsonToken.get("access_token");
-		System.out.println("access_token : " + accessToken);
+	//카카오 로그인 
+//	@ResponseBody
+	@RequestMapping(value = "/secu/kakaoLogin.do", produces = "application/json", method = {RequestMethod.GET, RequestMethod.POST})
+//	public String kakaoLogin(@RequestParam("code") String code,RedirectAttributes ra, HttpSession session, HttpServletResponse response, Model model) throws IOException {
+	public String kakaoLogin( HttpServletRequest request, HttpServletResponse response, Model model, MemberDto dto) throws IOException {
 		
 		logger.info("kakao 사용자 정보 받아오기 {}.");
-		// access_token을 통해 사용자 정보 요청
-        JsonNode userInfo = KakaoUserInfo.getKakaoUserInfo(accessToken);
- 
-        // Get id
-        String mem_id = userInfo.path("id").asText();
-        String mem_name = null;
-        String mem_email = null;
+		
+		String mem_id=dto.getMem_id();
+        String mem_name = dto.getMem_name();
+        String mem_email = dto.getMem_email();
         String mem_image = null;
         String mem_regDate = null;
- 
+        System.out.println("카카오아이디"+mem_id);
+        Map<String,String>map=new HashMap<>();
+        map.put("mem_id", mem_id);
+		map.put("mem_name", mem_name);
+		map.put("mem_email", mem_email);
+		model.addAttribute("map", map);
         // 유저정보 카카오에서 가져오기 Get properties
-        JsonNode properties = userInfo.path("properties");
-        JsonNode kakao_account = userInfo.path("kakao_account");
+//        JsonNode properties = userInfo.path("properties");
+//        JsonNode kakao_account = userInfo.path("kakao_account");
  
-        mem_name = properties.path("nickname").asText();
-        mem_email = kakao_account.path("email").asText();
-        mem_image = properties.path("profile_image").asText();
-        mem_regDate = properties.path("created").asText();
+//        mem_name = properties.path("nickname").asText();
+//        mem_email = kakao_account.path("email").asText();
+//        mem_image = properties.path("profile_image").asText();
+//        mem_regDate = properties.path("created").asText();
  
-        System.out.println("id: " + mem_id);
-        System.out.println("name: " + mem_name);
-        System.out.println("email: " + mem_email);
-        System.out.println("image: " + mem_image);
-        System.out.println("regDate: " + mem_regDate);
+//        System.out.println("id: " + mem_id);
+//        System.out.println("name: " + mem_name);
+//        System.out.println("email: " + mem_email);
+//        System.out.println("image: " + mem_image);
+//        System.out.println("regDate: " + mem_regDate);
         
-        try {
-			Map<String, Object> map = new HashMap<>();
-			MemberDto mem = MemberService.checkIdMember(mem_id);
-			if (mem == null) { //해당 되는 아이디 없음. 회원 가입 폼으로 이동
-				map.put("mem_id", mem_id);
-				map.put("mem_name", mem_name);
-				map.put("mem_email", mem_email);
-				map.put("mem_image", mem_image);
-				map.put("mem_regDate", mem_regDate);
-					
-				model.addAttribute("map", map);
-				return "/secu/joinMemberForm.do";
-			} else { //해당 아이디 있음. 로그인 후 메인화면으로 이동
-				CustomUserDetailsService userService = new CustomUserDetailsService();
-				userService.loadUserByUsername(mem_id);
-				return "home";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        
-        return null;
+//        try {
+//			Map<String, Object> map = new HashMap<>();
+//			MemberDto mem = MemberService.checkIdMember(mem_id);
+//			if (mem == null) { //해당 되는 아이디 없음. 회원 가입 폼으로 이동
+//				map.put("mem_id", mem_id);
+//				map.put("mem_name", mem_name);
+//				map.put("mem_email", mem_email);
+//				map.put("mem_image", mem_image);
+//				map.put("mem_regDate", mem_regDate);
+//					
+//				model.addAttribute("map", map);
+//				return "/secu/joinMemberForm.do";
+//			} else { //해당 아이디 있음. 로그인 후 메인화면으로 이동
+//				CustomUserDetailsService userService = new CustomUserDetailsService();
+//				userService.loadUserByUsername(mem_id);
+//				return "home";
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		List<MemberDto> list = MemberService.getAllMember();
+		model.addAttribute("list", list);
+		
+		return "secu/joinKakaoMember";
+//        return "/secu/joinMemberForm.do";
 	}
 	
 	@ResponseBody //html로 응답하기

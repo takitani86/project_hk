@@ -148,7 +148,7 @@ $(function registNum(){ //registNum 함수
 			<table border="1">
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" id="mem_id" name="mem_id" value="${map.mem_id}" placeholder="아이디 입력"></td>
+					<td><input type="text" id="mem_id" name="mem_id" placeholder="아이디 입력"></td>
 					<td><button type="button" class="checkIdMember">아이디 확인</button></td>
 					<td><p class="resultId"><span class="msg">아이디를 확인해 주십시오.</span></p></td>
 				</tr>
@@ -166,7 +166,7 @@ $(function registNum(){ //registNum 함수
 				</tr>
 				<tr>
 					<th>E-Mail</th>
-					<td><input type="email" name="mem_email" placeholder="이메일 주소 입력"></td>
+					<td><input type="email" name="mem_email" placeholder="이메일 주소 입력" ></td>
 					<td><button type="button" class="emailRegist">이메일 인증</button></td>
 				</tr>
 				<tr>
@@ -200,7 +200,7 @@ $(function registNum(){ //registNum 함수
 				</tbody>
 				<tr>
 					<th>전화 번호</th>
-					<td><input type="text" name="mem_phone" placeholder="전화 번호 입력"></td>
+					<td><input type="text" name="mem_phone" placeholder="000-0000-0000"></td>
 				</tr>
 				<tr>
 					<th>상호명</th>

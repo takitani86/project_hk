@@ -77,7 +77,7 @@
         Kakao.API.request({
           url: '/v1/user/me',
           success: function (res) {
-            console.log(res);
+            console.log("아이디:"+res["properties"]);
             //여기서 정보 요청해서 다 받아온 뒤에 디비에서 아이디 검색 -> 있으면 로그인완료+메인화면 이동 / 없으면 정보 받아서 회원가입폼으로 이동 ㅜㅜ
 
             var userToken = res.access_token;
@@ -89,8 +89,13 @@
             console.log(userId);
             console.log(userEmail);
             console.log(userNickName);
-
-            location.href = "<c:url value='/kakaoLogin.do'/>"
+            console.log(Object.keys(res.properties));
+//             location.href = "<c:url value='kakaoLogin.do'/>"
+				if(userEmail==undefined){
+					location.href="kakaoLogin.do?mem_id="+userId+"&mem_name="+userNickName;					
+				}else{
+					location.href="kakaoLogin.do?mem_id="+userId+"&mem_email="+userEmail+"&mem_name="+userNickName;		
+				}
           },
           fail: function (error) {
             alert(JSON.stringify(error));
