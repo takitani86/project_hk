@@ -6,10 +6,7 @@ response.setContentType("text/html; charset=utf-8");
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://code.jquery.com/jquery-latest.js"></script>
-<title>회원 가입 페이지</title>
+<%@ include file="../include/head.jsp" %>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function sample4_execDaumPostcode() {
@@ -141,94 +138,121 @@ $(function registNum(){ //registNum 함수
 	});
 })
 </script>
-</head>
-<body>
-	<h1>회원 가입</h1>
-		<form action="joinMember.do" name="form" id="form" method="post">
-			<table border="1">
-				<tr>
-					<th>아이디</th>
-					<td><input type="text" id="mem_id" name="mem_id" placeholder="아이디 입력"></td>
-					<td><button type="button" class="checkIdMember">아이디 확인</button></td>
-					<td><p class="resultId"><span class="msg">아이디를 확인해 주십시오.</span></p></td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td><input type="password" name="mem_pw" placeholder="비밀번호 입력"></td>
-				</tr>
-				<tr>
-					<th></th>
-					<td>(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10~16자)</td>
-				</tr>
-				<tr>
-					<th></th>
-					<td><input type="password" name="mem_pw2" placeholder="비밀번호 확인"></td>
-				</tr>
-				<tr>
-					<th>E-Mail</th>
-					<td><input type="email" name="mem_email" placeholder="이메일 주소 입력" ></td>
-					<td><button type="button" class="emailRegist">이메일 인증</button></td>
-				</tr>
-				<tr>
-					<th></th>
-					<td><input type="text" name="registNum" placeholder="인증 번호 입력 입력"></td>
-					<td><p class="resultEmail"><span class="rst"></span></p></td>
-				</tr>
-				<tr>
-					<th>이름</th>
-					<td><input type="text" name="mem_name" placeholder="사용자 이름 입력"></td>
-				</tr>
-			</table>
-			<br />
-			<table border="1">
-				<colgroup>
-				<col style="width:20%"><col>
-				</colgroup>
-				<tbody>
-					<tr>
-						<th>매장 주소</th>
-						<td>
-							<input type="text" id="sample4_postcode" placeholder="우편번호">
-							<input type="button" id="addressBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" id="sample4_roadAddress" name="roadAddress" placeholder="도로명주소">
-							<span id="guide" style="color:#999;display:none"></span>
-							<input type="text" id="sample4_detailAddress" name="detailAddress" placeholder="상세주소">
-							<input type="text" id="sample4_extraAddress" placeholder="참고항목">
-							<input type="hidden" name="mem_address" id="mem_address" value="">
-						</td>
-					</tr>				
-				</tbody>
-				<tr>
-					<th>전화 번호</th>
-					<td><input type="text" name="mem_phone" placeholder="000-0000-0000"></td>
-				</tr>
-				<tr>
-					<th>상호명</th>
-					<td><input type="text" name="mem_b_name" placeholder="상호명 입력"></td>
-				</tr>
-				<tr>
-					<th>업태</th>
-					<td><select name="mem_b_status" size='1' class='select'>
-						<option value=''>선택하세요</option>
-						<option value="1">한식</option>
-						<option value="2">분식</option>
-						<option value="3">일식</option>
-						<option value="4">중식</option>
-						<option value="5">양식</option>
-						<option value="6">야식</option>
-						<option value="7">주점</option>
-						<option value="8">카페/디저트</option>
-						<option value="9">패스트푸드</option>
-						<option value="10">치킨/피자</option>
-						<option value="11">기타</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="회원 가입"></td>
-					<td><input type="reset" value="취소"></td>
-				</tr>
-			</table>
-		</form>
+<body class="layout-boxed skin-blue sidebar-mini">
+	<div class="wrapper">
+		<%@ include file="../include/main_header.jsp"%>
+		<%@ include file="../include/left_column.jsp"%>
+		<div class="content-wrapper">
+			<form action="joinMember.do" name="form" id="form" method="post">
+				<div class="container-fluid">
+					<section class="content-header">
+						<h1>
+							<strong>회원 가입</strong>
+						</h1>
+					</section>
+					<section class="content-header">
+						<div class="container-fluid">
+							<table class="table">
+								<col width="20%">
+								<tr>
+									<th>아이디</th>
+									<td><input type="text" id="mem_id" name="mem_id"
+										style="width: 250px;" placeholder="아이디 입력">
+										<button type="button"
+											class="checkIdMember btn btn-block btn-default btn-sm"
+											style="width: 100px; display: inline-block;">아이디 확인</button>
+										<p class="resultId">
+											<span class="msg">아이디를 확인해 주십시오.</span>
+										</p></td>
+								</tr>
+								<tr>
+									<th>비밀번호</th>
+									<td><input type="password" name="mem_pw"
+										style="width: 250px;" placeholder="비밀번호 입력">
+										&nbsp;&nbsp;
+										<p style="font-size: 10; color: gray;">(영문 대소문자/숫자/특수문자 중
+											2가지 이상 조합, 10~16자)</p> <input type="password" name="mem_pw2"
+										style="width: 250px;" placeholder="비밀번호 확인"></td>
+								</tr>
+								<tr>
+									<th>E-Mail</th>
+									<td><input type="email" name="mem_email"
+										style="width: 250px;" placeholder="이메일 주소 입력">
+										<button type="button"
+											class="emailRegist btn btn-block btn-default btn-sm"
+											style="width: 100px; display: inline-block;">이메일 인증</button>
+										<input type="text" name="registNum"
+										style="width: 250px; display: block;" placeholder="인증 번호 입력">
+										<p class="resultEmail">
+											<span class="rst"></span>
+										</p></td>
+								</tr>
+								<tr>
+									<th>이름</th>
+									<td><input type="text" name="mem_name"
+										style="width: 250px;" placeholder="사용자 이름 입력"></td>
+								</tr>
+							</table>
+						</div>
+					</section>
+					<section class="content container-fluid">
+						<div class="container-fluid">
+							<table class="table">
+								<col width="20%">
+								<tbody>
+									<tr>
+										<th>매장 주소</th>
+										<td><input type="text" id="sample4_postcode"
+											placeholder="우편번호"> <input type="button"
+											id="addressBtn" onclick="sample4_execDaumPostcode()"
+											value="우편번호 찾기"><br> <input type="text"
+											id="sample4_roadAddress" name="roadAddress"
+											placeholder="도로명주소"> <span id="guide"
+											style="color: #999; display: none"></span> <input type="text"
+											id="sample4_detailAddress" name="detailAddress"
+											placeholder="상세주소"> <input type="text"
+											id="sample4_extraAddress" placeholder="참고항목"> <input
+											type="hidden" name="mem_address" id="mem_address" value="">
+										</td>
+									</tr>
+								</tbody>
+								<tr>
+									<th>전화 번호</th>
+									<td><input type="text" name="mem_phone"
+										placeholder="000-0000-0000"></td>
+								</tr>
+								<tr>
+									<th>상호명</th>
+									<td><input type="text" name="mem_b_name"
+										placeholder="상호명 입력"></td>
+								</tr>
+								<tr>
+									<th>업태</th>
+									<td><select name="mem_b_status" size='1' class='select'>
+											<option value=''>선택하세요</option>
+											<option value="1">한식</option>
+											<option value="2">분식</option>
+											<option value="3">일식</option>
+											<option value="4">중식</option>
+											<option value="5">양식</option>
+											<option value="6">야식</option>
+											<option value="7">주점</option>
+											<option value="8">카페/디저트</option>
+											<option value="9">패스트푸드</option>
+											<option value="10">치킨/피자</option>
+											<option value="11">기타</option>
+									</select></td>
+								</tr>
+							</table>
+							<div class="container-fluid">
+								<button type="submit" class="btn btn-block btn-primary" style="width:20%; float:left; display:inline-block;">회원 가입</button>
+								<button type="reset" class="btn btn-block btn-warning" style="width:20%; float:left; display:inline-block;">취소</button>
+							</div>							
+						</div>
+					</section>
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

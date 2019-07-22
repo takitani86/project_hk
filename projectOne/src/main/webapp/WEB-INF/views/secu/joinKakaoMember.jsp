@@ -74,7 +74,9 @@ response.setContentType("text/html; charset=utf-8");
 <%@ include file="../include/main_header.jsp" %>
 <%@ include file="../include/left_column.jsp" %>
 	<div class="content-wrapper">
+	<section class="content-header">
 	<h1>카카오 회원</h1><small>추가 정보 입력</small>
+	</section>
 		<form action="joinMember.do" name="form" id="form" method="post">
 			<input type="hidden" id="mem_id" name="mem_id" value="${map.mem_id}" placeholder="아이디 입력">
 			<input type="hidden" name="mem_pw" value="kakao0000" />
