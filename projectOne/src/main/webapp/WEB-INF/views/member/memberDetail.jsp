@@ -15,8 +15,7 @@ response.setContentType("text/html; charset=utf-8");
 	<div class="content-wrapper" style="overflow:auto;"> <!-- float 사용시 부모태그에 overflow 선언해줘야함 -->
 		<div class="ground1" style="width:20%; float:left; text-align:center; padding-top:30px;">
 			<img src="<c:url value="/resources/img${member.mem_image}"/>" class="img-circle"
-				alt="User Image" style="width: 100px; height: 100px; display:inline-block;">
-			<button type="button" onclick="#" class="btn btn-block btn-default" style="width:150px; display:inline-block; margin-top:10px;">사진 등록</button>
+				alt="User Image" style="width: 150px; height: 150px; display:inline-block;">
 		</div>
 		<div class="ground2" style="width:80%; float:right;">
 			<section class="content-header">
@@ -122,4 +121,7 @@ response.setContentType("text/html; charset=utf-8");
 	</div>
 <%@ include file="../include/plugin_js.jsp" %>
 </body>
+<script type="text/javascript">
+
+</script>
 </html>

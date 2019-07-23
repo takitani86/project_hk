@@ -20,6 +20,14 @@
           <input type="password" name="loginPwd" class="form-control" placeholder="Password">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
+        <div class="container fluid">
+        	<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+    			<font color="red">
+        			<p>로그인에 실패하였습니다.</p>
+        			<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+    			</font>
+			</c:if>
+        </div>        
         <div class="row">
           <div class="col-xs-8">
             <div class="checkbox icheck">
@@ -30,7 +38,7 @@
           </div>
           <!-- /.col -->
           <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">로그인</button>
+            <button type="submit" id="checkLoginResult" class="btn btn-primary btn-block btn-flat">로그인</button>
           </div>
           <!-- /.col -->
         </div>
@@ -44,9 +52,6 @@
 
       <a href="<c:url value='/secu/to_find_PwForm.do'/>">비밀번호 찾기</a><br>
       <a href="<c:url value='/secu/joinMemberForm.do'/>">회원가입</a><br>
-     <%--  <a href="<c:url value='https://kauth.kakao.com/oauth/authorize?client_id=27bd705ffa551adfcdf14b5d6e5b9316&redirect_uri=http://localhost:5336/projectOne/secu/oauth.do&response_type=code'/>">카카오 로그인</a>
-      <a href="<c:url value='/secu/oauth.do'/>">카카오 계정으로 이용하기</a>
-      <a href="<c:url value='/secu/joinKakaoMember.do'/>">카카오 계정으로 회원가입</a> --%>
 
     </div>
     <!-- /.login-box-body -->
@@ -90,11 +95,10 @@
             console.log(userEmail);
             console.log(userNickName);
             console.log(Object.keys(res.properties));
-//             location.href = "<c:url value='kakaoLogin.do'/>"
-				if(userEmail==undefined){
-					location.href="kakaoLogin.do?mem_id="+userId+"&mem_name="+userNickName;					
-				}else{
-					location.href="kakaoLogin.do?mem_id="+userId+"&mem_email="+userEmail+"&mem_name="+userNickName;		
+				if (userEmail == undefined) {
+					location.href = "kakaoLogin.do?mem_id=" + userId + "&mem_name=" + userNickName;					
+				} else {
+					location.href = "kakaoLogin.do?mem_id=" + userId + "&mem_email=" + userEmail + "&mem_name=" + userNickName;		
 				}
           },
           fail: function (error) {
