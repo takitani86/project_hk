@@ -47,8 +47,16 @@ response.setContentType("text/html; charset=utf-8");
 						<td><input type="password" value="${member.mem_pw}" readonly></td>
 					</tr>
 					<tr>
-						<th>승인 상태</th>
-						<td>${member.mem_isApprove}</td>
+						<c:choose>
+							<c:when test="${member.mem_isApprove == 0}">
+								<th>승인 상태</th>
+								<td>${member.mem_isApprove} &nbsp;&nbsp;&nbsp;<button type="button" onclick="location.href='approveMember.do?mem_id=${member.mem_id}'" class="btn btn-danger">승인</button></td>
+							</c:when>
+							<c:otherwise>
+								<th>승인 상태</th>
+								<td>${member.mem_isApprove}</td>
+							</c:otherwise>
+						</c:choose>
 					</tr>
 					<tr>
 						<th>탈퇴 여부</th>

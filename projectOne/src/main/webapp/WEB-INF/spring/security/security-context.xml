@@ -32,10 +32,10 @@
 		<!-- 로그인 -->
 		<form-login username-parameter="loginId"
 			password-parameter="loginPwd" login-processing-url="/user/login"
-			login-page="/secu/loginPage.do" default-target-url="/" />
+			login-page="/secu/loginPage.do" default-target-url="/home.do" />
 
 		<!-- 로그아웃 -->
-		<logout logout-url="/logout.do" logout-success-url="/"
+		<logout logout-url="/logout.do" logout-success-url="/secu/loginPage.do"
 			delete-cookies="true" invalidate-session="true" />
 
 		<!-- 중복로그인 방지 -->

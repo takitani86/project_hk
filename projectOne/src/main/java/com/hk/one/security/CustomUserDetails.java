@@ -15,6 +15,7 @@ public class CustomUserDetails implements UserDetails {
 	private String secu_pw;
 	private String secu_email;
 	private String secu_name;
+	private String secu_image;
 	private boolean enabled;
 	private String auth;
 	
@@ -108,6 +109,14 @@ public class CustomUserDetails implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return enabled;
+	}
+
+	public String getSecu_image() {
+		return secu_image;
+	}
+
+	public void setSecu_image(String secu_image) {
+		this.secu_image = secu_image;
 	}
 
 }

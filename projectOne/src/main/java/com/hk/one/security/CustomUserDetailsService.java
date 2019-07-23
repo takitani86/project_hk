@@ -37,6 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		user.setSecu_pw(dto.getMem_pw());
 		user.setSecu_email(dto.getMem_email());
 		user.setSecu_name(dto.getMem_name());
+		user.setSecu_image(dto.getMem_image());
 		if (dto.getMem_isApprove() == 1) {
 			user.setEnabled(true);
 		} else {

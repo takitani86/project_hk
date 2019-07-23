@@ -32,12 +32,13 @@
 			<c:when test="${not empty kakao}">
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="<c:url value="/resources/dist/img/user1-128x128.jpg"/>" class="img-circle" alt="User Image">
+						<img src="<c:url value="/resources/dist/img/avatar5.png"/>" class="img-circle" alt="User Image">
 					</div>
 					<div class="pull-left info">
 						<p>${kakao.secu_id}</p>
 						<!-- Status -->
-						<a href="#"><i class="fa fa-circle text-success"></i>${kakao.auth == "ROLE_ADMIN" ? "관리자":"점주"}</a>
+						<a href="member/memberMyDetail.do?mem_id=${user.username}"><i
+								class="fa fa-circle text-success"></i>${kakao.auth == "ROLE_ADMIN" ? "관리자":"점주"}</a>
 					</div>
 				</div>
 				<div>
@@ -51,18 +52,14 @@
 					<sec:authentication var="user" property="principal" />
 					<div class="user-panel">
 						<div class="pull-left image">
-							<img src="<c:url value="/resources/dist/img/user1-128x128.jpg"/>" class="img-circle" alt="User Image">
+							<img src="<c:url value='/resources/img${user.secu_image}'/>" class="img-circle" alt="User Image">
 						</div>
 						<div class="pull-left info">
 							<p>${user.username}</p>
 							<!-- Status -->
-							<a href="#"><i class="fa fa-circle text-success"></i>${user.auth == "ROLE_ADMIN" ? "관리자":"점주"}</a>
+							<a href="member/memberDetail.do?mem_id=${user.username}"><i
+									class="fa fa-circle text-success"></i>${user.auth == "ROLE_ADMIN" ? "관리자":"점주"}</a>
 						</div>
-					</div>
-					<div>
-						<form action="<c:url value='/logout.do'/>" method="POST">
-							<button class="btn btn-danger" type="submit">LOGOUT</button>
-						</form>
 					</div>
 				</sec:authorize>
 			</c:otherwise>
@@ -82,6 +79,18 @@
 					<a href="<c:url value='/admin/memberList.do'/>">
 						<i class="fa fa-list-alt"></i>
 						<span>가입점주 목록</span></a>
+				</li>
+				<li>
+					<a name="logout" href="<c:url value='/logout.do'/>" onclick="logout();">
+						<i class="fa  fa-user"></i>
+						<span>로그아웃</span></a>
+					<script>
+						function logout() {
+							document.logout.action = "<c:url value='/logout.do'/>";
+							document.logout.method = "post";
+							document.logout.submit;
+						}
+					</script>
 				</li>
 			</ul>
 		</sec:authorize>
@@ -114,6 +123,18 @@
 					<a href="<c:url value='/member/memberMyDetail.do'/>">
 						<i class="fa fa-smile-o"></i>
 						<span>내 정보 보기</span></a>
+				</li>
+				<li>
+					<a name="logout" href="<c:url value='/logout.do'/>" onclick="logout();">
+						<i class="fa  fa-user"></i>
+						<span>로그아웃</span></a>
+					<script>
+						function logout() {
+							document.logout.action = "<c:url value='/logout.do'/>";
+							document.logout.method = "post";
+							document.logout.submit;
+						}
+					</script>
 				</li>
 			</ul>
 		</sec:authorize>
