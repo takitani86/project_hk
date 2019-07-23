@@ -26,7 +26,7 @@
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<li class="dropdown notifications-menu">
 							<!-- Menu toggle button --> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i
-									class="fa fa-bell-o"></i> <span id="alert1" class="label label-warning">5</span>
+									class="fa fa-bell-o"></i> <span id="alert1" class="label label-warning"></span>
 							</a>
 							<ul class="dropdown-menu">
 								<li>
@@ -46,18 +46,6 @@
 			</div>
 		</nav>
 	</header>
-	<script>
-			$(function() {
-				$.ajax({
-					url: 'pushalert.do',
-					type: 'get',
-					success: function (count) {
-						$("#alert1").html(count);
-						$("#alert3").append(count + "명의 점주가 승인 대기중입니다.");
-					}
-				});
-			});
-	</script>
 </body>
 
 </html>

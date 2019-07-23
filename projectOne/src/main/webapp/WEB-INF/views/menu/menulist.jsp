@@ -38,6 +38,9 @@ function productUpdate(seq) {
       $('input[name="pro_price"]').val(data.pro_price);
       $('input[name="pro_desc"]').val(data.pro_desc);
       $('input[name="pro_option"]').val(data.pro_option);
+      if ($('select[name="cat_seq"]').val(data.cat_seq)) {
+        $('select[name="cat_seq"]').val(data.cat_seq).prop("selected", true);
+      };
     }
   })
 }
@@ -68,6 +71,12 @@ function delProduct() {
             <input type="text" class="form-control" name="pro_desc"><br>
             <label for="pro_option">상품 옵션</label>
             <input type="text" class="form-control" name="pro_option"><br>
+            <label for="pro_category">카테고리</label>
+            <select class="form-control" name="cat_seq">
+              <c:forEach var="cate" items="${category}">
+                <option value="${cate.cat_seq}">${cate.cat_name}</option>
+              </c:forEach>
+            </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
