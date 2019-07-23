@@ -37,7 +37,7 @@
                 <div class="box-body">
                   <div class="form-group">
                     <label for="id">아이디</label>
-                    <input type="text" name="mem_id" class="form-control col-xs-4" id="id" placeholder="${user.username}"
+                    <input type="text" name="mem_id" class="form-control col-xs-4" id="id" value="${user.username}" placeholder="${user.username}"
                       readonly>
                   </div>
                   <div class="form-group">
