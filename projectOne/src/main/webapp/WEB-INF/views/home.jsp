@@ -83,7 +83,18 @@
 
 	</div>
 	<!-- /wrapper -->
-
+	<script>
+			$(function() {
+				$.ajax({
+					url: 'pushalert.do',
+					type: 'get',
+					success: function (count) {
+						$("#alert1").html(count);
+						$("#alert3").append(count + "명의 점주가 승인 대기중입니다.");
+					}
+				});
+			});
+	</script>
 	<!-- JS 스크립트모음 -->
 	<%@ include file="include/plugin_js.jsp"%>
 </body>

@@ -95,7 +95,7 @@
 			<when test="pro_image == null">
 				UPDATE LJP_PRODUCT
 				SET
-				PRO_NAME=#{pro_name},PRO_PRICE=#{pro_price},PRO_DESC=#{pro_desc}
+				PRO_NAME=#{pro_name},PRO_PRICE=#{pro_price},PRO_DESC=#{pro_desc}, CAT_SEQ=#{cat_seq}
 				,PRO_OPTION=#{pro_option},PRO_REGDATE=SYSDATE
 				WHERE PRO_SEQ=#{pro_seq}
 			</when>

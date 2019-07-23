@@ -37,14 +37,9 @@
 					<div class="pull-left info">
 						<p>${kakao.secu_id}</p>
 						<!-- Status -->
-						<a href="member/memberMyDetail.do?mem_id=${user.username}"><i
+						<a href="<c:url value='/member/memberMyDetail.do'/>"><i
 								class="fa fa-circle text-success"></i>${kakao.auth == "ROLE_ADMIN" ? "관리자":"점주"}</a>
 					</div>
-				</div>
-				<div>
-					<form action="<c:url value='/logout.do'/>" method="POST">
-						<button class="btn btn-danger" type="submit">LOGOUT</button>
-					</form>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -57,7 +52,7 @@
 						<div class="pull-left info">
 							<p>${user.username}</p>
 							<!-- Status -->
-							<a href="member/memberDetail.do?mem_id=${user.username}"><i
+							<a href="<c:url value='/member/memberMyDetail.do'/>"><i
 									class="fa fa-circle text-success"></i>${user.auth == "ROLE_ADMIN" ? "관리자":"점주"}</a>
 						</div>
 					</div>
