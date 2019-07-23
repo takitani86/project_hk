@@ -202,17 +202,13 @@ $(function registNum(){ //registNum 함수
 								<tbody>
 									<tr>
 										<th>매장 주소</th>
-										<td><input type="text" id="sample4_postcode"
-											placeholder="우편번호"> <input type="button"
-											id="addressBtn" onclick="sample4_execDaumPostcode()"
-											value="우편번호 찾기"><br> <input type="text"
-											id="sample4_roadAddress" name="roadAddress"
-											placeholder="도로명주소"> <span id="guide"
-											style="color: #999; display: none"></span> <input type="text"
-											id="sample4_detailAddress" name="detailAddress"
-											placeholder="상세주소"> <input type="text"
-											id="sample4_extraAddress" placeholder="참고항목"> <input
-											type="hidden" name="mem_address" id="mem_address" value="">
+										<td><input type="text" id="sample4_postcode" placeholder="우편번호">
+											<input type="button" id="addressBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br />
+											<input type="text" id="sample4_roadAddress" name="roadAddress" placeholder="도로명주소"><br />
+											<span id="guide" style="color: #999; display: none"></span>
+											<input type="text" id="sample4_detailAddress" name="detailAddress" placeholder="상세주소">
+											<input type="text" id="sample4_extraAddress" placeholder="참고항목">
+											<input type="hidden" name="mem_address" id="mem_address" value="">
 										</td>
 									</tr>
 								</tbody>
@@ -245,8 +241,8 @@ $(function registNum(){ //registNum 함수
 								</tr>
 							</table>
 							<div class="container-fluid">
-								<button type="submit" class="btn btn-block btn-primary" style="width:20%; float:left; display:inline-block;">회원 가입</button>
-								<button type="reset" class="btn btn-block btn-warning" style="width:20%; float:left; display:inline-block;">취소</button>
+								<button type="submit" class="btn btn-block btn-primary" style="width:20%; float:right;">회원 가입</button>
+								<button type="reset" class="btn btn-block btn-warning" style="width:20%; margin:0px 5px 0px 5px; display:inline-block; float:right;">취소</button>
 							</div>							
 						</div>
 					</section>
