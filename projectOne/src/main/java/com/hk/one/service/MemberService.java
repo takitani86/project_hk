@@ -78,4 +78,9 @@ public class MemberService implements IMemberService {
 		return memberDao.getEnabledMember();
 	}
 
+	@Override
+	public boolean approveMember(String mem_id) {
+		return memberDao.approveMember(mem_id);
+	}
+
 }

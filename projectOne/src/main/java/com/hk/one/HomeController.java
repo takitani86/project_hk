@@ -276,4 +276,9 @@ public class HomeController {
 			
 		return "chat/chatAdmin";
 	}
+	
+	@RequestMapping(value = "/accessDenied.do", method = RequestMethod.GET)
+	public String acceessDenied(Model model) {
+		return "secu/accessdenied";
+	}
 }

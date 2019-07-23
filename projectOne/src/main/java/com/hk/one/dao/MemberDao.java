@@ -90,4 +90,10 @@ public class MemberDao implements IMemberDao {
 		return sqlSession.selectList(namespace + "getEnabledMember");
 	}
 
+	@Override
+	public boolean approveMember(String mem_id) {
+		int success = sqlSession.update(namespace + "approveMember", mem_id);
+		return success > 0 ? true:false;
+	}
+
 }

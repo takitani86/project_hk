@@ -83,7 +83,18 @@ public class MemberController {
 		mav.setViewName("member/searchMember");
 		return mav;
 	}
-	   
+	  
+	@RequestMapping(value = "/approveMember.do", method = RequestMethod.GET)
+	public String approveMember(Locale locale, Model model, @RequestParam String mem_id) {
+		logger.info("회원 승인 {}.", locale);
+		boolean isS = MemberService.approveMember(mem_id);
+		if(isS) {
+			return "redirect:memberDetail.do?mem_id=" + mem_id;
+		} else {
+			model.addAttribute("failUpdate", "회원 승인 실패");
+			return "error";
+		}
+	}
 /*	@RequestMapping(value = "/find_Pw.do", method = RequestMethod.POST)
 	public String findPw(MemberDto memberDto, RedirectAttributes redirectattr, Errors errors) throws Exception {
 		logger.info("비밀번호 찾기 {}.");

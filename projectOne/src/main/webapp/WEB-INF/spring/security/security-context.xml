@@ -19,7 +19,7 @@
 	</beans:bean>
 
 	<http auto-config="true" use-expressions="true">
-	<access-denied-handler error-page="/home.do"/>
+	<access-denied-handler error-page="/accessDenied.do"/>
 		<intercept-url pattern="/member/consumer/**"
 			access="permitAll" />
 		<intercept-url pattern="/member/**"
