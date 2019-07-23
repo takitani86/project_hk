@@ -214,13 +214,11 @@ $(function registNum(){ //registNum 함수
 								</tbody>
 								<tr>
 									<th>전화 번호</th>
-									<td><input type="text" name="mem_phone"
-										placeholder="000-0000-0000"></td>
+									<td><input type="text" name="mem_phone"	placeholder="000-0000-0000"></td>
 								</tr>
 								<tr>
 									<th>상호명</th>
-									<td><input type="text" name="mem_b_name"
-										placeholder="상호명 입력"></td>
+									<td><input type="text" name="mem_b_name" placeholder="상호명 입력"></td>
 								</tr>
 								<tr>
 									<th>업태</th>

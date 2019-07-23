@@ -108,7 +108,13 @@
 				<li>
 					<a href="<c:url value='/member/board/member_board.do'/>">
 						<i class="fa fa-file-text-o"></i>
-						<span>고객센터 게시판</span></a></li>
+						<span>고객센터 게시판</span></a>
+				</li>
+				<li>
+					<a href="<c:url value='/member/memberMyDetail.do'/>">
+						<i class="fa fa-smile-o"></i>
+						<span>내 정보 보기</span></a>
+				</li>
 			</ul>
 		</sec:authorize>
 		<!-- /.sidebar-menu -->

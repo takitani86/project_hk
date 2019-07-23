@@ -74,82 +74,90 @@ response.setContentType("text/html; charset=utf-8");
 <%@ include file="../include/main_header.jsp" %>
 <%@ include file="../include/left_column.jsp" %>
 	<div class="content-wrapper">
-	<section class="content-header">
-	<h1>카카오 회원</h1><small>추가 정보 입력</small>
-	</section>
 		<form action="joinMember.do" name="form" id="form" method="post">
-			<input type="hidden" id="mem_id" name="mem_id" value="${map.mem_id}" placeholder="아이디 입력">
-			<input type="hidden" name="mem_pw" value="kakao0000" />
-			<table border="1">
-				<tr>
-					<th>이름</th>
-					<td><input type="text" name="mem_name" value="${map.mem_name}" readonly></td>
-				</tr>
-				<tr>
-					<th>E-Mail</th>
-					<c:set var="mem_email" value="${map.mem_email}" />
-					<c:choose>
-						<c:when test="${mem_email != null}">
-							<td><input type="email" name="mem_email" value="${map.mem_email}" readonly></td>
-						</c:when>
-						<c:when test="${mem_email == null}">
-							<td><input type="email" name="mem_email" placeholder="이메일 주소 입력"></td>
-						</c:when>
-					</c:choose>
-				</tr>
-			</table>
-			<br />
-			<table border="1">
-				<colgroup>
-				<col style="width:20%"><col>
-				</colgroup>
-				<tbody>
-					<tr>
-						<th>매장 주소</th>
-						<td>
-							<input type="text" id="sample4_postcode" placeholder="우편번호">
-							<input type="button" id="addressBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" id="sample4_roadAddress" name="roadAddress" placeholder="도로명주소" onkeyup="oneAddress()">
-							<span id="guide" style="color:#999;display:none"></span>
-							<input type="text" id="sample4_detailAddress" name="detailAddress" placeholder="상세주소" onkeyup="oneAddress()">
-							<input type="text" id="sample4_extraAddress" placeholder="참고항목">
-							<input type="hidden" name="mem_address" id="mem_address" value="">
-						</td>
-					</tr>				
-				</tbody>
-				<tr>
-					<th>전화 번호</th>
-					<td><input type="text" name="mem_phone" placeholder="000-0000-0000"></td>
-				</tr>
-				<tr>
-					<th>상호명</th>
-					<td><input type="text" name="mem_b_name" placeholder="상호명 입력"></td>
-				</tr>
-				<tr>
-					<th>업태</th>
-					<td><select name="mem_b_status" size='1' class='select'>
-						<option value=''>선택하세요</option>
-						<option value="1">한식</option>
-						<option value="2">분식</option>
-						<option value="3">일식</option>
-						<option value="4">중식</option>
-						<option value="5">양식</option>
-						<option value="6">야식</option>
-						<option value="7">주점</option>
-						<option value="8">카페/디저트</option>
-						<option value="9">패스트푸드</option>
-						<option value="10">치킨/피자</option>
-						<option value="11">기타</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="회원 가입"></td>
-					<td><input type="reset" value="취소"></td>
-				</tr>
-			</table>
-		</form>
-	</div>
+			<div class="container-fluid">
+				<section class="content-header">
+					<h1><strong>카카오 회원</strong></h1><small>추가 정보 입력</small>
+				</section>
+			</div>
+				<section class="content-header">
+					<div class="container-fluid">
+						<input type="hidden" id="mem_id" name="mem_id" value="${map.mem_id}" placeholder="아이디 입력">
+						<input type="hidden" name="mem_pw" value="kakao0000" />
+						<table class="table">
+							<col width="20%">
+							<tr>
+								<th>이름</th>
+								<td><input type="text" name="mem_name" value="${map.mem_name}" readonly></td>
+							</tr>
+							<tr>
+								<th>E-Mail</th>
+								<c:set var="mem_email" value="${map.mem_email}" />
+								<c:choose>
+									<c:when test="${mem_email != null}">
+										<td><input type="email" name="mem_email" value="${map.mem_email}" readonly></td>
+									</c:when>
+									<c:when test="${mem_email == null}">
+										<td><input type="email" name="mem_email" placeholder="이메일 주소 입력"></td>
+									</c:when>
+								</c:choose>
+							</tr>
+						</table>
+					</div>
+				</section>
+				<br />
+				<section class="content container-fluid">
+					<div class="container-fluid">
+						<table class="table">
+							<col width="20%">
+							<tbody>
+								<tr>
+									<th>매장 주소</th>
+									<td>
+										<input type="text" id="sample4_postcode" placeholder="우편번호">
+										<input type="button" id="addressBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+										<input type="text" id="sample4_roadAddress" name="roadAddress" placeholder="도로명주소" onkeyup="oneAddress()">
+										<span id="guide" style="color:#999;display:none"></span>
+										<input type="text" id="sample4_detailAddress" name="detailAddress" placeholder="상세주소" onkeyup="oneAddress()">
+										<input type="text" id="sample4_extraAddress" placeholder="참고항목">
+										<input type="hidden" name="mem_address" id="mem_address" value="">
+									</td>
+								</tr>				
+							</tbody>
+							<tr>
+								<th>전화 번호</th>
+								<td><input type="text" name="mem_phone" placeholder="000-0000-0000"></td>
+							</tr>
+							<tr>
+								<th>상호명</th>
+								<td><input type="text" name="mem_b_name" placeholder="상호명 입력"></td>
+							</tr>
+							<tr>
+								<th>업태</th>
+								<td><select name="mem_b_status" size='1' class='select'>
+									<option value=''>선택하세요</option>
+									<option value="1">한식</option>
+									<option value="2">분식</option>
+									<option value="3">일식</option>
+									<option value="4">중식</option>
+									<option value="5">양식</option>
+									<option value="6">야식</option>
+									<option value="7">주점</option>
+									<option value="8">카페/디저트</option>
+									<option value="9">패스트푸드</option>
+									<option value="10">치킨/피자</option>
+									<option value="11">기타</option>
+									</select></td>
+							</tr>
+						</table>
+						<div class="container-fluid">
+									<button type="submit" class="btn btn-block btn-primary" style="width:20%; float:right;">회원 가입</button>
+									<button type="reset" class="btn btn-block btn-warning" style="width:20%; margin:0px 5px 0px 5px; display:inline-block; float:right;">취소</button>
+						</div>
+					</div>
+				</section>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

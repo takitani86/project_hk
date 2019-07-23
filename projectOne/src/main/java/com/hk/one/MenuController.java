@@ -26,6 +26,7 @@ import com.hk.one.service.IMemberService;
 import com.hk.one.service.IOrderListService;
 import com.hk.one.service.IOrderService;
 import com.hk.one.service.IProductService;
+import com.hk.one.service.MemberService;
 
 @Controller
 @RequestMapping(value = "/member")
@@ -40,7 +41,7 @@ public class MenuController {
 	@Autowired
 	private IMemberService memberService;
 	@Autowired
-	private IOrderListService orderListService;
+	private IOrderListService orderListService;	
 	
 	@RequestMapping(value = "/payment.do", method = RequestMethod.GET)
 	public String payment(Model model) {
@@ -179,5 +180,37 @@ public class MenuController {
 		
 		OrderListDto orderListDto = new OrderListDto(user,seqs,pro_seq.getPro_price());
 		return orderListDto;
+	}
+	
+	//회원 내 정보 보기, 수정
+	@RequestMapping(value = "/memberMyDetail.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String memberDetail(Locale locale, Model model, Authentication auth) {
+		logger.info("멤버 상세정보 호출 {}.", locale);
+		MemberDto member = memberService.getMember(auth.getName());
+		model.addAttribute("member", member);		
+		
+		return "member/memberDetail";
+	}
+	
+	@RequestMapping(value = "/member_MyinfoForm.do", method = RequestMethod.GET)
+	public String updateMemberForm(Locale locale, Model model, Authentication auth) {
+		logger.info("회원 정보 페이지로 이동 {}.", locale);
+		MemberDto member = memberService.getMember(auth.getName());
+		model.addAttribute("member", member);
+		
+		return "member/member_Myinfo";
+	}
+	
+	@RequestMapping(value = "/member_Myinfo.do", method = RequestMethod.POST)
+	public String updateMember(Locale locale, Model model, MemberDto member, Authentication auth) {
+		logger.info("회원 정보 수정 {}.", locale);
+		boolean isS = memberService.updateMember(member);
+		String mem_id = member.getMem_id();
+		if(isS) {
+			return "redirect:memberDetail.do?mem_id=" + mem_id;
+		} else {
+			model.addAttribute("failUpdate", "회원 정보 수정 실패");
+			return "error";
+		}
 	}
 }
