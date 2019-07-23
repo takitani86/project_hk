@@ -3,6 +3,8 @@ package com.hk.one.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.hk.one.dto.MemberDto;
 
 public interface IMemberDao {
@@ -21,4 +23,5 @@ public interface IMemberDao {
 	public String findPw(Map<String, Object> paramMap) throws Exception; //비밀번호 찾기 기능
 	public List<MemberDto> getEnabledMember(); // 활성화된 멤버 찾기
 	public boolean approveMember(String mem_id);
+	public String saveFile(MultipartFile file); //프로필 사진 업로드
 }

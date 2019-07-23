@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hk.one.dao.IMemberDao;
 import com.hk.one.dao.MemberDao;
@@ -81,6 +82,11 @@ public class MemberService implements IMemberService {
 	@Override
 	public boolean approveMember(String mem_id) {
 		return memberDao.approveMember(mem_id);
+	}
+	
+	@Override
+	public String saveFile(MultipartFile file) {
+		return memberDao.saveFile(file);
 	}
 
 }

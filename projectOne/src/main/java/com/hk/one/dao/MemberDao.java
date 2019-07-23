@@ -1,13 +1,17 @@
 package com.hk.one.dao;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hk.one.dto.MemberDto;
 
@@ -18,6 +22,25 @@ public class MemberDao implements IMemberDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
+	private static final String UPLOAD_PATH = "C:\\DEV\\image\\profile\\";
+
+	@Override
+	public String saveFile(MultipartFile file) {
+		// 파일이름 변경
+		UUID uuid = UUID.randomUUID();
+		String saveName = uuid + "_" + file.getOriginalFilename();
+		// 저장할 파일 객체를 생성(껍데기 파일)
+		File saveFile = new File(UPLOAD_PATH, saveName); // 저장할 폴더 이름, 저장할 파일 이름
+				
+			try {
+				file.transferTo(saveFile); // 업로드파일에 saveFile이라는 껍데기를 입힌다
+			} catch (IOException e) {
+				e.printStackTrace();
+				return null;
+			}
+		return saveName;
+	}
 
 	@Override
 	public List<MemberDto> getAllMember() {

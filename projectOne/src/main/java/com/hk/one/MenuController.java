@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hk.one.dto.CategoryDto;
 import com.hk.one.dto.MemberDto;
@@ -189,7 +190,7 @@ public class MenuController {
 		MemberDto member = memberService.getMember(auth.getName());
 		model.addAttribute("member", member);		
 		
-		return "member/memberDetail";
+		return "member/memberMyDetail";
 	}
 	
 	@RequestMapping(value = "/member_MyinfoForm.do", method = RequestMethod.GET)
@@ -202,12 +203,16 @@ public class MenuController {
 	}
 	
 	@RequestMapping(value = "/member_Myinfo.do", method = RequestMethod.POST)
-	public String updateMember(Locale locale, Model model, MemberDto member, Authentication auth) {
+	public String updateMember(Locale locale, Model model, MemberDto member, MultipartFile uploadFile, Authentication auth, HttpServletRequest request) {
 		logger.info("회원 정보 수정 {}.", locale);
+		HttpSession session = request.getSession(); // 세션을 가져옴
+		String realpath = request.getSession().getServletContext().getRealPath("upload");// ddsds/dsff/sdfs/upload
+		System.out.println(realpath);
+		member.setMem_image("/profile/" + memberService.saveFile(uploadFile));
 		boolean isS = memberService.updateMember(member);
 		String mem_id = member.getMem_id();
 		if(isS) {
-			return "redirect:memberDetail.do?mem_id=" + mem_id;
+			return "redirect:memberMyDetail.do?mem_id=" + mem_id;
 		} else {
 			model.addAttribute("failUpdate", "회원 정보 수정 실패");
 			return "error";

@@ -13,7 +13,7 @@ response.setContentType("text/html; charset=utf-8");
 	<%@ include file="../include/main_header.jsp" %>
 	<%@ include file="../include/left_column.jsp" %>
 	<div class="content-wrapper">
-		<form action='member_info.do' method='post'>
+		<form action='member_Myinfo.do' method='post' enctype="multipart/form-data">
 			<div class="container-fluid" style=":after; overflow:auto;">
 				<section class="content-header" style="margin-top:10px; display:block;">
 					<h1><strong>회원 정보</strong>
@@ -22,8 +22,9 @@ response.setContentType("text/html; charset=utf-8");
 				<section class="content-header">
 					<div class="container-fluid" style="text-align:center; padding-top:20px; display:inline-block;">
 						<img src="<c:url value="/resources/img${member.mem_image}"/>" class="img-circle"
-							alt="User Image" style="width:100px; height:100px;">
-						<button type="button" onclick="#" class="btn btn-block btn-default" style="width:150px; margin-top:10px;">사진 등록</button>
+							id="preview" alt="User Image" style="width:150px; height:150px;">
+						<input type="file" id="uploadFile" name="uploadFile" onchange="readURL(this);" style="display:none;">						
+						<button type="button" id="btn_upload" class="btn btn-block btn-default" style="width:150px;">사진 변경</button>
 					</div>
 				</section>
 				<br />
@@ -111,11 +112,6 @@ response.setContentType("text/html; charset=utf-8");
 								<td><button type="submit" class="btn btn-block btn-primary" style="width:90%; float:left;">변경 완료</button></td>
 								<td><button type="reset" class="btn btn-block btn-warning" style="width:90%; float:left;">변경 취소</button></td>
 							</tr>
-	<!-- 						<tr>
-								<th>멤버 목록</th>
-								<td><input type="button" value="멤버 목록으로 가기"
-									onclick="location.href='memberList.do'"></td>
-							</tr> -->
 						</table>
 					</section>
 				</div>				
@@ -126,9 +122,28 @@ response.setContentType("text/html; charset=utf-8");
 	</div>
 <script type="text/javascript">
 	function turnAttr(a) {
-	$(a).parent().prev().children().removeAttr("readonly");
-	console.log("실행 되는중")
+		$(a).parent().prev().children().removeAttr("readonly");
+		console.log("실행 되는중")
 	}
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#preview').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+    console.log("이미지 밸류: " + mem_image);
+  };
+</script>
+<script type="text/javascript">
+$(function (){
+	$('#btn_upload').click(function (e) {
+		e.preventDefault();
+		$('#uploadFile').click();
+	});
+
+});
 </script>
 <%@ include file="../include/plugin_js.jsp" %>
 </body>
