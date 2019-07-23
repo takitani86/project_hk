@@ -28,24 +28,45 @@
 		</sec:authorize>
 		<!-- Sidebar user panel (optional) -->
 		<!-- 로그인 상태 -->
-		<sec:authorize access="isAuthenticated()">
-			<sec:authentication var="user" property="principal" />
-			<div class="user-panel">
-				<div class="pull-left image">
-					<img src="<c:url value="/resources/dist/img/user1-128x128.jpg"/>" class="img-circle" alt="User Image">
+		<c:choose>
+			<c:when test="${not empty kakao}">
+				<div class="user-panel">
+					<div class="pull-left image">
+						<img src="<c:url value="/resources/dist/img/user1-128x128.jpg"/>" class="img-circle" alt="User Image">
+					</div>
+					<div class="pull-left info">
+						<p>${kakao.secu_id}</p>
+						<!-- Status -->
+						<a href="#"><i class="fa fa-circle text-success"></i>${kakao.auth == "ROLE_ADMIN" ? "관리자":"점주"}</a>
+					</div>
 				</div>
-				<div class="pull-left info">
-					<p>${user.username}</p>
-					<!-- Status -->
-					<a href="#"><i class="fa fa-circle text-success"></i>${user.auth == "ROLE_ADMIN" ? "관리자":"점주"}</a>
-				</div>
-			</div>
-					<div>
-						<form action="<c:url value='/logout.do'/>" method="POST">
+				<div>
+					<form action="<c:url value='/logout.do'/>" method="POST">
 						<button class="btn btn-danger" type="submit">LOGOUT</button>
 					</form>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication var="user" property="principal" />
+					<div class="user-panel">
+						<div class="pull-left image">
+							<img src="<c:url value="/resources/dist/img/user1-128x128.jpg"/>" class="img-circle" alt="User Image">
+						</div>
+						<div class="pull-left info">
+							<p>${user.username}</p>
+							<!-- Status -->
+							<a href="#"><i class="fa fa-circle text-success"></i>${user.auth == "ROLE_ADMIN" ? "관리자":"점주"}</a>
+						</div>
 					</div>
-		</sec:authorize>
+					<div>
+						<form action="<c:url value='/logout.do'/>" method="POST">
+							<button class="btn btn-danger" type="submit">LOGOUT</button>
+						</form>
+					</div>
+				</sec:authorize>
+			</c:otherwise>
+		</c:choose>
 
 		<!-- Sidebar Menu -->
 		<!-- 관리자 메뉴 -->

@@ -19,8 +19,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +40,7 @@ import com.hk.one.dto.SessionVO;
 import com.hk.one.login.KakaoAccessToken;
 import com.hk.one.login.KakaoUserInfo;
 import com.hk.one.login.Kakao_restApi;
+import com.hk.one.security.CustomUserDetails;
 import com.hk.one.security.CustomUserDetailsService;
 import com.hk.one.service.IMemberService;
 
@@ -46,6 +51,8 @@ public class HomeController {
 	private IMemberService MemberService;
 	@Autowired
 	private JavaMailSenderImpl javaMailSenderImpl;
+	@Autowired
+	private CustomUserDetailsService userService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -188,8 +195,13 @@ public class HomeController {
 				
 				return "secu/joinKakaoMember";
 			} else { //해당 아이디 있음. 로그인 후 메인화면으로 이동
-				CustomUserDetailsService userService = new CustomUserDetailsService();
-				userService.loadUserByUsername(mem_id);
+				CustomUserDetails user = (CustomUserDetails) userService.loadUserByUsername(mem_id);
+				Authentication auth = new UsernamePasswordAuthenticationToken(mem_id, null, user.getAuthorities());
+				SecurityContext sc = SecurityContextHolder.getContext();
+				sc.setAuthentication(auth);
+				HttpSession session = request.getSession(true);
+				session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
+				model.addAttribute("kakao", user);
 				return "home";
 			}
 		} catch (UsernameNotFoundException e) {
