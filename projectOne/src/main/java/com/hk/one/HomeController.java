@@ -281,4 +281,18 @@ public class HomeController {
 	public String acceessDenied(Model model) {
 		return "secu/accessdenied";
 	}
+	
+	@RequestMapping(value = "/pushalert.do", method = RequestMethod.GET)
+	@ResponseBody
+	public int pushalert() {
+		
+		List<MemberDto> dto = MemberService.getAllMember();
+		int count = 0;
+		for (int i = 0; i < dto.size(); i++) {
+			if (dto.get(i).getMem_isApprove() == 0) {
+				count++;
+			}
+		}
+		return count;
+	}
 }

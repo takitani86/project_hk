@@ -23,29 +23,41 @@
 				<ul class="nav navbar-nav">
 
 					<!-- Notifications Menu -->
-					<li class="dropdown notifications-menu">
-						<!-- Menu toggle button --> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i
-								class="fa fa-bell-o"></i> <span class="label label-warning">5</span>
-						</a>
-						<ul class="dropdown-menu">
-							<li class="header">5개의 알림이 있습니다</li>
-							<li>
-								<!-- Inner Menu: contains the notifications -->
-								<ul class="menu">
-									<li>
-										<!-- start notification --> <a href="#"> <i class="fa fa-users text-aqua"></i> 5명의 점주가 승인 대기중입니다.
-										</a>
-									</li>
-									<!-- end notification -->
-								</ul>
-							</li>
-							<li class="footer"><a href="#">View all</a></li>
-						</ul>
-					</li>
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li class="dropdown notifications-menu">
+							<!-- Menu toggle button --> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i
+									class="fa fa-bell-o"></i> <span id="alert1" class="label label-warning">5</span>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<!-- Inner Menu: contains the notifications -->
+									<ul class="menu">
+										<li>
+											<!-- start notification --> <a id="alert3" href="<c:url value='/admin/memberList.do'/>"><i class="fa fa-users text-aqua"></i>
+											</a>
+										</li>
+										<!-- end notification -->
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</sec:authorize>
 				</ul>
 			</div>
 		</nav>
 	</header>
+	<script>
+			$(function() {
+				$.ajax({
+					url: 'pushalert.do',
+					type: 'get',
+					success: function (count) {
+						$("#alert1").html(count);
+						$("#alert3").append(count + "명의 점주가 승인 대기중입니다.");
+					}
+				});
+			});
+	</script>
 </body>
 
 </html>
