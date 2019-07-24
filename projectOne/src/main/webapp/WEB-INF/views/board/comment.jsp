@@ -17,16 +17,14 @@ function commentList() {
     success : function(data) {
       var a = '';
       $.each(data, function(key, value){
-        a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
         a += '<div class="commentInfo' + value.com_seq + '">' + '댓글번호 : ' + value.com_seq + ' 작성자 : ' + value.mem_id;
-        a += '<a onclick="commentUpdate(' + value.com_seq + ',\'' + value.com_content + '\');"> 수정 </a>';
-        a += '<a onclick="commentDelete(' + value.com_seq + ');"> 삭제 </a> </div>';
         if (value.com_isDel == 1) {
           a += '<div class="commentContent' + value.com_seq + '"> <p> -- 삭제된 댓글입니다. -- <p>';
         } else {
+        a += '<button type="button" class="btn btn-flat btn-sm pull-right" onclick="commentUpdate(' + value.com_seq + ',\'' + value.com_content + '\');"> 수정 </button>';
+        a += '<button type="button" class="btn btn-danger btn-flat btn-sm pull-right" onclick="commentDelete(' + value.com_seq + ');"> 삭제 </button> </div>';
             a += '<div class="commentContent' + value.com_seq + '"> <p>' + value.com_content + '<p>';
           }
-        a += '</div></div>'; 
       });
       $("#commentList").html(a);
     }
@@ -54,10 +52,10 @@ function commentUpdate(com_seq, com_content) {
 
   a += '<div class="input-group">';
   a += '<input type="text" name="com_content_' + com_seq + '" value="' + com_content + '"/>';
-  a += '<span><button type="button" onclick="commentUpdateProc(' + com_seq + ');">수정</button></span>';
+  a += '<span><button type="button" class="btn btn-flat btn-sm" onclick="commentUpdateProc(' + com_seq + ');">수정</button></span>';
   a += '</div>';
 
-  $('#commentContent' + com_seq).html(a);
+  $('.commentContent' + com_seq).html(a);
 }
 
 // 댓글 수정

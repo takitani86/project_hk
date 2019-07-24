@@ -44,7 +44,7 @@
                   <div class="form-group">
                     <label for="exampleInputFile">파일 첨부</label>
                     <input type="file" name="uploadFile" onchange="readURL(this);" id="exampleInputFile">
-                    <img onerror="this.style.display='none'" src="#" id="preview" width=250 height=400 alt="preview">
+                    <img src="#" id="preview" width=250 height=400 alt="preview">
                     <p class="help-block">미리보기가 표시됩니다.</p>
                   </div>
                   <div class="form-group">

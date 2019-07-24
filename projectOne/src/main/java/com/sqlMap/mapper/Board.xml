@@ -34,7 +34,7 @@
 		FROM
 		LJP_QNABOARD
 	</select>
-	
+
 	<select id="getSearchCount" parameterType="Map" resultType="int">
 		SELECT count(*)
 		FROM LJP_QNABOARD
@@ -42,7 +42,8 @@
 			<!-- 검색 옵션이 전체검색일 경우 -->
 			<when test="searchType == 'all'">
 				WHERE MEM_ID like '%'||#{keyword}||'%'
-				OR QNA_CONTENT like '%'||#{keyword}||'%'
+				OR QNA_CONTENT
+				like '%'||#{keyword}||'%'
 				OR QNA_TITLE like '%'||#{keyword}||'%'
 			</when>
 			<!-- 전체 검색이 아닐 경우 -->
@@ -52,7 +53,7 @@
 		</choose>
 		ORDER BY QNA_SEQ DESC, QNA_REGDATE DESC
 	</select>
-	
+
 	<!-- 검색목록 불러오기 -->
 	<select id="getSearchResult" parameterType="Map"
 		resultMap="boardList">
@@ -73,7 +74,8 @@
 			<!-- 검색 옵션이 전체검색일 경우 -->
 			<when test="searchType == 'all'">
 				AND MEM_ID like '%'||#{keyword}||'%'
-				OR QNA_CONTENT like '%'||#{keyword}||'%'
+				OR QNA_CONTENT
+				like '%'||#{keyword}||'%'
 				OR QNA_TITLE like '%'||#{keyword}||'%'
 			</when>
 			<!-- 전체 검색이 아닐 경우 -->
@@ -104,21 +106,45 @@
 	<!-- 글 작성 -->
 	<insert id="insertBoard" parameterType="board">
 		<choose>
-			<when test="qna_refer == null">
-				INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE,
-				QNA_FILE_NAME, QNA_CONTENT,
-				MEM_ID)
-				VALUES
-				(LJP_QNABOARD_SEQ.nextval,#{qna_title}, #{qna_fileName},
-				#{qna_content},#{mem_id})
+			<when test="qna_fileName != null">
+				<choose>
+					<when test="qna_refer == null">
+						INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE,
+						QNA_FILE_NAME, QNA_CONTENT,
+						MEM_ID)
+						VALUES
+						(LJP_QNABOARD_SEQ.nextval,#{qna_title}, #{qna_fileName},
+						#{qna_content},#{mem_id})
+					</when>
+					<otherwise>
+						INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE,
+						QNA_FILE_NAME, QNA_CONTENT,
+						MEM_ID, QNA_REFER)
+						VALUES
+						(LJP_QNABOARD_SEQ.nextval,#{qna_title}, #{qna_fileName},
+						#{qna_content},#{mem_id}, #{qna_refer})
+					</otherwise>
+				</choose>
 			</when>
 			<otherwise>
-				INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE,
-				QNA_FILE_NAME, QNA_CONTENT,
-				MEM_ID, QNA_REFER)
-				VALUES
-				(LJP_QNABOARD_SEQ.nextval,#{qna_title}, #{qna_fileName},
-				#{qna_content},#{mem_id}, #{qna_refer})
+				<choose>
+					<when test="qna_refer == null">
+						INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE,
+						QNA_CONTENT,
+						MEM_ID)
+						VALUES
+						(LJP_QNABOARD_SEQ.nextval,#{qna_title},
+						#{qna_content},#{mem_id})
+					</when>
+					<otherwise>
+						INSERT INTO LJP_QNABOARD(QNA_SEQ, QNA_TITLE,
+						QNA_CONTENT,
+						MEM_ID, QNA_REFER)
+						VALUES
+						(LJP_QNABOARD_SEQ.nextval,#{qna_title},
+						#{qna_content},#{mem_id}, #{qna_refer})
+					</otherwise>
+				</choose>
 			</otherwise>
 		</choose>
 	</insert>

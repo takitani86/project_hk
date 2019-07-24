@@ -71,7 +71,11 @@
             </div>
             <!-- /.box -->
             <!-- 댓글목록 -->
-            <div id="commentList" class="box-comments "></div>
+            <div class="box">
+              <div class="box-body" id="commentList">
+
+              </div>
+            </div>
             <!-- 댓글  -->
             <label for="content">댓글</label>
             <form name="commentInsertForm">

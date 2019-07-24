@@ -5,10 +5,11 @@
 ../를 추가해주어야 한다(절대경로로 할 방법이 없음) --%>
 <%@ include file="../include/head.jsp"%>
 <style>
-    #replyForm {
-      display: none;
-    }
-  </style>
+  #replyForm {
+    display: none;
+  }
+</style>
+
 <body class="layout-boxed skin-blue sidebar-mini">
   <div class="wrapper">
     <!-- Main Header(네비게이션 바) -->
@@ -59,13 +60,14 @@
               <!-- /.box-body -->
 
               <div class="box-footer btn-group">
-                    <c:if test="${user.username == boarddetail.mem_id}">
-                      <button class="btn btn-default" type="button" onclick="updateForm('${boarddetail.qna_seq}')">수정</button>
-                    </c:if>
-                    <c:if test="${user.username != boarddetail.mem_id}">
-                      <button class="btn btn-default" type="button" onclick="replyForm()">답글달기</button>
-                    </c:if>
-                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#delBoard">삭제</button>
+                <c:if test="${user.username == boarddetail.mem_id}">
+                  <button class="btn btn-default" type="button"
+                    onclick="updateForm('${boarddetail.qna_seq}')">수정</button>
+                </c:if>
+                <c:if test="${user.username != boarddetail.mem_id}">
+                  <button class="btn btn-default" type="button" onclick="replyForm()">답글달기</button>
+                </c:if>
+                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#delBoard">삭제</button>
               </div>
             </div>
             <!-- /.box -->
@@ -88,7 +90,8 @@
                       </tr>
                       <tr>
                         <th><input type="file" name="uploadFile" onchange="readURL(this);"></th>
-                        <td><img id="preview" src="<c:url value='/resources/dist/img/default-50x50.gif'/>" width=200 height=200 /></td>
+                        <td><img id="preview" src="<c:url value='/resources/dist/img/default-50x50.gif'/>" width=200
+                            height=200 /></td>
                       </tr>
                       <tr>
                         <th>내용</th>
@@ -107,21 +110,24 @@
               </div>
             </div>
             <!-- 댓글목록 -->
-            <div id="commentList" class="box box-comments"></div>
-            <!-- 댓글  -->
-            <label for="content">댓글</label>
-            <form name="commentInsertForm">
-              <div class="input-group">
-                <input type="hidden" name="qna_seq" value="${boarddetail.qna_seq}">
-                <input type="text" class="form-control" id="content" name="com_content" placeholder="내용을 입력하세요.">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
-                </span>
+            <div class="box">
+              <div class="box-body" id="commentList">
+
               </div>
-            </form>
+              <!-- 댓글  -->
+              <label for="content">댓글</label>
+              <form name="commentInsertForm">
+                <div class="input-group">
+                  <input type="hidden" name="qna_seq" value="${boarddetail.qna_seq}">
+                  <input type="text" class="form-control" id="content" name="com_content" placeholder="내용을 입력하세요.">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+                  </span>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-        <%@ include file="comment.jsp" %>
+          <%@ include file="comment.jsp" %>
       </section>
       <!-- /.content -->
     </div>

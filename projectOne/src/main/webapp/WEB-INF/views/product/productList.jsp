@@ -26,16 +26,17 @@
       <section class="content container-fluid">
 
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-10">
             <div class="box">
               <!-- /.box-header -->
               <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
                   <tr>
-                    <th onclick="sortNo(4)">카테고리
+                    <th width="10%" onclick="sortNo(4)">카테고리
                     <th onclick="sortNo(2)">상품명</th>
                     <th onclick="sortNo(3)">가격</th>
-                    <th>설명</th>
+                    <th width="40%">설명</th>
+                    <th onclick="sortNo(0)">수정일</th>
                   </tr>
                   <c:choose>
                     <c:when test="${empty list}">
@@ -50,6 +51,7 @@
                           <td>${dto.pro_name}</td>
                           <td>${dto.pro_price}</td>
                           <td>${dto.pro_desc}</td>
+                          <td><fmt:formatDate value="${dto.pro_regdate}" pattern="yyyy-MM-dd"/></td>
                         </tr>
                       </c:forEach>
                     </c:otherwise>
@@ -90,19 +92,13 @@
   <%@ include file="../include/plugin_js.jsp"%>
 
   <script type="text/javascript">
-    // //체크박스 올체크 펑션
-    // function allSel(bool){
-    // 	var chks=document.getElementsByName("chk"); 
-    // 	for(var i =0;i<chks.length;i++){
-    // 		chks[i].checked=bool;
-    // 	}
-    // }
+ 
+  function sortNo(num){
+  	var nums=num;
+	  var page =<%=(String)session.getAttribute("countProductPageSession")%>;
+	  location.href="productList.do?countProductPage="+page+"&sort="+nums;
+  }
 
-    function sortNo(num) {
-      var nums = num;
-      var page = < %= (String) session.getAttribute("countProductPageSession") % > ;
-      location.href = "productList.do?countProductPage=" + page + "&sort=" + nums;
-    }
   </script>
 </body>
 

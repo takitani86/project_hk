@@ -134,7 +134,7 @@
 	
 	   <!-- 활성화된 멤버 보기 -->
 	<select id="getEnabledMember" resultMap="resultMemberList">
-		SELECT MEM_SEQ,MEM_ID,MEM_IMAGE,MEM_NAME,MEM_B_NAME
+		SELECT MEM_SEQ,MEM_ID,MEM_IMAGE,MEM_NAME,MEM_B_NAME, MEM_ADDRESS
 		FROM LJP_MEMBER
 		WHERE MEM_ISDEL = 0 AND MEM_ISAPPROVE = 1 AND MEM_ISADMIN = 0
 	</select>
