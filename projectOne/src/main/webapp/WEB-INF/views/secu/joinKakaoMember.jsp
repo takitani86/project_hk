@@ -74,7 +74,7 @@ response.setContentType("text/html; charset=utf-8");
 <%@ include file="../include/main_header.jsp" %>
 <%@ include file="../include/left_column.jsp" %>
 	<div class="content-wrapper">
-		<form action="joinMember.do" name="form" id="form" method="post">
+		<form action="/secu/joinKaMember.do" name="form" id="form" method="post">
 			<div class="container-fluid">
 				<section class="content-header">
 					<h1><strong>카카오 회원</strong></h1><small>추가 정보 입력</small>
