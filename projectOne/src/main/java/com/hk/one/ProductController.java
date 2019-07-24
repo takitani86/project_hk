@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hk.one.dto.CategoryDto;
 import com.hk.one.dto.OrderListDto;
 import com.hk.one.dto.ProductDto;
 import com.hk.one.service.IOrderListService;
+import com.hk.one.service.IOrderService;
 import com.hk.one.service.IProductService;
 
 @Controller
@@ -29,6 +32,8 @@ public class ProductController {
 	private IProductService productService;
 	@Autowired
 	private IOrderListService orderListService;
+	@Autowired
+	private IOrderService orderService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
@@ -42,7 +47,6 @@ public class ProductController {
 		String countProductPage=request.getParameter("countProductPage"); // view에서 요청페이지 파라미터를 받음
 		session.setAttribute("countProductPageSession", countProductPage); //현재페이지 세션저장
 		List<ProductDto> list = productService.getAllProductList(countProductPage);
-		
 		model.addAttribute("sort", sort);
 		model.addAttribute("list", list );
 		model.addAttribute("getPcount", getPcount);
@@ -58,10 +62,12 @@ public class ProductController {
 	
 	
 	@RequestMapping(value = "/insertProductForm.do", method = RequestMethod.GET)
-	public String insertProductForm(Locale locale, Model model) {
+	public String insertProductForm(Locale locale, Model model, Authentication auth) {
 		logger.info("상품추가 페이지이동{}.", locale);
 		//List<ProductDto> list = productService.getAllProductList();
 		//model.addAttribute("list", list );
+		List<CategoryDto> category = orderService.selectMenuCategoryList(auth.getName());
+		model.addAttribute("category", category);
 		
 		return "product/insertProductForm";
 	}

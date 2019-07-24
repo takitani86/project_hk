@@ -18,9 +18,10 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          고객센터 게시판 <small>관리자용</small>
+          상품 추가 <small></small>
         </h1>
       </section>
+
       <!-- Main content -->
       <section class="content container-fluid">
         <div class="row">
@@ -33,33 +34,35 @@
               </div>
               <!-- /.box-header -->
               <!-- form start -->
-              <form role="form" action="admin_writeBoard.do" method="post" enctype="multipart/form-data">
+              <form role="form" action="insertReceiveProduct.do" method="post" enctype="multipart/form-data">
                 <div class="box-body">
                   <div class="form-group">
-                    <label for="id">아이디</label>
-                    <input type="text" name="mem_id" class="form-control col-xs-4" id="id" placeholder="${user.username}"
-                      readonly>
+                    <label for="id">상품명</label>
+                    <input type="text" name="pro_name" class="form-control col-xs-4" id="id">
                   </div>
                   <div class="form-group">
-                    <label for="title">제목</label>
-                    <input type="text" name="qna_title" class="form-control" id="title" placeholder="제목">
+                    <label for="price">제목</label>
+                    <input type="text" name="pro_price" class="form-control" id="price">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputFile">파일 첨부</label>
+                    <label for="exampleInputFile">상품이미지</label>
                     <input type="file" name="uploadFile" onchange="readURL(this);" id="exampleInputFile">
                     <img onerror="this.style.display='none'" src="#" id="preview" width=250 height=400 alt="preview">
-                    <p class="help-block">미리보기가 표시됩니다.</p>
                   </div>
                   <div class="form-group">
-                    <label for="content">내용</label>
-                    <textarea name="qna_content" class="form-control" rows="8" id="content"
-                      placeholder="내용을 입력하세요." style="resize:none;"></textarea>
+                    <label for="content">카테고리 선택</label>
+                    <select class="form-control" name="cat_seq">
+                        <c:forEach var="cate" items="${category}">
+                          <option value="${cate.cat_seq}">${cate.cat_name}</option>
+                        </c:forEach>
+                      </select>
                   </div>
                 </div>
                 <!-- /.box-body -->
 
                 <div class="box-footer">
                   <button type="submit" class="btn btn-primary">등록</button>
+                  <button type="button" class="btn btn-default" onclick="location.href='productList.do?countProductPage=<%=pageNum%>&sort=${sort}'">등록</button>
                 </div>
               </form>
             </div>
@@ -82,7 +85,6 @@
 
   <script type="text/javascript">
     function readURL(input) {
-      $('#preview').removeAttr('onerror');
       if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
