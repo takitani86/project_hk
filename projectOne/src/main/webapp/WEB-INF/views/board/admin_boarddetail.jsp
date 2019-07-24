@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputFile">첨부된 파일</label>
-                  <img onerror="this.style.display='none'" src="<c:url value='/resources/img/board/${boarddetail.qna_fileName}'/>" width=550 height=300
+                  <img src="<c:url value='/resources/img/board/${boarddetail.qna_fileName}'/>" width=550 height=300
                     alt="preview">
                   <p class="help-block">이미지일 경우 미리보기가 표시됩니다.</p>
                 </div>
@@ -88,7 +88,7 @@
                       </tr>
                       <tr>
                         <th><input type="file" name="uploadFile" onchange="readURL(this);"></th>
-                        <td><img id="preview" onerror="this.style.display='none'" src="#" width=200 height=200 /></td>
+                        <td><img id="preview" src="<c:url value='/resources/dist/img/default-50x50.gif'/>" width=200 height=200 /></td>
                       </tr>
                       <tr>
                         <th>내용</th>

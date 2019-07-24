@@ -36,7 +36,7 @@
 						<button class="btn btn-info btn-flat" type="submit">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>
-						<input type="button" class="btn btn-default" onclick="location.href='admin_writeForm.do'" value="글쓰기">
+						<input type="button" class="btn btn-default" onclick="location.href='member_writeForm.do'" value="글쓰기">
 					</div>
 				</form>
 			</section>
