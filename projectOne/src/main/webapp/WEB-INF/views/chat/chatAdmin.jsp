@@ -9,59 +9,50 @@
 	<div class="wrapper">
 		<!-- Main Header(네비게이션 바) -->
 		<%@ include file="../include/main_header.jsp"%>
-
 		<!-- Left Column(사이드바) -->
 		<%@ include file="../include/left_column.jsp"%>
-
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<h1>
-					고객상담 <small>대화창</small>
-				</h1>
-			</section>
-
-			<!-- Main content -->
+			<div class="container fluid" style="padding:10px 10px 0px 10px;">
+				<section class="content-header">
+					<h1>
+						<strong>고객상담</strong> <small>대화창</small>
+					</h1>
+				</section>
+			</div>
 			<section class="content container-fluid">
-
-		<h1>1:1 상담(관리자)</h1>
-
-
-	<br />
-	<div id="chatContainer"></div>
-
-	<div id="chatArea"
-		style="width: 500px; height: 500px; overflow-y: scroll; margin-top: 30px;"></div>
-
-	<br />
-
-	<input id="message">
-	<span id="sendBtn"
-		style="border: 1px solid red; padding: 5px; width: 30px; background-color: red; color: white; cursor: pointer;">
-		Send</span>
-
-
-	<div>
-		Signed In as : <span id="">${sessionScope.userid}</span>
-	</div>
-	<div>
-		Send To : <span id="sendTo">merchant</span>
-	</div>
-
+				<div class="box box-primary direct-chat direct-chat-primary" style="width:300px;">
+					<div class="box-header with-border" style="padding:10px 30px 10px 30px;">
+						<h3 style="margin:10px 0px 10px 0px;"><strong>1:1 상담</strong> <small>관리자용</small></h3>						
+						<div class="box-tools pull-right">
+						</div>
+					</div>
+					<div class="box-body">
+						<div id="chatContainer" class="direct-chat-messages" style="height:300px;">
+							<div id="chatArea" class="direct-chat-msg right" style="height:270px; overflow-y:scroll;">
+							</div>
+						</div>
+					</div>
+					<div class="box-footer">
+		                <div class="input-group">
+		                  <input id="message" type="text" name="message" placeholder="내용을 입력하세요" class="form-control">
+		                      <span id="sendBtn" class="input-group-btn">
+		                        <button type="submit" class="btn btn-primary btn-flat" style="cursor: pointer;">Send</button>
+		                      </span>
+		                </div>
+		            </div>
+					<div class="container fluid">
+						Signed In as : <span id="">${sessionScope.userid}</span>
+					</div>
+					<div class="container fluid" style="margin:0px -670px 5px 0px; padding:0px 15px 5px;">
+						Send To : <span id="sendTo">merchant</span>
+					</div>							
+				</div>
 			</section>
-			<!-- /.content -->
 		</div>
-		<!-- /.content-wrapper -->
-
-		<!-- Main Footer -->
 		<%@ include file="../include/main_footer.jsp"%>
-
 	</div>
-	<!-- ./wrapper -->
-
-	<!-- REQUIRED JS SCRIPTS -->
-
 	<!-- JS 스크립트모음 -->
 	<%@ include file="../include/plugin_js.jsp"%>
 	<script>
@@ -103,7 +94,9 @@
 		if (jsonData.message != null) {
 			$("#chatArea")
 					.append(
-							"<div style='float:left;border:1px solid #F5A9F2;background-color:#F5A9F2;border-radius:6px;margin-bottom:10px;'>고객 : "
+							"<div class='direct-chat-info clearfix' style='margin:4px 0px 2px 0px;'>" + 
+							"<span class='direct-chat-name pull-left'>고객</span><span id='time-result' class='direct-chat-timestamp pull-right'></span>" + "</div>" +
+							"<div class='direct-chat-text' style='width:200px; margin:5px 25px 0px 0px; float:left;'>"
 									+ jsonData.message
 									+ "</div><div style='clear:both;'></div>");
 
@@ -134,14 +127,24 @@
 
 		webSocket.send('{ \"sendTo\" : \"' + $("#sendTo").text() + '\", \"message\" : \"' + messageText.value + '\"}');
 
-		$("#chatArea").append("<div style='float:right;border:1px solid #FE9A2E;background-color:#FE9A2E;border-radius:6px;margin-bottom:10px;'>당신 : " + 
-							   messageText.value + 
-							   "</div><div style='clear:both;'></div>");
+		$("#chatArea").append(
+							"<div class='direct-chat-info clearfix' style='margin:4px 4px 2px 0px;'>" + 
+							"<span class='direct-chat-name pull-right'>ADMIN</span><span id='time-result' class='direct-chat-timestamp pull-left'></span>" + "</div>" +
+							"<div class='direct-chat-text' style='width:200px; margin:5px 25px 0px 0px; float:right;'>"
+							   + messageText.value
+							   + "</div><div style='clear:both;'></div>");
 		
 		messageText.value = "";
 	}
 
 
+</script>
+<script type="text/javascript">
+	var d = new Date();
+	var currentDate = ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일";
+    var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 ";
+    var result = document.getElementById("time-result");
+    result.innerHTML = currentDate + " " + currentTime; 
 </script>
 
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
