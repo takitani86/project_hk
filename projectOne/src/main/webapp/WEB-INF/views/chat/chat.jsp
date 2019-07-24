@@ -26,6 +26,8 @@
 					<div class="box-header with-border" style="padding:10px 30px 10px 30px;">
 						<h3 style="margin:10px 0px 10px 0px;"><strong>1:1 상담</strong> <small>고객용</small></h3>						
 						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                			</button>
 						</div>
 					</div>
 					<div class="box-body">
