@@ -19,6 +19,7 @@
 		<mapper resource="/com/sqlMap/mapper/Member.xml"/>
 		<mapper resource="/com/sqlMap/mapper/Product.xml"/>
 		<mapper resource="/com/sqlMap/mapper/Comment.xml"/>
+		<mapper resource="/com/sqlMap/mapper/OrderList.xml"/>
 	</mappers>
 </configuration>
 

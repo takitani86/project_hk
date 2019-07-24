@@ -120,33 +120,13 @@ public class ProductController {
 		}
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/ordList.do", method = RequestMethod.GET)
-	public String ordList(Locale locale, Model model,@RequestParam String user,@RequestParam int seqs) {
-		logger.info("결제통신성공{}.", locale);
-		System.out.println("통신 유저:"+user);
-		System.out.println("통신 seq:"+seqs);
-		OrderListDto dto=orderListWrap(user,seqs); 
-		boolean isS=orderListService.addOrderList(dto);
-		return "d";
-//		if(isS) {
-//			return "redirect:consumer.do";
-//		}else {
-//			model.addAttribute("msg", "상품결제실패");
-//			return "error";
-//		}
-	}
-	
-	public OrderListDto orderListWrap(String user, int seqs){ //담아줌
-		System.out.println("orderListWrap 유저:"+user);
-		System.out.println("orderListWrap seq:"+seqs);
-		ProductDto pro_seq=productService.getProduct(seqs);
+	@RequestMapping(value = "/orderlist.do", method = RequestMethod.GET)
+	public String orderList(Model model, Authentication auth) {
+		logger.info("주문내역으로 이동");
 		
-		OrderListDto orderListDto = new OrderListDto(user,seqs,pro_seq.getPro_price());
-//		orderListDto.setOrd_id(user);
-//		orderListDto.setOrd_num(seqs);
-//		orderListDto.setOrd_proprice(pro_seq.getPro_price());
-		return orderListDto;
+		List<OrderListDto> list = orderListService.getOrderList(auth.getName()); 
+		model.addAttribute("orderList", list);
+		return "member/orderlist";
 	}
 	
 //	@RequestMapping(value = "/productImgInsert.do")

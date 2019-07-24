@@ -167,20 +167,24 @@ public class MenuController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/consumer/ordList.do", method = RequestMethod.GET)
-	public void ordList(Locale locale, Model model,@RequestParam String user,@RequestParam int seqs) {
+	public String ordList(Locale locale, Model model,@RequestParam String user,@RequestParam int seqs, @RequestParam long uid) {
 		logger.info("결제통신성공{}.", locale);
 		System.out.println("통신 유저:"+user);
 		System.out.println("통신 seq:"+seqs);
-		OrderListDto dto=orderListWrap(user,seqs); 
-		boolean isS= orderListService.addOrderList(dto);
+		OrderListDto dto=orderListWrap(user,seqs, uid);
+		boolean isS=orderListService.addOrderList(dto);
+		
+		return "d";
 	}
 	
-	public OrderListDto orderListWrap(String user, int seqs){ //담아줌
+	public OrderListDto orderListWrap(String user, int seqs, long uid){ //담아줌
 		System.out.println("orderListWrap 유저:"+user);
 		System.out.println("orderListWrap seq:"+seqs);
+		System.out.println("orderListWrap uid:"+uid);
 		ProductDto pro_seq=productService.getProduct(seqs);
 		
-		OrderListDto orderListDto = new OrderListDto(user,seqs,pro_seq.getPro_price());
+		OrderListDto orderListDto = new OrderListDto(user,uid,seqs,pro_seq.getPro_price());
+
 		return orderListDto;
 	}
 	
