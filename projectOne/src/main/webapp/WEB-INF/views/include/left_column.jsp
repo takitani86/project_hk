@@ -56,6 +56,7 @@
 									class="fa fa-circle text-success"></i>${user.auth == "ROLE_ADMIN" ? "관리자":"점주"}</a>
 						</div>
 					</div>
+					<br>
 				</sec:authorize>
 			</c:otherwise>
 		</c:choose>

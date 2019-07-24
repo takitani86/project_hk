@@ -38,12 +38,6 @@
 		<logout logout-url="/logout.do" logout-success-url="/secu/loginPage.do"
 			delete-cookies="true" invalidate-session="true" />
 
-		<!-- 중복로그인 방지 -->
-		<session-management>
-			<concurrency-control max-sessions="1"
-				expired-url="/secu/loginPage.do" />
-		</session-management>
-
 		<csrf disabled="true" />
 	</http>
 	<!-- <jdbc-user-service data-source-ref="dataSource" id="userService" users-by-username-query="SELECT 

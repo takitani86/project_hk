@@ -47,7 +47,7 @@
                   <div class="form-group">
                     <label for="exampleInputFile">파일 첨부</label>
                     <input type="file" name="uploadFile" onchange="readURL(this);" id="exampleInputFile">
-                    <img src="#" id="preview" width=250 height=400 alt="preview">
+                    <img onerror="this.style.display='none'" src="#" id="preview" width=250 height=400 alt="preview">
                     <p class="help-block">미리보기가 표시됩니다.</p>
                   </div>
                   <div class="form-group">
@@ -82,6 +82,7 @@
 
   <script type="text/javascript">
     function readURL(input) {
+      $('#preview').removeAttr('onerror');
       if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {

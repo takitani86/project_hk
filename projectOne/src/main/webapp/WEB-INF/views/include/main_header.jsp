@@ -46,6 +46,20 @@
 			</div>
 		</nav>
 	</header>
+	<script>
+		$(function() {
+			$.ajax({
+				url: '/projectOne/pushalert.do',
+				type: 'get',
+				success: function (count) {
+					if (count != 0) {
+					$("#alert1").html(count);
+					$("#alert3").append(count + "명의 점주가 승인 대기중입니다.");
+					}
+				}
+			});
+		});
+</script>
 </body>
 
 </html>
