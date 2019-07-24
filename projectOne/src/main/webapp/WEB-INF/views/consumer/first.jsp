@@ -9,16 +9,17 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     width: 200px;
     height: 300px;
-    margin: auto;
+    margin: 5px;
     text-align: center;
     display: inline-block;
+    border: 1px;
   }
 </style>
 
 <body class="hold-transition">
   <div class="content container-fluid">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-xs-10">
         <div class="box box-default">
           <div class="box-header with-border">
             <h3 class="box-title">
@@ -27,11 +28,10 @@
           </div>
           <div class="box-body" >
             <c:forEach var="member" items="${member}">
-              <div class=" card" onclick="selectMerchant('${member.mem_id}');">
+              <div class=" card" onclick="selectMerchant('${member.mem_id}', '${member.mem_b_name}');">
                 <img src="<c:url value='/resources/img${member.mem_image}'/>" alt="매장이미지"
                   style="width:100%; height: 70%">
                 <h3>${member.mem_b_name}</h3>
-                <p>${member.mem_id}</p>
                 <p>${member.mem_address}</p>
               </div>
             </c:forEach>
@@ -48,8 +48,8 @@
   <%@ include file="../include/plugin_js.jsp"%>
 
   <script>
-    function selectMerchant(id) {
-      location.href = "menu.do?mem_id=" + id;
+    function selectMerchant(id, name) {
+      location.href = "menu.do?mem_id=" + id + "&mem_b_name=" + name;
     }
   </script>
 </body>

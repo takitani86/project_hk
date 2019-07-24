@@ -16,7 +16,7 @@
         <section class="content-header text-center">
           <div class="alert alert-info alert-dismissable">
             <h1>
-              ${mem_id} 의 메뉴
+              ${mem_b_name}
             </h1>
           </div>
         </section>
@@ -105,7 +105,8 @@
           let count = 0;
           a += '<tr>';
           $.each(data, function (key, value) {
-            a += '<td><p><img src="${pageContext.request.contextPath}/resources/img/product/' + value.pro_image +
+            a += '<td><p><img src="${pageContext.request.contextPath}/resources/img/product/' + value
+              .pro_image +
               '" width="150" height="200" onclick="selectOrder(' + key + ',' + value.pro_seq +
               ')"></p><p>' + value.pro_name + '</p><p>' + value.pro_price + '</td>';
             count++;
@@ -127,7 +128,8 @@
       price += productList[k]["pro_price"];
       arrayBox.push(pro_seq);
       var a = '';
-      $(".orderList").children().append("<td><img src='${pageContext.request.contextPath}/resources/img/product/" + productList[k]["pro_image"] + "' width='100px' height='120px'><p>" + productList[k]["pro_name"] + '</p></td>');
+      $(".orderList").children().append("<td><img src='${pageContext.request.contextPath}/resources/img/product/" +
+        productList[k]["pro_image"] + "' width='100px' height='120px'><p>" + productList[k]["pro_name"] + '</p></td>');
       // $("#selectOrder").append("<div class ='pay' value=" + pro_seq + ">" + productList[k]["pro_name"] + "</>");
       $("#sum1").val(price);
       $("#sum").html("&#8361; " + numberWithCommas(price));
@@ -165,21 +167,25 @@
           var msg = '결제가 완료되었습니다.';
           var suc = 0;
           check(userid);
-
           msg += '고유ID : ' + rsp.imp_uid;
           msg += '상점 거래ID : ' + rsp.merchant_uid;
           msg += '결제 금액 : ' + rsp.paid_amount;
           msg += '카드 승인번호 : ' + rsp.apply_num;
+          $('#successOrder').modal('show');
+          $('input[name="id"]').val(rsp.imp_uid);
+          $('input[name="id2"]').val(rsp.merchant_uid);
+          $('input[name="id3"]').val(rsp.paid_amount);
+          $('input[name="id4"]').val(rsp.aplly_num);
 
         } else {
           var msg = '결제에 실패하였습니다.';
           msg += '에러내용 : ' + rsp.error_msg;
         }
 
-        alert(msg);
+        console.log(msg);
       });
     }
-    var i;
+
 
     function check(userid) {
       var suc = 0;
@@ -196,13 +202,42 @@
         url: "ordList.do",
         type: 'GET',
         data: "seqs=" + seqs + "&user=" + userid,
-        success: function (data) {},
+        success: function (data) {
+
+        },
         error: function (jqXHR, textStatus, errorThrown) {
           alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
         }
       });
     }
   </script>
+
+  <!-- 결제완료 MODAL -->
+  <div class="modal" id="successOrder" tabindex="-1" role="dialog" aria-labelledby="successOrder"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sucessOrder">결제정보</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <label for="id">고유ID</label>
+            <input type="text" class="form-control" name="id" readonly>
+            <label for="id2">상점 거래ID</label>
+            <input type="text" class="form-control" name="id2" readonly>
+            <label for="id3">결제금액</label>
+            <input type="text" class="form-control" name="id3" readonly>
+            <label for="id4">카드 승인번호</label>
+            <input type="text" class="form-control" name="id4" readonly>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 
 </html>

@@ -144,13 +144,14 @@ public class MenuController {
 	}
 	
 	@RequestMapping(value = "/consumer/menu.do", method = RequestMethod.GET)
-	public String consumerMenu(Model model, @RequestParam String mem_id) {
+	public String consumerMenu(Model model, @RequestParam String mem_id, @RequestParam String mem_b_name) {
 		logger.info("손님용 메뉴 메소드 호출");
 
 		// 카테고리 정보 조회
 		List<CategoryDto> category = orderService.selectMenuCategoryList(mem_id);
 
 		model.addAttribute("category", category);
+		model.addAttribute("mem_b_name", mem_b_name);
 		model.addAttribute("mem_id", mem_id);
 
 		return "consumer/menu";
@@ -165,7 +166,7 @@ public class MenuController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/ordList.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/consumer/ordList.do", method = RequestMethod.GET)
 	public void ordList(Locale locale, Model model,@RequestParam String user,@RequestParam int seqs) {
 		logger.info("결제통신성공{}.", locale);
 		System.out.println("통신 유저:"+user);
