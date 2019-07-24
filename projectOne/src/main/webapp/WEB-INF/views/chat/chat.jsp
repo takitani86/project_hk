@@ -103,7 +103,7 @@
 		if (jsonData.message != null) {
 			$("#chatArea")
 					.append(
-							"<div style='float:left;border:1px solid red;background-color:red;border-radius:6px;margin-bottom:10px;'>"
+							"<div style='float:left;border:1px solid #F5A9F2;background-color:#F5A9F2;border-radius:6px;margin-bottom:10px;'>상담원 : "
 									+ jsonData.message
 									+ "</div><div style='clear:both;'></div>");
 
@@ -134,7 +134,7 @@
 
 		webSocket.send('{ \"sendTo\" : \"' + $("#sendTo").text() + '\", \"message\" : \"' + messageText.value + '\"}');
 
-		$("#chatArea").append("<div style='float:right;border:1px solid cornflowerblue;background-color:cornflowerblue;border-radius:6px;margin-bottom:10px;'>" + 
+		$("#chatArea").append("<div style='float:right;border:1px solid #FE9A2E;background-color:#FE9A2E;border-radius:6px;margin-bottom:10px;'>당신 : " + 
 							   messageText.value + 
 							   "</div><div style='clear:both;'></div>");
 		
