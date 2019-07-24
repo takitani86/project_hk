@@ -1,8 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	response.setContentType("text/html; charset=UTF-8");
+%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ page session="false"%>
+
+
+<html>
+<style>
+.floatingPosition{
+position:absolute;
+top:-100px;
+left:800px;
+}
+</style>
 <!-- HEAD(link파일들 모음) -->
 <%@ include file="include/head.jsp"%>
-
 <body class="skin-blue sidebar-mini layout-boxed">
 
 	<div class="wrapper">
@@ -12,91 +31,67 @@
 		<!-- Left Column(사이드바) -->
 		<%@ include file="include/left_column.jsp"%>
 		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
+					<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
 					통합 주문관리서비스 <small>2019.07.18</small>
 				</h1>
 			</section>
 			<section class="content container-fluid">
-				<p>
-					<a href="<c:url value='productList.do?countProductPage=1&sort=1'/>">상품리스트</a>
+			<p>
+				<a href="<c:url value='productList.do?countProductPage=1&sort=1'/>">상품리스트</a>
+			</p>
+			<p>
+				<a href="<c:url value='admin/memberList.do'/>">회원목록</a>
+			</p>
+			<p>
+				<a href="<c:url value='member/board/member_board.do'/>">점주 게시판</a>
+			</p>
+			<p>
+				<a href="<c:url value='admin/board/admin_board.do'/>">관리자 게시판</a>
+			</p>
+			<p>
+				<a href="<c:url value='member/payment.do'/>">결제테스트</a>
+			</p>
+			<p>
+				<a href="<c:url value='chatAdmin.do'/>">관리자채팅</a>
+			</p>
+			<p>
+				<a href="<c:url value='chat.do'/>">채팅</a>
+			</p>
+			<p>
+				<a href="<c:url value='member/menu.do'/>">메뉴판</a>
+			</p>
+			<sec:authorize access="isAnonymous()">
+				<h5>
+					<a href='<c:url value="/secu/loginPage.do"/>'>LOGIN</a> 로그인 해주세요.
+				</h5>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<sec:authentication var="user" property="principal" />
+				<h3>${user.username}님,반갑습니다.</h3>
+				<p>암호 : ${user.password}</p>
+				<p>활성화 여부: ${user.enabled}</p>
+				<p>권한 여부: ${user.auth}</p>
+				<p>이메일: ${user.secu_email}
 				</p>
-				<p>
-					<a href="<c:url value='admin/memberList.do'/>">회원목록</a>
-				</p>
-				<p>
-					<a href="<c:url value='member/board/member_board.do'/>">점주 게시판</a>
-				</p>
-				<p>
-					<a href="<c:url value='admin/board/admin_board.do'/>">관리자 게시판</a>
-				</p>
-				<p>
-					<a href="<c:url value='member/payment.do'/>">결제테스트</a>
-				</p>
-				<p>
-					<a href="<c:url value='chatAdmin.do'/>">관리자채팅</a>
-				</p>
-				<p>
-					<a href="<c:url value='chat.do'/>">채팅</a>
-				</p>
-				<p>
-					<a href="<c:url value='member/menu.do'/>">메뉴판</a>
-				</p>
-				<sec:authorize access="isAnonymous()">
-					<h5>
-						<a href='<c:url value="/secu/loginPage.do"/>'>LOGIN</a> 로그인 해주세요.
-					</h5>
-				</sec:authorize>
-				<c:choose>
-					<c:when test="${not empty kakao}">
-						<h3>${kakao.secu_id}님,반갑습니다.</h3>
-						<p>암호 : ${kakao.password}</p>
-						<p>활성화 여부: ${kakao.enabled}</p>
-						<p>권한 여부: ${kakao.auth}</p>
-						<p>이메일: ${kakao.secu_email}
-						</p>
-						<form action="<c:url value='/logout.do'/>" method="POST">
-							<button type="submit">LOGOUT</button>
-						</form>
-					</c:when>
-					<c:otherwise>
-						<sec:authorize access="isAuthenticated()">
-							<sec:authentication var="user" property="principal" />
-							<h3>${user.username}님,반갑습니다.</h3>
-							<p>암호 : ${user.password}</p>
-							<p>활성화 여부: ${user.enabled}</p>
-							<p>권한 여부: ${user.auth}</p>
-							<p>이메일: ${user.secu_email}
-							</p>
-							<form action="<c:url value='/logout.do'/>" method="POST">
-								<button type="submit">LOGOUT</button>
-							</form>
-						</sec:authorize>
-					</c:otherwise>
-				</c:choose>
+				<form action="<c:url value='/logout.do'/>" method="POST">
+					<button type="submit">LOGOUT</button>
+				</form>
+			</sec:authorize>
 			</section>
 		</div>
-
+		
 		<!-- Main Footer -->
 		<%@ include file="include/main_footer.jsp"%>
-
+		
 	</div>
 	<!-- /wrapper -->
-	<script>
-			$(function() {
-				$.ajax({
-					url: 'pushalert.do',
-					type: 'get',
-					success: function (count) {
-						$("#alert1").html(count);
-						$("#alert3").append(count + "명의 점주가 승인 대기중입니다.");
-					}
-				});
-			});
-	</script>
+	
 	<!-- JS 스크립트모음 -->
 	<%@ include file="include/plugin_js.jsp"%>
+	<div class="floatingPosition">
+	<%@ include file="include/floating.jsp"%>
+	</div>
 </body>
-
 </html>
