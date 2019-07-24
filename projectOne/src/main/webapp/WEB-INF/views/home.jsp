@@ -16,7 +16,7 @@
 <style>
 .floatingPosition{
 position:absolute;
-top:-100px;
+top:300px;
 left:800px;
 }
 </style>

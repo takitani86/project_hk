@@ -4,23 +4,6 @@
 <%-- include 경로를 불러온 jsp 페이지의 상대경로에 따라 
 ../를 추가해주어야 한다(절대경로로 할 방법이 없음) --%>
 <%@ include file="../include/head.jsp"%>
-
-<body class="layout-boxed skin-blue sidebar-mini">
-	<div class="wrapper">
-		<!-- Main Header(네비게이션 바) -->
-		<%@ include file="../include/main_header.jsp"%>
-		<!-- Left Column(사이드바) -->
-		<%@ include file="../include/left_column.jsp"%>
-		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
-			<div class="container fluid" style="padding:10px 10px 0px 10px;">
-				<section class="content-header">
-					<h1>
-						<strong>고객상담</strong> <small>대화창</small>
-					</h1>
-				</section>
-			</div>
 			<section class="content container-fluid">
 				<div class="box box-primary direct-chat direct-chat-primary" style="width:300px;">
 					<div class="box-header with-border" style="padding:10px 30px 10px 30px;">
@@ -45,18 +28,14 @@
 		                </div>
 		            </div>
 		            <div class="container fluid">
-						Signed In as : <span id="">${sessionScope.userid}</span>
+						Signed In as : <span id="">${user.username}</span>
 					</div>
 					<div class="container fluid" style="margin:0px -670px 5px 0px; padding:0px 15px 5px;">
 						Send To : <span id="sendTo">ADMIN</span>
 					</div>
 				</div>
 			</section>
-		</div>
-		<%@ include file="../include/main_footer.jsp"%>
-	</div>
 	<!-- JS 스크립트모음 -->
-	<%@ include file="../include/plugin_js.jsp"%>
 	<script>
 	/*
 	$.ajax({

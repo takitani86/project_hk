@@ -57,8 +57,10 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = {"/", "/home.do"}, method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model,HttpServletRequest req,Authentication auth) {
 		logger.info("인덱스 {}.", locale);
+		session = req.getSession();
+		session.setAttribute("userid", auth.getName());
 		
 		return "home"; 
 	}

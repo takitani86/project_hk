@@ -19,24 +19,14 @@ response.setContentType("text/html; charset=utf-8");
 <sec:authorize access="isAuthenticated()">
 	<sec:authentication var="user" property="principal" />
 	<c:choose>
-
 		<c:when test="${user.username eq 'ADMIN'}">
-			<div class="floatMenu">
-				<p>
-					<a href="<c:url value='chatAdmin.do'/>"><img
-						src="${pageContext.request.contextPath}/resources/img/co.jpg"
-						width="100px" height="100px" /></a>
-				</p>
-			</div>
+		
+		<%@ include file="/WEB-INF/views/chat/chatAdmin.jsp"%>
+		
+		
 		</c:when>
 		<c:otherwise>
-			<div class="floatMenu">
-				<p>
-					<a href="<c:url value='chat.do'/>"><img
-						src="${pageContext.request.contextPath}/resources/img/co.jpg"
-						width="100px" height="100px" /></a>
-				</p>
-			</div>
+				<%@ include file="/WEB-INF/views/chat/chat.jsp"%>
 		</c:otherwise>
 
 	</c:choose>
