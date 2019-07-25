@@ -50,6 +50,34 @@
 <!-- HEAD(link파일들 모음) -->
 <%@ include file="include/head.jsp"%>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+		google.charts.load('current', {'packages':['corechart']});
+		google.charts.setOnLoadCallback(drawVisualization);
+	
+		function drawVisualization() { 
+			var data = google.visualization.arrayToDataTable([
+					['월', '신림점', '홍대점', '서대문구점', '개화점', '강남점', '평균'],
+					['2019/06',  130,      938,         522,             998,           450,      614.6],
+					['2019/05',  135,      1120,        599,             1268,          288,      682],
+					['2019/04',  157,      1167,        587,             807,           397,      623],
+					['2019/03',  139,      1110,        615,             968,           215,      609.4],
+					['2019/02',  136,      691,         629,             1026,          366,      569.6]
+				]);
+			var options = {
+					title : '매장별 매출그래프',
+					vAxis: {title: '매출'},
+					hAxis: {title: '월'}, 
+					seriesType: 'bars',
+					series: {5: {type: 'line'}}
+				};
+			
+			var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
+		}
+	</script>
+
+
 <body class="skin-blue sidebar-mini layout-boxed">
 
 	<div class="wrapper">
@@ -161,31 +189,35 @@
 			<br />
 
 				<div class="row">
-					<div class="col-sx-10">
+				<div class="col-sx-10">
+					<div class="col-sx-2">
 						<div class="floatingPosition">
 							<%@ include file="include/floating.jsp"%>
 						</div>
 					</div>
-				</div>
-				
-			 <div class="nav-tabs-custom">
+					<div class="col-sx-8">
+					 <div class="nav-tabs-custom">
 	            <!-- Tabs within a box -->
 	            <ul class="nav nav-tabs pull-right">
-	              <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-	              <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
 	              <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
 	            </ul>
 	            <div class="tab-content no-padding">
 	            <div class="box-body chart-responsive">
-	              <div class="chart" id="revenue-chart" style="height: 300px;"></div>
-    	        </div>
-	              <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-	              <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+	              <div id="chart_div" style="width:900px; height: 500px;"></div>
+	              </div>
 	            </div>
 	          </div>
+					</div>
+				</div>
+				
+				</div>
+				
+			
 
 			</section>
 		</div>
+		
+		
 
 		<!-- Main Footer -->
 		<%@ include file="include/main_footer.jsp"%>
@@ -244,7 +276,7 @@
 				// 2초마다 start 호출
 				rollingId = setInterval(function () {
 					start();
-				}, 5000);
+				}, 6000);
 			}
 
 			function start() {
