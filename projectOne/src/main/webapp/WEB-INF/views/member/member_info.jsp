@@ -105,7 +105,7 @@ response.setContentType("text/html; charset=utf-8");
 							<c:choose>
 								<c:when test="${member.login_id == 'ADMIN'}">
 								<tr>
-								<th>회원삭제</th>
+								<th>회원삭제!</th>
 								<td><button type="button" onclick="location.href='<c:url value="/deleteMember.do?mem_id=${member.mem_id}"/>'" class="btn btn-block btn-danger" style="width:30%; float:left;">탈퇴</button></td>
 								</tr>
 								</c:when>
