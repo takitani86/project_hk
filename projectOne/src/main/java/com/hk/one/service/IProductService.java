@@ -9,7 +9,7 @@ import com.hk.one.dto.ProductDto;
 
 public interface IProductService {
 
-public List<ProductDto> getAllProductList(); // 상품리스트 확인
+public List<ProductDto> getAllProductList(String countProductPage); // 상품리스트 확인
 	
 	public ProductDto getProduct(int seq) ; // 상품하나 확인
 	public ProductDto upProduct(String dto);
@@ -20,8 +20,6 @@ public List<ProductDto> getAllProductList(); // 상품리스트 확인
 	public boolean mulDelProduct(String[] seqs) ; // 상품 다중 삭제
 	public int countProductPage();//페이징
 	public boolean sortProduct(String sort);
-
-	public List<ProductDto> getAllProductList(String countProductPage);
 
 	String saveFile(MultipartFile file);
 	

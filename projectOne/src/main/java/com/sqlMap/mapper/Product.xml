@@ -12,7 +12,7 @@
 
 	<!-- property = java 변수명 , column = db컬럼명 -->
 
-	<select id="selectProductList" parameterType="String"
+	<select id="selectProductList" parameterType="Map"
 		resultType="product">
 		SELECT
 		PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_REGDATE,PRO_ISDEL
@@ -30,7 +30,7 @@
 		WHERE CEIL(RN/10) =	#{countProductPage}
 	</select>
 
-	<select id="selectReverseProductList" parameterType="String"
+	<select id="selectReverseProductList" parameterType="Map"
 		resultType="product">
 		SELECT
 		PRO_SEQ,PRO_NAME,PRO_IMAGE,PRO_PRICE,PRO_DESC,CAT_SEQ,PRO_REGDATE,PRO_ISDEL
@@ -109,11 +109,10 @@
 		WHERE PRO_SEQ=#{pro_seq}
 	</update>
 	
-	<update id="delProduct" parameterType="int">
-		UPDATE LJP_PRODUCT
-		SET PRO_ISDEL = 1
+	<delete id="delProduct" parameterType="int">
+		DELETE LJP_PRODUCT
 		WHERE PRO_SEQ = #{pro_seq}
-	</update>
+	</delete>
 	
 	<delete id="muldelProduct" parameterType="map">
 		UPDATE LJP_PRODUCT SET PRO_ISDEL=1 WHERE PRO_SEQ IN

@@ -17,10 +17,6 @@ public class ProductService implements IProductService {
 	private IProductDao productDao;
 
 	@Override
-	public List<ProductDto> getAllProductList() {
-		return productDao.getAllProductList();
-	}
-	@Override
 	public String saveFile(MultipartFile file) {
 		return productDao.saveFile(file);
 	}

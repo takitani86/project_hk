@@ -113,10 +113,11 @@ import com.hk.one.dto.ProductDto;
 	@Override
 	public List<ProductDto> getAllProductList(String countProductPage) {
 		List<ProductDto> list=new ArrayList<ProductDto>();
+		Map<String, String> map = new HashMap<>();
 		if(flag==true) {
 			System.out.println("flag상태ㅔ" +flag);
 			flag=false;
-			list=sqlSession.selectList(namespace+"selectProductList",countProductPage);
+			list=sqlSession.selectList(namespace+"selectProductList", countProductPage);
 			return list;
 		}else {
 			System.out.println("flag상태ㅔ" +flag);
@@ -134,22 +135,8 @@ import com.hk.one.dto.ProductDto;
 	}
 
 	@Override
-	public List<ProductDto> getAllProductList() {
-		if(flag==true) {
-			flag=false;
-			System.out.println("falg상태=" +flag);
-			return sqlSession.selectList(namespace+"selectProductList");
-		}else {
-			flag=true;
-			System.out.println("falg상태=" +flag);
-			return sqlSession.selectList(namespace+"selectReverseProductList");
-		}
-		
-	}
-
-	@Override
 	public boolean delProduct(int seq) {
-		int success = sqlSession.update(namespace+"delProduct", seq);
+		int success = sqlSession.delete(namespace+"delProduct", seq);
 		return success > 0 ? true:false;
 	}
 

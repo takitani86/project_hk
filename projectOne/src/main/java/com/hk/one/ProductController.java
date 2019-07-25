@@ -38,7 +38,7 @@ public class ProductController {
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
 	@RequestMapping(value = "/productList.do", method = RequestMethod.GET)
-	public String productList(Locale locale, Model model,HttpServletRequest request) {
+	public String productList(Locale locale, Model model,HttpServletRequest request, Authentication auth) {
 		String sort = (String) request.getParameter("sort");
 		System.out.println(sort);
 		logger.info("상품페이지 호출{}.", locale);
@@ -87,10 +87,10 @@ public class ProductController {
 		}
 	}
 	
-	@RequestMapping(value = "/muldelProduct.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public String mulDel(Locale locale, Model model,String[]seqs) {
-		logger.info("여러글삭제 {}.", locale);
-		boolean isS=productService.mulDelProduct(seqs);
+	@RequestMapping(value = "/delProduct.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String mulDel(Locale locale, Model model, int seq) {
+		logger.info("글삭제 {}.", locale);
+		boolean isS=productService.delProduct(seq);
 		if(isS) {
 			return "redirect:productList.do?countProductPage=1";
 		}else {
@@ -100,9 +100,11 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/productUpdate.do", method = RequestMethod.GET)
-	public String updateForm(Locale locale, Model model,int seq) {
+	public String updateForm(Locale locale, Model model,int seq, Authentication auth) {
 		logger.info("상품수정하기폼이동{}.", locale);
 		ProductDto dto =productService.getProduct(seq);
+		List<CategoryDto> category = orderService.selectMenuCategoryList(auth.getName());
+		model.addAttribute("category", category);
 		model.addAttribute("dto", dto );
 		return "product/productUpdate";
 	}
@@ -115,7 +117,7 @@ public class ProductController {
 		return "product/productUpdate";
 	}
 	
-	@RequestMapping(value = "/updateReceiveProduct.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/updateReceiveProduct.do", method = RequestMethod.POST)
 	public String updateboard(Locale locale, Model model, ProductDto dto) {
 		logger.info("상품수정하기{}.", locale);
 		
