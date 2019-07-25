@@ -114,13 +114,13 @@
 		WHERE PRO_SEQ = #{pro_seq}
 	</delete>
 	
-	<delete id="muldelProduct" parameterType="map">
+	<update id="muldelProduct" parameterType="map">
 		UPDATE LJP_PRODUCT SET PRO_ISDEL=1 WHERE PRO_SEQ IN
 		<foreach collection="seqs" item="seq" open="(" close=")"
 			separator=",">
 			#{seq}
 		</foreach>
-	</delete>
+	</update>
 
 	<!-- <insert id="insertProductImg" parameterType="FileDto"> INSERT INTO 
 		FILEBOARD VALUES (FILEBOARD_SEQ.NEXTVAL, #{origin_fname},#{stored_fname},#{file_size},SYSDATE,'N') 

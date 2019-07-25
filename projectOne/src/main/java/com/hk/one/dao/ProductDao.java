@@ -135,8 +135,8 @@ import com.hk.one.dto.ProductDto;
 	}
 
 	@Override
-	public boolean delProduct(int seq) {
-		int success = sqlSession.delete(namespace+"delProduct", seq);
+	public boolean delProduct(int pro_seq) {
+		int success = sqlSession.delete(namespace+"delProduct", pro_seq);
 		return success > 0 ? true:false;
 	}
 

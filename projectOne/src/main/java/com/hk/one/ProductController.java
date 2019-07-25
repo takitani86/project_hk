@@ -92,7 +92,7 @@ public class ProductController {
 		logger.info("글삭제 {}.", locale);
 		boolean isS=productService.delProduct(seq);
 		if(isS) {
-			return "redirect:productList.do?countProductPage=1";
+			return "home";
 		}else {
 			model.addAttribute("msg", "여러상품삭제실패");
 			return "error";
