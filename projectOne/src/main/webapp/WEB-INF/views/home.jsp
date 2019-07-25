@@ -16,12 +16,12 @@
 <style>
 .floatingPosition{
 position:absolute;
-top:300px;
-left:800px;
+top:45px;
+left:1025px;
 }
-.rolling_panel { position: relative; width: 750px; height: 300px; margin: 0; padding: 0; border: 1px solid #c7c7c7; overflow: hidden; }
-.rolling_panel ul { position: absolute; margin: 5px; padding: 0; list-style: none; }
-.rolling_panel ul li { float: left; width: 205px; height: 140px;}
+.rolling_panel { position: relative; width: 750px; height: 300px; margin: 0; padding: 0; overflow: hidden; }
+.rolling_panel ul { float:right; position: absolute; margin:5px; padding:0; list-style: none; }
+.rolling_panel ul li { float:left; padding:5px; width:750px; height:300px; }
 </style>
 <!-- HEAD(link파일들 모음) -->
 <%@ include file="include/head.jsp"%>
@@ -36,13 +36,13 @@ left:800px;
 		<div class="content-wrapper">
 			
 			<!-- 슬라이드 배너 -->
-			<a href="javascript:void(0)" id="prev">이전</a>
-       		<a href="javascript:void(0)" id="next">다음</a>
+			<!-- <a href="javascript:void(0)" id="prev">이전</a>
+       		<a href="javascript:void(0)" id="next">다음</a> -->
         	<div class="rolling_panel">
 	            <ul>
-	                <li><img src="배너1.png.200"></li>
-	                <li><img src="배너2.png.200"></li>
-	                <li><img src="배너3.png.200"></li>
+	                <li><img src="resources/img/banner1.png"></li>
+	                <li><img src="resources/img/banner2.png"></li>
+	                <li><img src="resources/img/banner3.png"></li>
 	            </ul>
         	</div>		
 					
@@ -132,6 +132,8 @@ $(document).ready(function() {
     var itemWidth = $panel.children().outerWidth(); // 아이템 가로 길이
     var itemLength = $panel.children().length;      // 아이템 수
 
+    console.log("아이템 윋ㄷ드" + itemWidth);
+    console.log("아이템 랭쓰" + itemLength);
     // Auto 롤링 아이디
     var rollingId;
 
@@ -170,7 +172,7 @@ $(document).ready(function() {
         // 2초마다 start 호출
         rollingId = setInterval(function() {
             start();
-        }, 2000);
+        }, 6000);
     }
 
     function start() {
