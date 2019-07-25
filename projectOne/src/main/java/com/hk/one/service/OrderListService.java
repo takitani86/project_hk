@@ -1,5 +1,7 @@
 package com.hk.one.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,11 @@ public class OrderListService implements IOrderListService {
 	public boolean addOrderList(OrderListDto dto) {
 		
 		return orderListDao.addOrderList(dto);
+	}
+
+	@Override
+	public List<OrderListDto> getOrderList(String name) {
+		return orderListDao.getOrderList(name);
 	}
 
 

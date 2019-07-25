@@ -22,6 +22,17 @@ function menuList(seq) {
              count = 0;
            }
       });
+      /* a += '<tr>';
+      $.each(data, function(key, value){
+          a += '<td><p><img src="${pageContext.request.contextPath}/resources/img/product/' + value.pro_image +
+           '" width="150" height="200" data-toggle="modal" data-target="#productUpdate" onclick="productUpdate(' + value.pro_seq +
+           ')"></p><p>' + value.pro_name + '</p><p>' + value.pro_price + '</td>';
+           count++;
+           if (count == 4) {
+             a += '</tr><tr>';
+             count = 0;
+           }
+      }); */
       $('.menuList').html(a);
     }
   });

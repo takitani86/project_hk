@@ -16,11 +16,13 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          메뉴판 관리 <small>점주용</small>
-        </h1>
-      </section>
+      <div class="container-fluid">
+	      <section class="content-header" style="margin:0px 0px 0px 2px;">
+	        <h1>
+	          <strong>메뉴판 관리</strong> <small>점주용</small>
+	        </h1>
+	      </section>
+      </div>
 
       <!-- Main content -->
       <section class="content">
@@ -36,11 +38,11 @@
                 </button>
               </div>
               <div class="box-body">
-                <table class="table table-bordered">
+		      	<table class="table table-bordered" style="width:400px;">
                   <tr>
                     <c:if test="${not empty category}">
                       <c:forEach var="cate" items="${category}">
-                        <td id="${cate.cat_seq}" onclick="menuList('${cate.cat_seq}');">${cate.cat_name}</a>
+                        <td id="${cate.cat_seq}" onclick="menuList('${cate.cat_seq}');">${cate.cat_name}
                         &nbsp;&nbsp;&nbsp;<a href="delCategory.do?seq=${cate.cat_seq}" class="glyphicon glyphicon-minus"></a></td>
                       </c:forEach>
                       <script>
@@ -56,9 +58,11 @@
             </div>
             <div class="box">
               <div class="box-body">
-                <table class="menuList">
-                </table>
-                <%@ include file="menulist.jsp" %>
+              	<div class="container fluid" style="margin:10px 0px 10px 0px; padding:10px 10px 10px 10px;">
+	                <table class="menuList">
+	                <%@ include file="menulist.jsp" %>
+	                </table>
+              	</div>
               </div>
             </div>
           </div>

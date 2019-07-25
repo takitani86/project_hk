@@ -146,15 +146,16 @@
       $("#sum1").val('');
       $("#sum").html('');
       price = 0;
+      arrayBox = [];
     }
     var IMP = window.IMP;
     IMP.init('imp55450318');
-
+    var uid = new Date().getTime();
     function payment(userid) {
       IMP.request_pay({
         pg: 'kakao',
         pay_method: 'card',
-        merchant_uid: 'merchant_' + new Date().getTime(),
+        merchant_uid: uid,
         name: '주문명:결제테스트',
         amount: $("#sum1").val(),
         buyer_email: 'aetheru@gmail.com',
@@ -166,16 +167,17 @@
         if (rsp.success) {
           var msg = '결제가 완료되었습니다.';
           var suc = 0;
-          check(userid);
+          check(userid, uid);
+          msg += 'merchant_uid: ' + uid;
           msg += '고유ID : ' + rsp.imp_uid;
           msg += '상점 거래ID : ' + rsp.merchant_uid;
           msg += '결제 금액 : ' + rsp.paid_amount;
           msg += '카드 승인번호 : ' + rsp.apply_num;
-          $('#successOrder').modal('show');
-          $('input[name="id"]').val(rsp.imp_uid);
-          $('input[name="id2"]').val(rsp.merchant_uid);
-          $('input[name="id3"]').val(rsp.paid_amount);
-          $('input[name="id4"]').val(rsp.aplly_num);
+          // $('#successOrder').modal('show');
+          // $('input[name="id"]').val(rsp.imp_uid);
+          // $('input[name="id2"]').val(rsp.merchant_uid);
+          // $('input[name="id3"]').val(rsp.paid_amount);
+          // $('input[name="id4"]').val(rsp.aplly_num);
 
         } else {
           var msg = '결제에 실패하였습니다.';
@@ -187,23 +189,23 @@
     }
 
 
-    function check(userid) {
+    function check(userid, uid) {
       var suc = 0;
       for (i = 0; i < arrayBox.length; i++) {
-        ordList(userid, arrayBox[i]);
+        ordList(userid, uid, arrayBox[i]);
       }
       $("#selectOrder").html("<tr></tr>");
       $("#sum").html(suc);
       arrayBox.splice(0);
     }
 
-    function ordList(userid, seqs) {
+    function ordList(userid, uid, seqs) {
       $.ajax({
         url: "ordList.do",
         type: 'GET',
-        data: "seqs=" + seqs + "&user=" + userid,
+        data: {seqs : seqs, user : userid, uid : uid},
+        // data: "seqs=" + seqs + "&user=" + userid + "&uid=" + uid,
         success: function (data) {
-
         },
         error: function (jqXHR, textStatus, errorThrown) {
           alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);

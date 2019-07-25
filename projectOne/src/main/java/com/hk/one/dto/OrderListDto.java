@@ -4,21 +4,25 @@ import java.util.Date;
 
 public class OrderListDto {
 	private int ord_num;
-	private String ord_bill;
+	private long ord_bill;
 	private Date ord_date;
 	private String ord_id;
 	private int ord_pronum;
 	private int ord_proprice;
 	
 	
-	
-	public OrderListDto(String ord_id, int ord_pronum, int ord_proprice) {
+	public OrderListDto() {
+		super();
+	}
+
+	public OrderListDto(String ord_id, long uid, int ord_pronum, int ord_proprice) {
 		this.ord_id=ord_id;
+		this.ord_bill=uid;
 		this.ord_pronum=ord_pronum;
 		this.ord_proprice=ord_proprice;
 	}
 
-	public OrderListDto(int ord_num, String ord_bill, Date ord_date, String ord_id, int ord_pronum, int ord_proprice) {
+	public OrderListDto(int ord_num, long ord_bill, Date ord_date, String ord_id, int ord_pronum, int ord_proprice) {
 		super();
 		this.ord_num = ord_num;
 		this.ord_bill = ord_bill;
@@ -34,10 +38,10 @@ public class OrderListDto {
 	public void setOrd_num(int ord_num) {
 		this.ord_num = ord_num;
 	}
-	public String getord_bill() {
+	public long getord_bill() {
 		return ord_bill;
 	}
-	public void setord_bill(String ord_bill) {
+	public void setord_bill(long ord_bill) {
 		this.ord_bill = ord_bill;
 	}
 	public Date getOrd_date() {
