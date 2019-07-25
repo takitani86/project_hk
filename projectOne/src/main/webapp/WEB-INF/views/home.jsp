@@ -14,11 +14,22 @@
 
 <html>
 <style>
-.floatingPosition{
-position:absolute;
-top:300px;
-left:800px;
+.static{
+position:relative;
 }
+
+.floatingPosition{
+position:relative;
+top:-750px;
+left:900px;
+}
+
+.content-wrapper{
+width:1500;
+height:700;
+}
+
+
 </style>
 <!-- HEAD(link파일들 모음) -->
 <%@ include file="include/head.jsp"%>
@@ -82,6 +93,7 @@ left:800px;
 					<c:otherwise>
 						<sec:authorize access="isAuthenticated()">
 							<sec:authentication var="user" property="principal" />
+							<div class="static">
 							<h3>${user.username}님,반갑습니다.</h3>
 							<p>암호 : ${user.password}</p>
 							<p>활성화 여부: ${user.enabled}</p>
@@ -91,6 +103,7 @@ left:800px;
 							<form action="<c:url value='/logout.do'/>" method="POST">
 								<button type="submit">LOGOUT</button>
 							</form>
+							</div>
 						</sec:authorize>
 					</c:otherwise>
 				</c:choose>
