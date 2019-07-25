@@ -97,19 +97,14 @@ public class HomeController {
 	public String joinKaMember(Locale locale, Model model, MemberDto memberDto,
 			@RequestParam("roadAddress") String sample4_roadAddress,
 			@RequestParam("detailAddress") String sample4_detailAddress) {
-		ModelAndView mav = new ModelAndView();
 		logger.info("회원 가입 {}.", locale);
 		String roadAddress = sample4_roadAddress;
 		String detailAddress = sample4_detailAddress;
 		String mem_address = roadAddress + " " + detailAddress;
 		System.out.println("주소: " + mem_address);
-
+		memberDto.setMem_address(mem_address);
 		boolean isS = MemberService.joinMember(memberDto);
 		if (isS) {
-			Map<String, String> addMap = new HashMap<>();
-			addMap.put("mem_address", mem_address);
-			model.addAttribute("addMap", addMap);
-			// mav = new ModelAndView("member/memberList"); //값 넣어서 전달하는거
 			return "redirect:kakaoLogin.do";
 		} else {
 			model.addAttribute("failJoin", "회원 가입 실패");
