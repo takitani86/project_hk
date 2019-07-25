@@ -244,7 +244,7 @@
 				// 2초마다 start 호출
 				rollingId = setInterval(function () {
 					start();
-				}, 6000);
+				}, 5000);
 			}
 
 			function start() {
