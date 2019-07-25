@@ -133,5 +133,10 @@
 		SELECT
 		CEIL(COUNT(*)/10) FROM LJP_PRODUCT
 	</select>
-
+	
+	<select id="getOrderProduct" resultType="product">
+		SELECT
+		PRO_SEQ, PRO_NAME FROM LJP_PRODUCT
+	</select>
+	
 </mapper>

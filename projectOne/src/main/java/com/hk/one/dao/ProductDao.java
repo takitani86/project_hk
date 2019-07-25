@@ -148,4 +148,9 @@ import com.hk.one.dto.ProductDto;
 		int success = sqlSession.update(namespace+"delProduct", seq);
 		return success > 0 ? true:false;
 	}
+
+	@Override
+	public List<ProductDto> getOrderProduct() {
+		return sqlSession.selectList(namespace+"getOrderProduct");
+	}
 }
