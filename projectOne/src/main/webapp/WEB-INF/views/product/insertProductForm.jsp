@@ -44,7 +44,7 @@
                   <div class="form-group">
                     <label for="exampleInputFile">상품이미지</label>
                     <input type="file" name="uploadFile" onchange="readURL(this);" id="exampleInputFile">
-                    <img src="#" id="preview" width=250 height=400 alt="preview">
+                    <img src="resources/img/product/default_product.png" id="preview" width=250 height=400 alt="preview">
                   </div>
                   <div class="form-group">
                     <label for="content">카테고리 선택</label>

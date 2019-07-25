@@ -63,6 +63,11 @@ import com.hk.one.dto.ProductDto;
 	public ProductDto getProduct(int dto) {
 		return sqlSession.selectOne(namespace+"selectProductOne",dto);
 	}
+	
+	@Override
+	public ProductDto upProduct(String dto) {
+		return sqlSession.selectOne(namespace+"selectProductOne",dto);
+	}
 
 	@Override
 	public boolean insertProduct(ProductDto dto) {
@@ -88,7 +93,6 @@ import com.hk.one.dto.ProductDto;
 		 System.out.println(count);
 		 return count>0?true:false;
 	}
-
 
 	@Override
 	public boolean mulDelProduct(String[] seqs) {

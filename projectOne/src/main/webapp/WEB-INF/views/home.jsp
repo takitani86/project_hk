@@ -44,6 +44,12 @@ left:1025px;
 	                <li><img src="resources/img/banner2.png"></li>
 	                <li><img src="resources/img/banner3.png"></li>
 	            </ul>
+	            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                  <span class="fa fa-angle-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                  <span class="fa fa-angle-right"></span>
+                </a>
         	</div>		
 					
 			<!-- Content Header (Page header) -->

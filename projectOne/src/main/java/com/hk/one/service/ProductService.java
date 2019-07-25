@@ -30,6 +30,11 @@ public class ProductService implements IProductService {
 		
 		return productDao.getProduct(dto);
 	}
+	
+	@Override
+	public ProductDto upProduct(String dto) {
+		return productDao.upProduct(dto);
+	}
 
 	@Override
 	public boolean insertProduct(ProductDto dto) {

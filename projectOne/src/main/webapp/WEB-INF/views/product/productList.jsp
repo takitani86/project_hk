@@ -46,6 +46,7 @@
                     </c:when>
                     <c:otherwise>
                       <c:forEach items="${list}" var="dto">
+                      	<tbody onclick="goDetail('${dto.pro_name}')">
                         <tr>
                           <td>${dto.cat_seq}</td>
                           <td>${dto.pro_name}</td>
@@ -53,6 +54,7 @@
                           <td>${dto.pro_desc}</td>
                           <td><fmt:formatDate value="${dto.pro_regdate}" pattern="yyyy-MM-dd"/></td>
                         </tr>
+                      	</tbody>
                       </c:forEach>
                     </c:otherwise>
                   </c:choose>
@@ -99,6 +101,10 @@
 	  location.href="productList.do?countProductPage="+page+"&sort="+nums;
   }
 
+  	var pro_name = "pro_name";
+	function goDetail(pro_name) {
+		location.href = 'updateListProduct.do?pro_name=' + pro_name; 
+	}
   </script>
 </body>
 
