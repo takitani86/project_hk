@@ -62,12 +62,18 @@
 			
 				<!-- 슬라이드 배너 -->
 				<!-- <a href="javascript:void(0)" id="prev">이전</a>
-						 <a href="javascript:void(0)" id="next">다음</a> -->
-						 <div class="rolling_panel">
-							 <ul>
+				 <a href="javascript:void(0)" id="next">다음</a> -->
+				 <div class="rolling_panel">
+					 <ul>
 						<li><img src="<c:url value='/resources/img/banner1.png'/>"></li>
 						<li><img src="<c:url value='/resources/img/banner2.png'/>"></li>
 						<li><img src="<c:url value='/resources/img/banner3.png'/>"></li>
+						<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+		                  <span class="fa fa-angle-left"></span>
+		                </a>
+		                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+		                  <span class="fa fa-angle-right"></span>
+		                </a>
 					</ul>
 				</div>
 
