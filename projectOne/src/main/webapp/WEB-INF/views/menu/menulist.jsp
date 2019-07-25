@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<style>
+.box box-solid hvr-grow-shadow {
+	display: inline-block;
+	vertical-align: middle;
+	-webkit-transform: perspective(1px) translateZ(0);
+	transform: perspective(1px) translateZ(0);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	-webkit-transition-property: box-shadow, transform;
+	transition-property: box-shadow, transform;
+}
+.box box-solid hvr-grow-shadow:hover, .box box-solid hvr-grow-shadow:focus, .box box-solid hvr-grow-shadow:active {
+	box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+	-webkit-transform: scale(1.1);
+	transform: scale(1.1);
+}
+</style>
 <script>
 
 // 카테고리 선택후 상품리스트 출력
@@ -11,14 +28,15 @@ function menuList(seq) {
     success : function(data) {
       var a = '';
       let count = 0; 
-      a += '<tr>';
+      a += '<ul style="overflow: hidden; list-style:none; margin:0px; padding:0px; width:800px;">';
       $.each(data, function(key, value){
-          a += '<td><p><img src="${pageContext.request.contextPath}/resources/img/product/' + value.pro_image +
+          a += '<li style="float:left; margin:0px 3px;"><div class="box box-solid hvr-grow-shadow" id="proBox" style="padding:5px 10px 10px;">' +
+          	'<div class="box-header with-border"><p><img src="${pageContext.request.contextPath}/resources/img/product/' + value.pro_image +
            '" width="150" height="200" data-toggle="modal" data-target="#productUpdate" onclick="productUpdate(' + value.pro_seq +
-           ')"></p><p>' + value.pro_name + '</p><p>' + value.pro_price + '</td>';
+           ')"></p></div><div class="box-body"><p><strong>' + value.pro_name + '</strong></p><p>' + value.pro_price + '원</div></div></li>';
            count++;
            if (count == 4) {
-             a += '</tr><tr>';
+             a += '</ul><ul style="overflow:hidden; list-style:none; margin:0px; padding:0px; width:800px;">';
              count = 0;
            }
       });
@@ -61,6 +79,7 @@ function delProduct() {
   location.href="delProduct.do?seq=" + $('input[name="pro_seq"]').val();
 }
 </script>
+
 
 <!-- 상품수정 MODAL -->
 <div class="modal fade" id="productUpdate" tabindex="-1" role="dialog" aria-labelledby="productUpdateLabel" aria-hidden="true">
