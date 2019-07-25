@@ -67,16 +67,10 @@
 			<ul class="sidebar-menu" data-widget="tree">
 				<li class="header">관리자 메뉴</li>
 				<!-- Optionally, you can add icons to the links -->
-				<li class="treeview">
-					<a href="#">
+				<li>
+					<a href="<c:url value='/admin/board/admin_board.do'/>">
 						<i class="fa fa-file-text-o"></i>
-						<span>고객센터</span><span class="pull-right-container">
-							<i class="fa fa-angle-left pull-right"></i>
-						</span></a>
-					<ul class="treeview-menu">
-						<li><a href="<c:url value='/admin/board/admin_board.do'/>"><i class="fa fa-circle-o"></i>게시판</a></li>
-						<li><a href="<c:url value='/chatAdmin.do'/>"><i class="fa fa-circle-o"></i>1:1 문의</a></li>
-					</ul>
+						<span>고객센터</span></a>
 				</li>
 				<li>
 					<a href="<c:url value='/admin/memberList.do'/>">
@@ -117,17 +111,11 @@
 						<i class="fa fa-flask"></i>
 						<span>주문관리</span></a>
 				</li>
-				<li class="treeview">
-					<a href="#">
-						<i class="fa fa-file-text-o"></i>
-						<span>고객센터</span><span class="pull-right-container">
-							<i class="fa fa-angle-left pull-right"></i>
-						</span></a>
-					<ul class="treeview-menu">
-						<li><a href="<c:url value='/member/board/member_board.do'/>"><i class="fa fa-circle-o"></i>게시판</a></li>
-						<li><a href="<c:url value='/chat.do'/>"><i class="fa fa-circle-o"></i>1:1 문의</a></li>
-					</ul>
-				</li>
+				<li>
+						<a href="<c:url value='/member/board/member_board.do'/>">
+							<i class="fa fa-file-text-o"></i>
+							<span>고객센터</span></a>
+					</li>
 				<li>
 					<a href="<c:url value='/member/memberMyDetail.do'/>">
 						<i class="fa fa-smile-o"></i>

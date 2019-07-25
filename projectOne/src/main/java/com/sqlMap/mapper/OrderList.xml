@@ -10,7 +10,7 @@
 	</select>
 
 	<select id="getOrderList" parameterType="String" resultType="orderList">
-		SELECT * FROM LJP_ORDERLIST WHERE ORD_ID = #{ord_id}
+		SELECT * FROM LJP_ORDERLIST WHERE ORD_ID = #{ord_id} ORDER BY ORD_DATE ASC
 	</select>
 	
 	<insert id="insertOrderList" parameterType="orderList">

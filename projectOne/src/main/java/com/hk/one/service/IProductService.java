@@ -26,4 +26,6 @@ public List<ProductDto> getAllProductList(); // 상품리스트 확인
 	String saveFile(MultipartFile file);
 	
 	public boolean delProduct(int seq);
+
+	public List<ProductDto> getOrderProduct();
 }
