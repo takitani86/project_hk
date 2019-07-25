@@ -23,7 +23,7 @@
         <div class="box box-default">
           <div class="box-header with-border">
             <h3 class="box-title">
-              <i class="fa fa-tag"></i> 점포를 선택해주세요.
+              <i class="fa fa-tag"></i> <strong>점포를 선택해주세요.</strong>
             </h3>
           </div>
           <div class="box-body" >

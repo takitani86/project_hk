@@ -14,11 +14,21 @@
     <div class="row">
       <div class="col-lg-8">
         <section class="content-header text-center">
-          <div class="alert alert-info alert-dismissable">
+        	<!-- <div class="box box-solid"> -->
+        		<div class="container fluid">
+	            <blockquote class="pull-left">
+	            <h1>
+	              <p style="font-stretch:condensed; font-weight:bolder;">&nbsp;&nbsp;&nbsp; ${mem_b_name}</p>
+	            </h1>
+	            </blockquote>
+        		</div>
+          <!-- 	</div> -->
+        
+          <%-- <div class="alert alert-info alert-dismissable">
             <h1>
               ${mem_b_name}
             </h1>
-          </div>
+          </div> --%>
         </section>
         <div class="box">
           <div class="box-body">
@@ -107,7 +117,7 @@
           $.each(data, function (key, value) {
         	  a += '<li style="float:left; margin:0px 3px;"><div class="box box-solid hvr-grow-shadow" id="proBox" style="padding:5px 10px 10px;">' +
             	'<div class="box-header with-border"><p><img src="${pageContext.request.contextPath}/resources/img/product/' + value.pro_image +
-             '" width="150" height="200" data-toggle="modal" data-target="#productUpdate" onclick="productUpdate(' + value.pro_seq +
+             '" width="150" height="200" data-toggle="modal" data-target="#productUpdate" onclick="selectOrder(' + key + ',' + value.pro_seq +
              ')"></p></div><div class="box-body"><p><strong>' + value.pro_name + '</strong></p><p>' + value.pro_price + '원</div></div></li>';
              count++;
             if (count == 4) {
