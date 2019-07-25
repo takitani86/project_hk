@@ -114,29 +114,7 @@ function sendEmail(mem_email) {
 		}
 	});
 }
-$(function registNum(){ //registNum 함수
-	$.ajax({ //rst값과 registNum을 가져와서 활용해야 한다
-		url: "",
-		type: "POST",
-		dataType: "json",
-		data: $("rst"), 
-		success: function(rst) {
-			if((rst == 0) && (registNum.equal(RegistN))) {					
-				$(".resultEmail .rst").text("인증완료");
-				$(".resultEmail .rst").attr("style", "color:#00f");
-			} else if (rst ==1) {
-				$(".resultEmail .rst").text("이메일을 다시 확인해 주세요.");
-				$(".resultEmail .rst").attr("style", "color:#f00");
-			} else if (!registNum.equal(RegistN)) {
-				$(".resultEmail .rst").text("인증번호가 맞지 않습니다.");
-				$(".resultEmail .rst").attr("style", "color:#f00");
-			}
-		},
-		error: function() {
-			alert("에러 발생");
-		}
-	});
-})
+
 </script>
 <body class="layout-boxed skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -167,25 +145,16 @@ $(function registNum(){ //registNum 함수
 								</tr>
 								<tr>
 									<th>비밀번호</th>
-									<td><input type="password" name="mem_pw"
+									<td><input type="password" name="mem_pw" id="password"
 										style="width: 250px;" placeholder="비밀번호 입력">
 										&nbsp;&nbsp;
-										<p style="font-size: 10; color: gray;">(영문 대소문자/숫자/특수문자 중
-											2가지 이상 조합, 10~16자)</p> <input type="password" name="mem_pw2"
-										style="width: 250px;" placeholder="비밀번호 확인"></td>
+										<p style="font-size: 10; color: gray;">(숫자+영문자+특수문자 조합으로 8자리 이상 입력합니다.)</p>
 								</tr>
 								<tr>
 									<th>E-Mail</th>
 									<td><input type="email" name="mem_email"
 										style="width: 250px;" placeholder="이메일 주소 입력">
-										<button type="button"
-											class="emailRegist btn btn-block btn-default btn-sm"
-											style="width: 100px; display: inline-block;">이메일 인증</button>
-										<input type="text" name="registNum"
-										style="width: 250px; display: block;" placeholder="인증 번호 입력">
-										<p class="resultEmail">
-											<span class="rst"></span>
-										</p></td>
+										</td>
 								</tr>
 								<tr>
 									<th>이름</th>
@@ -248,5 +217,20 @@ $(function registNum(){ //registNum 함수
 			</form>
 		</div>
 	</div>
+	<script>
+		$("#password").change(function(){
+    checkPassword($('#password').val());
+});
+function checkPassword(password){
+    
+    if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/.test(password)){            
+        alert('숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.');
+        $('#password').val('').focus();
+        return false;
+    }
+    return true;
+}
+
+	</script>
 </body>
 </html>

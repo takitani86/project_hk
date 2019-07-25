@@ -63,11 +63,11 @@
                 <c:if test="${user.username == boarddetail.mem_id}">
                   <button class="btn btn-default" type="button"
                     onclick="updateForm('${boarddetail.qna_seq}')">수정</button>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#delBoard">삭제</button>
                 </c:if>
                 <c:if test="${user.username != boarddetail.mem_id}">
                   <button class="btn btn-default" type="button" onclick="replyForm()">답글달기</button>
                 </c:if>
-                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#delBoard">삭제</button>
               </div>
             </div>
             <!-- /.box -->

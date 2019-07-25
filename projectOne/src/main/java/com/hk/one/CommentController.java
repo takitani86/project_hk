@@ -6,6 +6,7 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,13 +37,13 @@ public class CommentController {
 	// 댓글 작성
 	@RequestMapping("/insert.do")
 	@ResponseBody
-	private boolean commentInsert(Locale locale, @RequestParam int qna_seq, @RequestParam String com_content) throws Exception {
+	private boolean commentInsert(Locale locale, @RequestParam int qna_seq, @RequestParam String com_content, Authentication auth) throws Exception {
 		logger.info("commentInsert 호출 {}.", locale);
 		
 		CommentDto dto = new CommentDto();
 		dto.setQna_seq(qna_seq);
 		dto.setCom_content(com_content);
-		dto.setMem_id("merchant");
+		dto.setMem_id(auth.getName());
 		
 		return commentService.commentInsert(dto);
 	}

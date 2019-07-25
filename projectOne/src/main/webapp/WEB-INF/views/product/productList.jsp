@@ -32,11 +32,10 @@
               <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
                   <tr>
-                    <th width="10%" onclick="sortNo(4)">카테고리
-                    <th onclick="sortNo(2)">상품명</th>
-                    <th onclick="sortNo(3)">가격</th>
-                    <th width="40%">설명</th>
-                    <th onclick="sortNo(0)">수정일</th>
+                    <th width="20%" onclick="sortNo(2)">상품명</th>
+                    <th width="15%" onclick="sortNo(3)">가격</th>
+                    <th width="50%">설명</th>
+                    <th width="15%" onclick="sortNo(0)">수정일</th>
                   </tr>
                   <c:choose>
                     <c:when test="${empty list}">
@@ -46,9 +45,9 @@
                     </c:when>
                     <c:otherwise>
                       <c:forEach items="${list}" var="dto">
-                      	<tbody onclick="goDetail('${dto.pro_name}')">
+                        <input type="hidden" value="${dto.pro_seq}" name="pro_seq">
+                      	<tbody onclick="goDetail('${dto.pro_seq}')">
                         <tr>
-                          <td>${dto.cat_seq}</td>
                           <td>${dto.pro_name}</td>
                           <td>${dto.pro_price}</td>
                           <td>${dto.pro_desc}</td>
@@ -101,9 +100,8 @@
 	  location.href="productList.do?countProductPage="+page+"&sort="+nums;
   }
 
-  	var pro_name = "pro_name";
-	function goDetail(pro_name) {
-		location.href = 'updateListProduct.do?pro_name=' + pro_name; 
+	function goDetail(pro_seq) {
+		location.href = 'productUpdate.do?seq=' + pro_seq; 
 	}
   </script>
 </body>
