@@ -103,16 +103,27 @@
           productList = data;
           var a = '';
           let count = 0;
-          a += '<tr>';
+          a += '<ul style="overflow: hidden; list-style:none; margin:0px; padding:0px; width:800px;">';
           $.each(data, function (key, value) {
-            a += '<td><p><img src="${pageContext.request.contextPath}/resources/img/product/' + value
-              .pro_image +
-              '" width="150" height="200" onclick="selectOrder(' + key + ',' + value.pro_seq +
-              ')"></p><p>' + value.pro_name + '</p><p>' + value.pro_price + '</td>';
-            count++;
-            if (count == 5) {
-              a += '</tr><tr>';
-              count = 0;
+        	  a += '<li style="float:left; margin:0px 3px;"><div class="box box-solid hvr-grow-shadow" id="proBox" style="padding:5px 10px 10px;">' +
+            	'<div class="box-header with-border"><p><img src="${pageContext.request.contextPath}/resources/img/product/' + value.pro_image +
+             '" width="150" height="200" data-toggle="modal" data-target="#productUpdate" onclick="productUpdate(' + value.pro_seq +
+             ')"></p></div><div class="box-body"><p><strong>' + value.pro_name + '</strong></p><p>' + value.pro_price + '원</div></div></li>';
+             count++;
+            if (count == 4) {
+				a += '</ul><ul style="overflow:hidden; list-style:none; margin:0px; padding:0px; width:800px;">';
+				count = 0;
+              
+/*               a += '<tr>';
+              $.each(data, function (key, value) {
+                a += '<td><p><img src="${pageContext.request.contextPath}/resources/img/product/' + value
+                  .pro_image +
+                  '" width="150" height="200" onclick="selectOrder(' + key + ',' + value.pro_seq +
+                  ')"></p><p>' + value.pro_name + '</p><p>' + value.pro_price + '</td>';
+                count++;
+                if (count == 5) {
+                  a += '</tr><tr>';
+                  count = 0; */
             }
             pro_seq = value.pro_seq;
           });

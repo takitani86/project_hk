@@ -59,7 +59,7 @@
             <div class="box">
               <div class="box-body">
               	<div class="container fluid" style="margin:10px 0px 10px 0px; padding:10px 10px 10px 10px;">
-	                <table class="menuList">
+	                <table class="menuList" style="width:700px;">
 	                <%@ include file="menulist.jsp" %>
 	                </table>
               	</div>
