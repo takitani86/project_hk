@@ -14,31 +14,13 @@
 
 <html>
 <style>
-<<<<<<< HEAD
-.static{
-position:relative;
-=======
+
 .floatingPosition{
 position:absolute;
 top:45px;
 left:1025px;
->>>>>>> branch 'master' of https://github.com/takitani86/project_hk.git
-}
-<<<<<<< HEAD
-
-.floatingPosition{
-position:relative;
-top:-750px;
-left:900px;
 }
 
-.content-wrapper{
-width:1500;
-height:700;
-}
-
-
-=======
 .rolling_panel { position: relative; width: 750px; height: 300px; margin: 0; padding: 0; overflow: hidden; }
 .rolling_panel ul { float:right; position: absolute; margin:5px; padding:0; list-style: none; }
 .rolling_panel ul li { float:left; padding:5px; width:750px; height:300px; }
