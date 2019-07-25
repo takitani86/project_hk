@@ -102,10 +102,20 @@ response.setContentType("text/html; charset=utf-8");
 					<section class="content container-fluid">
 						<table class="table">
 							<col width="20%"><col width="60%"><col width="20%">
-							<tr>
+							<c:choose>
+								<c:when test="${member.login_id == 'ADMIN'}">
+								<tr>
+								<th>회원삭제</th>
+								<td><button type="button" onclick="location.href='<c:url value="/deleteMember.do?mem_id=${member.mem_id}"/>'" class="btn btn-block btn-danger" style="width:30%; float:left;">탈퇴</button></td>
+								</tr>
+								</c:when>
+								<c:otherwise>
+								<tr>
 								<th>탈퇴 신청</th>
-								<td><button type="button" onclick="location.href='deleteMember.do?mem_id=${member.mem_id}'" class="btn btn-block btn-danger" style="width:30%; float:left;">탈퇴</button></td>
-							</tr>
+								<td><button type="button" onclick="location.href='<c:url value="/deleteMember.do?mem_id=${member.mem_id}"/>'" class="btn btn-block btn-danger" style="width:30%; float:left;">탈퇴</button></td>
+								</tr>
+								</c:otherwise>
+							</c:choose>
 							<tr>
 								<th>회원 정보 변경</th>
 								<td><button type="submit" class="btn btn-block btn-primary" style="width:90%; float:left;">변경 완료</button></td>

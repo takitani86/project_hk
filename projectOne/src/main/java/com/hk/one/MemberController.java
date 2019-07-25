@@ -8,6 +8,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,10 +47,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/member_infoForm.do", method = RequestMethod.GET)
-	public String updateMemberForm(Locale locale, Model model, String mem_id) {
+	public String updateMemberForm(Locale locale, Model model, String mem_id,Authentication auth) {
 		logger.info("회원 정보 페이지로 이동 {}.", locale);
 		MemberDto member = MemberService.getMember(mem_id);
+		String idd=auth.getName();
 		model.addAttribute("member", member);
+		model.addAttribute("login_id", idd);
 		
 		return "member/member_info";
 	}
@@ -58,6 +61,7 @@ public class MemberController {
 	public String updateMember(Locale locale, Model model, MemberDto member) {
 		logger.info("회원 정보 수정 {}.", locale);
 		boolean isS = MemberService.updateMember(member);
+		
 		String mem_id = member.getMem_id();
 		if(isS) {
 			return "redirect:memberDetail.do?mem_id=" + mem_id;

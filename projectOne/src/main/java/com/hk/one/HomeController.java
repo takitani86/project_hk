@@ -151,7 +151,7 @@ public class HomeController {
 		logger.info("회원 탈퇴 {}.", locale);
 		boolean isS = MemberService.deleteMember(mem_id);
 		if (isS) {
-			return "redirect:memberList.do";
+			return "redirect:admin/memberList.do";
 		} else {
 			model.addAttribute("failDelete", "회원 탈퇴 실패");
 			return "error";
