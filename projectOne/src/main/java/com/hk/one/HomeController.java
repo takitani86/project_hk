@@ -224,7 +224,7 @@ public class HomeController {
 				HttpSession session = request.getSession(true);
 				session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
 				model.addAttribute("kakao", user);
-				return "secu/loginPage";
+				return "home";
 			}
 		} catch (UsernameNotFoundException e) {
 			e.printStackTrace();

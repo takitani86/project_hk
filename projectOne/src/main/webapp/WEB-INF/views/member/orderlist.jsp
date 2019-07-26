@@ -59,22 +59,37 @@
                             <td>흑당커피</td>
                           </c:when>
                           <c:when test="${orderlist.ord_pronum == 5}">
-                            <td>에스프레소</td>
+                            <td>콜드브루</td>
                           </c:when>
                           <c:when test="${orderlist.ord_pronum == 6}">
                             <td>바닐라라떼</td>
                           </c:when>
                           <c:when test="${orderlist.ord_pronum == 7}">
-                            <td>샤케라또</td>
+                            <td>벌꿀커피</td>
                           </c:when>
                           <c:when test="${orderlist.ord_pronum == 8}">
                             <td>카라멜 마키아또</td>
                           </c:when>
-                          <c:when test="${orderlist.ord_pronum == 1}">
-                            <td>아메리카노</td>
+                          <c:when test="${orderlist.ord_pronum == 35}">
+                            <td>녹차라떼</td>
+                          </c:when>
+                          <c:when test="${orderlist.ord_pronum == 19}">
+                            <td>초코 아이스크림</td>
+                          </c:when>
+                          <c:when test="${orderlist.ord_pronum == 36}">
+                            <td>밀크티</td>
+                          </c:when>
+                          <c:when test="${orderlist.ord_pronum == 40}">
+                            <td>초코 아이스크림</td>
+                          </c:when>
+                          <c:when test="${orderlist.ord_pronum == 39}">
+                            <td>마카롱</td>
+                          </c:when>
+                          <c:when test="${orderlist.ord_pronum == 41}">
+                            <td>흑당 아이스크림</td>
                           </c:when>
                           <c:otherwise>
-                            <td>${orderlist.ord_pronum}</td>
+                            <td>삭제상품</td>
                           </c:otherwise>
                         </c:choose>
                         <td>${orderlist.ord_proprice}</td>

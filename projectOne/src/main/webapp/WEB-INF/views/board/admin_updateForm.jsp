@@ -73,7 +73,27 @@
 
   </div>
   <!-- ./wrapper -->
+  <!-- 삭제창 Modal -->
+  <div id="delBoard" class="modal" role="dialog">
+    <div class="modal-dialog modal-sm">
 
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">삭제 확인</h4>
+        </div>
+        <div class="modal-body">
+          <p>정말 삭제하시겠습니까?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" onclick="delBoard('${boarddetail.qna_seq}');">예</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">아니오</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <!-- REQUIRED JS SCRIPTS -->
 
   <!-- JS 스크립트모음 -->

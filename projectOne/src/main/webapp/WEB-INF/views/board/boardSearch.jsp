@@ -136,12 +136,6 @@
           </ul>
         </div>
       </section>
-      <section class="content-header">
-        <h1>
-          Page Header <small>Optional description</small>
-        </h1>
-      </section>
-      <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
