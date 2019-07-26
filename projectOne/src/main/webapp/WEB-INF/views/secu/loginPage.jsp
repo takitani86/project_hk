@@ -47,6 +47,7 @@
 
       <a href="<c:url value='/secu/to_find_PwForm.do'/>">비밀번호 찾기</a><br>
       <a href="<c:url value='/secu/joinMemberForm.do'/>">회원가입</a><br>
+      <a href="<c:url value='/member/consumer/select.do'/>">고객용 메뉴</a><br>
 
     </div>
     <!-- /.login-box-body -->
