@@ -100,7 +100,6 @@ function delProduct() {
             <input type="text" class="form-control" name="pro_price"><br>
             <label for="pro_desc">상품설명</label>
             <input type="text" class="form-control" name="pro_desc"><br>
-            <button type="button" id="btn_upload" class="btn btn-block btn-default" style="width:150px;">이미지 변경</button>
             <label for="pro_category">카테고리</label>
             <select class="form-control" name="cat_seq">
               <c:forEach var="cate" items="${category}">

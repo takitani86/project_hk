@@ -43,18 +43,6 @@ response.setContentType("text/html; charset=utf-8");
 						<td>${member.mem_name}</td>
 					</tr>
 					<tr>
-						<th>비밀번호</th>
-						<td><input type="password" value="${member.mem_pw}" readonly></td>
-					</tr>
-					<tr>
-						<th>승인 상태</th>
-						<td>${member.mem_isApprove}</td>
-					</tr>
-					<tr>
-						<th>탈퇴 여부</th>
-						<td>${member.mem_isDel}</td>
-					</tr>
-					<tr>
 						<th>가입일</th>
 						<td>${member.mem_regDate}</td>
 					</tr>
