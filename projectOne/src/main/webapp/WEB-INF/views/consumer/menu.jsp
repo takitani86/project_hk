@@ -16,11 +16,13 @@
         <section class="content-header text-center">
         	<!-- <div class="box box-solid"> -->
         		<div class="container fluid">
-	            <blockquote class="pull-left">
+	            <!-- <blockquote class="pull-left"> -->
 	            <h1>
-	              <p style="font-stretch:condensed; font-weight:bolder;">&nbsp;&nbsp;&nbsp; ${mem_b_name}</p>
+	              <p style="font-stretch:condensed; font-weight:bolder; font-size:larger">
+	              <i class="fa fa-coffee"></i>&nbsp;&nbsp; ${mem_b_name}</p>
 	            </h1>
-	            </blockquote>
+	            <br /><br />
+	            <!-- </blockquote> -->
         		</div>
           <!-- 	</div> -->
         
@@ -57,9 +59,10 @@
           </div>
         </div>
         <div class="box">
-          <div class="alert alert-success alert-dismissible">
+        	<div class="container fluid"><br></div>
+        	<div class="container fluid">
             <h4><i class="icon fa fa-check"></i>
-              내 주문</h4>
+              <strong>내 주문</strong></h4>
             - 선택한 상품이 아래에 표시됩니다.
           </div>
           <div id="selectOrder" class="box-body">
@@ -75,8 +78,8 @@
                 <input type="hidden" id="sum1">
               </div>
               <div class="col-md-2">
-                <button class="btn bg-maroon btn-flat" onclick="delOrder();">장바구니 비우기</button>
-                <button class="btn btn-lg bg-purple btn-flat" onclick="payment('${mem_id}');">결제</button>
+                <button class="btn btn-block btn-default btn-sm" onclick="delOrder();">장바구니 비우기</button>
+                <button class="btn btn-block btn-primary btn-lg" onclick="payment('${mem_id}');">결제</button>
               </div>
             </div>
           </div>
