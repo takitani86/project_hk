@@ -100,13 +100,7 @@ function delProduct() {
             <input type="text" class="form-control" name="pro_price"><br>
             <label for="pro_desc">상품설명</label>
             <input type="text" class="form-control" name="pro_desc"><br>
-            <label for="pro_desc">상품 이미지</label>
-            <img src="<c:url value="/resources/img${data.pro_image}"/>" class="img-circle"
-							id="preview" alt="Product Image" style="width:150px; height:200px;">
-            <input type="file" id="uploadFile" name="uploadFile" onchange="readURL(this);" style="display:none;">
             <button type="button" id="btn_upload" class="btn btn-block btn-default" style="width:150px;">이미지 변경</button>
-            <label for="pro_option">상품 옵션</label>
-            <input type="text" class="form-control" name="pro_option"><br>
             <label for="pro_category">카테고리</label>
             <select class="form-control" name="cat_seq">
               <c:forEach var="cate" items="${category}">
