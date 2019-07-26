@@ -59,7 +59,7 @@ response.setContentType("text/html; charset=utf-8");
 					<table id="tableSelect" class="table table-hover">
 						<col width="10%"><col width="20%"><col width="20%"><col width="15%"><col width="20%"><col width="8%"><col width="7%">
 						<tr>
-							<th>회원번호</th><th>회원ID</th><th>이미지</th><th>회원 이름</th><th>상호명</th><th>승인</th><th>상태</th>
+							<th>회원번호</th><th>이미지</th><th>회원ID</th><th>회원 이름</th><th>상호명</th><th>승인</th><th>상태</th>
 						</tr>
 				<c:choose>
 					<c:when test="${empty map.list}">
@@ -70,8 +70,9 @@ response.setContentType("text/html; charset=utf-8");
 							<tbody onclick="goDetail('${member.mem_id}')">
 							<tr>
 								<td>${member.mem_seq}</td>
+								<td><img src="<c:url value="/resources/img${member.mem_image}"/>" class="img-circle"
+										alt="User Image" style="width: 150px; height: 150px;"></td>
 								<td>${member.mem_id}</td>
-								<td>${member.mem_image}</td>
 								<td>${member.mem_name}</td>
 								<td>${member.mem_b_name}</td>
 								<td>
@@ -116,9 +117,9 @@ response.setContentType("text/html; charset=utf-8");
 				<br /> <br />
 				<div>
 					<ul class="no-margin pull-right">
-						<li style="display:inline-block"><button type="submit" onclick="location.href='../secu/joinMemberForm.do'" class="btn btn-block btn-default">회원 추가</button></li>
+						<%-- <li style="display:inline-block"><button type="submit" onclick="location.href='../secu/joinMemberForm.do'" class="btn btn-block btn-default">회원 추가</button></li> --%>
 						<li style="display:inline-block"><button onclick="location.href='../home.do'" class="btn btn-block btn-default">홈으로</button></li>
-						<li style="display:inline-block"><button onclick="location.href='<c:url value="to_find_PwForm.do"/>'" class="btn btn-block btn-default">비밀번호 찾기</button></li>
+						<%-- <li style="display:inline-block"><button onclick="location.href='<c:url value="to_find_PwForm.do"/>'" class="btn btn-block btn-default">비밀번호 찾기</button></li> --%>
 					</ul>
 				</div>
 			</div>

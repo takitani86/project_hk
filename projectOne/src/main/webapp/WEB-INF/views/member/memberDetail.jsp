@@ -100,8 +100,8 @@ response.setContentType("text/html; charset=utf-8");
 			<section class="content container-fluid">			
 				<div class="container-fluid">
 					<ul class="no-margin pull-right">
-						<li style="display:inline-block"><button type="submit" class="btn btn-block btn-default"
-						onclick="location.href='member_infoForm.do?mem_id=${member.mem_id}'">회원 정보 수정</button></li>
+						<!-- <li style="display:inline-block"><button type="submit" class="btn btn-block btn-default"
+						onclick="location.href='member_infoForm.do?mem_id=${member.mem_id}'">회원 정보 수정</button></li> -->
 						<li style="display:inline-block"><button type="submit" class="btn btn-block btn-default"
 							onclick="location.href='memberList.do'">회원 목록</button></li>
 					</ul>
