@@ -33,9 +33,7 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">
                   카테고리 추가
                 </button>
-                <button type="button" class="btn btn-secondary" onclick="consumer();">
-                  손님용 메뉴판
-                </button>
+               
               </div>
               <div class="box-body">
 		      	<table class="table table-bordered" style="width:400px;">
