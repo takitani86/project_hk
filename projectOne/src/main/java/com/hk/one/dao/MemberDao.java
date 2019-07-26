@@ -23,7 +23,7 @@ public class MemberDao implements IMemberDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private static final String UPLOAD_PATH = "C:\\DEV\\image\\profile\\";
+	private static final String UPLOAD_PATH = "C:\\Users\\HKEDU\\git\\project_hk\\projectOne\\src\\main\\webapp\\resources\\img";
 
 	@Override
 	public String saveFile(MultipartFile file) {

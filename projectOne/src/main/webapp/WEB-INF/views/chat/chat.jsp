@@ -4,7 +4,7 @@
 <%-- include 경로를 불러온 jsp 페이지의 상대경로에 따라 
 ../를 추가해주어야 한다(절대경로로 할 방법이 없음) --%>
 <%@ include file="../include/head.jsp"%>
-			<section class="content container-fluid">
+			<section class="content container-fluid" >
 				<div class="box box-primary direct-chat direct-chat-primary" style="width:300px;">
 					<div class="box-header with-border" style="padding:10px 30px 10px 30px;">
 						<h3 style="margin:10px 0px 10px 0px;"><strong>1:1 상담</strong> <small>고객용</small></h3>						

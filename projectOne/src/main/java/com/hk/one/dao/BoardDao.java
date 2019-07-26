@@ -22,7 +22,7 @@ public class BoardDao implements IBoardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private static final String UPLOAD_PATH = "C:\\DEV\\image\\board\\";
+	private static final String UPLOAD_PATH = "C:\\Users\\HKEDU\\git\\project_hk\\projectOne\\src\\main\\webapp\\resources\\img\\board\\";
 
 	@Override
 	public String saveFile(MultipartFile file) {

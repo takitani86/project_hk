@@ -26,7 +26,7 @@ import com.hk.one.dto.ProductDto;
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	private static final String UPLOAD_PATH = "C:\\DEV\\image\\product\\";
+	private static final String UPLOAD_PATH = "C:\\Users\\HKEDU\\git\\project_hk\\projectOne\\src\\main\\webapp\\resources\\img\\product\\";
 
 	@Override
 	public String saveFile(MultipartFile file) {

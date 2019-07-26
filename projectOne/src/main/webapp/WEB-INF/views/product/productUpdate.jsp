@@ -44,7 +44,7 @@
                   <div class="form-group">
                     <label for="exampleInputFile">상품이미지</label>
                     <input type="file" name="uploadFile" onchange="readURL(this);" id="exampleInputFile">
-                    <img src="resources/img/product/default_product.png" id="preview" width=250 height=400
+                    <img src="<c:url value='resources/img/product/${dto.pro_image}'/>" id="preview" width=250 height=400
                       alt="preview">
                   </div>
                   <div class="form-group">

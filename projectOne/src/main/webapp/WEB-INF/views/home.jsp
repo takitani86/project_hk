@@ -198,12 +198,8 @@
 					<div class="col-sx-8">
 					 <div class="nav-tabs-custom">
 	            <!-- Tabs within a box -->
-	            <ul class="nav nav-tabs pull-right">
-	              <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
-	            </ul>
-	            <div class="tab-content no-padding">
-	            <div class="box-body chart-responsive">
-	              <div id="chart_div" style="width:900px; height: 500px;"></div>
+	           
+	              <div id="chart_div" style="width:620px; height: 450px; position: absolute;top:400px;left:600px !important;"></div>
 	              </div>
 	            </div>
 	          </div>
