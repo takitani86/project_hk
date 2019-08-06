@@ -24,6 +24,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +54,9 @@ public class HomeController {
 	private JavaMailSenderImpl javaMailSenderImpl;
 	@Autowired
 	private CustomUserDetailsService userService;
-
+	@Autowired
+	BCryptPasswordEncoder passEncoder;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = { "/", "/home.do" }, method = RequestMethod.GET)
@@ -81,6 +84,7 @@ public class HomeController {
 		String roadAddress = sample4_roadAddress;
 		String detailAddress = sample4_detailAddress;
 		String mem_address = roadAddress + " " + detailAddress;
+		memberDto.setMem_pw(passEncoder.encode(memberDto.getMem_pw()));
 		memberDto.setMem_address(mem_address);
 		System.out.println("주소: " + mem_address);
 
