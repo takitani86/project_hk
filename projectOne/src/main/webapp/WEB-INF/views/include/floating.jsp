@@ -20,7 +20,7 @@ response.setContentType("text/html; charset=utf-8");
 <c:choose>
 	<c:when test="${not empty kakao}">
 		<c:choose>
-			<c:when test="${kakao.secu_id eq 'ADMIN'}">
+			<c:when test="${kakao.secu_id eq '관리자'}">
 
 				<%@ include file="/WEB-INF/views/chat/chatAdmin.jsp"%>
 
@@ -36,7 +36,7 @@ response.setContentType("text/html; charset=utf-8");
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="user" property="principal" />
 			<c:choose>
-				<c:when test="${user.username eq 'ADMIN'}">
+				<c:when test="${user.username eq '관리자'}">
 
 					<%@ include file="/WEB-INF/views/chat/chatAdmin.jsp"%>
 

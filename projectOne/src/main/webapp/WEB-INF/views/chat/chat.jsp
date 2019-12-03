@@ -31,7 +31,7 @@
 						Signed In as : <span id="">${user.username}</span>
 					</div>
 					<div class="container fluid" style="margin:0px -670px 5px 0px; padding:0px 15px 5px;">
-						Send To : <span id="sendTo">ADMIN</span>
+						Send To : <span id="sendTo">관리자</span>
 					</div>
 				</div>
 			</section>
@@ -64,7 +64,7 @@
 	});
 
 	//Init WebSocket.
-	var webSocket = new WebSocket("ws://192.168.5.124:8888/projectOne/broadsocket");
+	var webSocket = new WebSocket("ws://118.37.99.34:8888/projectOne/broadsocket");
 
 	var messageTextArea = document.getElementById("chatArea");
 
